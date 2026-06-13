@@ -17,7 +17,7 @@ const fraunces = Fraunces({
   display: "swap",
 });
 
-const siteUrl = "https://jay-kapoor.vercel.app";
+const siteUrl = "https://personal-website-delta-two-23.vercel.app";
 const description =
   "The proof layer for Jay Kapoor's resume — fintech, healthtech, and investing work, each claim backed by something you can open.";
 
