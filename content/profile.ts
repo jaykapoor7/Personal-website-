@@ -16,7 +16,7 @@ export const profile: Profile = {
   portrait: {
     src: "/jay-kapoor.jpg",
     alt: "Jay Kapoor",
-    available: false,
+    available: true,
   },
   education: [
     {
