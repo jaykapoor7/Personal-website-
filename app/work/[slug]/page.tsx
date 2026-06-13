@@ -142,7 +142,7 @@ export default function WorkDetailPage({
             <div className="mb-8 flex items-baseline justify-between">
               <h2 className="display text-3xl">Proof</h2>
               <span className="text-xs text-muted">
-                Open the evidence behind this work
+                Links, docs, and screenshots
               </span>
             </div>
           </Reveal>

@@ -41,7 +41,7 @@ export function Footer() {
           </span>
           <span>
             <Link href="/work" className="link-underline">
-              Every claim here links to proof.
+              The projects behind the resume.
             </Link>
           </span>
         </div>

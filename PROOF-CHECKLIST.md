@@ -27,7 +27,11 @@ the real artifact.
 - [ ] **Investment Memo Series** — one representative memo (PDF)
 - [ ] **Healthcare Accessibility Research (IJEDR)** — publication link / PDF
 
+## Portrait photo
+- [ ] Add a photo at `public/jay-kapoor.jpg`, then set `portrait.available: true` in
+  `content/profile.ts`. It renders (grayscale, on-brand) on the Home hero and About page;
+  until then a clean "JK" placeholder shows.
+
 ## Optional polish
-- [ ] Custom OG share image at `public/og.png` (referenced in `app/layout.tsx`)
-- [ ] Favicon at `app/icon.png`
-- [ ] Swap `siteUrl` in `app/layout.tsx` to your final domain
+- [x] Favicon + 1200×630 OG share image (generated at build time via `next/og`)
+- [ ] Swap `siteUrl` in `app/layout.tsx` to your final/custom domain

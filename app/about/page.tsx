@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { profile } from "@/content/profile";
 import { Reveal } from "@/components/Reveal";
+import { Portrait } from "@/components/Portrait";
 
 export const metadata: Metadata = {
   title: "About",
@@ -16,15 +17,20 @@ export default function AboutPage() {
             About
           </p>
         </Reveal>
-        <Reveal delay={0.05}>
-          <div className="max-w-3xl space-y-6 text-2xl leading-snug sm:text-3xl">
-            {profile.bio.map((p, i) => (
-              <p key={i} className={i === 0 ? "display" : "text-muted"}>
-                {p}
-              </p>
-            ))}
-          </div>
-        </Reveal>
+        <div className="grid gap-10 md:grid-cols-[300px_1fr] md:items-start lg:gap-16">
+          <Reveal delay={0.05}>
+            <Portrait className="max-w-xs" />
+          </Reveal>
+          <Reveal delay={0.1}>
+            <div className="space-y-6 text-2xl leading-snug sm:text-3xl">
+              {profile.bio.map((p, i) => (
+                <p key={i} className={i === 0 ? "display" : "text-muted"}>
+                  {p}
+                </p>
+              ))}
+            </div>
+          </Reveal>
+        </div>
       </section>
 
       {/* Education */}
@@ -88,24 +94,6 @@ export default function AboutPage() {
         </Reveal>
       </section>
 
-      {/* Leadership */}
-      <section className="shell hr-line grid gap-10 border-t py-12 md:grid-cols-[1fr_2fr]">
-        <Reveal>
-          <h2 className="text-sm uppercase tracking-widest text-muted">
-            Leadership
-          </h2>
-        </Reveal>
-        <Reveal delay={0.05}>
-          <ul className="space-y-4">
-            {profile.leadership.map((l, i) => (
-              <li key={i} className="flex gap-4 text-lg leading-relaxed">
-                <span className="text-muted">—</span>
-                <span>{l}</span>
-              </li>
-            ))}
-          </ul>
-        </Reveal>
-      </section>
     </>
   );
 }

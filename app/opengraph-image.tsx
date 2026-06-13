@@ -4,7 +4,7 @@ import { ImageResponse } from "next/og";
 // editorial layout so links to the site preview cleanly everywhere.
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-export const alt = "Jay Kapoor — Proof of Work";
+export const alt = "Jay Kapoor — Portfolio";
 
 export default function OpengraphImage() {
   return new ImageResponse(
@@ -30,7 +30,7 @@ export default function OpengraphImage() {
             color: "#8a8a86",
           }}
         >
-          Proof of Work · Pittsburgh, PA
+          Builder &amp; Investor · Pittsburgh, PA
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ fontSize: 128, letterSpacing: "-0.04em", lineHeight: 1 }}>
@@ -45,8 +45,7 @@ export default function OpengraphImage() {
               lineHeight: 1.3,
             }}
           >
-            Fintech, healthtech &amp; investing — every resume claim, backed by
-            proof you can open.
+            Fintech, healthtech &amp; investing — the work behind the resume.
           </div>
         </div>
         <div style={{ fontSize: 24, color: "#8a8a86" }}>@jaybuildsvx</div>

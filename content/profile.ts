@@ -11,8 +11,13 @@ export const profile: Profile = {
   bio: [
     "I'm a builder and investor-in-training. I founded a healthcare-access platform that reached 10,000+ rural users, then spent the last year inside the founder's office of a 20,000-user fintech platform working on growth, strategy, and investment research.",
     "I'm studying Economics & Statistics at the University of Pittsburgh with a minor in Information Sciences. I care about products that reach underserved users and about the research discipline behind good investment decisions.",
-    "This site is the proof layer for my resume — every claim links to something you can open, read, or try.",
+    "This site is the long version of my resume — the projects behind it, with links you can open.",
   ],
+  portrait: {
+    src: "/jay-kapoor.jpg",
+    alt: "Jay Kapoor",
+    available: false,
+  },
   education: [
     {
       school: "University of Pittsburgh",
@@ -38,9 +43,6 @@ export const profile: Profile = {
       "Generative Engine Optimization (GEO)",
     ],
   },
-  leadership: [
-    "Founded an artisan-commerce initiative (The Finer Things Club, 2021—2024) onboarding 300+ rural artisans and generating $8k+ in revenue through NGO and marketplace partnerships.",
-  ],
   highlights: [
     { value: "20K", label: "users at the fintech platform I helped grow", source: "resume" },
     { value: "10K+", label: "rural users on the platform I founded", source: "resume" },

@@ -32,7 +32,7 @@ function ProofCard({ proof }: { proof: Proof }) {
           available ? "text-paper" : "text-muted/60"
         }`}
       >
-        {available ? "Open proof ↗" : "Coming soon"}
+        {available ? "Open ↗" : "Coming soon"}
       </span>
     </>
   );
@@ -57,7 +57,7 @@ function ProofCard({ proof }: { proof: Proof }) {
     <div
       className={`${base} border-dashed opacity-70`}
       aria-disabled="true"
-      title="Proof artifact coming soon"
+      title="Coming soon"
     >
       {inner}
     </div>
@@ -81,7 +81,7 @@ export function ProofTags({ proof }: { proof: Proof[] }) {
   const available = proof.filter((p) => p.status === "available").length;
   return (
     <span className="text-xs text-muted">
-      {proof.length} proof {proof.length === 1 ? "slot" : "slots"}
+      {proof.length} {proof.length === 1 ? "item" : "items"}
       {available > 0 && <span className="text-paper"> · {available} live</span>}
     </span>
   );

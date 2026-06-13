@@ -95,6 +95,14 @@ export interface EducationEntry {
   period: string;
 }
 
+export interface Portrait {
+  /** Path to the photo in /public. */
+  src: string;
+  alt: string;
+  /** When false, the UI shows an on-brand placeholder instead of a broken image. */
+  available: boolean;
+}
+
 export interface Profile {
   name: string;
   /** Short positioning line under the name. */
@@ -103,12 +111,12 @@ export interface Profile {
   email: string;
   /** A few sentences of bio for the About page. */
   bio: string[];
+  portrait: Portrait;
   education: EducationEntry[];
   skills: {
     technical: string[];
     domain: string[];
   };
-  leadership: string[];
   /** Headline stats for the home page (all carry a source). */
   highlights: Metric[];
   /** Path to the resume file in /public. */

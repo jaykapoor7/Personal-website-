@@ -19,12 +19,12 @@ const fraunces = Fraunces({
 
 const siteUrl = "https://personal-website-delta-two-23.vercel.app";
 const description =
-  "The proof layer for Jay Kapoor's resume — fintech, healthtech, and investing work, each claim backed by something you can open.";
+  "Jay Kapoor — fintech, healthtech, and investing. The work and research behind the resume.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${profile.name} — Proof of Work`,
+    default: `${profile.name} — Portfolio`,
     template: `%s — ${profile.name}`,
   },
   description,
@@ -40,13 +40,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: siteUrl,
-    title: `${profile.name} — Proof of Work`,
+    title: `${profile.name} — Portfolio`,
     description,
     siteName: profile.name,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${profile.name} — Proof of Work`,
+    title: `${profile.name} — Portfolio`,
     description,
     creator: "@jaybuildsvx",
   },

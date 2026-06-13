@@ -6,7 +6,7 @@ import { WorkCard } from "@/components/WorkCard";
 export const metadata: Metadata = {
   title: "Work",
   description:
-    "Selected work across fintech, healthtech, and investing — ordered by impact, each backed by proof.",
+    "Selected work across fintech, healthtech, and investing — ordered by impact, with the case study and links behind each one.",
 };
 
 export default function WorkPage() {
@@ -22,13 +22,13 @@ export default function WorkPage() {
         </Reveal>
         <Reveal delay={0.05}>
           <h1 className="display max-w-4xl text-4xl leading-tight sm:text-6xl">
-            Everything I claim, with a way to check it.
+            Everything on my resume, with the work behind it.
           </h1>
         </Reveal>
         <Reveal delay={0.1}>
           <p className="mt-6 max-w-2xl text-muted">
             Ordered by impact, then recency, then relevance — not by date. Open
-            any project for the full case study and its proof.
+            any project for the full case study and links.
           </p>
         </Reveal>
       </section>
