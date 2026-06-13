@@ -1,0 +1,33 @@
+# Proof checklist
+
+Every item below is currently a labeled `coming_soon` placeholder on the site.
+To activate one: add the file to `public/proof/` (or get a public URL), then in
+the matching `content/*.ts` object set `status: "available"` and add `url`.
+
+Nothing here is fabricated — links and metrics only go live when you provide
+the real artifact.
+
+## Already live ✅
+- **X / building in public** — `@jaybuildsvx` (Juno ADHD OS + Writing)
+- **LinkedIn** — `in/jay-kapoor7`
+- **Email** — `jak581@pitt.edu`
+- **Resume PDF** — `public/jay-kapoor-resume.pdf`
+
+## Work (`content/work.ts`)
+- [ ] **Crowwd** — live platform URL · competitive-analysis sample (PDF, redacted) · Arthavaad event photos
+- [ ] **Juno-AI** — live link/archive · product screenshots
+- [ ] **Juno ADHD OS** — repo URL · live product URL
+- [ ] **HDFC Bank** — client-safe investment pitch deck (PDF, redacted)
+- [ ] **TARC** — feasibility analysis sample (PDF, redacted)
+- [ ] **Project Nidaan** — field-research write-up (PDF) · KPI dashboard screenshot
+- [ ] **The Finer Things Club** — initiative page/archive · artisan & product photos
+
+## Writing & Research (`content/writing.ts`)
+- [ ] **India HealthTech Market Map** — published PDF · read-online link
+- [ ] **Investment Memo Series** — one representative memo (PDF)
+- [ ] **Healthcare Accessibility Research (IJEDR)** — publication link / PDF
+
+## Optional polish
+- [ ] Custom OG share image at `public/og.png` (referenced in `app/layout.tsx`)
+- [ ] Favicon at `app/icon.png`
+- [ ] Swap `siteUrl` in `app/layout.tsx` to your final domain
