@@ -5,11 +5,11 @@ import type { Profile } from "./types";
 export const profile: Profile = {
   name: "Jay Kapoor",
   tagline:
-    "Economics & Statistics @ Pitt. I build and research at the intersection of fintech, healthtech, and investing.",
+    "Economics & Statistics @ Pitt. I build and research at the intersection of fintech, healthtech, and investment research.",
   location: "Pittsburgh, PA",
   email: "jak581@pitt.edu",
   bio: [
-    "I'm a builder and investor-in-training. I founded a healthcare-access platform that reached 10,000+ rural users, then spent the last year inside the founder's office of a 20,000-user fintech platform working on growth, strategy, and investment research.",
+    "I'm a builder and researcher. I founded a healthcare-access platform that reached 10,000+ rural users, then spent the last year inside the founder's office of a 20,000-user fintech platform working on growth, strategy, and investment research.",
     "I'm studying Economics & Statistics at the University of Pittsburgh with a minor in Information Sciences. I care about products that reach underserved users and about the research discipline behind good investment decisions.",
     "This site is the long version of my resume — the projects behind it, with links you can open.",
   ],

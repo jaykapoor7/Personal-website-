@@ -18,7 +18,7 @@ export default function ContactPage() {
       </Reveal>
       <Reveal delay={0.05}>
         <h1 className="display text-5xl leading-tight sm:text-7xl">
-          Let&rsquo;s build or invest in something.
+          Let&rsquo;s build something.
         </h1>
       </Reveal>
       <Reveal delay={0.1}>

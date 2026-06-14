@@ -19,7 +19,7 @@ const fraunces = Fraunces({
 
 const siteUrl = "https://personal-website-delta-two-23.vercel.app";
 const description =
-  "Jay Kapoor — fintech, healthtech, and investing. The work and research behind the resume.";
+  "Jay Kapoor — fintech, healthtech, and investment research. The work behind the resume.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

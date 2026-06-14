@@ -6,7 +6,7 @@ import { WorkCard } from "@/components/WorkCard";
 export const metadata: Metadata = {
   title: "Work",
   description:
-    "Selected work across fintech, healthtech, and investing — ordered by impact, with the case study and links behind each one.",
+    "Selected work across fintech, healthtech, and investment research — ordered by impact, with the case study and links behind each one.",
 };
 
 export default function WorkPage() {

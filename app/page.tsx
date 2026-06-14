@@ -17,7 +17,7 @@ export default function HomePage() {
         <div>
           <Reveal>
             <p className="mb-6 text-sm uppercase tracking-widest text-muted">
-              Builder &amp; investor · {profile.location}
+              Builder &amp; researcher · {profile.location}
             </p>
           </Reveal>
           <Reveal delay={0.05}>

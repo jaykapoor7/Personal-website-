@@ -30,7 +30,7 @@ export default function OpengraphImage() {
             color: "#8a8a86",
           }}
         >
-          Builder &amp; Investor · Pittsburgh, PA
+          Builder &amp; Researcher · Pittsburgh, PA
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ fontSize: 128, letterSpacing: "-0.04em", lineHeight: 1 }}>
@@ -45,7 +45,8 @@ export default function OpengraphImage() {
               lineHeight: 1.3,
             }}
           >
-            Fintech, healthtech &amp; investing — the work behind the resume.
+            Fintech, healthtech &amp; investment research — the work behind the
+            resume.
           </div>
         </div>
         <div style={{ fontSize: 24, color: "#8a8a86" }}>@jaybuildsvx</div>
