@@ -47,8 +47,8 @@ export default function HomePage() {
             </div>
           </Reveal>
         </div>
-        <Reveal delay={0.1} className="hidden lg:block">
-          <Portrait className="max-w-sm" />
+        <Reveal delay={0.1} className="order-first lg:order-none">
+          <Portrait className="max-w-[15rem] sm:max-w-xs lg:max-w-sm" />
         </Reveal>
       </section>
 
