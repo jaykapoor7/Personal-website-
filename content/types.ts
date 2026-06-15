@@ -39,6 +39,9 @@ export interface GalleryImage {
   alt: string;
   /** Optional caption shown beneath the image. */
   caption?: string;
+  /** Render in full color (default is grayscale, to match the B&W theme).
+   *  Use for product UI / dashboards where color carries meaning. */
+  color?: boolean;
 }
 
 export interface WorkItem {

@@ -109,9 +109,19 @@ export const work: WorkItem[] = [
       { type: "live", status: "coming_soon", title: "Juno-AI", note: "Public link / archive to add." },
       {
         type: "image",
-        status: "coming_soon",
-        title: "Product screenshots",
-        note: "App / platform screenshots to add.",
+        status: "available",
+        title: "Product & impact dashboard",
+        url: "/work/juno-ai/juno-product-dashboard.png",
+        note: "Patient app, AI assistant, find-a-doctor, pharmacy, and impact dashboard.",
+      },
+    ],
+    gallery: [
+      {
+        src: "/work/juno-ai/juno-product-dashboard.png",
+        alt: "Juno-AI product screens — patient dashboard, AI symptom assistant, find-a-doctor, nearby pharmacy, and the admin impact dashboard",
+        caption:
+          "Juno-AI — patient app, AI assistant, doctor & pharmacy discovery, and the impact dashboard.",
+        color: true,
       },
     ],
     tags: ["Founder", "Product", "Healthcare Access", "Partnerships"],

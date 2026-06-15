@@ -8,15 +8,17 @@ export function Gallery({ images }: { images: GalleryImage[] }) {
   if (images.length === 0) return null;
   const [hero, ...rest] = images;
 
+  // Grayscale by default to match the B&W theme; opt into color per image.
+  const imgClass = (img: GalleryImage) =>
+    `w-full rounded-sm border border-line object-cover${
+      img.color ? "" : " grayscale"
+    }`;
+
   return (
     <div className="space-y-6">
       <figure className="space-y-3">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={hero.src}
-          alt={hero.alt}
-          className="w-full rounded-sm border border-line object-cover grayscale"
-        />
+        <img src={hero.src} alt={hero.alt} className={imgClass(hero)} />
         {hero.caption && (
           <figcaption className="text-sm text-muted">{hero.caption}</figcaption>
         )}
@@ -27,11 +29,7 @@ export function Gallery({ images }: { images: GalleryImage[] }) {
           {rest.map((img) => (
             <figure key={img.src} className="space-y-3">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={img.src}
-                alt={img.alt}
-                className="w-full rounded-sm border border-line object-cover grayscale"
-              />
+              <img src={img.src} alt={img.alt} className={imgClass(img)} />
               {img.caption && (
                 <figcaption className="text-sm text-muted">
                   {img.caption}
