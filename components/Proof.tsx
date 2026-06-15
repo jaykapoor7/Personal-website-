@@ -44,7 +44,13 @@ function ProofCard({ proof }: { proof: Proof }) {
     return (
       <a
         href={proof.url}
-        target={proof.type === "social" || proof.type === "live" ? "_blank" : undefined}
+        target={
+          proof.type === "social" ||
+          proof.type === "live" ||
+          proof.type === "pdf"
+            ? "_blank"
+            : undefined
+        }
         rel="noreferrer"
         className={`${base} hover:border-paper hover:bg-line/40`}
       >

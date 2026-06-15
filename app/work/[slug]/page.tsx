@@ -6,6 +6,7 @@ import { getWork, orderedWork } from "@/lib/order";
 import { Reveal } from "@/components/Reveal";
 import { MetricRow } from "@/components/Metric";
 import { ProofGrid } from "@/components/Proof";
+import { Gallery } from "@/components/Gallery";
 
 export function generateStaticParams() {
   return work.map((w) => ({ slug: w.slug }));
@@ -132,6 +133,20 @@ export default function WorkDetailPage({
                   </li>
                 ))}
               </ul>
+            </Reveal>
+          </section>
+        )}
+
+        {/* Gallery */}
+        {item.gallery && item.gallery.length > 0 && (
+          <section className="shell hr-line border-t py-14">
+            <Reveal>
+              <h2 className="mb-8 text-sm uppercase tracking-widest text-muted">
+                Gallery
+              </h2>
+            </Reveal>
+            <Reveal delay={0.05}>
+              <Gallery images={item.gallery} />
             </Reveal>
           </section>
         )}

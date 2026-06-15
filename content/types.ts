@@ -33,6 +33,14 @@ export interface Proof {
   note?: string;
 }
 
+/** A single image in a case-study gallery. */
+export interface GalleryImage {
+  src: string;
+  alt: string;
+  /** Optional caption shown beneath the image. */
+  caption?: string;
+}
+
 export interface WorkItem {
   slug: string;
   /** Organization or project name. */
@@ -66,6 +74,8 @@ export interface WorkItem {
 
   metrics: Metric[];
   proof: Proof[];
+  /** Optional image gallery (first image is treated as the hero). */
+  gallery?: GalleryImage[];
   tags: string[];
 }
 
