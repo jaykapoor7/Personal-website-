@@ -5,6 +5,7 @@ import type { Proof, ProofType } from "@/content/types";
 const TYPE_META: Record<ProofType, { label: string; glyph: string }> = {
   live: { label: "Live", glyph: "↗" },
   pdf: { label: "Document", glyph: "▤" },
+  file: { label: "Download", glyph: "↓" },
   image: { label: "Gallery", glyph: "▦" },
   social: { label: "Social", glyph: "✦" },
   video: { label: "Video", glyph: "▷" },
@@ -32,7 +33,11 @@ function ProofCard({ proof }: { proof: Proof }) {
           available ? "text-paper" : "text-muted/60"
         }`}
       >
-        {available ? "Open ↗" : "Coming soon"}
+        {available
+          ? proof.type === "file"
+            ? "Download ↓"
+            : "Open ↗"
+          : "Coming soon"}
       </span>
     </>
   );

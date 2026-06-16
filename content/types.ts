@@ -18,7 +18,14 @@ export interface Metric {
 }
 
 /** Kinds of evidence a recruiter can click through to. */
-export type ProofType = "live" | "pdf" | "image" | "social" | "video" | "repo";
+export type ProofType =
+  | "live"
+  | "pdf"
+  | "file"
+  | "image"
+  | "social"
+  | "video"
+  | "repo";
 
 /** Whether the proof artifact exists yet. Placeholders are never removed. */
 export type ProofStatus = "available" | "coming_soon";

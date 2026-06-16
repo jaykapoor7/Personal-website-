@@ -204,9 +204,10 @@ export const work: WorkItem[] = [
     proof: [
       {
         type: "pdf",
-        status: "coming_soon",
-        title: "Investment pitch deck (redacted)",
-        note: "Client-safe sample to add.",
+        status: "available",
+        title: "Apollo Hospitals research note (PDF)",
+        url: "/work/hdfc-bank/Apollo-Hospitals-Research-Note-Aug-2025.pdf",
+        note: "Company research note, August 2025.",
       },
     ],
     tags: ["Investment Research", "Equities", "Portfolio Construction"],
@@ -238,9 +239,10 @@ export const work: WorkItem[] = [
     proof: [
       {
         type: "pdf",
-        status: "coming_soon",
-        title: "Feasibility analysis (sample)",
-        note: "Redacted sample to add.",
+        status: "available",
+        title: "Development feasibility memo (PDF)",
+        url: "/work/tarc/Development-Feasibility-Memo-2025.pdf",
+        note: "Feasibility memo for a prospective development, 2025.",
       },
     ],
     tags: ["Feasibility Analysis", "Operations", "Research"],
@@ -279,10 +281,11 @@ export const work: WorkItem[] = [
         note: "Write-up to add.",
       },
       {
-        type: "image",
-        status: "coming_soon",
-        title: "KPI dashboard",
-        note: "Excel dashboard screenshot to add.",
+        type: "file",
+        status: "available",
+        title: "KPI dashboard (Excel)",
+        url: "/work/project-nidaan/Project-Nidaan-KPI-Dashboard.xlsx",
+        note: "Delivery-performance and program-outcome tracker.",
       },
     ],
     tags: ["Field Research", "Operations", "Partnerships"],
