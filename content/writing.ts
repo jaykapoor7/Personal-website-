@@ -44,18 +44,20 @@ export const writing: WritingItem[] = [
   },
   {
     slug: "healthcare-accessibility-ijedr",
-    title: "Healthcare Accessibility Research",
+    title:
+      "Juno AI: A Retrieval-Grounded Conversational Platform for Equitable Healthcare Information Access",
     kind: "Publication",
     year: "2022",
     recency: 2022,
     summary:
-      "Ethnographic study on preventive healthcare adoption in rural India, published in the Int'l Journal of Engineering Development & Research (IJEDR).",
+      "A research paper presenting Juno AI — combining a large language model with retrieval-augmented generation over a curated corpus of authoritative sources, so health guidance stays grounded in vetted content for users in low-resource, low-literacy settings.",
     proof: [
       {
         type: "pdf",
-        status: "coming_soon",
-        title: "IJEDR paper",
-        note: "Publication link / PDF to add.",
+        status: "available",
+        title: "Read the paper (PDF)",
+        url: "/work/juno-ai/Juno-AI-Research-Paper.pdf",
+        note: "Published in the Int'l Journal of Engineering Development & Research (IJEDR).",
       },
     ],
   },
