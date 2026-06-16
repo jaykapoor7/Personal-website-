@@ -86,19 +86,23 @@ export const work: WorkItem[] = [
     relevance: 8,
     featured: true,
     summary:
-      "Founded and scaled a healthcare-access platform to 10,000+ rural users, connecting patients with doctors, pharmacies, and booking services.",
+      "Founded and scaled a healthcare-access platform to 10,000+ rural users — a retrieval-grounded conversational health assistant with doctor discovery, pharmacy support, and a health dashboard.",
     context: [
-      "Juno-AI is a healthcare-access platform I founded to connect patients in underserved communities with doctors, pharmacies, and booking services.",
-      "I led it end-to-end across the full lifecycle — product, user outreach, partnerships, and operations.",
+      "Juno-AI is a healthcare-access platform I founded to help people — especially in underserved and rural communities — find trustworthy health information and navigate fragmented care. Access to reliable guidance is uneven for users in low-resource, low-literacy settings, who often have to interpret symptoms, judge urgency, and locate appropriate care with little support.",
+      "I designed Juno as a product-first healthcare experience rather than a generic chatbot: a conversational assistant that grounds every response in vetted, authoritative sources using retrieval-augmented generation, paired with doctor discovery, pharmacy support, intelligent next-step recommendations, and a personalized health dashboard.",
+      "I led the platform end-to-end — product, user outreach, partnerships, and operations — scaling it to 10,000+ rural users and documenting the approach in a research paper, “Juno AI: A Retrieval-Grounded Conversational Platform for Equitable Healthcare Information Access and Navigation.”",
     ],
     contributions: [
       "Founded and scaled the platform to 10,000+ rural users across underserved communities.",
+      "Designed a conversational health assistant that grounds answers in a curated corpus of authoritative sources (retrieval-augmented generation) rather than unvetted content.",
+      "Built the core product surfaces — doctor discovery, pharmacy support, a personalized health dashboard, and intelligent next-step recommendations.",
       "Negotiated partnerships with four healthcare organizations, driving 180% user growth within 12 months.",
-      "Led product development, user outreach, and operations end-to-end across the full platform lifecycle.",
+      "Led product development, user outreach, and operations end-to-end, and documented the work in a research paper.",
     ],
     outcomes: [
       "Reached 10,000+ rural users.",
       "Drove 180% user growth in a 12-month window via healthcare partnerships.",
+      "Documented the platform and its retrieval-grounded approach in a research paper.",
     ],
     metrics: [
       { value: "10K+", label: "rural users", source: "resume" },
@@ -106,7 +110,13 @@ export const work: WorkItem[] = [
       { value: "4", label: "healthcare partnerships", source: "resume" },
     ],
     proof: [
-      { type: "live", status: "coming_soon", title: "Juno-AI", note: "Public link / archive to add." },
+      {
+        type: "pdf",
+        status: "available",
+        title: "Juno-AI research paper (PDF)",
+        url: "/work/juno-ai/Juno-AI-Research-Paper.pdf",
+        note: "A Retrieval-Grounded Conversational Platform for Equitable Healthcare Information Access.",
+      },
       {
         type: "image",
         status: "available",
@@ -114,6 +124,7 @@ export const work: WorkItem[] = [
         url: "/work/juno-ai/juno-product-dashboard.png",
         note: "Patient app, AI assistant, find-a-doctor, pharmacy, and impact dashboard.",
       },
+      { type: "live", status: "coming_soon", title: "Juno-AI", note: "Public link / archive to add." },
     ],
     gallery: [
       {
@@ -124,7 +135,7 @@ export const work: WorkItem[] = [
         color: true,
       },
     ],
-    tags: ["Founder", "Product", "Healthcare Access", "Partnerships"],
+    tags: ["Founder", "Product", "AI / RAG", "Healthcare Access", "Partnerships"],
   },
   {
     slug: "juno-adhd-os",
