@@ -131,7 +131,6 @@ export const work: WorkItem[] = [
         url: "/work/juno-ai/juno-product-dashboard.png",
         note: "Patient app, AI assistant, find-a-doctor, pharmacy, and impact dashboard.",
       },
-      { type: "live", status: "coming_soon", title: "Juno-AI", note: "Public link / archive to add." },
     ],
     gallery: [
       {
@@ -177,8 +176,6 @@ export const work: WorkItem[] = [
         url: "https://x.com/jaybuildsvx",
         note: "Building in public at @jaybuildsvx.",
       },
-      { type: "repo", status: "coming_soon", title: "Source / repo", note: "Link to add." },
-      { type: "live", status: "coming_soon", title: "Live product", note: "Link to add." },
     ],
     tags: ["AI", "Claude API", "Product", "Building in public"],
   },
@@ -379,8 +376,6 @@ export const work: WorkItem[] = [
         url: "/work/finer-things-club/Finer-Things-Marketplace-One-Pager.pdf",
         note: "Overview of the artisan-commerce initiative.",
       },
-      { type: "live", status: "coming_soon", title: "Initiative page", note: "Link / archive to add." },
-      { type: "image", status: "coming_soon", title: "Artisan & product photos", note: "Images to add." },
     ],
     tags: ["Founder", "Commerce", "Partnerships"],
   },

@@ -23,7 +23,6 @@ export const writing: WritingItem[] = [
         url: "/research/India-HealthTech-Companies.csv",
         note: "Positioning, funding, stage, investors, and edge for each company.",
       },
-      { type: "live", status: "coming_soon", title: "Read online", note: "Link to add." },
     ],
   },
   {
