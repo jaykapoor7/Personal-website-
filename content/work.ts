@@ -176,6 +176,45 @@ export const work: WorkItem[] = [
     tags: ["AI", "Claude API", "Product", "Building in public"],
   },
   {
+    slug: "tot-schools",
+    title: "TOT Schools",
+    role: "Operations Lead",
+    category: "Startup Operations",
+    period: "2025 — Present",
+    impact: 7,
+    recency: 2026,
+    relevance: 8,
+    featured: true,
+    summary:
+      "End-to-end operations for a multi-centre early-childhood business — software, facilities, hiring, nutrition, compliance and documentation — run lean by one operator using AI as the team.",
+    context: [
+      "Running a childcare chain, AI-first. TOT Schools Learning Solutions Pvt. Ltd. is a multi-centre early-childhood business, and I run its operations end-to-end as Operations Lead — across software, facilities, hiring, nutrition, compliance, and documentation.",
+      "I run it lean: one operator using AI as a force-multiplier to do the work of a team. Across 8 centres I own six operating domains — technology, facilities, people, nutrition, documentation, and finance.",
+    ],
+    contributions: [
+      "Owned 6 operating domains across 8 centres: technology, facilities, people, nutrition, documentation, finance.",
+      "Rolled out Illumine (attendance, billing, parent comms, records) and CCTV across all centres; set up centres in person — custom furniture via carpenters, civil work, layout and safety.",
+      "Hired and onboarded centre heads, teachers, nurses and cleaners; stood up a nutrition programme with onboarded nutritionists.",
+      "Produced a 12-document branded handbook & SOP suite and automated IDIGI invoicing — using AI as a force-multiplier to do the work of a team.",
+    ],
+    outcomes: [],
+    metrics: [
+      { value: "8", label: "centres operated", source: "published" },
+      { value: "6", label: "operating domains owned", source: "published" },
+      { value: "12", label: "handbook & SOP documents produced", source: "published" },
+    ],
+    proof: [
+      {
+        type: "pdf",
+        status: "available",
+        title: "Operations case study (PDF)",
+        url: "/work/tot-schools/TOT-Schools-Operations-Case-Study.pdf",
+        note: "How one operator runs a multi-centre childcare chain, AI-first.",
+      },
+    ],
+    tags: ["Operations", "AI-First", "People & Hiring", "SOPs"],
+  },
+  {
     slug: "hdfc-bank",
     title: "HDFC Bank",
     role: "Wealth Management Intern, HNI Division",
