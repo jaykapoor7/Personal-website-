@@ -27,18 +27,24 @@ export const writing: WritingItem[] = [
   },
   {
     slug: "investment-memo-series",
-    title: "Investment Memo Series",
+    title: "The Memo Library & Ledger",
     kind: "Memo series",
     year: "2025 — Present",
     recency: 2026,
     summary:
-      "Venture-style investment theses on Indian health tech and fintech startups, applying market and competitive analysis.",
+      "Ten investment memos on healthcare and fintech companies across India and global markets — each a dated thesis, versioned over time, and scored against what actually happens. A calibration ledger attaches a conviction level and resolution date to every call.",
+    metrics: [
+      { value: "10", label: "investment memos", source: "published" },
+      { value: "15", label: "calls tracked (11 open · 4 resolved)", source: "published" },
+      { value: "75%", label: "hit rate on resolved calls", source: "published" },
+    ],
     proof: [
       {
         type: "pdf",
-        status: "coming_soon",
-        title: "Sample memo",
-        note: "Representative thesis to add.",
+        status: "available",
+        title: "The Memo Library & Ledger (PDF)",
+        url: "/research/Memo-Library-and-Ledger.pdf",
+        note: "Ten memos plus the calibration ledger.",
       },
     ],
   },

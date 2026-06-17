@@ -54,6 +54,13 @@ export const work: WorkItem[] = [
         note: "Competitive analysis, GEO playbook, and channel strategy.",
       },
       {
+        type: "pdf",
+        status: "available",
+        title: "Fintech teardown (PDF)",
+        url: "/work/crowwd/Crowwd-Fintech-Teardown.pdf",
+        note: "Benchmarking Crowwd against social-investing platforms.",
+      },
+      {
         type: "image",
         status: "available",
         title: "Photos from Arthavaad",
@@ -248,6 +255,13 @@ export const work: WorkItem[] = [
         url: "/work/hdfc-bank/Apollo-Hospitals-Research-Note-Aug-2025.pdf",
         note: "Company research note, August 2025.",
       },
+      {
+        type: "pdf",
+        status: "available",
+        title: "HNI portfolio allocation review (PDF)",
+        url: "/work/hdfc-bank/HNI-Portfolio-Allocation-Review.pdf",
+        note: "Asset-allocation review for an HNI portfolio.",
+      },
     ],
     tags: ["Investment Research", "Equities", "Portfolio Construction"],
   },
@@ -315,9 +329,10 @@ export const work: WorkItem[] = [
     proof: [
       {
         type: "pdf",
-        status: "coming_soon",
-        title: "Field research summary",
-        note: "Write-up to add.",
+        status: "available",
+        title: "Field research brief (PDF)",
+        url: "/work/project-nidaan/Project-Nidaan-Field-Research-Brief.pdf",
+        note: "Findings from 50+ delivery-worker interviews.",
       },
       {
         type: "file",
@@ -357,6 +372,13 @@ export const work: WorkItem[] = [
       { value: "$8k+", label: "revenue generated", source: "resume" },
     ],
     proof: [
+      {
+        type: "pdf",
+        status: "available",
+        title: "Marketplace one-pager (PDF)",
+        url: "/work/finer-things-club/Finer-Things-Marketplace-One-Pager.pdf",
+        note: "Overview of the artisan-commerce initiative.",
+      },
       { type: "live", status: "coming_soon", title: "Initiative page", note: "Link / archive to add." },
       { type: "image", status: "coming_soon", title: "Artisan & product photos", note: "Images to add." },
     ],
