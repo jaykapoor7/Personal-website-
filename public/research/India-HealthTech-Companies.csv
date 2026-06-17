@@ -1,0 +1,37 @@
+Company,Sector,What They Do,Funding (approx.),Stage,Key Investors,Competitive Advantage
+Practo,Telemedicine,"Doctor discovery, e-consults, practice-management SaaS",~$231M,Series D,"Peak XV (Sequoia India), Tencent, Z47 (Matrix)",Only profitable major player; dual B2C + B2B SaaS; 300M+ patient base
+Apollo 24/7,Telemedicine,"Omnichannel arm of Apollo Hospitals (consults, pharmacy, diagnostics)",Captive (Apollo HealthCo),Corporate-backed,"Apollo Hospitals, Advent International",Largest physical hospital + pharmacy network feeding digital funnel
+MediBuddy,Telemedicine,Enterprise B2B2C teleconsult + diagnostics + medicine,~$160M,Series C,"Quadria Capital, Lightrock",Corporate distribution; low CAC via enterprise accounts
+mfine,Telemedicine,Hospital-partnered specialist consults,~$97M,Series C,"Prime Venture Partners, SBI Investment",Quality-over-scale; real-time top-hospital doctor access
+Orange Health,Diagnostics,"On-demand at-home diagnostics, ~6-hour reports",~$35M+,Series B,"Accel, Bertelsmann, General Catalyst",Speed + reliability; tech-built logistics; metro density
+Redcliffe Labs,Diagnostics,"Full-stack diagnostics chain, pan-India",~$100M+,Series C,"LeapFrog, Schroders Capital",Owned-lab network + affordability in Tier 2/3
+Tata 1mg (Labs),Diagnostics,Diagnostics bundled into e-pharmacy super-app,Part of ~$240M,Corporate-owned,Tata Digital,Cross-sell off pharmacy traffic + Tata balance sheet
+Thyrocare,Diagnostics,"Asset-light preventive testing, franchise labs",Public (acq. by PharmEasy),Acquired,API Holdings / PharmEasy,National processing scale; low cost per test
+Tata 1mg,Pharmacy,"E-pharmacy, diagnostics, e-consults; ABHA-integrated",~$240M (then Tata-owned),Corporate-owned,Tata Digital,E-pharmacy leader (~31% share); vertical integration + corporate parent
+PharmEasy (API Holdings),Pharmacy,E-pharmacy + diagnostics + B2B distribution,Well over $1B across rounds,Late-stage,"Prosus, TPG, Temasek, B Capital","Roll-up scale (MedLife, Thyrocare); cautionary down-round case"
+Netmeds,Pharmacy,"E-pharmacy across 20,000+ pin codes",Acq. ~$72M (2020),Acquired,Reliance Retail Ventures,Reliance + JioMart distribution
+Apollo Pharmacy,Pharmacy,Largest offline + online pharmacy chain,Captive,Corporate-backed,Apollo Hospitals,Omnichannel density no pureplay can match
+Qure.ai,AI Healthcare,"Radiology AI (chest X-ray, head CT) for TB, stroke, lung nodules",~$125M,Series D,"Novo Holdings, HealthQuad, MassMutual Ventures, Peak XV",Regulatory clearances; global deployments; IPO-track
+Innovaccer,AI Healthcare,Healthcare data platform / EMR intelligence,~$675M (incl. $275M Series F),Series F (Unicorn),"Kleiner Perkins, Tiger Global, B Capital",Data-aggregation moat; AI co-pilots for care teams
+SigTuple,AI Healthcare,AI microscopy (AI100) — blood/urine slide analysis,~$40M,Series C,"Accel, IDG, pi Ventures",FDA 510(k) cleared; robotics + vision; patent stack
+Tricog Health,AI Healthcare,"Cloud ECG AI, 140+ cardiac conditions, real-time triage",~$25M+,Series B,"Blume Ventures, UTEC, Dream Incubator",Connects rural clinics to virtual cardiologists; speed-to-diagnosis
+HealthPlix,AI Healthcare,AI-powered EMR for doctors (point-of-care),~$44M,Series C,"Lightspeed, Chiratae",Embedded in physician workflow; prescription data network effects
+Onsurity,Insurance,Monthly SME group health membership + wellness,~$66M,Series B,"Quona, Creaegis, Nexus, IFC",Owns under-served SME segment; 300K+ members
+Plum,Insurance,Employee health benefits platform (+ Plum Health),~$98M,Series A+,"Tiger Global, Peak XV",HR-dashboard UX; expanding into diagnostics/teleconsult bundle
+Loop Health,Insurance,Group insurance + primary-care layer,~$40M+,Series B,"General Catalyst, Khosla, Elevation",Bundles care delivery with coverage to lower claims
+Acko,Insurance,Digital-native general + health insurer,~$450M+,Late-stage (Unicorn),Multiple,Own insurance license; embedded distribution; data-driven pricing
+Medyseva,Rural Healthcare,Phygital 'Kendra' clinics + telemedicine for Tier 2/3 & rural,~$480K seed,Seed,"Unicorn India Ventures, AIC RNTU",100K+ consults; hybrid clinic model; ABDM-aligned
+Karma Primary Healthcare,Rural Healthcare,Nurse-assisted remote consults + diagnostics in rural clinics,~$1.8M,Series A,"UBS Optimus Foundation, Ankur Capital, Grand Challenges Canada",Community-health-worker model; impact-capital backing
+eSanjeevani,Rural Healthcare,National govt teleconsultation (Ayushman Bharat),Public infrastructure,Government,Govt of India (MoHFW),340M+ consults — the rails private players ride
+Wysa,Mental Health,AI conversational agent + human-therapist backup,~$29M,Series B,"W Health Ventures, British International Investment, Google",Clinically validated; NHS/global enterprise + payer deployments
+Amaha (InnerHour),Mental Health,Omnichannel clinical care — therapy + psychiatry + digital self-care,~$12M,Series A,Fireside Ventures,Clinician-founded credibility; hybrid model; 4.5M+ users
+YourDOST,Mental Health,Emotional wellness + corporate EAP,Early-stage,Seed/Series A,"Fireside Ventures, others",Early-mover trust; B2B EAP revenue
+LISSUN,Mental Health,Scalable mental + maternal/child emotional health,~Rs 28 Cr,Series A,"IPV, others",Offline centers + digital; underserved maternal niche
+Nua,Women's Health,Menstrual care D2C + period tracker + content,~$24M,Series B,"Lightbox, Kae Capital",Brand + content community among urban women
+Gynoveda,Women's Health,Ayurvedic PCOS/fertility platform + clinics,Growth-stage,Series A+,Multiple,Ayurveda-meets-tech positioning; offline fertility clinics
+Veera Health,Women's Health,Digital therapeutics for PCOS,~$3M,Seed,"Sequoia (Peak XV), Nexus",Chronic-condition clinical depth vs. commerce-first peers
+Proactive For Her,Women's Health,"Full-stack women's clinics (menstrual, sexual, fertility, postpartum)","~$5.5M (acq. by IVF Access, 2025)",Acquired,"Sequoia surge, others",Clinical breadth; consolidation signal into fertility platforms
+Dozee,Hospital Infrastructure,Contactless AI remote patient monitoring (bedside sensors),~$33M,Series B,"Prime Venture Partners, 3one4, YourNest",No wearables; reduces nurse load; step-down/home monitoring
+Pristyn Care,Hospital Infrastructure,Asset-light elective surgery network,~$180M+,Late-stage (Unicorn),"Peak XV, Tiger Global, Hummingbird",Aggregates surgeons + clinics without owning hospitals
+HexaHealth,Hospital Infrastructure,Surgery-care discovery + management ecosystem,~$12M+,Series A,"Omidyar Network, 360 ONE",End-to-end elective surgery journey + insurance navigation
+Cloudphysician,Hospital Infrastructure,Tele-ICU command centers for under-resourced hospitals,~$24M+,Series B,"Peak XV, Chiratae",Brings critical-care expertise to hospitals without intensivists
