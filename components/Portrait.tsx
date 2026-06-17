@@ -31,7 +31,7 @@ export function Portrait({
       aria-label={`${alt} — portrait coming soon`}
     >
       <span className="display text-5xl text-muted">JK</span>
-      <span className="text-xs uppercase tracking-widest text-muted/70">
+      <span className="text-xs uppercase tracking-widest text-muted">
         Portrait — add photo
       </span>
     </div>

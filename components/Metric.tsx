@@ -14,7 +14,7 @@ export function MetricStat({ metric }: { metric: Metric }) {
     <div className="flex flex-col gap-1">
       <span className="display text-4xl leading-none sm:text-5xl">{metric.value}</span>
       <span className="text-sm text-muted">{metric.label}</span>
-      <span className="text-[10px] uppercase tracking-widest text-muted/70">
+      <span className="text-[10px] uppercase tracking-widest text-muted">
         {SOURCE_LABEL[metric.source]}
       </span>
     </div>

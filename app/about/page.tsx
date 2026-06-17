@@ -23,11 +23,17 @@ export default function AboutPage() {
           </Reveal>
           <Reveal delay={0.1}>
             <div className="space-y-6 text-2xl leading-snug sm:text-3xl">
-              {profile.bio.map((p, i) => (
-                <p key={i} className={i === 0 ? "display" : "text-muted"}>
-                  {p}
-                </p>
-              ))}
+              {profile.bio.map((p, i) =>
+                i === 0 ? (
+                  <h1 key={i} className="display">
+                    {p}
+                  </h1>
+                ) : (
+                  <p key={i} className="text-muted">
+                    {p}
+                  </p>
+                ),
+              )}
             </div>
           </Reveal>
         </div>

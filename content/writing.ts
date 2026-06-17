@@ -37,6 +37,7 @@ export const writing: WritingItem[] = [
       { value: "10", label: "investment memos", source: "published" },
       { value: "15", label: "calls tracked (11 open · 4 resolved)", source: "published" },
       { value: "75%", label: "hit rate on resolved calls", source: "published" },
+      { value: "0.134", label: "avg Brier score (lower is better)", source: "published" },
     ],
     proof: [
       {

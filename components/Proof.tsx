@@ -30,7 +30,7 @@ function ProofCard({ proof }: { proof: Proof }) {
       {proof.note && <p className="mt-1 text-sm text-muted">{proof.note}</p>}
       <span
         className={`mt-4 inline-block text-xs ${
-          available ? "text-paper" : "text-muted/60"
+          available ? "text-paper" : "text-muted"
         }`}
       >
         {available

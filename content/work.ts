@@ -128,13 +128,13 @@ export const work: WorkItem[] = [
         type: "image",
         status: "available",
         title: "Product & impact dashboard",
-        url: "/work/juno-ai/juno-product-dashboard.png",
+        url: "/work/juno-ai/juno-product-dashboard.webp",
         note: "Patient app, AI assistant, find-a-doctor, pharmacy, and impact dashboard.",
       },
     ],
     gallery: [
       {
-        src: "/work/juno-ai/juno-product-dashboard.png",
+        src: "/work/juno-ai/juno-product-dashboard.webp",
         alt: "Juno-AI product screens — patient dashboard, AI symptom assistant, find-a-doctor, nearby pharmacy, and the admin impact dashboard",
         caption:
           "Juno-AI — patient app, AI assistant, doctor & pharmacy discovery, and the impact dashboard.",
@@ -188,7 +188,7 @@ export const work: WorkItem[] = [
     impact: 7,
     recency: 2026,
     relevance: 8,
-    featured: true,
+    featured: false,
     summary:
       "End-to-end operations for a multi-centre early-childhood business — software, facilities, hiring, nutrition, compliance and documentation — run lean by one operator using AI as the team.",
     context: [

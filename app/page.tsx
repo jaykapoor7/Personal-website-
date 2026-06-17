@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { profile } from "@/content/profile";
-import { featuredWork } from "@/lib/order";
+import { featuredWork, orderedWriting } from "@/lib/order";
 import { Reveal } from "@/components/Reveal";
 import { Marquee } from "@/components/Marquee";
 import { MetricStat } from "@/components/Metric";
@@ -9,6 +9,8 @@ import { Portrait } from "@/components/Portrait";
 
 export default function HomePage() {
   const featured = featuredWork();
+  // Lead with the investing / research A-material.
+  const research = orderedWriting().slice(0, 2);
 
   return (
     <>
@@ -92,6 +94,43 @@ export default function HomePage() {
             <WorkCard key={item.slug} item={item} index={i} />
           ))}
           <div className="border-t border-line" />
+        </div>
+      </section>
+
+      {/* Selected research — leads with the investing A-material */}
+      <section className="shell py-16">
+        <div className="mb-8 flex items-baseline justify-between">
+          <h2 className="display text-3xl sm:text-4xl">Selected research</h2>
+          <Link href="/writing" className="link-underline text-sm text-muted">
+            All writing →
+          </Link>
+        </div>
+        <div className="grid gap-px overflow-hidden rounded-sm border border-line md:grid-cols-2">
+          {research.map((item) => (
+            <Link
+              key={item.slug}
+              href="/writing"
+              className="group flex flex-col gap-4 bg-ink p-6 transition-colors hover:bg-line/40 sm:p-8"
+            >
+              <div className="flex items-center gap-3 text-xs uppercase tracking-widest text-muted">
+                <span>{item.kind}</span>
+                <span aria-hidden>·</span>
+                <span>{item.year}</span>
+              </div>
+              <h3 className="display text-2xl leading-tight sm:text-3xl">
+                {item.title}
+              </h3>
+              {item.metrics && item.metrics.length > 0 && (
+                <div className="mt-auto flex flex-wrap gap-x-6 gap-y-1 pt-2 text-sm text-muted">
+                  {item.metrics.slice(0, 3).map((m, i) => (
+                    <span key={i}>
+                      <span className="text-paper">{m.value}</span> {m.label}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </Link>
+          ))}
         </div>
       </section>
 
