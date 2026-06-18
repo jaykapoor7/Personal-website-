@@ -17,9 +17,16 @@ export const writing: WritingItem[] = [
     ],
     proof: [
       {
+        type: "pdf",
+        status: "available",
+        title: "Market map (PDF)",
+        url: "/research/India-HealthTech-Market-Map.pdf",
+        note: "Ecosystem landscape grouped by sector.",
+      },
+      {
         type: "file",
         status: "available",
-        title: "Company dataset (CSV)",
+        title: "Raw dataset (CSV)",
         url: "/research/India-HealthTech-Companies.csv",
         note: "Positioning, funding, stage, investors, and edge for each company.",
       },
