@@ -46,16 +46,14 @@ function ProofCard({ proof }: { proof: Proof }) {
     "block rounded-sm border border-line p-5 transition-colors duration-300";
 
   if (available) {
+    // New tab for external links and downloadable docs; same tab for internal pages.
+    const external = /^https?:\/\//.test(proof.url || "");
+    const isDoc = proof.type === "pdf" || proof.type === "file";
+    const newTab = external || isDoc;
     return (
       <a
         href={proof.url}
-        target={
-          proof.type === "social" ||
-          proof.type === "live" ||
-          proof.type === "pdf"
-            ? "_blank"
-            : undefined
-        }
+        target={newTab ? "_blank" : undefined}
         rel="noreferrer"
         className={`${base} hover:border-paper hover:bg-line/40`}
       >

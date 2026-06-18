@@ -48,6 +48,13 @@ export const writing: WritingItem[] = [
     ],
     proof: [
       {
+        type: "live",
+        status: "available",
+        title: "Live calibration ledger",
+        url: "/ledger",
+        note: "15 dated calls, scored — 75% hit rate.",
+      },
+      {
         type: "pdf",
         status: "available",
         title: "The Memo Library & Ledger (PDF)",

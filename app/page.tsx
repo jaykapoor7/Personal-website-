@@ -117,7 +117,7 @@ export default function HomePage() {
           {research.map((item) => (
             <Link
               key={item.slug}
-              href="/writing"
+              href={item.slug === "investment-memo-series" ? "/ledger" : "/writing"}
               className="group flex flex-col gap-4 bg-ink p-6 transition-colors hover:bg-line/40 sm:p-8"
             >
               <div className="flex items-center gap-3 text-xs uppercase tracking-widest text-muted">
