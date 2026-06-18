@@ -9,8 +9,10 @@ import { Portrait } from "@/components/Portrait";
 
 export default function HomePage() {
   const featured = featuredWork();
-  // Lead with the investing / research A-material.
-  const research = orderedWriting().slice(0, 2);
+  // Lead with the investing / research A-material (exclude building-in-public).
+  const research = orderedWriting()
+    .filter((w) => w.kind !== "Building in public")
+    .slice(0, 3);
 
   return (
     <>
