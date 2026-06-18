@@ -153,7 +153,7 @@ export const work: WorkItem[] = [
     impact: 7,
     recency: 2026,
     relevance: 9,
-    featured: true,
+    featured: false,
     summary:
       "Building an AI-powered productivity and behavioral operating system for ADHD users — documented publicly as I build.",
     context: [
@@ -188,7 +188,7 @@ export const work: WorkItem[] = [
     impact: 7,
     recency: 2026,
     relevance: 8,
-    featured: false,
+    featured: true,
     summary:
       "End-to-end operations for a multi-centre early-childhood business — software, facilities, hiring, nutrition, compliance and documentation — run lean by one operator using AI as the team.",
     context: [
