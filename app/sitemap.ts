@@ -1,7 +1,6 @@
 import type { MetadataRoute } from "next";
 import { work } from "@/content/work";
-
-const siteUrl = "https://personal-website-delta-two-23.vercel.app";
+import { siteUrl } from "@/lib/site";
 
 export const dynamic = "force-static";
 

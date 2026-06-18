@@ -4,6 +4,7 @@ import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { profile } from "@/content/profile";
+import { siteUrl } from "@/lib/site";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -17,7 +18,6 @@ const fraunces = Fraunces({
   display: "swap",
 });
 
-const siteUrl = "https://personal-website-delta-two-23.vercel.app";
 const description =
   "Jay Kapoor — fintech, healthtech, and investment research. The work behind the resume.";
 
