@@ -131,6 +131,8 @@ export interface Profile {
   email: string;
   /** A few sentences of bio for the About page. */
   bio: string[];
+  /** What roles the site is positioning for (shown in hero / about). */
+  seeking: string;
   portrait: Portrait;
   education: EducationEntry[];
   skills: {

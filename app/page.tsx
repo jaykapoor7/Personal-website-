@@ -48,6 +48,12 @@ export default function HomePage() {
               </a>
             </div>
           </Reveal>
+          <Reveal delay={0.2}>
+            <p className="mt-6 inline-flex items-center gap-2 text-sm text-muted">
+              <span className="h-1.5 w-1.5 rounded-full bg-paper" aria-hidden />
+              {profile.seeking}
+            </p>
+          </Reveal>
         </div>
         <Reveal delay={0.1} className="order-first lg:order-none">
           <Portrait className="max-w-[15rem] sm:max-w-xs lg:max-w-sm" />

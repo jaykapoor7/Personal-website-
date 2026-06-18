@@ -13,6 +13,7 @@ export const profile: Profile = {
     "I'm studying Economics & Statistics at the University of Pittsburgh with a minor in Information Sciences. I care about products that reach underserved users and about the research discipline behind good investment decisions.",
     "This site is the long version of my resume — the projects behind it, with links you can open.",
   ],
+  seeking: "Open to operations / BizOps and venture (VC/PE) roles.",
   portrait: {
     src: "/jay-kapoor.jpg",
     alt: "Jay Kapoor",
