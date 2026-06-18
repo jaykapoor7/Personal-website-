@@ -71,6 +71,29 @@ export const writing: WritingItem[] = [
     ],
   },
   {
+    slug: "india-glp1-sector-thesis",
+    title: "India's GLP-1 Inflection",
+    kind: "Research",
+    year: "2026",
+    recency: 2026,
+    summary:
+      "A top-down sector thesis on India's metabolic-health wave after the March 2026 semaglutide patent cliff — arguing the durable value sits around the molecule (adherence, patient data, pen manufacturing), not in the commoditising generic drug.",
+    metrics: [
+      { value: "~$1B", label: "domestic TAM", source: "published" },
+      { value: "~34%", label: "India CAGR to 2030", source: "published" },
+      { value: "50+", label: "generic brands at launch", source: "published" },
+    ],
+    proof: [
+      {
+        type: "pdf",
+        status: "available",
+        title: "India's GLP-1 Inflection (PDF)",
+        url: "/research/India-GLP1-Sector-Thesis.pdf",
+        note: "Top-down value-capture analysis, layer by layer.",
+      },
+    ],
+  },
+  {
     slug: "healthcare-accessibility-ijedr",
     title:
       "Juno AI: A Retrieval-Grounded Conversational Platform for Equitable Healthcare Information Access",
