@@ -143,10 +143,10 @@ export default function LedgerPage() {
               Read the full memo library (PDF) ↗
             </a>
             <Link
-              href="/writing"
+              href="/thesis"
               className="rounded-sm border border-line px-5 py-3 text-muted transition-colors hover:border-paper hover:text-paper"
             >
-              All writing →
+              The thesis behind the calls →
             </Link>
           </div>
         </Reveal>
