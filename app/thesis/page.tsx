@@ -26,8 +26,8 @@ export default function ThesisPage() {
           </Link>
         </Reveal>
         <Reveal delay={0.05}>
-          <p className="mt-8 mb-4 text-sm uppercase tracking-widest text-muted">
-            Investing · How I think
+          <p className="kicker mt-8 mb-4">
+            <span className="text-accent">&gt;</span> investing · how i think
           </p>
         </Reveal>
         <Reveal delay={0.1}>

@@ -12,8 +12,8 @@ export default function ContactPage() {
   return (
     <section className="shell flex min-h-[70vh] flex-col justify-center py-20">
       <Reveal>
-        <p className="mb-6 text-sm uppercase tracking-widest text-muted">
-          Contact
+        <p className="kicker mb-6">
+          <span className="text-accent">&gt;</span> contact
         </p>
       </Reveal>
       <Reveal delay={0.05}>

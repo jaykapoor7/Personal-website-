@@ -2,7 +2,7 @@ import Link from "next/link";
 import { profile } from "@/content/profile";
 import { featuredWork, orderedWriting } from "@/lib/order";
 import { Reveal } from "@/components/Reveal";
-import { Marquee } from "@/components/Marquee";
+import { Ticker } from "@/components/Ticker";
 import { MetricStat } from "@/components/Metric";
 import { WorkCard } from "@/components/WorkCard";
 import { Portrait } from "@/components/Portrait";
@@ -21,13 +21,15 @@ export default function HomePage() {
       <section className="shell grid items-center gap-14 pt-24 pb-20 sm:pt-32 lg:grid-cols-[1.6fr_1fr]">
         <div>
           <Reveal>
-            <p className="mb-7 text-sm uppercase tracking-widest text-muted">
-              Builder &amp; researcher · {profile.location}
+            <p className="kicker mb-7">
+              <span className="text-accent">&gt;</span> builder &amp; researcher ·{" "}
+              {profile.location}
             </p>
           </Reveal>
           <Reveal delay={0.05}>
-            <h1 className="display text-6xl leading-[0.92] tracking-tightest sm:text-8xl lg:text-[8.5rem]">
-              Jay Kapoor
+            <h1 className="display text-6xl lowercase leading-[0.95] tracking-tighter2 sm:text-7xl lg:text-8xl">
+              jay kapoor
+              <span className="caret" aria-hidden />
             </h1>
           </Reveal>
           <Reveal delay={0.1}>
@@ -53,8 +55,8 @@ export default function HomePage() {
             </div>
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="mt-7 inline-flex items-center gap-2 text-sm text-muted">
-              <span className="h-1.5 w-1.5 rounded-full bg-paper" aria-hidden />
+            <p className="mt-7 inline-flex items-center gap-2 font-mono text-sm text-muted">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden />
               {profile.seeking}
             </p>
           </Reveal>
@@ -64,23 +66,12 @@ export default function HomePage() {
         </Reveal>
       </section>
 
-      <Marquee
-        items={[
-          "Fintech",
-          "Healthtech",
-          "Investment Research",
-          "Venture Research",
-          "Product",
-          "Growth",
-        ]}
-      />
+      <Ticker />
 
       {/* Headline stats */}
       <section className="shell py-20">
         <Reveal>
-          <h2 className="mb-12 text-sm uppercase tracking-widest text-muted">
-            By the numbers
-          </h2>
+          <h2 className="kicker mb-12">// by the numbers</h2>
         </Reveal>
         <div className="grid grid-cols-2 gap-10 sm:grid-cols-4">
           {profile.highlights.map((m, i) => (
@@ -93,10 +84,15 @@ export default function HomePage() {
 
       {/* Featured work */}
       <section className="py-10">
-        <div className="shell mb-4 flex items-baseline justify-between">
-          <h2 className="display text-3xl sm:text-4xl">Selected work</h2>
-          <Link href="/work" className="link-underline text-sm text-muted">
-            All work →
+        <div className="shell mb-6 flex items-baseline justify-between">
+          <h2 className="display text-3xl lowercase tracking-tighter2 sm:text-4xl">
+            <span className="text-accent">//</span> selected work
+          </h2>
+          <Link
+            href="/work"
+            className="link-underline font-mono text-xs uppercase tracking-widest text-muted"
+          >
+            all work →
           </Link>
         </div>
         <div>
@@ -110,19 +106,25 @@ export default function HomePage() {
       {/* Selected research — leads with the investing A-material */}
       <section className="shell py-16">
         <div className="mb-8 flex items-baseline justify-between">
-          <h2 className="display text-3xl sm:text-4xl">Selected research</h2>
-          <Link href="/writing" className="link-underline text-sm text-muted">
-            All writing →
+          <h2 className="display text-3xl lowercase tracking-tighter2 sm:text-4xl">
+            <span className="text-accent">//</span> selected research
+          </h2>
+          <Link
+            href="/writing"
+            className="link-underline font-mono text-xs uppercase tracking-widest text-muted"
+          >
+            all writing →
           </Link>
         </div>
         <div className="grid gap-px overflow-hidden rounded-sm border border-line md:grid-cols-2">
-          {research.map((item) => (
+          {research.map((item, i) => (
             <Link
               key={item.slug}
               href={item.slug === "investment-memo-series" ? "/ledger" : "/writing"}
               className="group flex flex-col gap-4 bg-ink p-6 transition-colors hover:bg-line/40 sm:p-8"
             >
-              <div className="flex items-center gap-3 text-xs uppercase tracking-widest text-muted">
+              <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-muted">
+                <span className="text-accent">[{String(i + 1).padStart(2, "0")}]</span>
                 <span>{item.kind}</span>
                 <span aria-hidden>·</span>
                 <span>{item.year}</span>
@@ -131,7 +133,7 @@ export default function HomePage() {
                 {item.title}
                 <span
                   aria-hidden
-                  className="text-muted opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  className="text-accent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                 >
                   ↗
                 </span>

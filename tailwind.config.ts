@@ -9,16 +9,18 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Editorial black-and-white palette, Palmer-inspired.
+        // Dark "research terminal" palette with a single amber accent.
         ink: "#0a0a0a",
         paper: "#f4f2ed",
         muted: "#8a8a86",
         line: "#1c1c1c",
-        accent: "#e8e6df",
+        accent: "#e9a23b",
       },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
-        display: ["var(--font-display)", "Georgia", "serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
+        // Headings now use the mono "terminal" voice.
+        display: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       letterSpacing: {
         tightest: "-0.04em",
@@ -35,9 +37,15 @@ const config: Config = {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-50%)" },
         },
+        blink: {
+          "0%, 49%": { opacity: "1" },
+          "50%, 100%": { opacity: "0" },
+        },
       },
       animation: {
         marquee: "marquee 30s linear infinite",
+        "marquee-fast": "marquee 40s linear infinite",
+        blink: "blink 1.1s steps(1) infinite",
       },
     },
   },

@@ -19,18 +19,18 @@ function ProofCard({ proof }: { proof: Proof }) {
   const inner = (
     <>
       <div className="flex items-center justify-between">
-        <span className="text-[10px] uppercase tracking-widest text-muted">
+        <span className="font-mono text-[10px] uppercase tracking-widest text-muted">
           {meta.label}
         </span>
-        <span aria-hidden className="text-muted">
+        <span aria-hidden className={available ? "text-accent" : "text-muted"}>
           {available ? meta.glyph : "·"}
         </span>
       </div>
       <p className="mt-3 text-base text-paper">{proof.title}</p>
       {proof.note && <p className="mt-1 text-sm text-muted">{proof.note}</p>}
       <span
-        className={`mt-4 inline-block text-xs ${
-          available ? "text-paper" : "text-muted"
+        className={`mt-4 inline-block font-mono text-xs ${
+          available ? "text-paper group-hover:text-accent" : "text-muted"
         }`}
       >
         {available
@@ -55,7 +55,7 @@ function ProofCard({ proof }: { proof: Proof }) {
         href={proof.url}
         target={newTab ? "_blank" : undefined}
         rel="noreferrer"
-        className={`${base} hover:border-paper hover:bg-line/40`}
+        className={`group ${base} hover:border-accent hover:bg-line/40`}
       >
         {inner}
       </a>

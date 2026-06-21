@@ -13,8 +13,8 @@ export default function AboutPage() {
     <>
       <section className="shell pt-20 pb-12 sm:pt-28">
         <Reveal>
-          <p className="mb-6 text-sm uppercase tracking-widest text-muted">
-            About
+          <p className="kicker mb-6">
+            <span className="text-accent">&gt;</span> about
           </p>
         </Reveal>
         <div className="grid gap-10 md:grid-cols-[300px_1fr] md:items-start lg:gap-16">
@@ -25,7 +25,7 @@ export default function AboutPage() {
             <div className="space-y-6 text-2xl leading-snug sm:text-3xl">
               {profile.bio.map((p, i) =>
                 i === 0 ? (
-                  <h1 key={i} className="display">
+                  <h1 key={i} className="tracking-tight text-paper">
                     {p}
                   </h1>
                 ) : (
@@ -34,8 +34,8 @@ export default function AboutPage() {
                   </p>
                 ),
               )}
-              <p className="inline-flex items-center gap-2 text-base text-muted sm:text-lg">
-                <span className="h-1.5 w-1.5 rounded-full bg-paper" aria-hidden />
+              <p className="inline-flex items-center gap-2 font-mono text-base text-muted sm:text-lg">
+                <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden />
                 {profile.seeking}
               </p>
             </div>
