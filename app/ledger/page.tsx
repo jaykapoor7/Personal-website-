@@ -138,13 +138,13 @@ export default function LedgerPage() {
               href="/research/Memo-Library-and-Ledger.pdf"
               target="_blank"
               rel="noreferrer"
-              className="rounded-sm border border-paper px-5 py-3 text-paper transition-colors hover:bg-paper hover:text-ink"
+              className="rounded-full border border-paper px-6 py-3 text-paper transition-colors duration-300 hover:bg-paper hover:text-ink"
             >
               Read the full memo library (PDF) ↗
             </a>
             <Link
               href="/thesis"
-              className="rounded-sm border border-line px-5 py-3 text-muted transition-colors hover:border-paper hover:text-paper"
+              className="rounded-full border border-line px-6 py-3 text-muted transition-colors duration-300 hover:border-paper hover:text-paper"
             >
               The thesis behind the calls →
             </Link>

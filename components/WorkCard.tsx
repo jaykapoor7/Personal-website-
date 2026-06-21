@@ -14,7 +14,7 @@ export function WorkCard({ item, index }: { item: WorkItem; index: number }) {
             {String(index + 1).padStart(2, "0")}
           </span>
           <div>
-            <h3 className="display text-3xl leading-tight transition-transform duration-300 group-hover:translate-x-1 sm:text-4xl">
+            <h3 className="display text-3xl leading-tight transition-transform duration-300 ease-out-expo group-hover:translate-x-1 sm:text-4xl">
               {item.title}
             </h3>
             <p className="mt-1 text-sm text-muted">
@@ -30,7 +30,7 @@ export function WorkCard({ item, index }: { item: WorkItem; index: number }) {
             <span>{item.period}</span>
             <span aria-hidden>·</span>
             <ProofTags proof={item.proof} />
-            <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">
+            <span aria-hidden className="transition-transform duration-300 ease-out-expo group-hover:translate-x-1">
               →
             </span>
           </div>

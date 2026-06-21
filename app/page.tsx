@@ -6,52 +6,54 @@ import { Marquee } from "@/components/Marquee";
 import { MetricStat } from "@/components/Metric";
 import { WorkCard } from "@/components/WorkCard";
 import { Portrait } from "@/components/Portrait";
+import { MagneticButton } from "@/components/MagneticButton";
 
 export default function HomePage() {
   const featured = featuredWork();
   // Lead with the investing / research A-material (exclude building-in-public).
   const research = orderedWriting()
     .filter((w) => w.kind !== "Building in public")
-    .slice(0, 4);
+    .slice(0, 5);
 
   return (
     <>
       {/* Hero */}
-      <section className="shell grid items-center gap-12 pt-20 pb-16 sm:pt-28 lg:grid-cols-[1.6fr_1fr]">
+      <section className="shell grid items-center gap-14 pt-24 pb-20 sm:pt-32 lg:grid-cols-[1.6fr_1fr]">
         <div>
           <Reveal>
-            <p className="mb-6 text-sm uppercase tracking-widest text-muted">
+            <p className="mb-7 text-sm uppercase tracking-widest text-muted">
               Builder &amp; researcher · {profile.location}
             </p>
           </Reveal>
           <Reveal delay={0.05}>
-            <h1 className="display text-5xl leading-[0.95] tracking-tightest sm:text-7xl lg:text-8xl">
+            <h1 className="display text-6xl leading-[0.92] tracking-tightest sm:text-8xl lg:text-[8.5rem]">
               Jay Kapoor
             </h1>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="mt-8 max-w-2xl text-lg text-muted sm:text-xl">
+            <p className="mt-9 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
               {profile.tagline}
             </p>
           </Reveal>
           <Reveal delay={0.15}>
-            <div className="mt-10 flex flex-wrap gap-4 text-sm">
-              <Link
+            <div className="mt-11 flex flex-wrap gap-4 text-sm">
+              <MagneticButton
                 href="/work"
-                className="rounded-sm border border-paper px-5 py-3 text-paper transition-colors hover:bg-paper hover:text-ink"
+                className="rounded-full border border-paper px-6 py-3 text-paper transition-colors duration-300 hover:bg-paper hover:text-ink"
               >
                 See the work →
-              </Link>
-              <a
+              </MagneticButton>
+              <MagneticButton
                 href={profile.resumeUrl}
-                className="rounded-sm border border-line px-5 py-3 text-muted transition-colors hover:border-paper hover:text-paper"
+                external
+                className="rounded-full border border-line px-6 py-3 text-muted transition-colors duration-300 hover:border-paper hover:text-paper"
               >
                 Resume ↗
-              </a>
+              </MagneticButton>
             </div>
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="mt-6 inline-flex items-center gap-2 text-sm text-muted">
+            <p className="mt-7 inline-flex items-center gap-2 text-sm text-muted">
               <span className="h-1.5 w-1.5 rounded-full bg-paper" aria-hidden />
               {profile.seeking}
             </p>
@@ -125,8 +127,14 @@ export default function HomePage() {
                 <span aria-hidden>·</span>
                 <span>{item.year}</span>
               </div>
-              <h3 className="display text-2xl leading-tight sm:text-3xl">
+              <h3 className="display flex items-start gap-2 text-2xl leading-tight transition-transform duration-300 ease-out-expo group-hover:translate-x-1 sm:text-3xl">
                 {item.title}
+                <span
+                  aria-hidden
+                  className="text-muted opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                >
+                  ↗
+                </span>
               </h3>
               {item.metrics && item.metrics.length > 0 && (
                 <div className="mt-auto flex flex-wrap gap-x-6 gap-y-1 pt-2 text-sm text-muted">

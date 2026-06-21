@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { profile } from "@/content/profile";
 import { siteUrl } from "@/lib/site";
 import { Analytics } from "@vercel/analytics/react";
+import { Cursor } from "@/components/Cursor";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -72,6 +73,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <Cursor />
         <Nav />
         <main id="main">{children}</main>
         <Footer />

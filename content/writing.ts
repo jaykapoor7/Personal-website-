@@ -94,6 +94,29 @@ export const writing: WritingItem[] = [
     ],
   },
   {
+    slug: "india-fintech-sector-thesis",
+    title: "India's Retail-Investing Reset",
+    kind: "Research",
+    year: "2026",
+    recency: 2026,
+    summary:
+      "A top-down thesis on the next phase of Indian fintech: SEBI's F&O clampdown and the maxing-out of the broking model push value from the commoditising trade to the durable relationship — advice, wealth, and engagement (AUM over per-trade revenue).",
+    metrics: [
+      { value: "91%", label: "of F&O traders lost money (FY25)", source: "published" },
+      { value: "~21 cr", label: "demat accounts, only ~4.8 cr active", source: "published" },
+      { value: "~₹80 L cr", label: "mutual-fund AUM", source: "published" },
+    ],
+    proof: [
+      {
+        type: "pdf",
+        status: "available",
+        title: "India's Retail-Investing Reset (PDF)",
+        url: "/research/India-Fintech-Sector-Thesis.pdf",
+        note: "Top-down thesis — trade to advice, layer by layer.",
+      },
+    ],
+  },
+  {
     slug: "healthcare-accessibility-ijedr",
     title:
       "Juno AI: A Retrieval-Grounded Conversational Platform for Equitable Healthcare Information Access",
