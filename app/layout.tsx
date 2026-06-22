@@ -100,6 +100,12 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${mono.variable}`}>
       <body className="grain min-h-screen">
         <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{var t=localStorage.getItem('accent'),m={amber:'233 162 59',green:'126 231 135',white:'244 242 237'};if(t&&m[t])document.documentElement.style.setProperty('--accent',m[t]);}catch(e){}",
+          }}
+        />
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
         />

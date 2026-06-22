@@ -5,6 +5,8 @@
 :root {
   --font-sans: "Inter", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  /* Signature accent as an RGB triplet so the `theme` command can swap it. */
+  --accent: 233 162 59; /* amber */
 }
 
 @layer base {
@@ -118,7 +120,7 @@
     height: 56px;
     width: 56px;
     mix-blend-mode: normal;
-    border-color: theme(colors.accent);
+    border-color: theme(colors.accent / 100%);
     background: theme(colors.accent / 18%);
   }
 }

@@ -14,7 +14,8 @@ const config: Config = {
         paper: "#f4f2ed",
         muted: "#8a8a86",
         line: "#1c1c1c",
-        accent: "#e9a23b",
+        // Runtime-switchable via --accent (see globals.css + `theme` command).
+        accent: "rgb(var(--accent) / <alpha-value>)",
       },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],

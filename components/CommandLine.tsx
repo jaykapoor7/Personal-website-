@@ -21,10 +21,42 @@ const HELP = [
   "  ledger            the calibration ledger",
   "  thesis            investing thesis",
   "  writing           research & memos",
+  "  goto <page>       jump to a page",
   "  resume            download résumé",
-  "  contact           get in touch",
   "  socials           where to find me",
+  "  theme <color>     amber | green | white",
+  "  ascii             ascii signature",
+  "  date              current date",
   "  clear             clear the screen",
+  "  (tab to complete · ↑/↓ for history)",
+];
+
+const ASCII = [
+  "   __  ___   __",
+  "  / / / / | / /     jay kapoor",
+  " / /_/ /| |/ /      builder & researcher",
+  " \\____/ |___/       fintech · healthtech · investing",
+];
+
+const ACCENTS: Record<string, string> = {
+  amber: "233 162 59",
+  green: "126 231 135",
+  white: "244 242 237",
+};
+
+const PAGES: Record<string, string> = {
+  home: "/",
+  work: "/work",
+  writing: "/writing",
+  ledger: "/ledger",
+  thesis: "/thesis",
+  about: "/about",
+  contact: "/contact",
+};
+
+const COMMANDS = [
+  "help", "whoami", "work", "open", "ledger", "thesis", "writing",
+  "goto", "resume", "socials", "theme", "ascii", "date", "clear", "sudo",
 ];
 
 export function CommandLine() {
@@ -45,6 +77,10 @@ export function CommandLine() {
     setLines((l) => [...l, ...arr.map((t) => ({ kind, text: t }))]);
   }
 
+  function go(path: string) {
+    setTimeout(() => router.push(path), 250);
+  }
+
   function run(raw: string) {
     const cmd = raw.trim();
     setLines((l) => [...l, { kind: "in", text: cmd }]);
@@ -52,10 +88,10 @@ export function CommandLine() {
     setHistory((h) => [cmd, ...h]);
     setHIndex(-1);
 
-    const [name, ...rest] = cmd.toLowerCase().split(/\s+/);
-    const arg = rest.join(" ");
+    const [name, ...rest] = cmd.split(/\s+/);
+    const arg = rest.join(" ").toLowerCase();
 
-    switch (name) {
+    switch (name.toLowerCase()) {
       case "help":
         return print(HELP);
       case "whoami":
@@ -70,31 +106,62 @@ export function CommandLine() {
         return print("→ type 'open <name>' to view a project", "sys");
       case "open":
       case "cd": {
-        const target = work.find(
+        const t = work.find(
           (w) => w.slug === arg || w.title.toLowerCase() === arg,
         );
-        if (!target) return print(`no such project: ${arg || "(none)"}`);
-        print(`opening /work/${target.slug} …`, "sys");
-        setTimeout(() => router.push(`/work/${target.slug}`), 250);
-        return;
+        if (!t) return print(`no such project: ${arg || "(none)"}`);
+        print(`opening /work/${t.slug} …`, "sys");
+        return go(`/work/${t.slug}`);
       }
       case "ledger":
         print("opening /ledger …", "sys");
-        return void setTimeout(() => router.push("/ledger"), 250);
+        return go("/ledger");
       case "thesis":
         print("opening /thesis …", "sys");
-        return void setTimeout(() => router.push("/thesis"), 250);
+        return go("/thesis");
       case "writing":
         print("opening /writing …", "sys");
-        return void setTimeout(() => router.push("/writing"), 250);
+        return go("/writing");
       case "contact":
         print("opening /contact …", "sys");
-        return void setTimeout(() => router.push("/contact"), 250);
+        return go("/contact");
+      case "goto": {
+        const p = PAGES[arg];
+        if (!p) return print(`unknown page: ${arg} — try ${Object.keys(PAGES).join(", ")}`);
+        print(`opening ${p} …`, "sys");
+        return go(p);
+      }
       case "resume":
         print("downloading résumé …", "sys");
         return void window.open(profile.resumeUrl, "_blank");
       case "socials":
         return print(socials.map((s) => `  ${s.label.padEnd(10)} ${s.handle}`));
+      case "theme": {
+        const rgb = ACCENTS[arg];
+        if (!rgb) return print(`usage: theme <${Object.keys(ACCENTS).join(" | ")}>`);
+        document.documentElement.style.setProperty("--accent", rgb);
+        try { localStorage.setItem("accent", arg); } catch {}
+        return print(`accent → ${arg}`, "sys");
+      }
+      case "ascii":
+        return print(ASCII);
+      case "date":
+        return print(new Date().toString());
+      case "history":
+        return print([...history].reverse().map((h, i) => `  ${i + 1}  ${h}`));
+      case "echo":
+        return print(rest.join(" "));
+      case "sudo":
+        if (arg === "hire-jay") {
+          return print(
+            [
+              "[sudo] access granted ✓",
+              "initiating onboarding … let's talk: " + profile.email,
+            ],
+            "sys",
+          );
+        }
+        return print("usage: sudo hire-jay");
       case "clear":
         return setLines([]);
       default:
@@ -102,10 +169,36 @@ export function CommandLine() {
     }
   }
 
+  function complete() {
+    const parts = value.split(/\s+/);
+    if (parts.length <= 1) {
+      const m = COMMANDS.filter((c) => c.startsWith(parts[0].toLowerCase()));
+      if (m.length === 1) setValue(m[0] + " ");
+      else if (m.length > 1) print(m.join("   "));
+    } else {
+      const first = parts[0].toLowerCase();
+      const frag = parts[parts.length - 1].toLowerCase();
+      const pool =
+        first === "open" || first === "cd"
+          ? work.map((w) => w.slug)
+          : first === "goto"
+            ? Object.keys(PAGES)
+            : first === "theme"
+              ? Object.keys(ACCENTS)
+              : [];
+      const m = pool.filter((p) => p.startsWith(frag));
+      if (m.length === 1) setValue(`${first} ${m[0]}`);
+      else if (m.length > 1) print(m.join("   "));
+    }
+  }
+
   function onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === "Enter") {
       run(value);
       setValue("");
+    } else if (e.key === "Tab") {
+      e.preventDefault();
+      complete();
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
       setHIndex((i) => {
@@ -147,7 +240,7 @@ export function CommandLine() {
                 ? "text-paper"
                 : l.kind === "sys"
                   ? "text-accent"
-                  : "whitespace-pre text-muted"
+                  : "whitespace-pre-wrap text-muted"
             }
           >
             {l.kind === "in" && <span className="text-accent">$ </span>}

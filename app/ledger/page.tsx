@@ -1,20 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ledger, type CallResult, type Verdict } from "@/content/ledger";
+import { ledger, type Verdict } from "@/content/ledger";
 import { Reveal } from "@/components/Reveal";
 import { MetricRow } from "@/components/Metric";
 import { Scramble } from "@/components/Scramble";
+import { LedgerCalls } from "@/components/LedgerCalls";
 
 export const metadata: Metadata = {
   title: "Calibration Ledger",
   description:
     "Dated, conviction-weighted investment calls scored against what actually happened — 75% hit rate, 0.134 Brier across the book.",
-};
-
-const RESULT_STYLE: Record<CallResult, string> = {
-  HIT: "bg-paper text-ink",
-  MISS: "border border-paper text-paper",
-  OPEN: "border border-line text-muted",
 };
 
 const VERDICT_STYLE: Record<Verdict, string> = {
@@ -68,33 +63,14 @@ export default function LedgerPage() {
       {/* Dated calls */}
       <section className="shell py-12">
         <Reveal>
-          <div className="mb-6 flex items-baseline justify-between">
+          <div className="mb-6 flex items-baseline justify-between gap-4">
             <h2 className="display text-3xl">15 dated calls</h2>
-            <span className="text-xs uppercase tracking-widest text-muted">
-              Prediction · Conviction · Result
+            <span className="font-mono text-xs uppercase tracking-widest text-muted">
+              call the open ones &rarr;
             </span>
           </div>
         </Reveal>
-        <ul className="hr-line border-t">
-          {ledger.calls.map((c, i) => (
-            <Reveal as="li" key={i} delay={Math.min(i, 6) * 0.03}>
-              <div className="flex flex-col gap-3 border-b border-line py-5 md:flex-row md:items-start md:justify-between md:gap-8">
-                <div className="max-w-2xl">
-                  <p className="text-base leading-snug text-paper">
-                    {c.prediction}
-                  </p>
-                  <p className="mt-1 text-sm text-muted">{c.detail}</p>
-                </div>
-                <div className="flex shrink-0 items-center gap-4">
-                  <span className="text-sm text-muted">
-                    <span className="text-paper">{c.conviction}%</span> conv.
-                  </span>
-                  <Badge label={c.result} className={RESULT_STYLE[c.result]} />
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </ul>
+        <LedgerCalls calls={ledger.calls} />
         <Reveal>
           <p className="mt-6 max-w-3xl text-sm text-muted">{ledger.scoring}</p>
         </Reveal>
