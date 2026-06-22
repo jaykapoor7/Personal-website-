@@ -9,6 +9,8 @@ import { siteUrl } from "@/lib/site";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Cursor } from "@/components/Cursor";
+import { Boot } from "@/components/Boot";
+import { CommandPalette } from "@/components/CommandPalette";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -107,6 +109,8 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <Boot />
+        <CommandPalette />
         <Cursor />
         <Nav />
         <main id="main">{children}</main>

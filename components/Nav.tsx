@@ -27,22 +27,35 @@ export function Nav() {
           jay_kapoor
         </Link>
 
-        <ul className="hidden items-center gap-7 text-xs uppercase tracking-widest md:flex">
-          {links.map((l, i) => {
-            const active = pathname === l.href || pathname.startsWith(`${l.href}/`);
-            return (
-              <li key={l.href}>
-                <Link
-                  href={l.href}
-                  className={`link-underline ${active ? "text-accent" : "text-muted"}`}
-                >
-                  <span className="text-muted/50">{String(i + 1).padStart(2, "0")} </span>
-                  {l.label}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+        <div className="hidden items-center gap-6 md:flex">
+          <ul className="flex items-center gap-7 text-xs uppercase tracking-widest">
+            {links.map((l, i) => {
+              const active =
+                pathname === l.href || pathname.startsWith(`${l.href}/`);
+              return (
+                <li key={l.href}>
+                  <Link
+                    href={l.href}
+                    className={`link-underline ${active ? "text-accent" : "text-muted"}`}
+                  >
+                    <span className="text-muted/50">
+                      {String(i + 1).padStart(2, "0")}{" "}
+                    </span>
+                    {l.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new Event("open-cmdk"))}
+            className="inline-flex items-center gap-1 rounded-full border border-line px-3 py-1 text-[10px] uppercase tracking-widest text-muted transition-colors duration-300 hover:border-accent hover:text-accent"
+            aria-label="Open command palette"
+          >
+            <span aria-hidden>⌘</span>K
+          </button>
+        </div>
 
         <button
           type="button"
