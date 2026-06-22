@@ -35,6 +35,14 @@
     @apply bg-paper text-ink;
   }
 
+  /* Tactile press feedback (Emil Kowalski's detail). Opt out with data-nopress. */
+  button:not([data-nopress]) {
+    @apply transition-transform duration-150 ease-out-expo;
+  }
+  button:not([data-nopress]):active {
+    transform: scale(0.97);
+  }
+
   /* Thin rule used to separate editorial blocks. */
   .hr-line {
     @apply border-t border-line;

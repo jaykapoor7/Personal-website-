@@ -8,6 +8,7 @@ import { WorkCard } from "@/components/WorkCard";
 import { Portrait } from "@/components/Portrait";
 import { MagneticButton } from "@/components/MagneticButton";
 import { Scramble } from "@/components/Scramble";
+import { CommandLine } from "@/components/CommandLine";
 
 export default function HomePage() {
   const featured = featuredWork();
@@ -42,14 +43,14 @@ export default function HomePage() {
             <div className="mt-11 flex flex-wrap gap-4 text-sm">
               <MagneticButton
                 href="/work"
-                className="rounded-full border border-paper px-6 py-3 text-paper transition-colors duration-300 hover:bg-paper hover:text-ink"
+                className="rounded-full border border-paper px-6 py-3 text-paper transition duration-300 hover:bg-paper hover:text-ink active:scale-[0.97]"
               >
                 See the work →
               </MagneticButton>
               <MagneticButton
                 href={profile.resumeUrl}
                 external
-                className="rounded-full border border-line px-6 py-3 text-muted transition-colors duration-300 hover:border-paper hover:text-paper"
+                className="rounded-full border border-line px-6 py-3 text-muted transition duration-300 hover:border-paper hover:text-paper active:scale-[0.97]"
               >
                 Resume ↗
               </MagneticButton>
@@ -64,6 +65,19 @@ export default function HomePage() {
         </div>
         <Reveal delay={0.1} className="order-first lg:order-none">
           <Portrait className="max-w-[15rem] sm:max-w-xs lg:max-w-sm" />
+        </Reveal>
+      </section>
+
+      {/* Interactive terminal */}
+      <section className="shell pb-12">
+        <Reveal>
+          <p className="kicker mb-4">
+            <span className="text-accent">&gt;</span> try the terminal — type{" "}
+            <span className="text-paper">help</span>
+          </p>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <CommandLine />
         </Reveal>
       </section>
 
