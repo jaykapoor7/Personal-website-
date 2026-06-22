@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { orderedWork } from "@/lib/order";
 import { Reveal } from "@/components/Reveal";
 import { WorkCard } from "@/components/WorkCard";
+import { Scramble } from "@/components/Scramble";
 
 export const metadata: Metadata = {
   title: "Work",
@@ -22,7 +23,7 @@ export default function WorkPage() {
         </Reveal>
         <Reveal delay={0.05}>
           <h1 className="display max-w-4xl text-4xl leading-tight sm:text-6xl">
-            Everything on my resume, with the work behind it.
+            <Scramble text="Everything on my resume, with the work behind it." />
           </h1>
         </Reveal>
         <Reveal delay={0.1}>

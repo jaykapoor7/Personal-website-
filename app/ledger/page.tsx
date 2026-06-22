@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ledger, type CallResult, type Verdict } from "@/content/ledger";
 import { Reveal } from "@/components/Reveal";
 import { MetricRow } from "@/components/Metric";
+import { Scramble } from "@/components/Scramble";
 
 export const metadata: Metadata = {
   title: "Calibration Ledger",
@@ -49,7 +50,7 @@ export default function LedgerPage() {
         </Reveal>
         <Reveal delay={0.1}>
           <h1 className="display text-5xl leading-[0.95] sm:text-7xl">
-            The Calibration Ledger
+            <Scramble text="The Calibration Ledger" />
           </h1>
         </Reveal>
         <Reveal delay={0.15}>

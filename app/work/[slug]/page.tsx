@@ -7,6 +7,7 @@ import { Reveal } from "@/components/Reveal";
 import { MetricRow } from "@/components/Metric";
 import { ProofGrid } from "@/components/Proof";
 import { Gallery } from "@/components/Gallery";
+import { Scramble } from "@/components/Scramble";
 
 export function generateStaticParams() {
   return work.map((w) => ({ slug: w.slug }));
@@ -66,7 +67,7 @@ export default function WorkDetailPage({
           </Reveal>
           <Reveal delay={0.1}>
             <h1 className="display mt-4 text-5xl leading-tight sm:text-7xl">
-              {item.title}
+              <Scramble text={item.title} />
             </h1>
           </Reveal>
           <Reveal delay={0.15}>

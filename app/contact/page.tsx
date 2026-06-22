@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { profile } from "@/content/profile";
 import { socials } from "@/content/socials";
 import { Reveal } from "@/components/Reveal";
+import { Scramble } from "@/components/Scramble";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -18,7 +19,7 @@ export default function ContactPage() {
       </Reveal>
       <Reveal delay={0.05}>
         <h1 className="display text-5xl leading-tight sm:text-7xl">
-          Let&rsquo;s build something.
+          <Scramble text="Let's build something." />
         </h1>
       </Reveal>
       <Reveal delay={0.1}>

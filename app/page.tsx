@@ -7,6 +7,7 @@ import { MetricStat } from "@/components/Metric";
 import { WorkCard } from "@/components/WorkCard";
 import { Portrait } from "@/components/Portrait";
 import { MagneticButton } from "@/components/MagneticButton";
+import { Scramble } from "@/components/Scramble";
 
 export default function HomePage() {
   const featured = featuredWork();
@@ -28,7 +29,7 @@ export default function HomePage() {
           </Reveal>
           <Reveal delay={0.05}>
             <h1 className="display text-6xl lowercase leading-[0.95] tracking-tighter2 sm:text-7xl lg:text-8xl">
-              jay kapoor
+              <Scramble text="jay kapoor" />
               <span className="caret" aria-hidden />
             </h1>
           </Reveal>
@@ -86,7 +87,8 @@ export default function HomePage() {
       <section className="py-10">
         <div className="shell mb-6 flex items-baseline justify-between">
           <h2 className="display text-3xl lowercase tracking-tighter2 sm:text-4xl">
-            <span className="text-accent">//</span> selected work
+            <span className="text-accent">//</span>{" "}
+            <Scramble text="selected work" />
           </h2>
           <Link
             href="/work"
@@ -107,7 +109,8 @@ export default function HomePage() {
       <section className="shell py-16">
         <div className="mb-8 flex items-baseline justify-between">
           <h2 className="display text-3xl lowercase tracking-tighter2 sm:text-4xl">
-            <span className="text-accent">//</span> selected research
+            <span className="text-accent">//</span>{" "}
+            <Scramble text="selected research" />
           </h2>
           <Link
             href="/writing"

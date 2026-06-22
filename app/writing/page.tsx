@@ -3,6 +3,7 @@ import { orderedWriting } from "@/lib/order";
 import { Reveal } from "@/components/Reveal";
 import { ProofGrid } from "@/components/Proof";
 import { MetricRow } from "@/components/Metric";
+import { Scramble } from "@/components/Scramble";
 
 export const metadata: Metadata = {
   title: "Writing & Research",
@@ -23,7 +24,7 @@ export default function WritingPage() {
         </Reveal>
         <Reveal delay={0.05}>
           <h1 className="display max-w-4xl text-4xl leading-tight sm:text-6xl">
-            Research, memos, and building in public.
+            <Scramble text="Research, memos, and building in public." />
           </h1>
         </Reveal>
       </section>

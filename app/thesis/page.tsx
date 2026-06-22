@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { thesis, type Verdict } from "@/content/thesis";
 import { Reveal } from "@/components/Reveal";
+import { Scramble } from "@/components/Scramble";
 
 export const metadata: Metadata = {
   title: "Investing Thesis",
@@ -31,7 +32,9 @@ export default function ThesisPage() {
           </p>
         </Reveal>
         <Reveal delay={0.1}>
-          <h1 className="display text-5xl leading-[0.95] sm:text-7xl">Thesis</h1>
+          <h1 className="display text-5xl leading-[0.95] sm:text-7xl">
+            <Scramble text="Thesis" />
+          </h1>
         </Reveal>
         <Reveal delay={0.15}>
           <p className="mt-6 max-w-2xl text-lg text-muted">{thesis.intro}</p>
