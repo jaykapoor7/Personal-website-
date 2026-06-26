@@ -153,19 +153,21 @@ export default function WorkDetailPage({
         )}
 
         {/* Proof */}
-        <section className="shell hr-line border-t py-14">
-          <Reveal>
-            <div className="mb-8 flex items-baseline justify-between">
-              <h2 className="display text-3xl">Proof</h2>
-              <span className="text-xs text-muted">
-                Links, docs, and screenshots
-              </span>
-            </div>
-          </Reveal>
-          <Reveal delay={0.05}>
-            <ProofGrid proof={item.proof} />
-          </Reveal>
-        </section>
+        {item.proof.length > 0 && (
+          <section className="shell hr-line border-t py-14">
+            <Reveal>
+              <div className="mb-8 flex items-baseline justify-between">
+                <h2 className="display text-3xl">Proof</h2>
+                <span className="text-xs text-muted">
+                  Links, docs, and screenshots
+                </span>
+              </div>
+            </Reveal>
+            <Reveal delay={0.05}>
+              <ProofGrid proof={item.proof} />
+            </Reveal>
+          </section>
+        )}
 
         {/* Tags */}
         {item.tags.length > 0 && (

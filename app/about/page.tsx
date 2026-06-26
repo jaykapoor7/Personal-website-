@@ -104,6 +104,22 @@ export default function AboutPage() {
         </Reveal>
       </section>
 
+      {/* Leadership */}
+      <section className="shell hr-line grid gap-10 border-t py-12 md:grid-cols-[1fr_2fr]">
+        <Reveal>
+          <h2 className="kicker">// leadership</h2>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <ul className="space-y-4">
+            {profile.leadership.map((l, i) => (
+              <li key={i} className="flex gap-4 text-lg leading-relaxed">
+                <span className="text-accent">—</span>
+                <span>{l}</span>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+      </section>
     </>
   );
 }

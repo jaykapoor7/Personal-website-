@@ -139,6 +139,7 @@ export interface Profile {
     technical: string[];
     domain: string[];
   };
+  leadership: string[];
   /** Headline stats for the home page (all carry a source). */
   highlights: Metric[];
   /** Path to the resume file in /public. */

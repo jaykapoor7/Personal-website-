@@ -28,8 +28,13 @@ export function WorkCard({ item, index }: { item: WorkItem; index: number }) {
           </span>
           <div className="flex items-center gap-3 font-mono text-xs text-muted">
             <span>{item.period}</span>
+            {item.proof.length > 0 && (
+              <>
+                <span aria-hidden>·</span>
+                <ProofTags proof={item.proof} />
+              </>
+            )}
             <span aria-hidden>·</span>
-            <ProofTags proof={item.proof} />
             <span
               aria-hidden
               className="transition-transform duration-300 ease-out-expo group-hover:translate-x-1 group-hover:text-accent"
