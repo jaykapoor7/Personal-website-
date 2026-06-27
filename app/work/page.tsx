@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { groupedWork } from "@/lib/order";
 import { Reveal } from "@/components/Reveal";
-import { WorkCard } from "@/components/WorkCard";
+import { WorkBrowser } from "@/components/WorkBrowser";
 import { Scramble } from "@/components/Scramble";
 
 export const metadata: Metadata = {
@@ -35,20 +35,7 @@ export default function WorkPage() {
       </section>
 
       <div className="pb-10">
-        {groups.map((group) => (
-          <section key={group.title} className="pt-10">
-            <Reveal>
-              <h2 className="kicker shell mb-1">
-                <span className="text-accent">//</span> {group.title.toLowerCase()}
-                <span className="ml-2 text-muted/50">[{group.items.length}]</span>
-              </h2>
-            </Reveal>
-            {group.items.map((item, i) => (
-              <WorkCard key={item.slug} item={item} index={i} />
-            ))}
-            <div className="border-t border-line" />
-          </section>
-        ))}
+        <WorkBrowser groups={groups} />
       </div>
     </>
   );

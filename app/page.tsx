@@ -13,9 +13,10 @@ import { CommandLine } from "@/components/CommandLine";
 export default function HomePage() {
   const featured = featuredWork();
   // Lead with the investing / research A-material (exclude building-in-public).
+  // Kept to 3 for a calmer landing — the rest live on /writing.
   const research = orderedWriting()
     .filter((w) => w.kind !== "Building in public")
-    .slice(0, 5);
+    .slice(0, 3);
 
   return (
     <>
@@ -146,7 +147,7 @@ export default function HomePage() {
                 <span aria-hidden>·</span>
                 <span>{item.year}</span>
               </div>
-              <h3 className="display flex items-start gap-2 text-2xl leading-tight transition-transform duration-300 ease-out-expo group-hover:translate-x-1 sm:text-3xl">
+              <h3 className="display flex items-start gap-2 text-2xl lowercase leading-tight tracking-tighter2 transition-transform duration-300 ease-out-expo group-hover:translate-x-1 sm:text-3xl">
                 {item.title}
                 <span
                   aria-hidden
@@ -155,15 +156,6 @@ export default function HomePage() {
                   ↗
                 </span>
               </h3>
-              {item.metrics && item.metrics.length > 0 && (
-                <div className="mt-auto flex flex-wrap gap-x-6 gap-y-1 pt-2 text-sm text-muted">
-                  {item.metrics.slice(0, 3).map((m, i) => (
-                    <span key={i}>
-                      <span className="text-paper">{m.value}</span> {m.label}
-                    </span>
-                  ))}
-                </div>
-              )}
             </Link>
           ))}
         </div>
