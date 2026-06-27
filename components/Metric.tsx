@@ -1,14 +1,7 @@
-import type { Metric, MetricSource } from "@/content/types";
+import type { Metric } from "@/content/types";
 
-// Human label for each source. Every metric must declare where it comes from,
-// so the provenance is always visible rather than implied.
-const SOURCE_LABEL: Record<MetricSource, string> = {
-  resume: "Per resume",
-  analytics: "Measured",
-  published: "Published",
-  estimated: "Estimated",
-};
-
+// Note: each metric still carries a `source` in the data (governance), it's
+// just not rendered — keeps the numbers clean.
 export function MetricStat({ metric }: { metric: Metric }) {
   return (
     <div className="flex flex-col gap-1">
@@ -16,9 +9,6 @@ export function MetricStat({ metric }: { metric: Metric }) {
         {metric.value}
       </span>
       <span className="text-sm text-muted">{metric.label}</span>
-      <span className="font-mono text-[10px] uppercase tracking-widest text-muted">
-        {SOURCE_LABEL[metric.source]}
-      </span>
     </div>
   );
 }

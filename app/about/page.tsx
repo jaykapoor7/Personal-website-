@@ -44,11 +44,9 @@ export default function AboutPage() {
       </section>
 
       {/* Education */}
-      <section className="shell hr-line grid gap-10 border-t py-12 md:grid-cols-[1fr_2fr]">
+      <section className="shell hr-line grid gap-8 border-t py-10 md:grid-cols-[1fr_2fr]">
         <Reveal>
-          <h2 className="text-sm uppercase tracking-widest text-muted">
-            Education
-          </h2>
+          <h2 className="kicker">// education</h2>
         </Reveal>
         <Reveal delay={0.05}>
           <ul className="space-y-8">
@@ -66,11 +64,9 @@ export default function AboutPage() {
       </section>
 
       {/* Skills */}
-      <section className="shell hr-line grid gap-10 border-t py-12 md:grid-cols-[1fr_2fr]">
+      <section className="shell hr-line grid gap-8 border-t py-10 md:grid-cols-[1fr_2fr]">
         <Reveal>
-          <h2 className="text-sm uppercase tracking-widest text-muted">
-            Skills
-          </h2>
+          <h2 className="kicker">// skills</h2>
         </Reveal>
         <Reveal delay={0.05}>
           <div className="space-y-8">
@@ -105,7 +101,7 @@ export default function AboutPage() {
       </section>
 
       {/* Leadership */}
-      <section className="shell hr-line grid gap-10 border-t py-12 md:grid-cols-[1fr_2fr]">
+      <section className="shell hr-line grid gap-8 border-t py-10 md:grid-cols-[1fr_2fr]">
         <Reveal>
           <h2 className="kicker">// leadership</h2>
         </Reveal>

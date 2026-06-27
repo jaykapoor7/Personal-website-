@@ -89,8 +89,8 @@ export default function HomePage() {
         <Reveal>
           <h2 className="kicker mb-12">// by the numbers</h2>
         </Reveal>
-        <div className="grid grid-cols-2 gap-10 sm:grid-cols-4">
-          {profile.highlights.map((m, i) => (
+        <div className="grid grid-cols-3 gap-6 sm:gap-10">
+          {profile.highlights.slice(0, 3).map((m, i) => (
             <Reveal key={i} delay={i * 0.07}>
               <MetricStat metric={m} />
             </Reveal>

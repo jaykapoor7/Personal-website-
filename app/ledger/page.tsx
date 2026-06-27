@@ -1,33 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ledger, type Verdict } from "@/content/ledger";
+import { ledger } from "@/content/ledger";
 import { Reveal } from "@/components/Reveal";
 import { MetricRow } from "@/components/Metric";
 import { Scramble } from "@/components/Scramble";
 import { LedgerCalls } from "@/components/LedgerCalls";
+import { CoverageIndex } from "@/components/CoverageIndex";
 
 export const metadata: Metadata = {
   title: "Calibration Ledger",
   description:
     "Dated, conviction-weighted investment calls scored against what actually happened — 75% hit rate, 0.134 Brier across the book.",
 };
-
-const VERDICT_STYLE: Record<Verdict, string> = {
-  BUY: "bg-paper text-ink",
-  HOLD: "border border-paper text-paper",
-  WATCH: "border border-line text-muted",
-  PASS: "border border-dashed border-line text-muted",
-};
-
-function Badge({ label, className }: { label: string; className: string }) {
-  return (
-    <span
-      className={`inline-flex shrink-0 items-center justify-center rounded-full px-3 py-1 text-[11px] font-medium uppercase tracking-widest ${className}`}
-    >
-      {label}
-    </span>
-  );
-}
 
 export default function LedgerPage() {
   return (
@@ -81,30 +65,14 @@ export default function LedgerPage() {
         <Reveal>
           <div className="mb-6 flex items-baseline justify-between">
             <h2 className="display text-3xl">Coverage index</h2>
-            <span className="text-xs uppercase tracking-widest text-muted">
+            <span className="font-mono text-xs uppercase tracking-widest text-muted">
               10 names · 4 verdicts
             </span>
           </div>
         </Reveal>
-        <ul className="grid gap-px overflow-hidden rounded-sm border border-line sm:grid-cols-2">
-          {ledger.coverage.map((c) => (
-            <li
-              key={c.id}
-              className="flex items-center justify-between gap-4 bg-ink p-5"
-            >
-              <div>
-                <p className="text-[10px] uppercase tracking-widest text-muted">
-                  {c.id}
-                </p>
-                <p className="mt-1 text-lg leading-tight">{c.company}</p>
-                <p className="mt-0.5 text-xs uppercase tracking-wider text-muted">
-                  {c.tag}
-                </p>
-              </div>
-              <Badge label={c.verdict} className={VERDICT_STYLE[c.verdict]} />
-            </li>
-          ))}
-        </ul>
+        <Reveal delay={0.05}>
+          <CoverageIndex />
+        </Reveal>
       </section>
 
       {/* CTA + disclaimer */}
