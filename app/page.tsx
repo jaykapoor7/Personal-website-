@@ -2,7 +2,6 @@ import Link from "next/link";
 import { profile } from "@/content/profile";
 import { featuredWork, orderedWriting } from "@/lib/order";
 import { Reveal } from "@/components/Reveal";
-import { Ticker } from "@/components/Ticker";
 import { MetricStat } from "@/components/Metric";
 import { WorkCard } from "@/components/WorkCard";
 import { Portrait } from "@/components/Portrait";
@@ -81,8 +80,6 @@ export default function HomePage() {
           <CommandLine />
         </Reveal>
       </section>
-
-      <Ticker />
 
       {/* Headline stats */}
       <section className="shell py-20">
