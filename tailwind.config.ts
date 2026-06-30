@@ -9,11 +9,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Dark "research terminal" palette with a single amber accent.
-        ink: "#0a0a0a",
-        paper: "#f4f2ed",
-        muted: "#8a8a86",
-        line: "#1c1c1c",
+        // Cobalt-and-gold "woven" palette, inspired by the dithered sky image.
+        ink: "#0b1a4d", // deep cobalt sky
+        paper: "#f3efe4", // warm cream (clouds)
+        muted: "#98a2c6", // blue-grey
+        line: "#27306b", // cobalt border
         // Runtime-switchable via --accent (see globals.css + `theme` command).
         accent: "rgb(var(--accent) / <alpha-value>)",
       },

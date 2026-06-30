@@ -24,7 +24,7 @@ const HELP = [
   "  goto <page>       jump to a page",
   "  resume            download résumé",
   "  socials           where to find me",
-  "  theme <color>     amber | green | white",
+  "  theme <color>     gold | amber | green | white",
   "  ascii             ascii signature",
   "  date              current date",
   "  clear             clear the screen",
@@ -39,9 +39,10 @@ const ASCII = [
 ];
 
 const ACCENTS: Record<string, string> = {
+  gold: "232 176 75",
   amber: "233 162 59",
   green: "126 231 135",
-  white: "244 242 237",
+  white: "243 239 228",
 };
 
 const PAGES: Record<string, string> = {

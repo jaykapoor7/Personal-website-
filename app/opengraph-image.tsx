@@ -16,8 +16,8 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#0a0a0a",
-          color: "#f4f2ed",
+          background: "#0b1a4d",
+          color: "#f3efe4",
           padding: "72px 80px",
           fontFamily: "Georgia, serif",
         }}
@@ -27,7 +27,7 @@ export default function OpengraphImage() {
             fontSize: 24,
             letterSpacing: "0.2em",
             textTransform: "uppercase",
-            color: "#8a8a86",
+            color: "#98a2c6",
           }}
         >
           Builder &amp; Researcher · Pittsburgh, PA
@@ -40,7 +40,7 @@ export default function OpengraphImage() {
             style={{
               marginTop: 28,
               fontSize: 34,
-              color: "#8a8a86",
+              color: "#98a2c6",
               maxWidth: 900,
               lineHeight: 1.3,
             }}
@@ -49,7 +49,7 @@ export default function OpengraphImage() {
             resume.
           </div>
         </div>
-        <div style={{ fontSize: 24, color: "#8a8a86" }}>@jaybuildsvx</div>
+        <div style={{ fontSize: 24, color: "#98a2c6" }}>@jaybuildsvx</div>
       </div>
     ),
     { ...size },

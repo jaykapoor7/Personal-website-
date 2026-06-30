@@ -6,7 +6,7 @@
   --font-sans: "Inter", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
   /* Signature accent as an RGB triplet so the `theme` command can swap it. */
-  --accent: 233 162 59; /* amber */
+  --accent: 232 176 75; /* warm gold */
 }
 
 @layer base {
@@ -17,7 +17,15 @@
   }
 
   body {
-    @apply bg-ink text-paper font-sans antialiased;
+    @apply text-paper font-sans antialiased;
+    /* Deep cobalt with a subtle brighter "sky" glow toward the top. */
+    background-color: theme(colors.ink);
+    background-image: radial-gradient(
+      120% 80% at 70% -10%,
+      rgba(43, 74, 173, 0.55) 0%,
+      rgba(11, 26, 77, 0) 55%
+    );
+    background-attachment: fixed;
     font-feature-settings: "ss01", "cv01";
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
@@ -72,15 +80,23 @@
     @apply ml-1 inline-block h-[0.78em] w-[0.5ch] translate-y-[0.04em] bg-accent align-baseline animate-blink;
   }
 
-  /* Subtle grain overlay for the Palmer-style texture. */
+  /* Woven dot-grid dither (cross-stitch texture) layered over a faint grain. */
   .grain::before {
     content: "";
     position: fixed;
     inset: 0;
     z-index: 50;
     pointer-events: none;
-    opacity: 0.035;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.5;
+    background-image:
+      radial-gradient(rgba(243, 239, 228, 0.05) 0.5px, transparent 0.6px),
+      radial-gradient(rgba(232, 176, 75, 0.04) 0.5px, transparent 0.6px);
+    background-size:
+      3px 3px,
+      3px 3px;
+    background-position:
+      0 0,
+      1.5px 1.5px;
   }
 
   .link-underline {

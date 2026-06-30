@@ -61,7 +61,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0a0a0a",
+  themeColor: "#0b1a4d",
 };
 
 // JSON-LD Person schema — helps search engines understand & richly surface Jay.
@@ -102,7 +102,7 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "try{var t=localStorage.getItem('accent'),m={amber:'233 162 59',green:'126 231 135',white:'244 242 237'};if(t&&m[t])document.documentElement.style.setProperty('--accent',m[t]);}catch(e){}",
+              "try{var t=localStorage.getItem('accent'),m={gold:'232 176 75',amber:'233 162 59',green:'126 231 135',white:'243 239 228'};if(t&&m[t])document.documentElement.style.setProperty('--accent',m[t]);}catch(e){}",
           }}
         />
         <script
