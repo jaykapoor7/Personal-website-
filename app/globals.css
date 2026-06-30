@@ -18,14 +18,22 @@
 
   body {
     @apply text-paper font-sans antialiased;
-    /* Deep cobalt with a subtle brighter "sky" glow toward the top. */
+    /* Layered cobalt "sky": faint sun rays, soft cloud wisps, a top-right sun
+       glow, and a deepened bottom — atmospheric but low-contrast so text stays
+       crisp. Pure CSS, fixed so it reads as an ambient backdrop. */
     background-color: theme(colors.ink);
-    background-image: radial-gradient(
-      120% 80% at 70% -10%,
-      rgba(43, 74, 173, 0.55) 0%,
-      rgba(11, 26, 77, 0) 55%
-    );
+    background-image:
+      repeating-linear-gradient(
+        118deg,
+        rgba(232, 176, 75, 0.018) 0 1px,
+        transparent 1px 30px
+      ),
+      radial-gradient(38% 20% at 58% 60%, rgba(243, 239, 228, 0.06), transparent 72%),
+      radial-gradient(32% 16% at 26% 80%, rgba(150, 180, 240, 0.05), transparent 72%),
+      radial-gradient(120% 85% at 80% -12%, rgba(58, 96, 205, 0.6), transparent 56%),
+      radial-gradient(150% 110% at 15% 120%, rgba(5, 11, 42, 0.65), transparent 60%);
     background-attachment: fixed;
+    background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat;
     font-feature-settings: "ss01", "cv01";
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
