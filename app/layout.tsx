@@ -11,6 +11,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Cursor } from "@/components/Cursor";
 import { Boot } from "@/components/Boot";
 import { CommandPalette } from "@/components/CommandPalette";
+import { RouteBackdrop } from "@/components/RouteBackdrop";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -100,10 +101,11 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${mono.variable}`}>
       <body className="grain min-h-screen">
         <div className="backdrop" aria-hidden />
+        <RouteBackdrop />
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "try{var t=localStorage.getItem('accent'),m={gold:'232 176 75',amber:'233 162 59',green:'126 231 135',white:'243 239 228'};if(t&&m[t])document.documentElement.style.setProperty('--accent',m[t]);var b=localStorage.getItem('backdrop'),bm={sunset:'/backdrop-sunset.webp',hills:'/backdrop-hills.webp',cobalt:'/sky-backdrop.webp'};if(b&&bm[b])document.documentElement.style.setProperty('--bg-image','url('+bm[b]+')');}catch(e){}",
+              "try{var r=document.documentElement,t=localStorage.getItem('accent'),m={gold:'232 176 75',amber:'233 162 59',green:'126 231 135',white:'243 239 228'};if(t&&m[t])r.style.setProperty('--accent',m[t]);var bm={sunset:'/backdrop-sunset.webp',hills:'/backdrop-hills.webp',cobalt:'/sky-backdrop.webp'},o=localStorage.getItem('backdrop'),p=location.pathname,k=(o&&bm[o])?o:(p.indexOf('/work')===0?'hills':(p.indexOf('/writing')===0||p.indexOf('/ledger')===0||p.indexOf('/thesis')===0)?'cobalt':(p.indexOf('/about')===0?'hills':'sunset'));if(bm[k])r.style.setProperty('--bg-image','url('+bm[k]+')');}catch(e){}",
           }}
         />
         <script
