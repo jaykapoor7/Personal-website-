@@ -7,6 +7,8 @@
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
   /* Signature accent as an RGB triplet so the `theme` command can swap it. */
   --accent: 232 176 75; /* warm gold */
+  /* Backdrop image, switchable via the `bg` command. */
+  --bg-image: url("/backdrop-sunset.webp");
 }
 
 @layer base {
@@ -32,12 +34,12 @@
     pointer-events: none;
     background-color: theme(colors.ink);
     background-image:
-      linear-gradient(rgba(11, 26, 77, 0.66), rgba(11, 26, 77, 0.8)),
-      radial-gradient(120% 85% at 80% -12%, rgba(58, 96, 205, 0.35), transparent 55%),
-      radial-gradient(150% 110% at 15% 120%, rgba(5, 11, 42, 0.55), transparent 60%),
-      url("/sky-backdrop.webp");
+      linear-gradient(rgba(11, 26, 77, 0.52), rgba(11, 26, 77, 0.68)),
+      radial-gradient(120% 85% at 80% -12%, rgba(58, 96, 205, 0.28), transparent 55%),
+      radial-gradient(150% 110% at 15% 120%, rgba(5, 11, 42, 0.5), transparent 60%),
+      var(--bg-image);
     background-size: auto, auto, auto, cover;
-    background-position: center, center, center, center top;
+    background-position: center, center, center, center;
     background-repeat: no-repeat;
   }
 

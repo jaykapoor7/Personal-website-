@@ -25,6 +25,7 @@ const HELP = [
   "  resume            download résumé",
   "  socials           where to find me",
   "  theme <color>     gold | amber | green | white",
+  "  bg <name>         sunset | hills | cobalt",
   "  ascii             ascii signature",
   "  date              current date",
   "  clear             clear the screen",
@@ -45,6 +46,12 @@ const ACCENTS: Record<string, string> = {
   white: "243 239 228",
 };
 
+const BACKDROPS: Record<string, string> = {
+  sunset: "/backdrop-sunset.webp",
+  hills: "/backdrop-hills.webp",
+  cobalt: "/sky-backdrop.webp",
+};
+
 const PAGES: Record<string, string> = {
   home: "/",
   work: "/work",
@@ -57,7 +64,7 @@ const PAGES: Record<string, string> = {
 
 const COMMANDS = [
   "help", "whoami", "work", "open", "ledger", "thesis", "writing",
-  "goto", "resume", "socials", "theme", "ascii", "date", "clear", "sudo",
+  "goto", "resume", "socials", "theme", "bg", "ascii", "date", "clear", "sudo",
 ];
 
 export function CommandLine() {
@@ -144,6 +151,13 @@ export function CommandLine() {
         try { localStorage.setItem("accent", arg); } catch {}
         return print(`accent → ${arg}`, "sys");
       }
+      case "bg": {
+        const img = BACKDROPS[arg];
+        if (!img) return print(`usage: bg <${Object.keys(BACKDROPS).join(" | ")}>`);
+        document.documentElement.style.setProperty("--bg-image", `url(${img})`);
+        try { localStorage.setItem("backdrop", arg); } catch {}
+        return print(`backdrop → ${arg}`, "sys");
+      }
       case "ascii":
         return print(ASCII);
       case "date":
@@ -186,7 +200,9 @@ export function CommandLine() {
             ? Object.keys(PAGES)
             : first === "theme"
               ? Object.keys(ACCENTS)
-              : [];
+              : first === "bg"
+                ? Object.keys(BACKDROPS)
+                : [];
       const m = pool.filter((p) => p.startsWith(frag));
       if (m.length === 1) setValue(`${first} ${m[0]}`);
       else if (m.length > 1) print(m.join("   "));
