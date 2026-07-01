@@ -22,18 +22,16 @@
        glow, and a deepened bottom — atmospheric but low-contrast so text stays
        crisp. Pure CSS, fixed so it reads as an ambient backdrop. */
     background-color: theme(colors.ink);
+    /* Faint blurred painting underneath a cobalt veil + glow (top→bottom). */
     background-image:
-      repeating-linear-gradient(
-        118deg,
-        rgba(232, 176, 75, 0.018) 0 1px,
-        transparent 1px 30px
-      ),
-      radial-gradient(38% 20% at 58% 60%, rgba(243, 239, 228, 0.06), transparent 72%),
-      radial-gradient(32% 16% at 26% 80%, rgba(150, 180, 240, 0.05), transparent 72%),
-      radial-gradient(120% 85% at 80% -12%, rgba(58, 96, 205, 0.6), transparent 56%),
-      radial-gradient(150% 110% at 15% 120%, rgba(5, 11, 42, 0.65), transparent 60%);
+      linear-gradient(rgba(11, 26, 77, 0.7), rgba(11, 26, 77, 0.82)),
+      radial-gradient(120% 85% at 80% -12%, rgba(58, 96, 205, 0.35), transparent 55%),
+      radial-gradient(150% 110% at 15% 120%, rgba(5, 11, 42, 0.55), transparent 60%),
+      url("/sky-backdrop.webp");
+    background-size: auto, auto, auto, cover;
+    background-position: center, center, center, center top;
+    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
     background-attachment: fixed;
-    background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat;
     font-feature-settings: "ss01", "cv01";
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
