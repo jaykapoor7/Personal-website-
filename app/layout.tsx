@@ -99,6 +99,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${mono.variable}`}>
       <body className="grain min-h-screen">
+        <div className="backdrop" aria-hidden />
         <script
           dangerouslySetInnerHTML={{
             __html:
