@@ -32,7 +32,7 @@ export function orderedWriting(): WritingItem[] {
 // Items keep their impact→recency→relevance order within each lane; anything
 // not listed falls through to "Earlier" so new entries never silently vanish.
 const LANES: { title: string; slugs: string[] }[] = [
-  { title: "Building & Product", slugs: ["juno-ai", "juno-adhd-os", "straypaw", "tot-schools"] },
+  { title: "Building & Product", slugs: ["juno-ai", "juno-adhd-os", "ai-search-checker", "straypaw", "tot-schools"] },
   { title: "Investing & Strategy", slugs: ["crowwd", "hdfc-bank"] },
   { title: "Academic Research", slugs: ["apodaca-lab", "pitt-sociology", "upmc-emergency-medicine"] },
   { title: "Earlier", slugs: ["tarc", "project-nidaan", "finer-things-club"] },

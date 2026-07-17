@@ -170,6 +170,13 @@ export const work: WorkItem[] = [
     metrics: [],
     proof: [
       {
+        type: "live",
+        status: "available",
+        title: "Try the live build",
+        url: "https://preventive-healthcare-xi.vercel.app/",
+        note: "Work-in-progress — built on the Claude API.",
+      },
+      {
         type: "social",
         status: "available",
         title: "Build updates on X",
@@ -411,6 +418,47 @@ export const work: WorkItem[] = [
       },
     ],
     tags: ["Founder", "Side Project", "Social Impact", "NGO Partnerships"],
+  },
+  {
+    slug: "ai-search-checker",
+    title: "AI Search Checker",
+    role: "Builder",
+    category: "AI / Product",
+    location: "Remote",
+    period: "2026 — Present",
+    impact: 6,
+    recency: 2026,
+    relevance: 8,
+    featured: false,
+    summary:
+      "A tool that audits how a brand or website shows up in AI / LLM search and generates a shareable visibility report — applied GEO (Generative Engine Optimization).",
+    context: [
+      "As people increasingly discover products through AI search (ChatGPT, Perplexity, Gemini) rather than classic search, how a brand is represented to LLMs becomes its own discipline — Generative Engine Optimization.",
+      "AI Search Checker audits how a site or brand surfaces in AI search and produces a shareable report, building directly on the GEO work I ran at Crowwd.",
+    ],
+    contributions: [
+      "Built a web tool that checks how a brand / website appears in AI / LLM search and generates a shareable report.",
+      "Turned hands-on GEO experience into what the report measures and how it scores.",
+    ],
+    outcomes: [],
+    metrics: [],
+    proof: [
+      {
+        type: "live",
+        status: "available",
+        title: "Visit the tool",
+        url: "https://llm-ai-search-checker.vercel.app/",
+        note: "Check any brand's AI-search visibility.",
+      },
+      {
+        type: "live",
+        status: "available",
+        title: "Sample report",
+        url: "https://llm-ai-search-checker.vercel.app/report/7oetk5",
+        note: "An example generated report.",
+      },
+    ],
+    tags: ["AI", "GEO", "Product", "Search"],
   },
   {
     slug: "apodaca-lab",
