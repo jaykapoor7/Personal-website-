@@ -144,29 +144,25 @@ export const work: WorkItem[] = [
     tags: ["Founder", "Product", "AI / RAG", "Healthcare Access", "Partnerships"],
   },
   {
-    slug: "juno-adhd-os",
-    title: "Juno ADHD OS",
+    slug: "juno-preventive-health",
+    title: "Juno Preventive Health",
     role: "Builder",
-    category: "AI / Product",
+    category: "AI / Healthcare",
     location: "Remote",
-    period: "Jan 2026 — Present",
+    period: "2026 — Present",
     impact: 7,
     recency: 2026,
-    relevance: 9,
+    relevance: 8,
     featured: false,
     summary:
-      "Building an AI-powered productivity and behavioral operating system for ADHD users — documented publicly as I build.",
+      "An AI preventive-healthcare build — helping people stay ahead of health issues rather than react to them.",
     context: [
-      "Juno ADHD OS is an AI-powered productivity and behavioral operating system for people with ADHD, built on the Claude API.",
-      "I'm documenting the full product build in public at @jaybuildsvx, so the process itself is the proof.",
+      "Juno Preventive Health is an AI-powered tool focused on preventive care, built on the Claude API — an evolving build that extends the healthcare-access work I've done with Juno.",
     ],
     contributions: [
-      "Designing and building an AI productivity/behavioral OS for ADHD users on the Claude API.",
-      "Documenting the full product build publicly at @jaybuildsvx.",
+      "Designing and building an AI tool for preventive healthcare on the Claude API.",
     ],
-    outcomes: [
-      "Active build — progress is shared openly as it happens.",
-    ],
+    outcomes: [],
     metrics: [],
     proof: [
       {
@@ -176,15 +172,8 @@ export const work: WorkItem[] = [
         url: "https://preventive-healthcare-xi.vercel.app/",
         note: "Work-in-progress — built on the Claude API.",
       },
-      {
-        type: "social",
-        status: "available",
-        title: "Build updates on X",
-        url: "https://x.com/jaybuildsvx",
-        note: "Building in public at @jaybuildsvx.",
-      },
     ],
-    tags: ["AI", "Claude API", "Product", "Building in public"],
+    tags: ["AI", "Claude API", "Healthcare", "Preventive Care"],
   },
   {
     slug: "tot-schools",
@@ -420,8 +409,8 @@ export const work: WorkItem[] = [
     tags: ["Founder", "Side Project", "Social Impact", "NGO Partnerships"],
   },
   {
-    slug: "ai-search-checker",
-    title: "AI Search Checker",
+    slug: "seo-geo-optimiser",
+    title: "SEO & GEO Optimiser",
     role: "Builder",
     category: "AI / Product",
     location: "Remote",
@@ -431,14 +420,14 @@ export const work: WorkItem[] = [
     relevance: 8,
     featured: false,
     summary:
-      "A tool that audits how a brand or website shows up in AI / LLM search and generates a shareable visibility report — applied GEO (Generative Engine Optimization).",
+      "A tool that audits and optimises how a brand shows up in both classic search (SEO) and AI / LLM search (GEO) — generating a shareable visibility report.",
     context: [
-      "As people increasingly discover products through AI search (ChatGPT, Perplexity, Gemini) rather than classic search, how a brand is represented to LLMs becomes its own discipline — Generative Engine Optimization.",
-      "AI Search Checker audits how a site or brand surfaces in AI search and produces a shareable report, building directly on the GEO work I ran at Crowwd.",
+      "Discovery is splitting between classic search engines (SEO) and AI search like ChatGPT, Perplexity, and Gemini (GEO). This tool measures a brand's visibility across both and shows how to improve it.",
+      "It turns the hands-on SEO and GEO work I ran at Crowwd into a repeatable audit that produces a shareable report.",
     ],
     contributions: [
-      "Built a web tool that checks how a brand / website appears in AI / LLM search and generates a shareable report.",
-      "Turned hands-on GEO experience into what the report measures and how it scores.",
+      "Built a web tool that checks how a brand / website appears across SEO and AI-search (GEO) and generates a shareable report.",
+      "Turned hands-on SEO/GEO experience into what the report measures and how it scores.",
     ],
     outcomes: [],
     metrics: [],
@@ -448,7 +437,7 @@ export const work: WorkItem[] = [
         status: "available",
         title: "Visit the tool",
         url: "https://llm-ai-search-checker.vercel.app/",
-        note: "Check any brand's AI-search visibility.",
+        note: "Check any brand's SEO + AI-search visibility.",
       },
       {
         type: "live",
@@ -458,7 +447,7 @@ export const work: WorkItem[] = [
         note: "An example generated report.",
       },
     ],
-    tags: ["AI", "GEO", "Product", "Search"],
+    tags: ["SEO", "GEO", "AI", "Search", "Product"],
   },
   {
     slug: "apodaca-lab",

@@ -142,7 +142,7 @@ export const writing: WritingItem[] = [
     year: "Ongoing",
     recency: 2026,
     summary:
-      "Documenting the Juno ADHD OS build and other experiments openly at @jaybuildsvx.",
+      "Documenting my builds and experiments openly at @jaybuildsvx.",
     proof: [
       {
         type: "social",
