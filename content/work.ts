@@ -450,8 +450,8 @@ export const work: WorkItem[] = [
     tags: ["SEO", "GEO", "AI", "Search", "Product"],
   },
   {
-    slug: "explain-my-whoop",
-    title: "Explain My WHOOP",
+    slug: "recovery-intelligence",
+    title: "Recovery Intelligence",
     role: "Builder",
     category: "AI / Product",
     location: "Remote",
@@ -463,7 +463,7 @@ export const work: WorkItem[] = [
     summary:
       "Explains your wearable-tracker stats in plain English — calories, recovery, and more — and lets you chat with your own data, Bevel-style.",
     context: [
-      "Wearables like WHOOP produce a lot of data that's hard to interpret. Explain My WHOOP turns those stats — calories, recovery, and more — into plain-English explanations, and lets you chat directly with your own data.",
+      "Wearables like WHOOP produce a lot of data that's hard to interpret. Recovery Intelligence turns those stats — calories, recovery, and more — into plain-English explanations, and lets you chat directly with your own data.",
     ],
     contributions: [
       "Built a tool that explains wearable-tracker stats (calories, recovery, etc.) in plain English.",
