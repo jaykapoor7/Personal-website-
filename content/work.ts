@@ -420,7 +420,7 @@ export const work: WorkItem[] = [
     relevance: 8,
     featured: false,
     summary:
-      "A tool that audits and optimises how a brand shows up in both classic search (SEO) and AI / LLM search (GEO) — generating a shareable visibility report.",
+      "A tool to boost your website's visibility — it audits how you show up across classic search (SEO) and AI / LLM search (GEO), shows what you're doing right and wrong, and generates a shareable report.",
     context: [
       "Discovery is splitting between classic search engines (SEO) and AI search like ChatGPT, Perplexity, and Gemini (GEO). This tool measures a brand's visibility across both and shows how to improve it.",
       "It turns the hands-on SEO and GEO work I ran at Crowwd into a repeatable audit that produces a shareable report.",
@@ -448,6 +448,72 @@ export const work: WorkItem[] = [
       },
     ],
     tags: ["SEO", "GEO", "AI", "Search", "Product"],
+  },
+  {
+    slug: "explain-my-whoop",
+    title: "Explain My WHOOP",
+    role: "Builder",
+    category: "AI / Product",
+    location: "Remote",
+    period: "2026 — Present",
+    impact: 5,
+    recency: 2026,
+    relevance: 6,
+    featured: false,
+    summary:
+      "Explains your wearable-tracker stats in plain English — calories, recovery, and more — and lets you chat with your own data, Bevel-style.",
+    context: [
+      "Wearables like WHOOP produce a lot of data that's hard to interpret. Explain My WHOOP turns those stats — calories, recovery, and more — into plain-English explanations, and lets you chat directly with your own data.",
+    ],
+    contributions: [
+      "Built a tool that explains wearable-tracker stats (calories, recovery, etc.) in plain English.",
+      "Built a chat interface to query your own tracker data conversationally.",
+    ],
+    outcomes: [],
+    metrics: [],
+    proof: [
+      {
+        type: "live",
+        status: "available",
+        title: "Visit the tool",
+        url: "https://explain-my-whoop-stats.vercel.app/",
+        note: "Chat with your own wearable data.",
+      },
+    ],
+    tags: ["AI", "Wearables", "Health", "Product"],
+  },
+  {
+    slug: "road360",
+    title: "Road360",
+    role: "Builder",
+    category: "AI / Product",
+    location: "New Delhi, India",
+    period: "2026 — Present",
+    impact: 5,
+    recency: 2026,
+    relevance: 6,
+    featured: false,
+    summary:
+      "Tracks horn noise and hard braking to rate your drive — built around driving conditions in Delhi.",
+    context: [
+      "Road360 tracks driving behavior — horn noise and hard brakes — and rates the drive, built around the realities of driving in Delhi.",
+    ],
+    contributions: [
+      "Built tracking for horn noise and hard-braking events during a drive.",
+      "Built a scoring system that rates the overall drive.",
+    ],
+    outcomes: [],
+    metrics: [],
+    proof: [
+      {
+        type: "live",
+        status: "available",
+        title: "Visit the tool",
+        url: "https://road360.vercel.app/",
+        note: "Rate your drive in Delhi.",
+      },
+    ],
+    tags: ["AI", "Driving", "Delhi", "Product"],
   },
   {
     slug: "apodaca-lab",
