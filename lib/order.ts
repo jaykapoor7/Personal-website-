@@ -34,7 +34,7 @@ export function orderedWriting(): WritingItem[] {
 const LANES: { title: string; slugs: string[] }[] = [
   { title: "Building & Product", slugs: ["juno-ai", "juno-preventive-health", "seo-geo-optimiser", "recovery-intelligence", "road360", "straypaw", "tot-schools"] },
   { title: "Investing & Strategy", slugs: ["crowwd", "hdfc-bank"] },
-  { title: "Academic Research", slugs: ["apodaca-lab", "pitt-sociology", "upmc-emergency-medicine"] },
+  { title: "Academic Research", slugs: ["apodaca-lab", "pitt-sociology", "upmc-emergency-medicine", "max-hospital"] },
   { title: "Earlier", slugs: ["tarc", "project-nidaan", "finer-things-club"] },
 ];
 

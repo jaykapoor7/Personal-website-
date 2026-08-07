@@ -95,7 +95,7 @@ export const work: WorkItem[] = [
     summary:
       "Founded and scaled a healthcare-access platform to 10,000+ rural users — a retrieval-grounded conversational health assistant with doctor discovery, pharmacy support, and a health dashboard.",
     context: [
-      "Juno-AI is a healthcare-access platform I founded to help people — especially in underserved and rural communities — find trustworthy health information and navigate fragmented care. Access to reliable guidance is uneven for users in low-resource, low-literacy settings, who often have to interpret symptoms, judge urgency, and locate appropriate care with little support.",
+      "Juno-AI is a healthcare-access platform I founded at 14 to help people — especially in underserved and rural communities — find trustworthy health information and navigate fragmented care. Access to reliable guidance is uneven for users in low-resource, low-literacy settings, who often have to interpret symptoms, judge urgency, and locate appropriate care with little support.",
       "I designed Juno as a product-first healthcare experience rather than a generic chatbot: a conversational assistant that grounds every response in vetted, authoritative sources using retrieval-augmented generation, paired with doctor discovery, pharmacy support, intelligent next-step recommendations, and a personalized health dashboard.",
       "I led the platform end-to-end — product, user outreach, partnerships, and operations — scaling it to 10,000+ rural users and documenting the approach in a research paper, “Juno AI: A Retrieval-Grounded Conversational Platform for Equitable Healthcare Information Access and Navigation.”",
     ],
@@ -387,16 +387,19 @@ export const work: WorkItem[] = [
     relevance: 6,
     featured: false,
     summary:
-      "A side project for street-animal welfare — partnering with NGOs and onboarding an early user base.",
+      "A community stray-dog tracking and care-coordination platform — 50+ dogs tracked with vaccination and sterilization status, supporting compliance under India's ABC Rules 2023.",
     context: [
-      "StrayPaw is a side project I'm building for street-animal welfare, partnering with NGOs and growing an early user base.",
+      "StrayPaw is a community stray-dog tracking and care-coordination platform I founded in India, partnering with NGOs and a feeder network to bring structure to informal caretaker practice.",
+      "It gives feeders and NGOs proof-of-status records — vaccination and sterilization status per dog — supporting compliance under India's Animal Birth Control (ABC) Rules, 2023.",
     ],
     contributions: [
-      "Partnering with NGOs to support street-animal welfare on the ground.",
-      "Building the product and onboarding early users.",
+      "Founded and built a stray-dog tracking and care-coordination platform; 50+ dogs tracked with vaccination and sterilization status.",
+      "Led NGO and feeder-network outreach, turning informal caretaker practice into a structured, usable record system for municipal and nonprofit partners.",
     ],
     outcomes: [],
-    metrics: [],
+    metrics: [
+      { value: "50+", label: "dogs tracked", source: "resume" },
+    ],
     proof: [
       {
         type: "live",
@@ -521,9 +524,9 @@ export const work: WorkItem[] = [
     role: "Research Assistant",
     category: "Research",
     location: "University of Pittsburgh",
-    period: "Jan 2025 — Present",
+    period: "Jan 2025 — Dec 2025",
     impact: 6,
-    recency: 2026,
+    recency: 2025,
     relevance: 6,
     featured: false,
     summary:
@@ -584,9 +587,9 @@ export const work: WorkItem[] = [
     role: "Research Assistant",
     category: "Research",
     location: "UPMC · Pittsburgh, PA",
-    period: "Aug 2024 — Jan 2025",
+    period: "Aug 2024 — Dec 2024",
     impact: 5,
-    recency: 2025,
+    recency: 2024,
     relevance: 6,
     featured: false,
     summary:
@@ -608,5 +611,31 @@ export const work: WorkItem[] = [
     ],
     proof: [],
     tags: ["Clinical Research", "REDCap", "Chart Review", "Human Subjects"],
+  },
+  {
+    slug: "max-hospital",
+    title: "Max Hospital",
+    role: "Clinical Shadowing",
+    category: "Clinical",
+    location: "New Delhi, India",
+    period: "8+ months",
+    impact: 4,
+    recency: 2024,
+    relevance: 5,
+    featured: false,
+    summary:
+      "Clinical shadowing in Emergency and Internal Medicine at a high-volume tertiary hospital — direct exposure to triage, diagnostic reasoning, and clinical documentation.",
+    context: [
+      "I shadowed attending physicians across Emergency and Internal Medicine at Max Hospital, a high-volume tertiary hospital in New Delhi.",
+      "It gave me direct grounding in how real-world clinical data is generated and recorded — context that carries into the research and healthcare-product work I do elsewhere.",
+    ],
+    contributions: [
+      "Shadowed attending physicians across emergency and internal medicine, observing triage, diagnostic reasoning, and patient communication.",
+      "Observed clinical documentation practices firsthand — direct grounding in how real-world clinical data is generated and recorded.",
+    ],
+    outcomes: [],
+    metrics: [],
+    proof: [],
+    tags: ["Clinical Shadowing", "Emergency Medicine", "Internal Medicine"],
   },
 ];

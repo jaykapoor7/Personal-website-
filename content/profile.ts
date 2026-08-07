@@ -23,7 +23,8 @@ export const profile: Profile = {
   education: [
     {
       school: "University of Pittsburgh",
-      credential: "B.S. Economics & Statistics · Minor: Information Sciences",
+      credential:
+        "B.S. Economics & Statistics · Minor: Information Sciences · Pre-Medical Track",
       location: "Pittsburgh, PA",
       period: "Expected May 2028",
     },
@@ -47,9 +48,11 @@ export const profile: Profile = {
     ],
   },
   leadership: [
+    "Team Leader, JumpStart / AmeriCorps, Pittsburgh — led a team of 8 corps members delivering early-childhood literacy programming in Pittsburgh public schools.",
     "Founded the Entrepreneurship Club at the University of Pittsburgh (2021–2023) — hosted 20+ startup workshops mentoring student teams on MVP design and go-to-market.",
     "Vendor Acquisition Head, Vivum Fest (2022) — managed 25+ vendors and a $10k budget for a 4,000+ attendee event.",
     "Contingent Leader, National Economics Fest (2023) — led a team to “Best Contingent” out of 500+ on macroeconomic models and policy.",
+    "Relief Coordinator, COVID-19 Relief Group, Assam (2019–2021) — verified medication leads and coordinated hospital-bed availability with local hospitals and volunteers to expand medical access in remote areas.",
   ],
   highlights: [
     { value: "20K", label: "users at the fintech platform I helped grow", source: "resume" },
