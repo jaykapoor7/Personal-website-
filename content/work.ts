@@ -103,17 +103,16 @@ export const work: WorkItem[] = [
       "Founded and scaled the platform to 10,000+ rural users across underserved communities.",
       "Designed a conversational health assistant that grounds answers in a curated corpus of authoritative sources (retrieval-augmented generation) rather than unvetted content.",
       "Built the core product surfaces — doctor discovery, pharmacy support, a personalized health dashboard, and intelligent next-step recommendations.",
-      "Negotiated partnerships with four healthcare organizations, driving 180% user growth within 12 months.",
+      "Negotiated partnerships with four healthcare organizations to expand access and distribution.",
       "Led product development, user outreach, and operations end-to-end, and documented the work in a research paper.",
     ],
     outcomes: [
       "Reached 10,000+ rural users.",
-      "Drove 180% user growth in a 12-month window via healthcare partnerships.",
+      "Built partnerships with four healthcare organizations to expand distribution.",
       "Documented the platform and its retrieval-grounded approach in a research paper.",
     ],
     metrics: [
       { value: "10K+", label: "rural users", source: "resume" },
-      { value: "180%", label: "user growth in 12 months", source: "resume" },
       { value: "4", label: "healthcare partnerships", source: "resume" },
     ],
     proof: [

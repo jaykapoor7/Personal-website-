@@ -57,7 +57,6 @@ export const profile: Profile = {
   highlights: [
     { value: "20K", label: "users at the fintech platform I helped grow", source: "resume" },
     { value: "10K+", label: "rural users on the platform I founded", source: "resume" },
-    { value: "180%", label: "user growth driven in 12 months", source: "resume" },
     { value: "$8k+", label: "revenue from artisan-commerce initiative", source: "resume" },
   ],
   resumeUrl: "/jay-kapoor-resume.pdf",
