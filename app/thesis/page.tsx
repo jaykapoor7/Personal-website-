@@ -11,8 +11,8 @@ export const metadata: Metadata = {
 };
 
 const VERDICT_STYLE: Record<Verdict, string> = {
-  BUY: "bg-paper text-ink",
-  HOLD: "border border-paper text-paper",
+  BUY: "bg-ink text-paper",
+  HOLD: "border border-ink text-ink",
   WATCH: "border border-line text-muted",
   PASS: "border border-dashed border-line text-muted",
 };
@@ -28,7 +28,7 @@ export default function ThesisPage() {
         </Reveal>
         <Reveal delay={0.05}>
           <p className="kicker mt-8 mb-4">
-            <span className="text-accent">&gt;</span> investing · how i think
+            Investing — how I think
           </p>
         </Reveal>
         <Reveal delay={0.1}>
@@ -84,7 +84,7 @@ export default function ThesisPage() {
                 >
                   {row.verdict}
                 </span>
-                <p className="text-paper">{row.meaning}</p>
+                <p className="text-ink">{row.meaning}</p>
                 <p className="mt-auto text-sm text-muted">{row.examples}</p>
               </div>
             </Reveal>
@@ -127,7 +127,7 @@ export default function ThesisPage() {
           <ul className="space-y-6">
             {thesis.principles.map((p, i) => (
               <li key={i}>
-                <h3 className="text-lg text-paper">{p.title}</h3>
+                <h3 className="text-lg text-ink">{p.title}</h3>
                 <p className="mt-1 text-muted">{p.body}</p>
               </li>
             ))}
@@ -141,7 +141,7 @@ export default function ThesisPage() {
           <div className="flex flex-wrap gap-4 text-sm">
             <Link
               href="/ledger"
-              className="rounded-full border border-paper px-6 py-3 text-paper transition-colors duration-300 hover:bg-paper hover:text-ink"
+              className="rounded-full bg-ink px-6 py-3 text-paper transition-colors duration-300 hover:bg-accent"
             >
               See the calibration ledger →
             </Link>
@@ -149,7 +149,7 @@ export default function ThesisPage() {
               href="/research/Memo-Library-and-Ledger.pdf"
               target="_blank"
               rel="noreferrer"
-              className="rounded-full border border-line px-6 py-3 text-muted transition-colors duration-300 hover:border-paper hover:text-paper"
+              className="rounded-full border border-line px-6 py-3 text-ink transition-colors duration-300 hover:border-ink"
             >
               Read the memos (PDF) ↗
             </a>

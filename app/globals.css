@@ -4,46 +4,22 @@
 
 :root {
   --font-sans: "Inter", system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
-  /* Signature accent as an RGB triplet so the `theme` command can swap it. */
-  --accent: 232 176 75; /* warm gold */
-  /* Backdrop image, switchable via the `bg` command. */
-  --bg-image: url("/backdrop-sunset.webp");
+  --font-display: "Fraunces", Georgia, serif;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    /* Smooth, refined motion curve used across transitions. */
     --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   body {
-    @apply bg-ink text-paper font-sans antialiased;
-    font-feature-settings: "ss01", "cv01";
+    @apply bg-paper text-ink font-sans antialiased;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
   }
 
-  /* Fixed painting backdrop under a cobalt veil + glow. A real position:fixed
-     element (not background-attachment:fixed) so it renders on mobile too. */
-  .backdrop {
-    position: fixed;
-    inset: 0;
-    z-index: -10;
-    pointer-events: none;
-    background-color: theme(colors.ink);
-    background-image:
-      linear-gradient(rgba(11, 26, 77, 0.52), rgba(11, 26, 77, 0.68)),
-      radial-gradient(120% 85% at 80% -12%, rgba(58, 96, 205, 0.28), transparent 55%),
-      radial-gradient(150% 110% at 15% 120%, rgba(5, 11, 42, 0.5), transparent 60%),
-      var(--bg-image);
-    background-size: auto, auto, auto, cover;
-    background-position: center, center, center, center;
-    background-repeat: no-repeat;
-  }
-
-  /* Editorial typography defaults: balanced headings, tidy body wrapping. */
+  /* Editorial typography defaults. */
   h1,
   h2,
   h3 {
@@ -54,15 +30,7 @@
   }
 
   ::selection {
-    @apply bg-paper text-ink;
-  }
-
-  /* Tactile press feedback (Emil Kowalski's detail). Opt out with data-nopress. */
-  button:not([data-nopress]) {
-    @apply transition-transform duration-150 ease-out-expo;
-  }
-  button:not([data-nopress]):active {
-    transform: scale(0.97);
+    @apply bg-ink text-paper;
   }
 
   /* Thin rule used to separate editorial blocks. */
@@ -80,35 +48,9 @@
     @apply font-display tracking-tighter2;
   }
 
-  /* Terminal "system" label: mono, uppercase, spaced. Prefix (>, //, [01])
-     lives in the markup so each label can differ. */
+  /* Small editorial label. */
   .kicker {
-    @apply font-mono text-xs uppercase tracking-widest text-muted;
-  }
-
-  /* Blinking block caret for the hero. Reduced-motion → solid (the global
-     media query neutralizes the animation). */
-  .caret {
-    @apply ml-1 inline-block h-[0.78em] w-[0.5ch] translate-y-[0.04em] bg-accent align-baseline animate-blink;
-  }
-
-  /* Woven dot-grid dither (cross-stitch texture) layered over a faint grain. */
-  .grain::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: 50;
-    pointer-events: none;
-    opacity: 0.5;
-    background-image:
-      radial-gradient(rgba(243, 239, 228, 0.05) 0.5px, transparent 0.6px),
-      radial-gradient(rgba(232, 176, 75, 0.04) 0.5px, transparent 0.6px);
-    background-size:
-      3px 3px,
-      3px 3px;
-    background-position:
-      0 0,
-      1.5px 1.5px;
+    @apply text-xs uppercase tracking-[0.18em] text-muted;
   }
 
   .link-underline {
@@ -121,41 +63,6 @@
   }
   .link-underline:hover::after {
     @apply origin-left scale-x-100;
-  }
-
-  /* Additive custom cursor (augments the native one). Desktop/fine-pointer
-     only; difference blend keeps it visible on any background. */
-  .cursor-dot {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 30px;
-    width: 30px;
-    border: 1px solid theme(colors.paper);
-    border-radius: 9999px;
-    pointer-events: none;
-    z-index: 60;
-    mix-blend-mode: difference;
-    opacity: 0;
-    transform: translate3d(-100px, -100px, 0);
-    transition:
-      opacity 0.25s ease,
-      width 0.2s var(--ease-out-expo),
-      height 0.2s var(--ease-out-expo);
-    will-change: transform;
-  }
-  .cursor-dot[data-active="true"] {
-    height: 56px;
-    width: 56px;
-    mix-blend-mode: normal;
-    border-color: theme(colors.accent / 100%);
-    background: theme(colors.accent / 18%);
-  }
-}
-
-@media (hover: none), (pointer: coarse) {
-  .cursor-dot {
-    display: none !important;
   }
 }
 

@@ -5,14 +5,9 @@ import { Reveal } from "@/components/Reveal";
 import { MetricStat } from "@/components/Metric";
 import { WorkCard } from "@/components/WorkCard";
 import { Portrait } from "@/components/Portrait";
-import { MagneticButton } from "@/components/MagneticButton";
-import { Scramble } from "@/components/Scramble";
-import { CommandLine } from "@/components/CommandLine";
 
 export default function HomePage() {
   const featured = featuredWork();
-  // Lead with the investing / research A-material (exclude building-in-public).
-  // Kept to 3 for a calmer landing — the rest live on /writing.
   const research = orderedWriting()
     .filter((w) => w.kind !== "Building in public")
     .slice(0, 3);
@@ -20,44 +15,41 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="shell grid items-center gap-14 pt-24 pb-20 sm:pt-32 lg:grid-cols-[1.6fr_1fr]">
+      <section className="shell grid items-center gap-14 pt-24 pb-16 sm:pt-32 lg:grid-cols-[1.5fr_1fr]">
         <div>
           <Reveal>
-            <p className="kicker mb-7">
-              <span className="text-accent">&gt;</span> builder &amp; researcher ·{" "}
-              {profile.location}
-            </p>
+            <p className="kicker mb-6">Builder &amp; researcher · {profile.location}</p>
           </Reveal>
           <Reveal delay={0.05}>
-            <h1 className="display text-6xl lowercase leading-[0.95] tracking-tighter2 sm:text-7xl lg:text-8xl">
-              <Scramble text="jay kapoor" />
-              <span className="caret" aria-hidden />
+            <h1 className="display text-6xl leading-[1] tracking-tightest sm:text-7xl lg:text-8xl">
+              Jay Kapoor
             </h1>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="mt-9 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
+            <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted sm:text-xl">
               {profile.tagline}
             </p>
           </Reveal>
           <Reveal delay={0.15}>
-            <div className="mt-11 flex flex-wrap gap-4 text-sm">
-              <MagneticButton
+            <div className="mt-9 flex flex-wrap gap-4 text-sm">
+              <Link
                 href="/work"
-                className="rounded-full border border-paper px-6 py-3 text-paper transition duration-300 hover:bg-paper hover:text-ink active:scale-[0.97]"
+                className="rounded-full bg-ink px-6 py-3 text-paper transition-colors duration-300 hover:bg-accent"
               >
                 See the work →
-              </MagneticButton>
-              <MagneticButton
+              </Link>
+              <a
                 href={profile.resumeUrl}
-                external
-                className="rounded-full border border-line px-6 py-3 text-muted transition duration-300 hover:border-paper hover:text-paper active:scale-[0.97]"
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-full border border-line px-6 py-3 text-ink transition-colors duration-300 hover:border-ink"
               >
-                Resume ↗
-              </MagneticButton>
+                Résumé ↗
+              </a>
             </div>
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="mt-7 inline-flex items-center gap-2 font-mono text-sm text-muted">
+            <p className="mt-7 inline-flex items-center gap-2 text-sm text-muted">
               <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden />
               {profile.seeking}
             </p>
@@ -68,23 +60,10 @@ export default function HomePage() {
         </Reveal>
       </section>
 
-      {/* Interactive terminal */}
-      <section className="shell pb-12">
-        <Reveal>
-          <p className="kicker mb-4">
-            <span className="text-accent">&gt;</span> try the terminal — type{" "}
-            <span className="text-paper">help</span>
-          </p>
-        </Reveal>
-        <Reveal delay={0.05}>
-          <CommandLine />
-        </Reveal>
-      </section>
-
       {/* Headline stats */}
-      <section className="shell py-20">
+      <section className="shell border-t border-line py-16">
         <Reveal>
-          <h2 className="kicker mb-12">// by the numbers</h2>
+          <p className="kicker mb-10">By the numbers</p>
         </Reveal>
         <div className="grid grid-cols-3 gap-6 sm:gap-10">
           {profile.highlights.slice(0, 3).map((m, i) => (
@@ -96,17 +75,14 @@ export default function HomePage() {
       </section>
 
       {/* Featured work */}
-      <section className="py-10">
-        <div className="shell mb-6 flex items-baseline justify-between">
-          <h2 className="display text-3xl lowercase tracking-tighter2 sm:text-4xl">
-            <span className="text-accent">//</span>{" "}
-            <Scramble text="selected work" />
-          </h2>
+      <section className="py-14">
+        <div className="shell mb-4 flex items-baseline justify-between">
+          <h2 className="display text-3xl tracking-tight sm:text-4xl">Selected work</h2>
           <Link
             href="/work"
-            className="link-underline font-mono text-xs uppercase tracking-widest text-muted"
+            className="link-underline text-sm text-muted"
           >
-            all work →
+            All work →
           </Link>
         </div>
         <div>
@@ -117,41 +93,28 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Selected research — leads with the investing A-material */}
-      <section className="shell py-16">
-        <div className="mb-8 flex items-baseline justify-between">
-          <h2 className="display text-3xl lowercase tracking-tighter2 sm:text-4xl">
-            <span className="text-accent">//</span>{" "}
-            <Scramble text="selected research" />
-          </h2>
-          <Link
-            href="/writing"
-            className="link-underline font-mono text-xs uppercase tracking-widest text-muted"
-          >
-            all writing →
+      {/* Selected research */}
+      <section className="shell py-14">
+        <div className="mb-6 flex items-baseline justify-between">
+          <h2 className="display text-3xl tracking-tight sm:text-4xl">Selected research</h2>
+          <Link href="/writing" className="link-underline text-sm text-muted">
+            All writing →
           </Link>
         </div>
-        <div className="grid gap-px overflow-hidden rounded-sm border border-line md:grid-cols-2">
-          {research.map((item, i) => (
+        <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-line md:grid-cols-2">
+          {research.map((item) => (
             <Link
               key={item.slug}
               href={item.slug === "investment-memo-series" ? "/ledger" : "/writing"}
-              className="group flex flex-col gap-4 bg-ink p-6 transition-colors hover:bg-line/40 sm:p-8"
+              className="group flex flex-col gap-3 bg-paper p-6 transition-colors hover:bg-line/40 sm:p-8"
             >
-              <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-muted">
-                <span className="text-accent">[{String(i + 1).padStart(2, "0")}]</span>
+              <div className="flex items-center gap-3 text-xs uppercase tracking-[0.14em] text-muted">
                 <span>{item.kind}</span>
                 <span aria-hidden>·</span>
                 <span>{item.year}</span>
               </div>
-              <h3 className="display flex items-start gap-2 text-2xl lowercase leading-tight tracking-tighter2 transition-transform duration-300 ease-out-expo group-hover:translate-x-1 sm:text-3xl">
+              <h3 className="display text-2xl leading-tight tracking-tight sm:text-3xl">
                 {item.title}
-                <span
-                  aria-hidden
-                  className="text-accent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                >
-                  ↗
-                </span>
               </h3>
             </Link>
           ))}
@@ -159,13 +122,11 @@ export default function HomePage() {
       </section>
 
       {/* Closing line */}
-      <section className="shell py-24">
+      <section className="shell border-t border-line py-20">
         <Reveal>
-          <p className="display max-w-4xl text-3xl leading-snug sm:text-5xl">
-            A resume tells you what I did.{" "}
-            <span className="text-muted">
-              This site lets you check.
-            </span>
+          <p className="display max-w-3xl text-3xl leading-snug tracking-tight sm:text-4xl">
+            A résumé tells you what I did.{" "}
+            <span className="text-muted">This site lets you check.</span>
           </p>
         </Reveal>
       </section>

@@ -14,7 +14,7 @@ export default function ContactPage() {
     <section className="shell flex min-h-[70vh] flex-col justify-center py-20">
       <Reveal>
         <p className="kicker mb-6">
-          <span className="text-accent">&gt;</span> contact
+          Contact
         </p>
       </Reveal>
       <Reveal delay={0.05}>
@@ -32,14 +32,14 @@ export default function ContactPage() {
       </Reveal>
 
       <Reveal delay={0.15}>
-        <ul className="mt-16 grid gap-px overflow-hidden rounded-sm border border-line sm:grid-cols-2">
+        <ul className="mt-16 grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2">
           {socials.map((s) => (
             <li key={s.type}>
               <a
                 href={s.url}
                 target={s.type === "email" ? undefined : "_blank"}
                 rel="noreferrer"
-                className="flex items-center justify-between bg-ink p-6 transition-colors hover:bg-line/40"
+                className="flex items-center justify-between bg-paper p-6 transition-colors hover:bg-line/40"
               >
                 <span>
                   <span className="block text-sm text-muted">{s.label}</span>
@@ -54,7 +54,7 @@ export default function ContactPage() {
           <li>
             <a
               href={profile.resumeUrl}
-              className="flex items-center justify-between bg-ink p-6 transition-colors hover:bg-line/40"
+              className="flex items-center justify-between bg-paper p-6 transition-colors hover:bg-line/40"
             >
               <span>
                 <span className="block text-sm text-muted">Resume</span>

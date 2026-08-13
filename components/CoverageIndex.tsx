@@ -5,7 +5,7 @@ import { ledger, type Verdict } from "@/content/ledger";
 
 const VERDICT_STYLE: Record<Verdict, string> = {
   BUY: "bg-accent text-ink",
-  HOLD: "border border-paper text-paper",
+  HOLD: "border border-ink text-ink",
   WATCH: "border border-line text-muted",
   PASS: "border border-dashed border-line text-muted",
 };
@@ -36,7 +36,7 @@ export function CoverageIndex() {
               className={`rounded-full border px-3.5 py-1 font-mono text-[11px] uppercase tracking-widest transition-colors duration-200 ${
                 active === f
                   ? "border-accent text-accent"
-                  : "border-line text-muted hover:border-paper hover:text-paper"
+                  : "border-line text-muted hover:border-ink hover:text-ink"
               }`}
             >
               {f === "All" ? "all" : f.toLowerCase()}

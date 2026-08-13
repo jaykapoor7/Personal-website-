@@ -6,7 +6,7 @@ import { Reveal } from "@/components/Reveal";
 
 const RESULT_STYLE: Record<CallResult, string> = {
   HIT: "bg-accent text-ink",
-  MISS: "border border-paper text-paper",
+  MISS: "border border-ink text-ink",
   OPEN: "border border-line text-muted",
 };
 
@@ -34,7 +34,7 @@ export function LedgerCalls({ calls }: { calls: LedgerCall[] }) {
           <Reveal as="li" key={i} delay={Math.min(i, 6) * 0.03}>
             <div className="flex flex-col gap-3 border-b border-line py-5 md:flex-row md:items-start md:justify-between md:gap-8">
               <div className="max-w-2xl">
-                <p className="text-base leading-snug text-paper">{c.prediction}</p>
+                <p className="text-base leading-snug text-ink">{c.prediction}</p>
                 <p className="mt-1 text-sm text-muted">{c.detail}</p>
               </div>
 
@@ -49,7 +49,7 @@ export function LedgerCalls({ calls }: { calls: LedgerCall[] }) {
                 ) : guess ? (
                   <>
                     <span className="font-mono text-xs text-muted">
-                      you: <span className="text-paper">{guess}</span> · jay{" "}
+                      you: <span className="text-ink">{guess}</span> · jay{" "}
                       <span className="text-accent">{c.conviction}%</span> →{" "}
                       {lean}
                     </span>

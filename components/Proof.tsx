@@ -26,11 +26,11 @@ function ProofCard({ proof }: { proof: Proof }) {
           {available ? meta.glyph : "·"}
         </span>
       </div>
-      <p className="mt-3 text-base text-paper">{proof.title}</p>
+      <p className="mt-3 text-base text-ink">{proof.title}</p>
       {proof.note && <p className="mt-1 text-sm text-muted">{proof.note}</p>}
       <span
         className={`mt-4 inline-block font-mono text-xs ${
-          available ? "text-paper group-hover:text-accent" : "text-muted"
+          available ? "text-ink group-hover:text-accent" : "text-muted"
         }`}
       >
         {available
@@ -91,7 +91,7 @@ export function ProofTags({ proof }: { proof: Proof[] }) {
   return (
     <span className="text-xs text-muted">
       {proof.length} {proof.length === 1 ? "item" : "items"}
-      {available > 0 && <span className="text-paper"> · {available} live</span>}
+      {available > 0 && <span className="text-ink"> · {available} live</span>}
     </span>
   );
 }

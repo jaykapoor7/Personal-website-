@@ -29,7 +29,7 @@ export function Footer() {
               </li>
             ))}
             <li>
-              <a href={profile.resumeUrl} className="link-underline text-paper">
+              <a href={profile.resumeUrl} className="link-underline text-ink">
                 Resume ↗
               </a>
             </li>

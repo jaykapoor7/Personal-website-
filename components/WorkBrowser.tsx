@@ -31,7 +31,7 @@ export function WorkBrowser({ groups }: { groups: Group[] }) {
               className={`rounded-full border px-4 py-1.5 font-mono text-xs uppercase tracking-widest transition-colors duration-200 ${
                 isActive
                   ? "border-accent text-accent"
-                  : "border-line text-muted hover:border-paper hover:text-paper"
+                  : "border-line text-muted hover:border-ink hover:text-ink"
               }`}
             >
               {c === "All" ? "all" : c.toLowerCase()}

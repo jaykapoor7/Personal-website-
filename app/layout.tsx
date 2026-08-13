@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, IBM_Plex_Mono } from "next/font/google";
+import { Inter, Fraunces } from "next/font/google";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
@@ -8,10 +8,6 @@ import { socials } from "@/content/socials";
 import { siteUrl } from "@/lib/site";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Cursor } from "@/components/Cursor";
-import { Boot } from "@/components/Boot";
-import { CommandPalette } from "@/components/CommandPalette";
-import { RouteBackdrop } from "@/components/RouteBackdrop";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -19,10 +15,9 @@ const inter = Inter({
   display: "swap",
 });
 
-const mono = IBM_Plex_Mono({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-mono",
+  variable: "--font-display",
   display: "swap",
 });
 
@@ -62,7 +57,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0b1a4d",
+  themeColor: "#f5f0e6",
 };
 
 // JSON-LD Person schema — helps search engines understand & richly surface Jay.
@@ -98,29 +93,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${mono.variable}`}>
-      <body className="grain min-h-screen">
-        <div className="backdrop" aria-hidden />
-        <RouteBackdrop />
-        <script
-          dangerouslySetInnerHTML={{
-            __html:
-              "try{var r=document.documentElement,t=localStorage.getItem('accent'),m={gold:'232 176 75',amber:'233 162 59',green:'126 231 135',white:'243 239 228'};if(t&&m[t])r.style.setProperty('--accent',m[t]);var bm={sunset:'/backdrop-sunset.webp',hills:'/backdrop-hills.webp',cobalt:'/sky-backdrop.webp'},o=localStorage.getItem('backdrop'),p=location.pathname,k=(o&&bm[o])?o:(p.indexOf('/work')===0?'hills':(p.indexOf('/writing')===0||p.indexOf('/ledger')===0||p.indexOf('/thesis')===0)?'cobalt':(p.indexOf('/about')===0?'hills':'sunset'));if(bm[k])r.style.setProperty('--bg-image','url('+bm[k]+')');}catch(e){}",
-          }}
-        />
+    <html lang="en" className={`${inter.variable} ${fraunces.variable}`}>
+      <body className="min-h-screen">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
         />
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-paper focus:px-4 focus:py-2 focus:text-ink"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-ink focus:px-4 focus:py-2 focus:text-paper"
         >
           Skip to content
         </a>
-        <Boot />
-        <CommandPalette />
-        <Cursor />
         <Nav />
         <main id="main">{children}</main>
         <Footer />

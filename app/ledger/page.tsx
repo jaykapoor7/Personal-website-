@@ -24,7 +24,7 @@ export default function LedgerPage() {
         </Reveal>
         <Reveal delay={0.05}>
           <p className="kicker mt-8 mb-4">
-            <span className="text-accent">&gt;</span> independent research · investment memos
+            Independent research — investment memos
           </p>
         </Reveal>
         <Reveal delay={0.1}>
@@ -83,13 +83,13 @@ export default function LedgerPage() {
               href="/research/Memo-Library-and-Ledger.pdf"
               target="_blank"
               rel="noreferrer"
-              className="rounded-full border border-paper px-6 py-3 text-paper transition-colors duration-300 hover:bg-paper hover:text-ink"
+              className="rounded-full bg-ink px-6 py-3 text-paper transition-colors duration-300 hover:bg-accent"
             >
               Read the full memo library (PDF) ↗
             </a>
             <Link
               href="/thesis"
-              className="rounded-full border border-line px-6 py-3 text-muted transition-colors duration-300 hover:border-paper hover:text-paper"
+              className="rounded-full border border-line px-6 py-3 text-ink transition-colors duration-300 hover:border-ink"
             >
               The thesis behind the calls →
             </Link>

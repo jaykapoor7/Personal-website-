@@ -14,7 +14,7 @@ export default function AboutPage() {
       <section className="shell pt-20 pb-12 sm:pt-28">
         <Reveal>
           <p className="kicker mb-6">
-            <span className="text-accent">&gt;</span> about
+            About
           </p>
         </Reveal>
         <div className="grid gap-10 md:grid-cols-[300px_1fr] md:items-start lg:gap-16">
@@ -25,7 +25,7 @@ export default function AboutPage() {
             <div className="space-y-6 text-2xl leading-snug sm:text-3xl">
               {profile.bio.map((p, i) =>
                 i === 0 ? (
-                  <h1 key={i} className="tracking-tight text-paper">
+                  <h1 key={i} className="tracking-tight text-ink">
                     {p}
                   </h1>
                 ) : (
@@ -46,7 +46,7 @@ export default function AboutPage() {
       {/* Education */}
       <section className="shell hr-line grid gap-8 border-t py-10 md:grid-cols-[1fr_2fr]">
         <Reveal>
-          <h2 className="kicker">// education</h2>
+          <h2 className="kicker">Education</h2>
         </Reveal>
         <Reveal delay={0.05}>
           <ul className="space-y-8">
@@ -66,7 +66,7 @@ export default function AboutPage() {
       {/* Skills */}
       <section className="shell hr-line grid gap-8 border-t py-10 md:grid-cols-[1fr_2fr]">
         <Reveal>
-          <h2 className="kicker">// skills</h2>
+          <h2 className="kicker">Skills</h2>
         </Reveal>
         <Reveal delay={0.05}>
           <div className="space-y-8">
@@ -103,7 +103,7 @@ export default function AboutPage() {
       {/* Leadership */}
       <section className="shell hr-line grid gap-8 border-t py-10 md:grid-cols-[1fr_2fr]">
         <Reveal>
-          <h2 className="kicker">// leadership</h2>
+          <h2 className="kicker">Leadership</h2>
         </Reveal>
         <Reveal delay={0.05}>
           <ul className="space-y-4">

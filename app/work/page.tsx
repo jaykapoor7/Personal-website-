@@ -18,7 +18,7 @@ export default function WorkPage() {
       <section className="shell pt-20 pb-10 sm:pt-28">
         <Reveal>
           <p className="kicker mb-6">
-            <span className="text-accent">&gt;</span> work
+            Work
           </p>
         </Reveal>
         <Reveal delay={0.05}>
