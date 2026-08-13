@@ -30,7 +30,7 @@ export default function OpengraphImage() {
             color: "#7c756a",
           }}
         >
-          Builder &amp; Researcher · Pittsburgh, PA
+          Creator &amp; Operator · Pittsburgh, PA
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ fontSize: 128, letterSpacing: "-0.04em", lineHeight: 1 }}>

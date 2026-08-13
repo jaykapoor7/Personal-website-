@@ -5,14 +5,14 @@ import type { Profile } from "./types";
 export const profile: Profile = {
   name: "Jay Kapoor",
   tagline:
-    "Economics & Statistics @ Pitt. I build and research at the intersection of fintech, healthtech, and investment research.",
+    "Economics & Statistics student at Pitt. I build things and do research across fintech, healthtech, and investing.",
   location: "Pittsburgh, PA",
   email: "jak581@pitt.edu",
   bio: [
-    "I'm a builder and researcher. I founded a healthcare-access platform that reached 10,000+ rural users, then spent the last year inside the founder's office of a 20,000-user fintech platform working on growth, strategy, and investment research.",
-    "I'm studying Economics & Statistics at the University of Pittsburgh with a minor in Information Sciences, and I do research across three Pitt / UPMC labs. I care about products that reach underserved users and about the research discipline behind good investment decisions.",
-    "My long-term goal: a venture studio or multi-project investment firm — underwriting deals and building startups in parallel.",
-    "This site is the long version of my resume — the projects behind it, with links you can open.",
+    "I like building things and figuring out how they work. I started a healthcare-access platform for rural communities, and I spent the last year in the founder's office at a fintech startup, working on growth, strategy, and investment research.",
+    "I'm studying Economics & Statistics at the University of Pittsburgh with a minor in Information Sciences, and I do research across a few Pitt / UPMC labs. I gravitate toward products that reach underserved users, and toward the research habits behind good investment calls.",
+    "Longer term, I want to build and back companies in parallel — somewhere between a venture studio and an investment firm.",
+    "This site is just the long version of my resume — the actual projects, with links you can open.",
   ],
   seeking: "Open to operations / BizOps and venture (VC/PE) roles.",
   portrait: {
@@ -55,9 +55,9 @@ export const profile: Profile = {
     "Relief Coordinator, COVID-19 Relief Group, Assam (2019–2021) — verified medication leads and coordinated hospital-bed availability with local hospitals and volunteers to expand medical access in remote areas.",
   ],
   highlights: [
-    { value: "20K", label: "users at the fintech platform I helped grow", source: "resume" },
-    { value: "10K+", label: "rural users on the platform I founded", source: "resume" },
-    { value: "$8k+", label: "revenue from artisan-commerce initiative", source: "resume" },
+    { value: "20K", label: "users at the fintech startup I worked at", source: "resume" },
+    { value: "10K+", label: "rural users on a healthcare platform I built", source: "resume" },
+    { value: "$8k+", label: "revenue from a small artisan-commerce project", source: "resume" },
   ],
   resumeUrl: "/jay-kapoor-resume.pdf",
 };

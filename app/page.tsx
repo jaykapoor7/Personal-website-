@@ -18,7 +18,7 @@ export default function HomePage() {
       <section className="shell grid items-center gap-14 pt-24 pb-16 sm:pt-32 lg:grid-cols-[1.5fr_1fr]">
         <div>
           <Reveal>
-            <p className="kicker mb-6">Builder &amp; researcher · {profile.location}</p>
+            <p className="kicker mb-6">Creator &amp; operator · {profile.location}</p>
           </Reveal>
           <Reveal delay={0.05}>
             <h1 className="display text-6xl leading-[1] tracking-tightest sm:text-7xl lg:text-8xl">
@@ -126,7 +126,7 @@ export default function HomePage() {
         <Reveal>
           <p className="display max-w-3xl text-3xl leading-snug tracking-tight sm:text-4xl">
             A résumé tells you what I did.{" "}
-            <span className="text-muted">This site lets you check.</span>
+            <span className="text-muted">This site just shows the work.</span>
           </p>
         </Reveal>
       </section>

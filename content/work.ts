@@ -19,16 +19,16 @@ export const work: WorkItem[] = [
     relevance: 10,
     featured: true,
     summary:
-      "Founder's-office intern at a ~20,000-user fintech & investing-insights platform, owning user acquisition, the Arthavaad speaker series, and competitive/investment research.",
+      "Founder's-office intern at a ~20,000-user fintech & investing-insights platform, working on user acquisition, the Arthavaad speaker series, and competitive/investment research.",
     context: [
       "As a Founder's-Office Intern at Crowwd — a fintech and investing-insights platform with ~20,000 users (“Mute the chaos. Invest with clarity.”) — I reported directly to the Founder & CEO across growth, strategy, business development, and operations, from May 2025 to May 2026 in New Delhi.",
-      "I owned Crowwd's user acquisition end-to-end, building a multi-channel distribution strategy across Reddit, X, YouTube, Google Ads, and Generative Engine Optimization (GEO) — organic and paid — while managing a small team of interns; our organic channels onboarded 200+ users. Supporting that, I authored Crowwd's GEO playbook and a channel analysis of unconventional ad platforms with CPM/CTR benchmarks.",
+      "I ran Crowwd's user acquisition end-to-end, building a multi-channel distribution strategy across Reddit, X, YouTube, Google Ads, and Generative Engine Optimization (GEO) — organic and paid — while working alongside a small team of interns; our organic channels onboarded 200+ users. Supporting that, I put together Crowwd's GEO playbook and a channel analysis of unconventional ad platforms with CPM/CTR benchmarks.",
       "I also launched and ran Arthavaad, a multi-city monthly speaker series, owning speaker outreach, brand partnerships, logistics, and event execution end-to-end.",
       "On research, I produced competitive analysis and investment research across Indian fintech, benchmarking Crowwd against seven social-investing platforms (OpiGo, Liquide, Stocktwits, eToro, and others) to inform founder-level strategy.",
     ],
     contributions: [
       "Reported directly to the Founder & CEO across growth, strategy, business development, and operations.",
-      "Owned multi-channel user acquisition (Reddit, X, YouTube, Google Ads, GEO) and managed a small intern team; organic channels onboarded 200+ users.",
+      "Ran multi-channel user acquisition (Reddit, X, YouTube, Google Ads, GEO) with a small intern team; organic channels onboarded 200+ users.",
       "Launched and ran Arthavaad, a multi-city monthly speaker series — speaker outreach, partnerships, logistics, and execution end-to-end.",
       "Produced competitive analysis and investment research across Indian fintech to inform founder-level strategy.",
     ],
@@ -185,13 +185,13 @@ export const work: WorkItem[] = [
     relevance: 8,
     featured: true,
     summary:
-      "End-to-end operations for a multi-centre early-childhood business — software, facilities, hiring, nutrition, compliance and documentation — run lean by one operator using AI as the team.",
+      "End-to-end operations for a multi-centre early-childhood business — software, facilities, hiring, nutrition, compliance and documentation — run lean by one person using AI as the team.",
     context: [
       "Running a childcare chain, AI-first. TOT Schools Learning Solutions Pvt. Ltd. is a multi-centre early-childhood business, and I run its operations end-to-end as Operations Lead — across software, facilities, hiring, nutrition, compliance, and documentation.",
-      "I run it lean: one operator using AI as a force-multiplier to do the work of a team. Across 8 centres I own six operating domains — technology, facilities, people, nutrition, documentation, and finance.",
+      "I run it lean — one person leaning on AI to cover the work of a team. Across 8 centres I look after six areas: technology, facilities, people, nutrition, documentation, and finance.",
     ],
     contributions: [
-      "Owned 6 operating domains across 8 centres: technology, facilities, people, nutrition, documentation, finance.",
+      "Ran 6 operating areas across 8 centres: technology, facilities, people, nutrition, documentation, finance.",
       "Rolled out Illumine (attendance, billing, parent comms, records) and CCTV across all centres; set up centres in person — custom furniture via carpenters, civil work, layout and safety.",
       "Hired and onboarded centre heads, teachers, nurses and cleaners; stood up a nutrition programme with onboarded nutritionists.",
       "Produced a 12-document branded handbook & SOP suite and automated IDIGI invoicing — using AI as a force-multiplier to do the work of a team.",
@@ -199,7 +199,7 @@ export const work: WorkItem[] = [
     outcomes: [],
     metrics: [
       { value: "8", label: "centres operated", source: "published" },
-      { value: "6", label: "operating domains owned", source: "published" },
+      { value: "6", label: "operating areas run", source: "published" },
       { value: "12", label: "handbook & SOP documents produced", source: "published" },
     ],
     proof: [
