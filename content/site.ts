@@ -1,4 +1,10 @@
-/** Edit this file to update the public portfolio. Keep dates and claims tied to a source. */
+/** Edit this file to update the public portfolio. Keep dates and claims tied to a source.
+ * Role dates and titles updated in October 2026 from Jay’s LinkedIn screenshots:
+ * Crowwd, HDFC, Apodaca Lab, Project Nidaan, Finer Things Club, Juno-AI,
+ * SCI 3Sixty, Accessible SmartTech Lab, TARC, and UPMC Emergency Medicine.
+ * StrayPaw records and partner count come from Jay’s LinkedIn update and live site.
+ * Other recent organizations were named by Jay; dates are omitted where unverified.
+ */
 export const person = {
   name: "Jay Kapoor",
   email: "jak581@pitt.edu",
@@ -32,14 +38,14 @@ export const projects: Project[] = [
     image: "/straypaw/field-observation.webp", imageAlt: "Street dog photographed for StrayPaw’s field observation atlas", imagePosition: "center 54%", tone: "forest",
     body: [
       "StrayPaw gives residents, rescue teams, and local governments a way to work from the same record. Someone can report an animal; a field team can follow the case; a city can see where care is happening and where it is missing.",
-      "I started it because much of this work already happens through feeders, rescuers, and NGOs, but the records are often scattered. The product now includes animal profiles, case tracking, and a live map."
+      "I started it because much of this work already happens through feeders, rescuers, and NGOs, but the records are often scattered. The product now includes animal profiles, case tracking, and a live map. It has over 30,000 animal records across India and works with 19 NGOs."
     ],
     did: ["Product design and development", "Field workflows for reports and case follow-up", "Outreach to feeder networks and NGOs"],
     gallery: [{src:"/straypaw/street-dog.jpg",alt:"Street dog documented in Delhi",caption:"From StrayPaw’s field photographs"},{src:"/straypaw/skyline-dog.webp",alt:"StrayPaw’s city and street dog image",caption:"StrayPaw, from the street up"}],
     links: [{label:"Visit StrayPaw",href:"https://straypaw.kapoorjay.com"},{label:"Explore the live map",href:"https://straypaw.kapoorjay.com/map"}],
   },
   {
-    slug: "juno-ai", title: "Juno-AI", eyebrow: "Founder · Healthcare", period: "2019–2024",
+    slug: "juno-ai", title: "Juno-AI", eyebrow: "Founder · Healthcare", period: "Jun 2019–Aug 2023",
     summary: "A healthcare access project I started to help people find information, doctors, and pharmacies.",
     image: "/work/juno-ai/juno-product-dashboard.webp", imageAlt: "Juno-AI product screens and dashboard", tone: "lilac",
     body: ["I started Juno-AI as a teenager in India. It combined health information with tools for finding care, especially for people in places where reliable guidance can be hard to get.", "I worked on the product, outreach, and partnerships. The original research paper and product images are still available below."],
@@ -47,7 +53,7 @@ export const projects: Project[] = [
     links: [{label:"Read the paper",href:"/work/juno-ai/Juno-AI-Research-Paper.pdf"}],
   },
   {
-    slug: "crowwd", title: "Crowwd", eyebrow: "Founder’s office internship · Fintech", period: "2025–2026",
+    slug: "crowwd", title: "Crowwd", eyebrow: "Founder’s office internship · Fintech", period: "May–Aug 2025",
     summary: "Growth, events, and research at an investing platform in India.",
     image: "/work/crowwd/arthavaad-stage.jpg", imageAlt: "Arthavaad event at The Circle.Work", tone: "clay",
     body: ["At Crowwd, I worked with the founder on distribution, competitive research, and a speaker series called Arthavaad.", "The work ranged from looking at acquisition channels to finding speakers and running events. I also wrote research notes on fintech products."],
@@ -56,13 +62,13 @@ export const projects: Project[] = [
     links: [{label:"Visit Crowwd",href:"https://crowwd.io"},{label:"Selected research",href:"/work/crowwd/Crowwd-Selected-Research-and-Strategy.pdf"}],
   },
   {
-    slug: "project-nidaan", title: "Project Nidaan", eyebrow: "Field research · Health", period: "2022–2024",
+    slug: "project-nidaan", title: "Project Nidaan", eyebrow: "Co-founder · Health research", period: "May 2022–Aug 2024",
     summary: "Research into medication access for delivery riders in Bengaluru.",
     tone: "sand", body: ["I interviewed delivery riders about how they access medicines and care, then organized and analyzed the responses. The project looked at barriers that do not always show up in formal healthcare data."],
     links: [{label:"Field research brief",href:"/work/project-nidaan/Project-Nidaan-Field-Research-Brief.pdf"}],
   },
   {
-    slug: "finer-things-club", title: "The Finer Things Club", eyebrow: "Founder · Commerce", period: "2021–2024",
+    slug: "finer-things-club", title: "The Finer Things Club", eyebrow: "Founder · Commerce", period: "Jul 2021–Aug 2024",
     summary: "A small marketplace project working with rural artisans in India.", tone: "peach",
     body: ["This began as a way to help artisans sell their work through NGO and marketplace partnerships. I worked on onboarding, distribution, and the day-to-day operations."],
     links: [{label:"Project one-pager",href:"/work/finer-things-club/Finer-Things-Marketplace-One-Pager.pdf"}],
@@ -74,7 +80,7 @@ export const projects: Project[] = [
     links: [{label:"Operations case study",href:"/work/tot-schools/TOT-Schools-Operations-Case-Study.pdf"}],
   },
   {
-    slug: "hdfc-bank", title: "HDFC Bank", eyebrow: "Wealth management internship", period: "Summer 2025",
+    slug: "hdfc-bank", title: "HDFC Bank", eyebrow: "Wealth Management Intern", period: "May–Aug 2025",
     summary: "Investment research for the wealth management team.", tone: "sand",
     body: ["I researched equities, mutual funds, and other products for portfolio reviews. These are two examples of the work."],
     links: [{label:"Apollo Hospitals note",href:"/work/hdfc-bank/Apollo-Hospitals-Research-Note-Aug-2025.pdf"},{label:"Portfolio review",href:"/work/hdfc-bank/HNI-Portfolio-Allocation-Review.pdf"}],
@@ -83,15 +89,14 @@ export const projects: Project[] = [
 
 export const experience = [
   { name: "StrayPaw", detail: "Founder", href: "/work/straypaw" },
-  { name: "Accessible SmartTech Lab", detail: "Research and media internship" },
-  { name: "SCI 3Sixty", detail: "Fellowship" },
+  { name: "Accessible SmartTech Lab", detail: "Research Assistant · Aug 2026–present", description: "Developing accessible smart technologies with Prof. Dan Ding." },
+  { name: "SCI 3Sixty", detail: "3Sixty Fellow · Sep 2026–present", description: "Applied AI research with Prof. Rosta Farzan, including AI adoption among nonprofits." },
   { name: "SeaX Ventures", detail: "Venture work" },
   { name: "Bolder Futures", detail: "Project work" },
-  { name: "Prof. Rosta Farzan", detail: "Research on AI adoption among nonprofits" },
   { name: "Prof. Yasir Khan", detail: "Economics research on Kisan Rail" },
   { name: "Contrary Research", detail: "Research" },
-  { name: "Crowwd", detail: "Founder’s office internship", href: "/work/crowwd" },
-  { name: "HDFC Bank", detail: "Wealth management internship", href: "/work/hdfc-bank" },
+  { name: "Crowwd", detail: "Founder’s Office Intern · May–Aug 2025", href: "/work/crowwd" },
+  { name: "HDFC Bank", detail: "Wealth Management Intern · May–Aug 2025", href: "/work/hdfc-bank" },
 ];
 
 export const writingItems = [
@@ -105,13 +110,13 @@ export const writingItems = [
 /** Smaller projects remain accessible without taking over the main work page. */
 export const archiveProjects: Project[] = [
   {slug:"juno-preventive-health",title:"Juno Preventive Health",eyebrow:"Small build · Healthcare",period:"2026",summary:"An experiment with AI and preventive health information.",tone:"lilac",body:["I built an early version using the Claude API to explore how people might make sense of preventive care."],links:[{label:"Open the build",href:"https://preventive-healthcare-xi.vercel.app/"}]},
-  {slug:"tarc",title:"TARC",eyebrow:"Project and operations work",period:"2025",summary:"Feasibility research for potential real estate projects.",tone:"sand",body:["I looked at regulations, pricing, and project assumptions for possible developments."],links:[{label:"Read a feasibility memo",href:"/work/tarc/Development-Feasibility-Memo-2025.pdf"}]},
+  {slug:"tarc",title:"TARC",eyebrow:"Project and Operations Associate",period:"Jan–Aug 2026",summary:"Feasibility research for potential real estate projects.",tone:"sand",body:["I looked at regulations, pricing, and project assumptions for possible developments."],links:[{label:"Read a feasibility memo",href:"/work/tarc/Development-Feasibility-Memo-2025.pdf"}]},
   {slug:"seo-geo-optimiser",title:"Search visibility checker",eyebrow:"Small build · Search",period:"2026",summary:"A tool that reviews a site’s search visibility and produces a report.",tone:"blue",body:["I made this after working on search distribution at Crowwd. It looks at conventional search and AI search results."],links:[{label:"Open the tool",href:"https://llm-ai-search-checker.vercel.app/"}]},
   {slug:"recovery-intelligence",title:"Recovery Intelligence",eyebrow:"Small build · Health data",period:"2026",summary:"An experiment for explaining wearable data in plain language.",tone:"peach",body:["The tool turns recovery and activity numbers into a simpler explanation."],links:[{label:"Open the tool",href:"https://explain-my-whoop-stats.vercel.app/"}]},
   {slug:"road360",title:"Road360",eyebrow:"Small build · Transport",period:"2026",summary:"A driving experiment built around Delhi’s road conditions.",tone:"clay",body:["I explored whether horn noise and harsh braking could help describe a drive."],links:[{label:"Open the tool",href:"https://road360.vercel.app/"}]},
-  {slug:"apodaca-lab",title:"Apodaca Lab",eyebrow:"Research assistant · Pitt",period:"2025",summary:"Cell biology research at the Pitt School of Medicine.",tone:"sand",body:["I cultured primary bladder cells for work studying how cells respond to stretch."],links:[]},
+  {slug:"apodaca-lab",title:"Apodaca Lab",eyebrow:"Research Assistant · Pitt",period:"Aug 2024–May 2025",summary:"Cell biology research at the Pitt School of Medicine.",tone:"sand",body:["I cultured primary bladder cells for work studying how cells respond to stretch."],links:[]},
   {slug:"pitt-sociology",title:"Pitt Sociology",eyebrow:"Research assistant · Pitt",summary:"Literature review and data work in Pitt’s sociology department.",tone:"blue",body:["The work involved reading studies, working with surveys, and analysis in R and Stata."],links:[]},
-  {slug:"upmc-emergency-medicine",title:"UPMC Emergency Medicine",eyebrow:"Research assistant",period:"2024",summary:"Clinical data work for retrospective trauma research.",tone:"lilac",body:["I abstracted and coded medical record data in REDCap."],links:[]},
+  {slug:"upmc-emergency-medicine",title:"UPMC Emergency Medicine",eyebrow:"Research Assistant",period:"Aug 2025–Jan 2026",summary:"Clinical data work for retrospective trauma research.",tone:"lilac",body:["I abstracted and coded medical record data in REDCap."],links:[]},
   {slug:"max-hospital",title:"Max Hospital",eyebrow:"Clinical shadowing",period:"2023–2024",summary:"Clinical shadowing in emergency and internal medicine.",tone:"peach",body:["I observed care at a hospital in New Delhi."],links:[]},
 ];
 export const allProjects = [...projects, ...archiveProjects];
