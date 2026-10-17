@@ -1,28 +1,4 @@
 "use client";
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useRef } from "react";
-
-/** Coordinate route changes with the browser's View Transitions API. */
-export function NavigationMotion(){
- const router=useRouter(); const pathname=usePathname(); const pending=useRef<null|(()=>void)>(null);
- useEffect(()=>{pending.current?.();pending.current=null},[pathname]);
- useEffect(()=>{
-  function onClick(event:MouseEvent){
-   if(event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.altKey||event.shiftKey)return;
-   const anchor=(event.target as Element|null)?.closest("a[href]") as HTMLAnchorElement|null;
-   if(!anchor||anchor.target||anchor.hasAttribute("download")||anchor.hasAttribute("data-no-transition"))return;
-   const destination=new URL(anchor.href,location.href);
-   if(destination.origin!==location.origin||destination.pathname===location.pathname||/\.(pdf|csv|xlsx|jpg|jpeg|png|webp|svg)$/i.test(destination.pathname))return;
-   const api=document as Document & {startViewTransition?:(update:()=>Promise<void>)=>void};
-   if(!api.startViewTransition||matchMedia("(prefers-reduced-motion: reduce)").matches)return;
-   event.preventDefault();
-   api.startViewTransition(()=>new Promise<void>(resolve=>{
-    const timeout=setTimeout(()=>{pending.current=null;resolve()},900);
-    pending.current=()=>{clearTimeout(timeout);resolve()};
-    router.push(destination.pathname+destination.search+destination.hash);
-   }));
-  }
-  document.addEventListener("click",onClick,true);return()=>document.removeEventListener("click",onClick,true);
- },[router]);
- return null;
-}
+import {usePathname,useRouter} from "next/navigation";
+import {useEffect,useRef} from "react";
+export function NavigationMotion(){const router=useRouter(),path=usePathname(),pending=useRef<null|(()=>void)>(null);useEffect(()=>{pending.current?.();pending.current=null;document.body.dataset.mode=path==="/"||path.startsWith("/play")?"play":"pro"},[path]);useEffect(()=>{function onClick(e:MouseEvent){if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;const a=(e.target as Element|null)?.closest("a[href]") as HTMLAnchorElement|null;if(!a||a.target||a.hasAttribute("download"))return;const to=new URL(a.href,location.href);if(to.origin!==location.origin||to.pathname===location.pathname||/\.(pdf|jpg|png|webp|svg)$/i.test(to.pathname))return;if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;e.preventDefault();const fromPlay=location.pathname==="/"||location.pathname.startsWith("/play"),toPlay=to.pathname==="/"||to.pathname.startsWith("/play"),switching=fromPlay!==toPlay;const overlay=document.createElement("div");overlay.className=`route-curtain ${switching?"mode-curtain":"page-curtain"} ${toPlay?"to-play":"to-pro"}`;overlay.setAttribute("aria-hidden","true");overlay.innerHTML=Array.from({length:switching?9:5},(_,i)=>`<i style="--i:${i}"></i>`).join("");document.body.appendChild(overlay);requestAnimationFrame(()=>overlay.classList.add("enter"));setTimeout(()=>{pending.current=()=>{overlay.classList.add("leave");setTimeout(()=>overlay.remove(),430)};router.push(to.pathname+to.search+to.hash)},switching?430:250);setTimeout(()=>{pending.current?.();pending.current=null;overlay.remove()},1400)}document.addEventListener("click",onClick,true);return()=>document.removeEventListener("click",onClick,true)},[router]);return null}

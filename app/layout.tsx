@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, DM_Serif_Display } from "next/font/google";
 import "./globals.css";
+import "./redesign.css";
 import { Nav } from "@/components/Nav";
 import { NavigationMotion } from "@/components/NavigationMotion";
 import { Footer } from "@/components/Footer";

@@ -74,8 +74,7 @@ export const projects: Project[] = [
     links: [{label:"Project one-pager",href:"/work/finer-things-club/Finer-Things-Marketplace-One-Pager.pdf"}],
   },
   {
-    slug: "tot-schools", title: "TOT Schools", eyebrow: "Operations", period: "2025–now",
-    summary: "Operations work for an early childhood education business.", tone: "blue",
+    slug: "tot-schools", title: "TOT Schools", eyebrow: "Operations", summary: "Operations work for an early childhood education business.", tone: "blue",
     body: ["I worked across practical parts of running the schools, including software, hiring, facilities, and documentation."],
     links: [{label:"Operations case study",href:"/work/tot-schools/TOT-Schools-Operations-Case-Study.pdf"}],
   },
