@@ -17,7 +17,7 @@ This audit is for the isolated concept branch. Production remains at commit `ba2
 
 - Neal.fun (live browser): the gateway is visually simple and gives each completed experience a distinct identity. The projects themselves supply the play. The current portfolio fails because it presents tools as experiments.
 - A Number From the Ghost (live browser): dark immersive full-window stage, sparse interface, and scene-first presentation. Initial automated capture remained on its loading state, so this reference is used for composition and stated principles rather than claimed animation details.
-- Species in Pieces: origin returned HTTP 503 in the browser. The brief and publicly known polygon transformation principle guide the project prototype; no claim of reproducing its exact mechanics.
+- Species in Pieces: the HTTPS origin returned HTTP 503. The HTTP version returned its page and title but remained on its generating screen during automated inspection. Its 30-piece premise and the brief inform the morph study; no claim of reproducing the live transition mechanics.
 - Pointer Pointer (live browser): one instruction and one action fill the entire screen. The current homepage has too many explanatory sections for that simplicity.
 - Bruno Simon (live browser): a world first, navigation second. This informs tactile exploration, without compulsory 3D.
 - Paco and Rauno (live browser): economical editorial presentation for professional content.
