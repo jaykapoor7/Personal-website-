@@ -90,11 +90,9 @@ export const projects: Project[] = [
 export const experience = [
   { name: "StrayPaw", detail: "Founder", href: "/work/straypaw" },
   { name: "Accessible SmartTech Lab", detail: "Research Assistant · Aug 2026–present", description: "Developing accessible smart technologies with Prof. Dan Ding." },
-  { name: "SCI 3Sixty", detail: "3Sixty Fellow · Sep 2026–present", description: "Applied AI research with Prof. Rosta Farzan, including AI adoption among nonprofits." },
-  { name: "SeaX Ventures", detail: "Venture work" },
-  { name: "Bolder Futures", detail: "Project work" },
+  { name: "SCI 3Sixty", detail: "3Sixty Fellow · Sep 2026–present", description: "Applied AI research under Prof. Rosta Farzan." },
+  { name: "Research with Prof. Rosta Farzan", detail: "AI adoption among nonprofits" },
   { name: "Prof. Yasir Khan", detail: "Economics research on Kisan Rail" },
-  { name: "Contrary Research", detail: "Research" },
   { name: "Crowwd", detail: "Founder’s Office Intern · May–Aug 2025", href: "/work/crowwd" },
   { name: "HDFC Bank", detail: "Wealth Management Intern · May–Aug 2025", href: "/work/hdfc-bank" },
 ];
