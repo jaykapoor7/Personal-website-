@@ -53,7 +53,7 @@ export const projects: Project[] = [
     links: [{label:"Read the paper",href:"/work/juno-ai/Juno-AI-Research-Paper.pdf"}],
   },
   {
-    slug: "crowwd", title: "Crowwd", eyebrow: "Founder’s office internship · Fintech", period: "May–Aug 2025",
+    slug: "crowwd", title: "Crowwd", eyebrow: "Founder’s Office Intern · Fintech", period: "May–Aug 2025",
     summary: "Growth, events, and research at an investing platform in India.",
     image: "/work/crowwd/arthavaad-stage.jpg", imageAlt: "Arthavaad event at The Circle.Work", tone: "clay",
     body: ["At Crowwd, I worked with the founder on distribution, competitive research, and a speaker series called Arthavaad.", "The work ranged from looking at acquisition channels to finding speakers and running events. I also wrote research notes on fintech products."],
@@ -116,7 +116,7 @@ export const archiveProjects: Project[] = [
   {slug:"road360",title:"Road360",eyebrow:"Small build · Transport",period:"2026",summary:"A driving experiment built around Delhi’s road conditions.",tone:"clay",body:["I explored whether horn noise and harsh braking could help describe a drive."],links:[{label:"Open the tool",href:"https://road360.vercel.app/"}]},
   {slug:"apodaca-lab",title:"Apodaca Lab",eyebrow:"Research Assistant · Pitt",period:"Aug 2024–May 2025",summary:"Cell biology research at the Pitt School of Medicine.",tone:"sand",body:["I cultured primary bladder cells for work studying how cells respond to stretch."],links:[]},
   {slug:"pitt-sociology",title:"Pitt Sociology",eyebrow:"Research assistant · Pitt",summary:"Literature review and data work in Pitt’s sociology department.",tone:"blue",body:["The work involved reading studies, working with surveys, and analysis in R and Stata."],links:[]},
-  {slug:"upmc-emergency-medicine",title:"UPMC Emergency Medicine",eyebrow:"Research Assistant",period:"Aug 2025–Jan 2026",summary:"Clinical data work for retrospective trauma research.",tone:"lilac",body:["I abstracted and coded medical record data in REDCap."],links:[]},
+  {slug:"upmc-emergency-medicine",title:"UPMC Emergency Medicine",eyebrow:"Research Assistant",period:"Aug 2025–Jan 2026",summary:"Research on prehospital care and emergency outcomes.",tone:"lilac",body:["I analyzed prehospital care patterns and emergency outcomes across UPMC’s emergency medicine work."],links:[]},
   {slug:"max-hospital",title:"Max Hospital",eyebrow:"Clinical shadowing",period:"2023–2024",summary:"Clinical shadowing in emergency and internal medicine.",tone:"peach",body:["I observed care at a hospital in New Delhi."],links:[]},
 ];
 export const allProjects = [...projects, ...archiveProjects];
