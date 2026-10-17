@@ -1,42 +1,6 @@
 import type { Metadata } from "next";
-import { groupedWork } from "@/lib/order";
-import { Reveal } from "@/components/Reveal";
-import { WorkBrowser } from "@/components/WorkBrowser";
-import { Scramble } from "@/components/Scramble";
-
-export const metadata: Metadata = {
-  title: "Work",
-  description:
-    "Selected work across fintech, healthtech, and investment research — ordered by impact, with the case study and links behind each one.",
-};
-
-export default function WorkPage() {
-  const groups = groupedWork();
-
-  return (
-    <>
-      <section className="shell pt-20 pb-10 sm:pt-28">
-        <Reveal>
-          <p className="kicker mb-6">
-            Work
-          </p>
-        </Reveal>
-        <Reveal delay={0.05}>
-          <h1 className="display max-w-4xl text-4xl leading-tight sm:text-6xl">
-            <Scramble text="The work behind the resume." />
-          </h1>
-        </Reveal>
-        <Reveal delay={0.1}>
-          <p className="mt-6 max-w-2xl text-muted">
-            Grouped by what it is — open any project for the full case study and
-            the proof behind it.
-          </p>
-        </Reveal>
-      </section>
-
-      <div className="pb-10">
-        <WorkBrowser groups={groups} />
-      </div>
-    </>
-  );
-}
+import { projects, archiveProjects, experience } from "@/content/site";
+import { ProjectLink } from "@/components/ProjectLink";
+import { Rise } from "@/components/Scene";
+export const metadata:Metadata={title:"Work",description:"Projects and experience from Jay Kapoor."};
+export default function Work(){return <><header className="page-hero wrap"><span className="eyebrow">01 / Work</span><h1>Things I’ve<br/><em>worked on.</em></h1><p>Some are products. Some are research. Some are just projects I wanted to try.</p></header><section className="wrap work-feature"><ProjectLink project={projects[0]} featured/></section><section className="wrap work-grid">{projects.slice(1).map((p,i)=><Rise key={p.slug}><ProjectLink project={p} index={i+1}/></Rise>)}</section><section className="archive-work wrap"><div className="section-heading"><span className="eyebrow">More projects</span></div><div className="archive-work-list">{archiveProjects.map(p=><a key={p.slug} href={`/work/${p.slug}`}><span>{p.title}</span><small>{p.eyebrow}</small><b>↗</b></a>)}</div></section><section className="work-experience wrap"><div className="section-heading"><span className="eyebrow">Experience & research</span><span className="quiet-link">A few recent things</span></div><div className="experience-grid">{experience.map((e,i)=><div className="experience-item" key={e.name}><span className="row-number">{String(i+1).padStart(2,"0")}</span><div><h3>{e.name}</h3><p>{e.detail}</p></div>{e.href&&<a href={e.href} aria-label={`See ${e.name}`}>↗</a>}</div>)}</div></section></>}

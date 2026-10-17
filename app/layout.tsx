@@ -1,116 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Fraunces } from "next/font/google";
+import { Inter, DM_Serif_Display } from "next/font/google";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
+import { NavigationMotion } from "@/components/NavigationMotion";
 import { Footer } from "@/components/Footer";
-import { profile } from "@/content/profile";
-import { socials } from "@/content/socials";
+import { person } from "@/content/site";
 import { siteUrl } from "@/lib/site";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap",
-});
-
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-const description =
-  "Jay Kapoor — fintech, healthtech, and investment research. The work behind the resume.";
-
-export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-  title: {
-    default: `${profile.name} — Portfolio`,
-    template: `%s — ${profile.name}`,
-  },
-  description,
-  keywords: [
-    "Jay Kapoor",
-    "portfolio",
-    "fintech",
-    "healthtech",
-    "investment research",
-    "venture research",
-  ],
-  authors: [{ name: profile.name }],
-  openGraph: {
-    type: "website",
-    url: siteUrl,
-    title: `${profile.name} — Portfolio`,
-    description,
-    siteName: profile.name,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: `${profile.name} — Portfolio`,
-    description,
-    creator: "@jaybuildsvx",
-  },
-  robots: { index: true, follow: true },
-};
-
-export const viewport: Viewport = {
-  themeColor: "#f5f0e6",
-};
-
-// JSON-LD Person schema — helps search engines understand & richly surface Jay.
-const personSchema = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: profile.name,
-  url: siteUrl,
-  image: `${siteUrl}/jay-kapoor.jpg`,
-  jobTitle: "Builder & Researcher",
-  description,
-  email: `mailto:${profile.email}`,
-  alumniOf: {
-    "@type": "CollegeOrUniversity",
-    name: "University of Pittsburgh",
-  },
-  knowsAbout: [
-    "Fintech",
-    "Healthtech",
-    "Investment Research",
-    "Venture Research",
-    "Operations",
-    "Market Mapping",
-  ],
-  sameAs: socials
-    .filter((s) => s.type !== "email")
-    .map((s) => s.url),
-};
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html lang="en" className={`${inter.variable} ${fraunces.variable}`}>
-      <body className="min-h-screen">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
-        />
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-ink focus:px-4 focus:py-2 focus:text-paper"
-        >
-          Skip to content
-        </a>
-        <Nav />
-        <main id="main">{children}</main>
-        <Footer />
-        <Analytics />
-        <SpeedInsights />
-      </body>
-    </html>
-  );
-}
+const sans=Inter({subsets:["latin"],variable:"--font-sans",display:"swap"});
+const serif=DM_Serif_Display({weight:"400",subsets:["latin"],variable:"--font-serif",display:"swap"});
+const description="Jay Kapoor is a student at the University of Pittsburgh, working on StrayPaw and research projects.";
+export const metadata:Metadata={metadataBase:new URL(siteUrl),title:{default:"Jay Kapoor",template:"%s · Jay Kapoor"},description,openGraph:{type:"website",url:siteUrl,title:"Jay Kapoor",description,siteName:"Jay Kapoor"},robots:{index:true,follow:true}};
+export const viewport:Viewport={themeColor:"#f3f0e7"};
+export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en" className={`${sans.variable} ${serif.variable}`}><body><a className="skip-link" href="#main">Skip to content</a><Nav/><NavigationMotion/><main id="main">{children}</main><Footer/></body></html>}

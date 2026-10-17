@@ -1,76 +1,23 @@
-# Jay Kapoor — Proof-of-Work Portfolio
+# Jay Kapoor’s website
 
-A dark, minimal, editorial portfolio that acts as a **proof layer for my
-resume**: every claim links to something you can open, read, or try.
-
-Built with **Next.js (App Router) + TypeScript + Tailwind CSS + Framer Motion**,
-statically exported so it can be hosted anywhere.
-
-## Run locally
+A personal site built with Next.js and TypeScript. The site exports static HTML to `out/`.
 
 ```bash
 npm install
-npm run dev      # http://localhost:3000
+npm run dev
+npm run build
 ```
 
-## Build (static export)
+## Updating content
 
-```bash
-npm run build    # outputs a fully static site to ./out
-```
+Edit `content/site.ts` for the introduction, projects, experience, links, and writing list. Large projects go in `projects`; older work goes in `archiveProjects`. Project pages and the sitemap are generated from those arrays. Existing research PDFs and project images live in `public/`.
 
-## Deploy
+Keep claims, dates, and job titles grounded in a public source or résumé. Recent roles without verified dates intentionally omit them. The résumé PDF is an older document and should be replaced when an updated copy is available.
 
-The site is a static export (`output: "export"` in `next.config.mjs`).
+## Design
 
-- **Vercel** (recommended): import the repo; framework preset "Next.js" works
-  out of the box. The resulting URL is what goes on the resume.
-- **Any static host** (GitHub Pages, Netlify, S3): serve the contents of `./out`.
+The visual system uses warm paper, dark green, and a restrained rust accent. Display type is DM Serif Display; body type is Inter. Motion uses Framer Motion for scroll entry and depth, with CSS transitions for hover states. `prefers-reduced-motion` removes movement.
 
-## How it's organized
+## Routes
 
-```
-app/                 Routes (Home, Work, Work/[slug], Writing, About, Contact)
-components/           UI: Nav, Footer, Reveal (motion), Metric, Proof, WorkCard…
-content/             Single source of truth — edit these, not the components
-  ├─ types.ts        Shared schema (Metric, Proof, WorkItem, …)
-  ├─ work.ts         Experience + builds, as case studies
-  ├─ writing.ts      Research, publications, building-in-public
-  ├─ profile.ts      Identity, education, skills, headline stats
-  └─ socials.ts      External links
-lib/order.ts         Display ordering (impact → recency → relevance)
-public/              Resume PDF + /proof assets
-```
-
-### Editing content
-
-All copy and data live in `content/*.ts`. Components never hard-code content.
-
-**Metrics** must declare a `source` (`"resume" | "analytics" | "published" |
-"estimated"`). The source is shown in the UI, so nothing reads as an
-unverifiable fact. If there's no evidence for a number, omit it.
-
-**Proof** objects drive the evidence UI dynamically:
-
-```ts
-proof: {
-  type: "live" | "pdf" | "image" | "social" | "video" | "repo",
-  status: "available" | "coming_soon",
-  title: string,
-  url?: string,   // only when available
-  note?: string,
-}
-```
-
-`coming_soon` slots render as labeled placeholders and are intentionally kept —
-they show recruiters exactly what proof is on the way.
-
-**Ordering**: work is sorted by `impact → recency → relevance`, not by date
-(`lib/order.ts`).
-
-## Supplying proof assets
-
-See [`PROOF-CHECKLIST.md`](./PROOF-CHECKLIST.md) for the exact list of links and
-files to drop in. To activate a placeholder: add the file to `public/proof/`
-(or get a URL), then set the matching proof object's `status` to `"available"`
-and fill in `url`.
+Home, work, project details, writing, ledger, about, contact, and an older research archive are statically generated. Older project URLs remain available.

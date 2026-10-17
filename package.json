@@ -2,7 +2,7 @@
   "name": "jay-kapoor-portfolio",
   "version": "1.0.0",
   "private": true,
-  "description": "Proof-of-work portfolio for Jay Kapoor — a proof layer for the resume.",
+  "description": "Personal website for Jay Kapoor.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -13,7 +13,7 @@
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "framer-motion": "^11.11.17",
-    "next": "14.2.18",
+    "next": "^14.2.35",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
