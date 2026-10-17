@@ -1,6 +1,6 @@
 # Jay Kapoor’s website
 
-A personal site built with Next.js and TypeScript. The site exports static HTML to `out/`.
+A static Next.js site with two connected areas: a Playground of existing interactive builds and a straightforward portfolio. `npm run build` exports the site to `out/`.
 
 ```bash
 npm install
@@ -10,14 +10,17 @@ npm run build
 
 ## Updating content
 
-Edit `content/site.ts` for the introduction, projects, experience, links, and writing list. Large projects go in `projects`; older work goes in `archiveProjects`. Project pages and the sitemap are generated from those arrays. Existing research PDFs and project images live in `public/`.
+- `content/site.ts`: introduction, professional projects, experience, writing, and links. Project pages and their sitemap entries come from these arrays.
+- `content/play.ts`: the Playground collection. Add an item only when a working experiment exists. Each item gets `/play/[slug]` and a live embedded preview with an external fallback.
+- `components/ProjectMorph.tsx`: the five featured projects share one SVG composition. Each scene has five paths with matching command types; keep that structure when adding another composition so the shapes interpolate cleanly.
+- `public/`: project images, source documents, and the current résumé PDF.
 
-Keep claims, dates, and job titles grounded in a public source or résumé. Recent roles without verified dates intentionally omit them. The résumé PDF is an older document and should be replaced when an updated copy is available.
+Keep titles, dates, and claims tied to a source. Some organizations Jay named have no verified dates, so the site omits those dates.
 
-## Design
+## Design and motion
 
-The visual system uses warm paper, dark green, and a restrained rust accent. Display type is DM Serif Display; body type is Inter. Motion uses Framer Motion for scroll entry and depth, with CSS transitions for hover states. `prefers-reduced-motion` removes movement.
+The Playground uses warm paper, navy, and distinct colors for each build. The professional side keeps the quieter green palette. The mode switch uses the browser View Transitions API when available; normal navigation remains available without it. The project navigator uses Framer Motion to interpolate SVG paths. Reduced motion removes these transitions.
 
 ## Routes
 
-Home, work, project details, writing, ledger, about, contact, and an older research archive are statically generated. Older project URLs remain available.
+`/` and `/play` are the Playground. `/play/[slug]` contains live projects. `/about`, `/work`, `/work/[slug]`, `/experience`, `/writing`, and `/contact` form the portfolio. Older research routes and project URLs remain available.
