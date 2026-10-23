@@ -1,3 +1,4 @@
+import { StrayPawExplorer } from "@/components/StrayPawExplorer";
 import { Arrow } from "@/components/Arrow";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -45,7 +46,11 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         </Rise>
       </header>
       <div className="project-page-image">
-        <ProjectVisual project={p} large />
+        {p.slug === "straypaw" ? (
+          <StrayPawExplorer />
+        ) : (
+          <ProjectVisual project={p} large />
+        )}
         {p.slug === "straypaw" && <CarePath />}
       </div>
       <div className="wrap project-body">

@@ -22,6 +22,7 @@ const routes = [
   "/work/project-nidaan/",
   "/work/juno-ai/",
   "/contact/",
+  "/artifacts/",
   "/experience/",
   "/writing/",
   "/ledger/",
@@ -54,28 +55,51 @@ try {
     await visit(page, "/");
     const activate = async (locator) =>
       name === "touch" ? locator.tap() : locator.click();
+    assert.match(
+      await page.locator("#hero-title").innerText(),
+      /I build systems/,
+    );
     await activate(
-      page.getByRole("button", { name: "Follow the observation" }),
+      page.getByRole("button", { name: "02 A record", exact: false }),
     );
     assert.match(
-      await page.locator("#hero-title").innerText(),
-      /Now connect it/,
+      await page.locator(".scene-narration").innerText(),
+      /shared record/,
     );
-    await activate(page.getByRole("button", { name: "See the wider system" }));
-    await activate(page.getByRole("switch"));
-    assert.match(
-      await page.locator("#hero-title").innerText(),
-      /Lost connections/,
+    await activate(
+      page.getByRole("button", { name: "03 A network", exact: false }),
     );
     await activate(page.getByRole("switch"));
+    assert.equal(
+      await page.getByRole("switch").getAttribute("aria-checked"),
+      "false",
+    );
+    await activate(page.getByRole("switch"));
+    await activate(
+      page.getByRole("button", { name: "04 A real system", exact: false }),
+    );
     assert.match(
-      await page.locator("#hero-title").innerText(),
-      /Better connections/,
+      await page.locator(".scene-narration").innerText(),
+      /Coimbatore/,
+    );
+    assert.ok(
+      await page
+        .getByRole("link", { name: "Explore the real StrayPaw map" })
+        .isVisible(),
+    );
+    await activate(
+      page.getByRole("button", { name: "Vadavalli", exact: false }),
+    );
+    assert.match(await page.locator(".area-detail").innerText(), /Vadavalli/);
+    assert.match(
+      await page.locator(".area-detail").innerText(),
+      /2 open requests/,
     );
     if (name === "reduced")
       assert.equal(
         await page
-          .locator(".world-camera")
+          .locator(".system-node")
+          .first()
           .evaluate((n) => getComputedStyle(n).transitionDuration),
         "0s",
       );
@@ -130,6 +154,32 @@ try {
         );
       }
     }
+    await visit(page, "/about/");
+    const slider = page.getByRole("slider", {
+      name: "Compare childhood and Trojans football teams",
+    });
+    await slider.focus();
+    await page.keyboard.press("End");
+    assert.equal(await slider.inputValue(), "100");
+    await page.keyboard.press("Home");
+    assert.equal(await slider.inputValue(), "0");
+    await visit(page, "/research/");
+    await activate(
+      page.getByRole("button", { name: "Diagnostics", exact: true }),
+    );
+    assert.match(
+      await page.locator(".company-detail").innerText(),
+      /Orange Health/,
+    );
+    await visit(page, "/play/");
+    await activate(
+      page.getByRole("button", { name: "Approve one small park", exact: true }),
+    );
+    assert.match(
+      await page.locator(".government-desk").innerText(),
+      /form a committee/,
+    );
+    await visit(page, "/play/everything-falls/");
     const coffee = page.getByRole("button", { name: "Drag Coffee cup" });
     await coffee.scrollIntoViewIfNeeded();
     const before = await coffee.getAttribute("style");
@@ -208,8 +258,8 @@ try {
   await visit(pagePlain, "/");
   assert.equal(await pagePlain.locator("#hero-title").isVisible(), true);
   assert.equal(await pagePlain.locator(".scale-control").isVisible(), false);
-  await pagePlain.getByRole("link", { name: "See the work" }).click();
-  assert.ok(pagePlain.url().endsWith("/work/"));
+  await pagePlain.getByRole("link", { name: "Explore selected work" }).click();
+  assert.ok(pagePlain.url().endsWith("/#selected"));
   await plain.close();
   assert.deepEqual(errors, [], "Uncaught browser errors");
   console.log(

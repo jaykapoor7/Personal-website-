@@ -1,5 +1,6 @@
 /** Edit this file to update the public portfolio. Keep dates and claims tied to a source.
- * Role dates and titles updated in October 2026 from Jay’s LinkedIn screenshots:
+ * Primary sources: supplied résumé and LinkedIn screenshots (23 October 2026).
+ * Month-level dates omitted where these sources conflict. LinkedIn roles include:
  * Crowwd, HDFC, Apodaca Lab, Project Nidaan, Finer Things Club, Juno-AI,
  * SCI 3Sixty, Accessible SmartTech Lab, TARC, and UPMC Emergency Medicine.
  * StrayPaw records and partner count come from Jay’s LinkedIn update and live site.
@@ -22,6 +23,7 @@ export const person = {
     { label: "Email", href: "mailto:jak581@pitt.edu" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/jay-kapoor7" },
     { label: "GitHub", href: "https://github.com/jaykapoor7" },
+    { label: "X", href: "https://x.com/jaybuildsvx" },
     { label: "Résumé", href: "/jay-kapoor-resume.pdf" },
   ],
 };
@@ -56,14 +58,20 @@ export const projects: Project[] = [
     tone: "forest",
     body: [
       "StrayPaw gives residents, rescue teams, and local governments a way to work from the same record. Someone can report an animal; a field team can follow the case; a city can see where care is happening and where it is missing.",
-      "I started it because much of this work already happens through feeders, rescuers, and NGOs, but the records are often scattered. The product now includes animal profiles, case tracking, and a live map. The project register contains over 30,000 animal records across India. A record count describes the data in the system; it is not a count of animals rescued or treated.",
+      "I started it because much of this work already happens through feeders, rescuers, and NGOs, but the records are often scattered. The product now includes animal profiles, case tracking, and a live map. The project register contains over 30,000 animal records across 28 Indian cities. My October LinkedIn update reports 19 NGO partnerships, including PAWS Chennai, Pawsome People Project, and The Kind Hour Foundation. A record count is not a count of animals rescued or treated.",
     ],
     did: [
       "Product design and development",
       "Field workflows for reports and case follow-up",
       "Outreach to feeder networks and NGOs",
+      "NGO case workspaces, maps, field access, and municipal ABC/ARV reporting",
     ],
     gallery: [
+      {
+        src: "/straypaw/field-observation.webp",
+        alt: "Field-observation photographs from the StrayPaw project",
+        caption: "The field-observation archive",
+      },
       {
         src: "/straypaw/street-dog.jpg",
         alt: "Street dog documented in Delhi",
@@ -87,7 +95,7 @@ export const projects: Project[] = [
     slug: "juno-ai",
     title: "Juno-AI",
     eyebrow: "Founder · Healthcare",
-    period: "Jun 2019–Aug 2023",
+    period: "Founded 2019",
     summary:
       "A healthcare access project I started to help people find information, doctors, and pharmacies.",
     image: "/work/juno-ai/juno-product-dashboard.webp",
@@ -95,8 +103,8 @@ export const projects: Project[] = [
     tone: "lilac",
     body: [
       "I started Juno-AI as a teenager in India. It combined health information with tools for finding care, especially for people in places where reliable guidance can be hard to get.",
-      "I worked on the product, outreach, and partnerships. The linked paper describes an information and care-navigation prototype with retrieval grounding and a constrained, non-diagnostic pathway.",
-      "The paper reports a small formative evaluation. It does not establish clinical effectiveness or population-scale impact. The historical project and the more recent preventive-health experiment are listed separately.",
+      "I built the product, led outreach, and developed healthcare partnerships. My résumé and LinkedIn report 10,000+ rural users. The linked paper documents the retrieval-grounded information and care-navigation prototype; it does not independently audit that historical user count.",
+      "The paper reports a small formative evaluation, not clinical effectiveness. The historical platform and the more recent preventive-health experiment are listed separately.",
     ],
     did: [
       "Health information and care navigation",
@@ -108,19 +116,24 @@ export const projects: Project[] = [
         label: "Read the paper",
         href: "/work/juno-ai/Juno-AI-Research-Paper.pdf",
       },
+      {
+        label: "Archived interface mockup · illustrative figures",
+        href: "/work/juno-ai/juno-product-dashboard.webp",
+      },
     ],
   },
   {
     slug: "crowwd",
     title: "Crowwd",
     eyebrow: "Founder’s Office Intern · Fintech",
-    period: "May–Aug 2025",
+    period: "2025",
     summary: "Growth, events, and research at an investing platform in India.",
     image: "/work/crowwd/arthavaad-stage.jpg",
     imageAlt: "Arthavaad event at The Circle.Work",
     tone: "clay",
     body: [
-      "At Crowwd, I worked with the founder on distribution, competitive research, and a speaker series called Arthavaad.",
+      "In Crowwd’s founder’s office, I ran multi-channel user acquisition, benchmarked seven social-investing platforms, and wrote a GEO playbook for the founder.",
+      "I launched Arthavaad, a multi-city monthly speaker series, and handled speaker outreach, brand partnerships, logistics, and execution. Event photographs and selected strategy work are linked below.",
       "The work ranged from looking at acquisition channels to finding speakers and running events. I also wrote research notes on fintech products.",
     ],
     did: [
@@ -137,6 +150,10 @@ export const projects: Project[] = [
     ],
     links: [
       { label: "Visit Crowwd", href: "https://crowwd.io" },
+      {
+        label: "Fintech teardown",
+        href: "/work/crowwd/Crowwd-Fintech-Teardown.pdf",
+      },
       {
         label: "Selected research",
         href: "/work/crowwd/Crowwd-Selected-Research-and-Strategy.pdf",
@@ -161,6 +178,10 @@ export const projects: Project[] = [
         label: "Field research brief",
         href: "/work/project-nidaan/Project-Nidaan-Field-Research-Brief.pdf",
       },
+      {
+        label: "KPI dashboard · illustrative work sample",
+        href: "/work/project-nidaan/Project-Nidaan-KPI-Dashboard.xlsx",
+      },
     ],
   },
   {
@@ -168,11 +189,10 @@ export const projects: Project[] = [
     title: "The Finer Things Club",
     eyebrow: "Founder · Commerce",
     period: "Jul 2021–Aug 2024",
-    summary:
-      "A small marketplace project working with rural artisans in India.",
+    summary: "An artisan marketplace: 300+ rural artisans, $8k+ in revenue.",
     tone: "peach",
     body: [
-      "This began as a way to help artisans sell their work through NGO and marketplace partnerships. I worked on onboarding, distribution, and the day-to-day operations.",
+      "I founded an artisan-commerce initiative and worked on onboarding, distribution, and operations through NGO and marketplace partnerships. My résumé and LinkedIn record report 300+ rural artisans onboarded and $8k+ in revenue; the one-pager preserves the project account.",
     ],
     links: [
       {
@@ -184,11 +204,13 @@ export const projects: Project[] = [
   {
     slug: "tot-schools",
     title: "TOT Schools",
-    eyebrow: "Operations",
-    summary: "Operations work for an early childhood education business.",
+    eyebrow: "Operations Lead",
+    period: "Jun 2025–Apr 2026",
+    summary: "Six operating functions. Eight early-childhood centres.",
     tone: "blue",
     body: [
-      "I worked across practical parts of running the schools, including software, hiring, facilities, and documentation.",
+      "I ran technology, facilities, people, nutrition, documentation, and finance across eight centres. I rolled out Illumine for attendance, billing, and parent communications, and CCTV across the centres.",
+      "I hired and onboarded staff and wrote a 12-document handbook and SOP suite. The linked case study documents the scope and work delivered, as reported by me.",
     ],
     links: [
       {
@@ -201,7 +223,7 @@ export const projects: Project[] = [
     slug: "hdfc-bank",
     title: "HDFC Bank",
     eyebrow: "Wealth Management Intern",
-    period: "May–Aug 2025",
+    period: "2025",
     summary: "Investment research for the wealth management team.",
     tone: "sand",
     body: [
@@ -226,7 +248,7 @@ export const experience = [
     name: "Accessible SmartTech Lab",
     detail: "Research Assistant · Aug 2026–present",
     description:
-      "Developing accessible smart technologies with Prof. Dan Ding.",
+      "Developing human–machine interaction systems for accessible smart technologies under Prof. Dan Ding.",
   },
   {
     name: "SCI 3Sixty",
@@ -239,14 +261,42 @@ export const experience = [
   },
   { name: "Prof. Yasir Khan", detail: "Economics research on Kisan Rail" },
   {
+    name: "JumpStart / AmeriCorps",
+    detail: "Team Leader",
+    description:
+      "Led eight corps members delivering early-childhood literacy programming in Pittsburgh schools.",
+  },
+  {
+    name: "TOT Schools",
+    detail: "Operations Lead · Jun 2025–Apr 2026",
+    href: "/work/tot-schools",
+  },
+  {
     name: "Crowwd",
-    detail: "Founder’s Office Intern · May–Aug 2025",
+    detail: "Founder’s Office Intern · 2025",
     href: "/work/crowwd",
   },
   {
     name: "HDFC Bank",
-    detail: "Wealth Management Intern · May–Aug 2025",
+    detail: "Wealth Management Intern · 2025",
     href: "/work/hdfc-bank",
+  },
+  {
+    name: "The International School of Bangalore",
+    detail: "Founder, Entrepreneurship Club · 2021–2023",
+    description: "Founded the school entrepreneurship club.",
+  },
+  {
+    name: "School event operations",
+    detail: "Head of Vendor Acquisition · 2022",
+    description:
+      "Vendor coordination and budgeting for the school’s event, recorded on LinkedIn.",
+  },
+  {
+    name: "National Economics Fest",
+    detail: "Contingent Leader · 2023",
+    description:
+      "Led a team of six developing macroeconomic models and policy proposals.",
   },
 ];
 
@@ -303,6 +353,24 @@ export const writingItems = [
 
 /** Smaller projects remain accessible without taking over the main work page. */
 export const archiveProjects: Project[] = [
+  {
+    slug: "juno-adhd-os",
+    title: "Juno ADHD OS",
+    eyebrow: "Documented prototype · Productivity",
+    period: "Jan–May 2026",
+    summary: "A productivity and behavioral-planning prototype for ADHD users.",
+    tone: "blue",
+    body: [
+      "My LinkedIn project record describes a prototype exploring AI-assisted productivity and behavioral planning for ADHD users. It is separate from Juno’s healthcare-access platform and the preventive-health experiment.",
+    ],
+    links: [
+      {
+        label: "LinkedIn project record",
+        href: "https://www.linkedin.com/in/jay-kapoor7",
+      },
+    ],
+  },
+
   {
     slug: "juno-preventive-health",
     title: "Juno Preventive Health",
@@ -390,11 +458,11 @@ export const archiveProjects: Project[] = [
     slug: "apodaca-lab",
     title: "Apodaca Lab",
     eyebrow: "Research Assistant · Pitt",
-    period: "Aug 2024–May 2025",
+    period: "2024–2025",
     summary: "Cell biology research at the Pitt School of Medicine.",
     tone: "sand",
     body: [
-      "I cultured primary bladder cells for work studying how cells respond to stretch.",
+      "I cultured primary bladder urothelial cells for PIEZO/TMEM63 mechanotransduction studies under Prof. Gerard Apodaca and contributed figures toward manuscripts and grant submissions. This describes a research-assistant contribution, not authorship of a published finding.",
     ],
     links: [],
   },
@@ -417,7 +485,7 @@ export const archiveProjects: Project[] = [
     summary: "Research on prehospital care and emergency outcomes.",
     tone: "lilac",
     body: [
-      "I analyzed prehospital care patterns and emergency outcomes across UPMC’s emergency medicine work.",
+      "My work included abstracting and coding EMR data in REDCap for retrospective trauma studies, and analysis of prehospital care patterns and emergency outcomes. Patient-level research data are not published here.",
     ],
     links: [],
   },

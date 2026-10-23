@@ -2,90 +2,109 @@ import { Arrow } from "@/components/Arrow";
 import Link from "next/link";
 import Image from "next/image";
 import { LivingSystem } from "@/components/LivingSystem";
+import { StrayPawExplorer } from "@/components/StrayPawExplorer";
 import {
   CarePath,
   FieldNotes,
   JunoPath,
 } from "@/components/ProjectInteractions";
-import { Reveal } from "@/components/Reveal";
 export default function Home() {
   return (
     <>
       <LivingSystem />
-      <section className="introduction shell">
-        <span className="eyebrow">THE THREAD THROUGH MY WORK</span>
-        <Reveal>
-          <h2>
-            Notice the gap.
-            <br />
-            Understand the pieces.
-            <br />
-            <em>Build the connection.</em>
-          </h2>
-        </Reveal>
-        <p>
-          From street-animal records to healthcare access, I keep coming back to
-          the same question: what stops the right help from reaching the right
-          place?
-        </p>
-      </section>
       <section id="selected" className="selected-work shell">
         <div className="section-rule">
           <span>01 / SELECTED WORK</span>
-          <Link href="/work">
-            Full project index <Arrow />
+          <Link href="/artifacts">
+            Open the artifact index <Arrow />
           </Link>
         </div>
-        <Reveal className="flagship">
-          <div className="flagship-image">
-            <Image
-              src="/straypaw/street-dog.webp"
-              alt="A street dog in Delhi, photographed for StrayPaw"
-              fill
-              sizes="(max-width: 760px) 100vw, 60vw"
-            />
-            <span className="image-tag">ON THE STREET → ON THE RECORD</span>
-            <span className="photo-caption">StrayPaw / Field photograph</span>
-          </div>
-          <div className="flagship-copy">
-            <span className="eyebrow">01 — STRAYPAW / BUILDING NOW</span>
-            <h2>
-              Care starts
-              <br />
-              with a record.
-            </h2>
-            <p>
-              Shared animal records and care workflows for residents, rescue
-              teams, and cities in India.
-            </p>
-            <div className="project-stat">
-              <strong>30k+</strong>
-              <span>
-                animal records
+        <div className="selected-heading">
+          <h2>
+            Built.
+            <br />
+            <em>Out in the world.</em>
+          </h2>
+          <p>
+            A live product. Fieldwork.
+            <br />
+            And the evidence behind them.
+          </p>
+        </div>
+        <article className="stray-feature">
+          <div className="stray-intro">
+            <div>
+              <span className="eyebrow">01 — STRAYPAW / SOLO FOUNDER</span>
+              <h3>
+                Every animal.
                 <br />
-                in the project register
-              </span>
+                On the record.
+              </h3>
             </div>
-            <Link className="text-link" href="/work/straypaw">
-              Inside StrayPaw{" "}
-              <span>
-                <Arrow />
-              </span>
-            </Link>
+            <div>
+              <p>
+                Scattered sightings → shared records → coordinated care.
+                <br />I built the product and its field workflows.
+              </p>
+              <div className="stray-metrics">
+                <div>
+                  <strong>30k+</strong>
+                  <span>animal records</span>
+                </div>
+                <div>
+                  <strong>28</strong>
+                  <span>Indian cities</span>
+                </div>
+              </div>
+              <div className="feature-links">
+                <Link href="/work/straypaw">
+                  Inside the project <Arrow />
+                </Link>
+                <a
+                  href="https://straypaw.kapoorjay.com"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Open StrayPaw <Arrow />
+                </a>
+              </div>
+            </div>
           </div>
+          <StrayPawExplorer />
           <CarePath />
-        </Reveal>
+          <div className="evidence-caption">
+            <span>
+              Record counts describe the register, not animals treated.
+            </span>
+            <a
+              href="https://github.com/jaykapoor7/Pok-mon-go-dog-"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Inspect the repository <Arrow />
+            </a>
+          </div>
+        </article>
         <div className="two-projects">
-          <Reveal className="nidaan-project">
+          <article className="nidaan-project">
             <FieldNotes />
             <div className="project-caption">
               <div>
-                <span className="eyebrow">02 / FIELD RESEARCH · 2022–2024</span>
+                <span className="eyebrow">02 / FIELDWORK · BENGALURU</span>
                 <h3>Project Nidaan</h3>
                 <p>
-                  Understanding what stands between delivery riders and basic
-                  care.
+                  I interviewed riders, coded responses,
+                  <br />
+                  and mapped barriers to medication access.
                 </p>
+                <a
+                  className="artifact-inline"
+                  href="/work/project-nidaan/Project-Nidaan-Field-Research-Brief.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Read the field brief <Arrow />
+                </a>
               </div>
               <Link
                 className="circle-link"
@@ -95,8 +114,8 @@ export default function Home() {
                 <Arrow />
               </Link>
             </div>
-          </Reveal>
-          <Reveal className="juno-project">
+          </article>
+          <article className="juno-project">
             <JunoPath />
             <div className="project-caption">
               <div>
@@ -105,9 +124,18 @@ export default function Home() {
                 </span>
                 <h3>Juno-AI</h3>
                 <p>
-                  Exploring a clearer route from a health question to the next
-                  step.
+                  I built a health-information platform,
+                  <br />
+                  then documented its design and evaluation.
                 </p>
+                <a
+                  className="artifact-inline"
+                  href="/work/juno-ai/Juno-AI-Research-Paper.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Read the research paper <Arrow />
+                </a>
               </div>
               <Link
                 className="circle-link"
@@ -117,88 +145,155 @@ export default function Home() {
                 <Arrow />
               </Link>
             </div>
-          </Reveal>
+          </article>
+        </div>
+      </section>
+      <section className="shell operating-section">
+        <div className="section-rule">
+          <span>02 / BUILT BEYOND THE BROWSER</span>
+          <Link href="/work">
+            All work <Arrow />
+          </Link>
+        </div>
+        <div className="operating-layout">
+          <article className="crowwd-feature">
+            <Link href="/work/crowwd" className="crowwd-photo">
+              <picture>
+                <source
+                  media="(max-width:760px)"
+                  srcSet="/work/crowwd/arthavaad-stage-640.webp"
+                />
+                <Image
+                  src="/work/crowwd/arthavaad-stage-1280.webp"
+                  alt="Jay at Arthavaad, the event series he launched at Crowwd"
+                  fill
+                  sizes="(max-width:760px) 100vw, 55vw"
+                />
+              </picture>
+              <span>ARTHAVAAD / CROWWD</span>
+            </Link>
+            <h3>Get people in the room.</h3>
+            <p>
+              I launched the speaker series. Ran outreach.
+              <br />
+              Built distribution and competitive research.
+            </p>
+            <a
+              className="text-link"
+              href="/work/crowwd/Crowwd-Selected-Research-and-Strategy.pdf"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Open the strategy work <Arrow />
+            </a>
+          </article>
+          <article className="tot-feature">
+            <span className="eyebrow">TOT SCHOOLS / OPERATIONS LEAD</span>
+            <div className="centres-art" aria-hidden="true">
+              {Array.from({ length: 8 }, (_, i) => (
+                <i key={i}>
+                  <span>{String(i + 1).padStart(2, "0")}</span>
+                </i>
+              ))}
+            </div>
+            <h3>
+              Eight centres.
+              <br />
+              All the moving parts.
+            </h3>
+            <p>
+              Technology, people, facilities, nutrition,
+              <br />
+              documentation, and finance.
+            </p>
+            <Link href="/work/tot-schools" className="text-link">
+              See the operating work <Arrow />
+            </Link>
+            <a
+              className="artifact-inline"
+              href="/work/tot-schools/TOT-Schools-Operations-Case-Study.pdf"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Read the case study <Arrow />
+            </a>
+          </article>
         </div>
       </section>
       <section className="research-preview shell">
         <div className="section-rule">
-          <span>02 / ASK BETTER QUESTIONS</span>
+          <span>03 / RESEARCH</span>
           <Link href="/research">
-            Research & notes <Arrow />
+            Questions & evidence <Arrow />
           </Link>
         </div>
         <div className="research-intro">
           <h2>
-            The evidence
+            First,
             <br />
-            <em>comes first.</em>
+            <em>look closer.</em>
           </h2>
           <p>
-            Research across emergency care, accessibility, and human behavior
-            informs the things I want to build.
+            Public health. Accessible technology.
+            <br />
+            Human behavior. Data that needs context.
           </p>
         </div>
         <div className="research-rows">
-          <Link href="/work/upmc-emergency-medicine">
-            <span>01</span>
-            <h3>What happens before the hospital?</h3>
-            <small>UPMC Emergency Medicine / Research assistant</small>
-            <b>
-              <Arrow />
-            </b>
-          </Link>
           <Link href="/research#experience">
-            <span>02</span>
-            <h3>Who gets to use the technology?</h3>
-            <small>Accessible SmartTech Lab / Research assistant</small>
+            <span>01</span>
+            <h3>Technology people can use.</h3>
+            <small>Accessible SmartTech Lab · Research assistant</small>
             <b>
               <Arrow />
             </b>
           </Link>
-          <a
-            href="/research/India-HealthTech-Market-Map.pdf"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <span>03</span>
-            <h3>Where is healthcare being rebuilt?</h3>
-            <small>India HealthTech / Independent market map</small>
+          <Link href="/work/upmc-emergency-medicine">
+            <span>02</span>
+            <h3>What happens before hospital?</h3>
+            <small>UPMC Emergency Medicine · Research assistant</small>
             <b>
               <Arrow />
             </b>
-          </a>
+          </Link>
+          <Link href="/research#landscape">
+            <span>03</span>
+            <h3>Map the healthcare landscape.</h3>
+            <small>India HealthTech · Research + dataset</small>
+            <b>
+              <Arrow />
+            </b>
+          </Link>
         </div>
       </section>
       <section className="play-preview">
         <div className="shell">
           <div className="section-rule">
-            <span>03 / THE OTHER SIDE OF MY BRAIN</span>
+            <span>04 / OFF THE CLOCK</span>
             <Link href="/play">
-              Enter the experiments <Arrow />
+              Experiments <Arrow />
             </Link>
           </div>
           <div className="play-preview-layout">
             <div>
               <h2>
-                Serious problems.
+                Serious work.
                 <br />
-                <em>Occasional nonsense.</em>
+                <em>Playful mind.</em>
               </h2>
               <p>
-                I also make websites where buttons go on strike and emergency
-                services deploy dinosaurs.
+                Sometimes the interface goes on strike.
+                <br />
+                Sometimes a dinosaur answers the call.
               </p>
               <Link className="pill dark" href="/play">
-                Take a curious detour{" "}
-                <span>
-                  <Arrow />
-                </span>
+                Take a curious detour <Arrow />
               </Link>
             </div>
             <Link
               href="/play"
               className="play-art"
-              aria-label="Please do not press (you were going to anyway) — explore the experiments"
+              aria-label="Explore the playable experiments"
             >
               <span className="orbit-word">PLEASE DO NOT PRESS</span>
               <div className="big-button">
@@ -210,6 +305,30 @@ export default function Home() {
             </Link>
           </div>
         </div>
+      </section>
+      <section className="shell home-about">
+        <div>
+          <span className="eyebrow">05 / THE PERSON BEHIND IT</span>
+          <h2>
+            Different teams.
+            <br />
+            <em>Same game.</em>
+          </h2>
+          <Link className="text-link" href="/about">
+            The story so far <Arrow />
+          </Link>
+        </div>
+        <Link href="/about" className="home-memory">
+          <Image
+            src="/photos/04_childhood_football_team-1280.webp"
+            alt="Jay’s childhood football team on the pitch with their coach"
+            fill
+            sizes="(max-width:760px) 100vw, 55vw"
+          />
+          <span>
+            A FEW THINGS THAT STAYED <Arrow />
+          </span>
+        </Link>
       </section>
     </>
   );

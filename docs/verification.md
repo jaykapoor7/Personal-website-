@@ -1,28 +1,38 @@
-# Portfolio verification — 23 October 2026
+# Release verification — 23 October 2026
 
 ## User story
 
-A visitor can explore the relationship between an observation, a shared record, and a care workflow; bypass the illustration to inspect work; read bounded research contributions; open original artifacts; and try a creative experiment. The portfolio is statically generated. No backend, CMS, authentication, or external data service is involved in that flow.
+A visitor understands Jay’s focus immediately, can bypass the connection scene, inspect live products and original work samples, explore bounded research, play experiments, and navigate the personal photo archive. All page content and data are statically exported. There is no new backend or privileged service dependency.
 
-## Checks performed
+## Local release checks
 
-- Production Next.js build: 34 static pages generated, TypeScript validation passed.
-- Local link crawl: 40 distinct local destinations; no missing pages or artifacts.
-- Browser routes: homepage, work, research, about, experiments, all three major project details, contact, experience, writing, ledger, thesis, and physics detail returned HTTP 200.
-- Desktop, mobile emulation, and reduced-motion profiles exercised both directions of the shared-record switch and project controls. No uncaught browser errors were observed.
-- Touch events exercised the system controls and an actual physics drag. Keyboard events started and moved physics objects. Resizing a phone viewport to landscape safely reset the simulation within its bounds.
-- Responsive homepage widths: 360, 390, 768, 1024, 1440, and 1920 pixels; no horizontal overflow. Main document routes also checked for overflow on desktop and phone.
-- Reduced motion: camera transition computed to `0s`; ambient pulse is disabled by CSS.
-- JavaScript-disabled browser: main copy and work navigation remain available; inactive interaction controls are hidden.
-- Axe WCAG 2 A/AA and 2.1 AA scans on the main pages found no violations after fixes. Vector arrows avoid platform-specific missing glyphs. Text contrast and visible/accessibility-label mismatches were corrected.
-- Mobile Lighthouse on the compressed static export: Performance 97, Accessibility 100, Best Practices 100, SEO 100. Observed FCP 1.4 seconds, LCP 2.5 seconds, total blocking time 30 ms, CLS 0. These are lab measurements, not field metrics.
-- Homepage first-load JS reported by Next.js: 106 kB, reduced from the intermediate animation-library implementation's 142 kB. The homepage's camera uses native CSS/SVG. Physics loads on the experiments routes.
-- External game/prototype/Crowwd links were checked for reachability and returned HTTP 200. Their individual application flows were not retested or modified.
+- Next.js production export and TypeScript validation passed. All project, archive, and artifact-index routes were generated.
+- `npm run test:browser` passed on desktop, emulated iPhone with real CDP touch input, and reduced motion.
+- The suite exercises all four hero scales, disconnect/reconnect, actual archived-area counts, care stages, research themes, Juno information steps, navigation, photo comparison endpoints, company-sector filters, the government sketch, real physics dragging, keyboard physics, and orientation changes.
+- WCAG 2 A/AA and 2.1 AA automated axe scans passed on the primary routes. Additional scans covered TOT Schools and the artifact index. No uncaught browser errors.
+- Width checks from 360 through 1920 pixels found no horizontal overflow. JavaScript-disabled navigation and the main positioning remain accessible. Both group photographs are available fully without JavaScript.
+- All 27 directly referenced local artifact/media files exist. The source résumé’s bytes are preserved exactly. The old proof index’s PDFs, spreadsheet, CSV, event images, and portrait are linked again.
+- Shipped games, prototype home URLs, Crowwd, GitHub, StrayPaw, and X returned HTTP 200. LinkedIn blocks automated reads with HTTP 999; the supplied screenshots were audited. Reachability does not establish every external app’s functionality.
 
-## Repeatable suite
+## Performance
 
-`npm run test:browser` runs `scripts/verify-portfolio.mjs` against the served export. The suite asserts behavior rather than only collecting screenshots. See the README for serving and browser selection.
+The final compressed static export, measured sequentially after other browser checks:
+
+| Mobile Lighthouse category | Score |
+| -------------------------- | ----- |
+| Performance                | 98    |
+| Accessibility              | 100   |
+| Best practices             | 100   |
+| SEO                        | 100   |
+
+FCP 1.1 s, LCP 2.3 s, total blocking time 10 ms, CLS 0. These are local lab observations using gzip to match production text compression, not field metrics. A raw Python static server does not compress resources and gives misleadingly slower transfer results; an overlapping browser run also produced CPU contention. The reported run avoided those conditions.
+
+The connection engine omits its hidden geographic polygons until the real-system scale is selected. Source geography remains bundled and available offline; the actual project explorer is server-rendered. Photographs have optimized WebP variants; mobile personal photos and the event photograph select smaller sources. No animation library runs on the homepage. Physics loads on experiment routes.
+
+## Production procedure
+
+The current portfolio repository’s GitHub Vercel status confirms team `jaykapoor700-1687s-projects`, project `personal-website`. Release by fast-forwarding this repository’s `main` branch. Production is checked with `npm run test:production`: TLS-verified HTTP reads of routes, desktop/mobile interactions, photo loading, and checksum comparison of public artifact bytes against the release.
 
 ## Limits
 
-Testing used system Chromium, including an emulated iPhone viewport and CDP touch events. Physical iOS/Safari devices, a screen-reader session, and long-term production telemetry were not tested. Automated accessibility checks do not establish complete accessibility conformance. Source limitations, including the inaccessible LinkedIn profile, are documented in `portfolio-evidence-audit.md`.
+Tests use Chromium and mobile emulation, not physical Safari devices or a human screen-reader session. Automated checks do not establish complete accessibility conformance. Publicly unavailable research data and unverified outcomes were not fabricated. Publishing the original private 2022 Juno document is excluded unless the user specifically approves it.

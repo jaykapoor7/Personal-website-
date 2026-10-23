@@ -1,3 +1,4 @@
+import { HealthTechMap } from "@/components/HealthTechMap";
 import { Arrow } from "@/components/Arrow";
 import Link from "next/link";
 import { writingItems, experience } from "@/content/site";
@@ -6,8 +7,13 @@ export const metadata = {
   description:
     "Fieldwork, emergency care, accessibility, and independent research by Jay Kapoor.",
 };
-const research = experience.filter(
-  (x) => !["StrayPaw", "Crowwd", "HDFC Bank"].includes(x.name),
+const research = experience.filter((x) =>
+  [
+    "Accessible SmartTech Lab",
+    "SCI 3Sixty",
+    "Research with Prof. Rosta Farzan",
+    "Prof. Yasir Khan",
+  ].includes(x.name),
 );
 export default function Research() {
   return (
@@ -15,13 +21,13 @@ export default function Research() {
       <header className="shell editorial-hero">
         <span className="eyebrow">RESEARCH / QUESTIONS BEFORE ANSWERS</span>
         <h1>
-          Go to the evidence.
+          Questions first.
           <br />
-          <em>Stay curious.</em>
+          <em>Evidence always.</em>
         </h1>
         <p>
-          My research spans care access, accessibility, and human behavior. I’m
-          learning how to turn observations into questions worth answering.
+          Care access. Accessible technology. Human behavior. Here is what I
+          worked on, and what you can inspect.
         </p>
       </header>
       <section className="shell research-focus">
@@ -44,17 +50,16 @@ export default function Research() {
           </Link>
         </div>
         <div>
-          <span className="eyebrow">
-            RESEARCH ASSISTANT / AUG 2025–JAN 2026
-          </span>
+          <span className="eyebrow">RESEARCH ASSISTANT / UPMC</span>
           <h2 style={{ marginTop: 20 }}>
             Before the
             <br />
             hospital door.
           </h2>
           <p>
-            At UPMC Emergency Medicine, my work involved analysis of prehospital
-            care patterns and emergency outcomes.
+            My work included EMR abstraction and coding in REDCap for
+            retrospective trauma studies, and analysis of prehospital care
+            patterns and emergency outcomes.
           </p>
           <Link className="text-link" href="/work/upmc-emergency-medicine">
             See the contribution{" "}
@@ -63,6 +68,19 @@ export default function Research() {
             </span>
           </Link>
         </div>
+      </section>
+      <section id="landscape" className="shell">
+        <div className="section-rule">
+          <span>INDEPENDENT RESEARCH / INDIA HEALTHTECH</span>
+          <a
+            href="/research/India-HealthTech-Market-Map.pdf"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Full landscape <Arrow />
+          </a>
+        </div>
+        <HealthTechMap />
       </section>
       <section id="experience" className="shell editorial-list">
         <div className="section-label">
@@ -87,10 +105,11 @@ export default function Research() {
           <span className="list-number">05</span>
           <div>
             <h2>Apodaca Lab</h2>
-            <p>Research assistant · Aug 2024–May 2025</p>
+            <p>Research assistant · 2024–2025</p>
             <small>
-              Cultured primary bladder cells for research on cellular responses
-              to stretch.
+              Cultured primary bladder urothelial cells for PIEZO/TMEM63
+              mechanotransduction studies; contributed figures toward
+              manuscripts and grants.
             </small>
           </div>
           <Link href="/work/apodaca-lab" aria-label="Read about Apodaca Lab">
@@ -114,6 +133,11 @@ export default function Research() {
           </Link>
         </article>
       </section>
+      <div className="shell research-artifacts-cta">
+        <a href="/artifacts">
+          Open every research file, case study, and dataset <Arrow />
+        </a>
+      </div>
       <section className="shell writing-editorial reading-list">
         <div className="section-label">
           <span>INDEPENDENT RESEARCH & WRITING</span>

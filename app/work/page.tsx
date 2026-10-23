@@ -7,7 +7,13 @@ export const metadata = {
   description:
     "StrayPaw, Project Nidaan, Juno-AI, and the broader project index.",
 };
-const slugs = ["straypaw", "project-nidaan", "juno-ai"];
+const slugs = [
+  "straypaw",
+  "project-nidaan",
+  "juno-ai",
+  "crowwd",
+  "tot-schools",
+];
 export default function Work() {
   const selected = slugs.map((s) => allProjects.find((p) => p.slug === s)!);
   const other = allProjects.filter((p) => !slugs.includes(p.slug));
@@ -21,8 +27,8 @@ export default function Work() {
           <em>Things I’ve built.</em>
         </h1>
         <p>
-          Software, fieldwork, and healthcare information. Three projects that
-          explain where I’m heading.
+          Software, fieldwork, and healthcare information. Products and
+          operating work, with the files behind them.
         </p>
       </header>
       <section className="shell all-work">
@@ -39,6 +45,18 @@ export default function Work() {
                   <Arrow />
                 </span>
               </Link>
+              <div className="work-source">
+                {p.links.map((l) => (
+                  <a
+                    key={l.href}
+                    href={l.href}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {l.label} <Arrow />
+                  </a>
+                ))}
+              </div>
             </div>
             <ProjectVisual project={p} />
           </article>
@@ -47,6 +65,9 @@ export default function Work() {
       <section className="shell">
         <div className="section-rule">
           <span>THE WIDER INDEX</span>
+          <Link href="/artifacts">
+            Every artifact <Arrow />
+          </Link>
           <Link href="/experience">
             Experience <Arrow />
           </Link>

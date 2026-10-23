@@ -1,3 +1,5 @@
+> Historical audit. Superseded for this release by [master-redesign-audit.md](master-redesign-audit.md), including the newly supplied résumé and LinkedIn screenshots.
+
 # Portfolio evidence and positioning — 23 October 2026
 
 ## Recommended identity

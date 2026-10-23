@@ -1,3 +1,4 @@
+import { GovernmentSketch } from "@/components/GovernmentSketch";
 import { Arrow } from "@/components/Arrow";
 import Link from "next/link";
 import dynamic from "next/dynamic";
@@ -23,8 +24,8 @@ export default function Play() {
           <em>what if?</em>
         </h1>
         <p>
-          Small worlds, strange rules, and things that probably didn’t need
-          physics. Finished experiments you can actually play.
+          Two shipped games. One desk with gravity. And a small government with
+          a paperwork problem.
         </p>
       </header>
       <section className="shell experiment-list">
@@ -106,19 +107,58 @@ export default function Play() {
             </a>
           </div>
         </article>
+        <div className="experiment-embed">
+          <details>
+            <summary>Play Everybody’s on Strike here ↗</summary>
+            <iframe
+              title="Everybody’s on Strike — playable game"
+              src="https://strike.kapoorjay.com"
+              loading="lazy"
+              allow="fullscreen"
+              referrerPolicy="strict-origin-when-cross-origin"
+            />
+          </details>
+          <details>
+            <summary>Play The World’s Worst Emergency Service here ↗</summary>
+            <iframe
+              title="The World’s Worst Emergency Service — playable game"
+              src="https://emergency.kapoorjay.com"
+              loading="lazy"
+              allow="fullscreen"
+              referrerPolicy="strict-origin-when-cross-origin"
+            />
+          </details>
+        </div>
         <article className="physics-preview">
           <div className="section-rule">
-            <span>03 / EVERYTHING FALLS · INTERACTIVE</span>
+            <span>03 / PERMISSION TO FALL · PORTFOLIO EXPERIMENT</span>
             <Link href="/play/everything-falls">
               Full desk <Arrow />
             </Link>
           </div>
           <h2>
-            A desk with
+            Permission
             <br />
-            <em>very little discipline.</em>
+            <em>to Fall.</em>
           </h2>
+          <p style={{ marginBottom: 25 }}>Pick something up. Let it go.</p>
           <EverythingFalls compact />
+        </article>
+        <article className="concept-sketch">
+          <GovernmentSketch />
+          <div className="concept-copy">
+            <span className="eyebrow">04 / A NEW PORTFOLIO SKETCH</span>
+            <h2>
+              A Very Small
+              <br />
+              <em>Government.</em>
+            </h2>
+            <p>One citizen. One park. An unreasonable amount of procedure.</p>
+            <p className="source-note" style={{ marginTop: 20 }}>
+              A miniature concept built for this portfolio. No separate shipped
+              product claimed.
+            </p>
+          </div>
         </article>
       </section>
       <section className="shell reading-list">
@@ -128,7 +168,13 @@ export default function Play() {
         <div className="archive-index">
           {[
             {
-              title: "Recovery Intelligence",
+              title: "Juno ADHD OS",
+              href: "/work/juno-adhd-os",
+              detail:
+                "Productivity & behavioral planning · LinkedIn project record",
+            },
+            {
+              title: "Health OS",
               href: "/work/recovery-intelligence",
               detail: "Wearable data, explained",
             },

@@ -1,6 +1,6 @@
-# Jay Kapoor — The Living System
+# Jay Kapoor — systems for real-world problems
 
-Personal portfolio at https://kapoorjay.com. Static Next.js 14 App Router export, React 18, TypeScript. This repository and Vercel's `personal-website` project are the only deployment targets for this site.
+Personal portfolio at https://kapoorjay.com. Next.js 14 / React 18 / TypeScript, exported as static files. This repository and Vercel’s `personal-website` project are the only release targets.
 
 ```sh
 npm ci
@@ -8,35 +8,31 @@ npm run dev
 npm run build
 ```
 
-The build exports every route and artifact to `out/`. No API keys, database, CMS, or server runtime are required.
+No API keys, database, or server runtime are required. The build exports to `out/`.
 
-## Experience
+## The experience
 
-The homepage follows one observation into a shared record and a wider care workflow. Three scale controls and the map markers offer direct navigation. At system scale, toggle shared records to see the handoffs disappear and reconnect. CSS drives camera movement; reduced motion disables transitions and ambient pulses. This is an illustrated system, not a map of live StrayPaw data.
+- `app/experience.css`: new responsive design system. Previous UI stylesheets have been removed.
+- `components/LivingSystem.tsx`: one point → records → network → actual StrayPaw geography, controlled by scroll or direct buttons. Reduced motion disables automatic progression.
+- `components/StrayPawExplorer.tsx`: archived Coimbatore area geometry and aggregate request counts, with provenance and a link to the real map.
+- `components/PhotoTimeline.tsx`: personal archive, full-team comparison, and track-to-pitch transition. Faces are unchanged.
+- `components/HealthTechMap.tsx`: interactive view of the actual downloadable company dataset.
+- `/artifacts`: all the historical PDFs, spreadsheets, research files, and shipped builds in one inspectable index.
+- `/play`: two shipped games, the gravity desk, a labelled miniature sketch, and utility prototypes.
 
-Main routes: `/`, `/work`, `/research`, `/play`, `/about`. Existing `/experience`, `/writing`, `/contact`, `/ledger`, `/thesis`, project detail routes, PDFs, and résumé remain available.
+Routes `/work`, `/research`, `/about`, `/play`, `/contact`, `/experience`, `/writing`, `/ledger`, `/thesis`, and historical project detail URLs are preserved. All old local artifact paths remain available.
 
-## Content and source integrity
+## Evidence
 
-- `content/site.ts`: projects, role dates, documents, links. Major projects are curated in `app/work/page.tsx`.
-- `components/LivingSystem.tsx`: illustrated neighborhood and causal shared-record interaction.
-- `components/ProjectInteractions.tsx`: care workflow, Nidaan qualitative themes, Juno information pathway.
-- `components/EverythingFalls.tsx`: pointer, touch, and keyboard physics experiment.
-- `app/globals.css`: full responsive design system; original CSS is no longer imported.
-- `docs/portfolio-evidence-audit.md`: positioning, source hierarchy, verification limits.
-- `public/`: original project artifacts and photography.
+`content/site.ts` holds project contributions and sources; `content/proof.ts` holds the artifact index. `docs/master-redesign-audit.md` records claim limits, source conflicts, photography, and dataset provenance. Keep records distinct from outcomes, formative evaluations distinct from clinical validation, and sketches distinct from shipped products.
 
-Preserve distinctions between data records and outcomes, research contributions and ownership, prototypes and deployed clinical products, and illustrative analysis and measured findings. LinkedIn was inaccessible directly during this redesign; dates rely on the documented existing portfolio record and résumé.
-
-StrayPaw and all other project repositories/deployments are outside this repository's scope. Do not deploy this portfolio to their Vercel projects.
-
-## Browser verification
-
-After building, serve the export and run the browser suite in another terminal:
+## Verification
 
 ```sh
 python -m http.server 3000 --directory out
 npm run test:browser
 ```
 
-The suite uses system Chromium when available, or Playwright's installed browser. Set `PLAYWRIGHT_CHROMIUM_PATH` for a custom binary and `BASE_URL` to verify another origin. It checks the causal map interaction, project controls, keyboard and touch physics, responsive layouts, reduced motion, accessibility, route availability, and navigation without JavaScript.
+The browser suite exercises desktop/touch/reduced motion, navigation, real area-data controls, research filters, photo comparison, game sketch, physics, route availability, no-JavaScript navigation, and WCAG A/AA scans. Set `BASE_URL` for another origin or `PLAYWRIGHT_CHROMIUM_PATH` for a browser binary. See `docs/verification.md` for measured results and limits.
+
+Do not modify or deploy to StrayPaw or unrelated game projects.

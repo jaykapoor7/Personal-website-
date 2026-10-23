@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test:browser": "node scripts/verify-portfolio.mjs"
+    "test:browser": "node scripts/verify-portfolio.mjs",
+    "test:production": "node scripts/verify-production.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

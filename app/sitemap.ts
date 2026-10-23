@@ -16,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/thesis",
     "/about",
     "/contact",
+    "/artifacts",
     ...allProjects.map((x) => `/work/${x.slug}`),
   ].map((path) => ({ url: `${siteUrl}${path}`, lastModified: new Date() }));
 }

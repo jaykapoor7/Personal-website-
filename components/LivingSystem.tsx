@@ -1,477 +1,287 @@
 "use client";
-import { Arrow } from "@/components/Arrow";
-
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-
-const project = (u: number, v: number, h = 0) => [
-  400 + (u - v) * 32,
-  100 + (u + v) * 16 - h,
+import { Arrow } from "./Arrow";
+import snapshot from "@/content/straypaw-snapshot.json";
+const stages = ["A point", "A record", "A network", "A real system"];
+const notes = [
+  "One observation is a beginning.",
+  "A shared record. A place, a history, a next step.",
+  "Connect the people who can act.",
+  "StrayPaw, Coimbatore. A real system.",
 ];
-const pts = (coords: number[][]) =>
-  coords.map(([u, v, h]) => project(u, v, h).join(",")).join(" ");
-const buildings = Array.from({ length: 81 }, (_, i) => ({
-  u: (i % 9) + 1,
-  v: Math.floor(i / 9) + 1,
-  h: 14 + ((i * 17) % 34),
-})).filter((b) => b.u % 3 !== 0 && b.v % 3 !== 0);
-const stops = [
-  {
-    u: 6,
-    v: 5,
-    title: "An observation",
-    label: "A street animal needs care.",
-    tag: "01 / On the street",
-  },
-  {
-    u: 3,
-    v: 5,
-    title: "A shared record",
-    label: "A place, a history, a next step.",
-    tag: "02 / In the record",
-  },
-  {
-    u: 3,
-    v: 8,
-    title: "Coordinated care",
-    label: "A team can pick up where another left off.",
-    tag: "03 / Across the system",
-  },
+const centers = snapshot.areas.map((a) => {
+  const xs = a.ring.filter((_, i) => i % 2 === 0),
+    ys = a.ring.filter((_, i) => i % 2 === 1);
+  return [
+    xs.reduce((a, b) => a + b) / xs.length,
+    ys.reduce((a, b) => a + b) / ys.length,
+  ];
+});
+const bounds = [
+  Math.min(...centers.map((p) => p[0])),
+  Math.max(...centers.map((p) => p[0])),
+  Math.min(...centers.map((p) => p[1])),
+  Math.max(...centers.map((p) => p[1])),
 ];
-const scenes = [
-  {
-    title: (
-      <>
-        One small problem.
-        <br />
-        <em>A whole system.</em>
-      </>
-    ),
-    body: "A street animal needs care. A report is a start. What connects it to the people who can help?",
-    action: "Follow the observation",
-    note: "Start with what’s missing.",
-  },
-  {
-    title: (
-      <>
-        The report exists.
-        <br />
-        <em>Now connect it.</em>
-      </>
-    ),
-    body: "A photo. A place. A history. Shared records make an observation useful to the next person.",
-    action: "See the wider system",
-    note: "Make the handoff possible.",
-  },
-  {
-    title: (
-      <>
-        Better connections.
-        <br />
-        <em>Better care.</em>
-      </>
-    ),
-    body: "Residents, rescue teams, and cities working from the same record. This is the problem I’m building StrayPaw around.",
-    action: "Explore StrayPaw",
-    note: "Build for the people doing the work.",
-  },
+const geo = ([x, y]: number[]) => [
+  380 + ((x - bounds[0]) / (bounds[1] - bounds[0])) * 440,
+  385 - ((y - bounds[2]) / (bounds[3] - bounds[2])) * 330,
 ];
+const pos = (i: number, step: number) => {
+  if (step === 3) return geo(centers[i]);
+  if (step === 1) return [310 + (i % 5) * 145, 135 + Math.floor(i / 5) * 84];
+  if (step === 0) {
+    if (i === 0) return [600, 220];
+    const a = i * 2.39996,
+      r = 40 + Math.sqrt(i) * 20;
+    return [600 + Math.cos(a) * r, 220 + Math.sin(a) * r * 0.55];
+  }
+  const a = i * 2.39996,
+    r = 30 + Math.sqrt(i) * 32;
+  return [600 + Math.cos(a) * r, 220 + Math.sin(a) * r * 0.46];
+};
 export function LivingSystem() {
-  const [step, setStep] = useState(0);
-  const [linked, setLinked] = useState(true);
-  const scene =
-    step === 2 && !linked
-      ? {
-          ...scenes[2],
-          title: (
-            <>
-              Same effort.
-              <br />
-              <em>Lost connections.</em>
-            </>
-          ),
-          body: "The observations still exist. Without a shared record, teams lose the history and the handoff. Reconnect them to see what changes.",
-          note: "Information has to travel with the work.",
-        }
-      : scenes[step];
+  const [step, setStep] = useState(0),
+    [linked, setLinked] = useState(true);
+  const canvas = useRef<HTMLDivElement>(null),
+    manual = useRef(false);
+  const choose = (n: number) => {
+    manual.current = true;
+    setStep(n);
+  };
+  useEffect(() => {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let frame = 0;
+    const onScroll = () => {
+      if (frame || manual.current) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        const top = canvas.current?.getBoundingClientRect().top ?? 0;
+        if (top < 200 && top > -380)
+          setStep(Math.min(3, Math.floor((200 - top) / 125)));
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(frame);
+    };
+  }, []);
+  const count = step === 0 ? 1 : step === 1 ? 15 : step === 2 ? 95 : 254;
   return (
-    <section className="living-hero" aria-labelledby="hero-title">
-      <div className="hero-copy">
-        <div className="eyebrow">
-          <span className="status-dot" /> JAY KAPOOR · BUILDER & RESEARCHER
+    <section className="system-hero" aria-labelledby="hero-title">
+      <div className="hero-heading shell">
+        <div className="hero-topline">
+          <span className="eyebrow">JAY KAPOOR — BUILDER & RESEARCHER</span>
+          <span className="eyebrow">PITTSBURGH ↔ INDIA</span>
         </div>
-        <div className="hero-narrative" aria-live="polite">
-          <h1 id="hero-title" key={step}>
-            {scene.title}
-          </h1>
-          <p>{scene.body}</p>
-        </div>
-        <div className="hero-actions">
-          {step < 2 ? (
-            <button className="pill dark" onClick={() => setStep((s) => s + 1)}>
-              {scene.action}
-              <span>
-                <Arrow />
-              </span>
-            </button>
-          ) : (
-            <Link className="pill dark" href="/work/straypaw">
-              {scene.action}
-              <span>
-                <Arrow />
-              </span>
-            </Link>
-          )}
-          <Link className="text-link" href="/work">
-            See the work <span>↓</span>
-          </Link>
-        </div>
-        <p className="hero-bio">
-          I build software and study access to care.
+        <h1 id="hero-title">
+          I build systems for
           <br />
-          Economics & Statistics at the University of Pittsburgh.
-        </p>
-      </div>
-      <div className={`world step-${step}`}>
-        <div className="world-top">
-          <span className="eyebrow">THE LIVING SYSTEM</span>
-          <span className="world-coordinate">
-            {["01. OBSERVE", "02. CONNECT", "03. COORDINATE"][step]}
+          <span>real-world problems.</span>
+        </h1>
+        <div className="hero-intro">
+          <p>
+            Software. Data. Access to care.
+            <br />
+            Economics & Statistics at Pitt.
+          </p>
+          <Link href="#selected" className="hero-work-link">
+            Explore selected work <Arrow direction="down" />
+          </Link>
+          <span className="eyebrow hero-aside">
+            SERIOUS WORK.
+            <br />
+            PLAYFUL MIND.
           </span>
         </div>
-        <svg
-          viewBox="0 0 800 620"
-          className="world-map"
-          role="group"
-          aria-label={`Illustrated neighborhood: ${stops[step].label}`}
-        >
-          <defs>
-            <pattern
-              id="map-dots"
-              width="16"
-              height="16"
-              patternUnits="userSpaceOnUse"
-            >
-              <circle cx="1" cy="1" r=".7" fill="#c3c8bf" />
-            </pattern>
-          </defs>
-          <rect width="800" height="620" fill="url(#map-dots)" opacity=".5" />
-          <g
-            className="world-camera"
-            style={{
-              transform: `translate(${step === 0 ? -165 : step === 1 ? -65 : 0}px, ${step === 0 ? -100 : step === 1 ? -40 : 0}px) scale(${step === 0 ? 1.5 : step === 1 ? 1.18 : 1})`,
-            }}
+      </div>
+      <div
+        className={`system-scene phase-${step} ${linked ? "is-linked" : ""}`}
+        ref={canvas}
+      >
+        <div className="system-caption shell">
+          <span className="eyebrow">
+            <i className="live-dot" /> THE CONNECTION ENGINE
+          </span>
+          <span className="scene-index">0{step + 1} / 04</span>
+        </div>
+        <div className="engine-stage">
+          <svg
+            viewBox="0 0 1200 440"
+            className="connection-art"
+            role="img"
+            aria-label={notes[step]}
           >
-            <polygon
-              points={pts([
-                [0, 0],
-                [12, 0],
-                [12, 12],
-                [0, 12],
-              ])}
-              fill="#e7e9df"
-              stroke="#a8b6a8"
-              strokeWidth="1"
-            />
-            <polygon
-              points={pts([
-                [12, 12],
-                [0, 12],
-                [0, 12, -12],
-                [12, 12, -12],
-              ])}
-              fill="#d8ded0"
-              stroke="#a8b6a8"
-            />
-            <polygon
-              points={pts([
-                [12, 0],
-                [12, 12],
-                [12, 12, -12],
-                [12, 0, -12],
-              ])}
-              fill="#ced8ca"
-              stroke="#a8b6a8"
-            />
-            {[1, 4, 7, 10].map((n) => (
-              <g key={n} fill="none">
-                <polyline
-                  points={pts([
-                    [n, 0],
-                    [n, 12],
-                  ])}
-                  stroke="#f9f8f2"
-                  strokeWidth="20"
-                />
-                <polyline
-                  points={pts([
-                    [0, n],
-                    [12, n],
-                  ])}
-                  stroke="#f9f8f2"
-                  strokeWidth="20"
-                />
-                <polyline
-                  points={pts([
-                    [n, 0],
-                    [n, 12],
-                  ])}
-                  stroke="#cbd1c5"
-                  strokeDasharray="2 10"
-                />
-                <polyline
-                  points={pts([
-                    [0, n],
-                    [12, n],
-                  ])}
-                  stroke="#cbd1c5"
-                  strokeDasharray="2 10"
-                />
-              </g>
-            ))}
-            {buildings.map(({ u, v, h }, i) => (
-              <g key={i} className="map-building">
-                <polygon
-                  points={pts([
-                    [u, v],
-                    [u + 0.7, v],
-                    [u + 0.7, v + 0.7],
-                    [u, v + 0.7],
-                  ])}
-                  fill="#cdd6c7"
-                />
-                <polygon
-                  points={pts([
-                    [u, v, h],
-                    [u + 0.7, v, h],
-                    [u + 0.7, v + 0.7, h],
-                    [u, v + 0.7, h],
-                  ])}
-                  fill={i % 5 === 0 ? "#d9e7c3" : "#f7f5ec"}
-                  stroke="#a6b2a1"
-                />
-                <polygon
-                  points={pts([
-                    [u + 0.7, v, h],
-                    [u + 0.7, v + 0.7, h],
-                    [u + 0.7, v + 0.7],
-                    [u + 0.7, v],
-                  ])}
-                  fill="#c8d1bf"
-                  stroke="#a6b2a1"
-                />
-                <polygon
-                  points={pts([
-                    [u, v + 0.7, h],
-                    [u + 0.7, v + 0.7, h],
-                    [u + 0.7, v + 0.7],
-                    [u, v + 0.7],
-                  ])}
-                  fill="#e2e6d9"
-                  stroke="#a6b2a1"
-                />
-                <path
-                  d={`M${project(u + 0.25, v + 0.71, h - 8)}v7 M${project(u + 0.5, v + 0.71, h - 8)}v7`}
-                  stroke="#b3bfaa"
-                  strokeWidth="2"
-                />
-              </g>
-            ))}
-            {[
-              [2, 10],
-              [5, 11],
-              [9, 10],
-              [10, 3],
-              [11, 7],
-              [2, 2],
-              [8, 2],
-            ].map(([u, v], i) => (
-              <g key={i} transform={`translate(${project(u, v)})`}>
-                <path d="M0 0v-17" stroke="#7e9773" />
-                <ellipse
-                  cy="-20"
-                  rx="10"
-                  ry="15"
-                  fill="#b3cda0"
-                  stroke="#8eaa7e"
-                />
-                <path
-                  d="M0-6v-21m0 14l-5-5m5 0l5-5"
-                  stroke="#8eaa7e"
-                  fill="none"
-                />
-              </g>
-            ))}
-            <polyline
-              className="care-route"
-              pathLength="1"
-              strokeDasharray="1"
-              strokeDashoffset={step > 0 && linked ? 0 : 1}
-              opacity={step > 0 && linked ? 1 : 0}
-              points={pts([
-                [6, 5],
-                [4, 5],
-                [3, 5],
-                [3, 7],
-                [3, 8],
-              ])}
-              fill="none"
-              stroke="#ed633d"
-              strokeWidth="3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            {step === 2 &&
-              linked &&
-              [
-                [9, 5],
-                [6, 8],
-                [9, 8],
-                [6, 2],
-              ].map(([u, v], i) => (
-                <g
-                  key={i}
-                  className="network-branch"
-                  style={{ animationDelay: `${i * 0.12}s` }}
-                >
-                  <polyline
-                    points={pts([
-                      [3, 5],
-                      [u, 5],
-                      [u, v],
-                    ])}
-                    fill="none"
-                    stroke="#457464"
-                    strokeWidth="1.5"
-                    strokeDasharray="4 5"
+            <defs>
+              <pattern
+                id="engine-grid"
+                width="32"
+                height="32"
+                patternUnits="userSpaceOnUse"
+              >
+                <path d="M14 16h4m-2-2v4" stroke="#4a4c53" strokeWidth=".6" />
+              </pattern>
+            </defs>
+            <rect width="1200" height="440" fill="url(#engine-grid)" />
+            <g className="system-orbits" opacity={step === 3 ? 0 : 0.65}>
+              <ellipse cx="600" cy="220" rx="480" ry="175" />
+              <ellipse cx="600" cy="220" rx="330" ry="120" />
+              <ellipse cx="600" cy="220" rx="180" ry="65" />
+              <path d="M55 220h1090M600 25v390" />
+            </g>
+            <g className="real-area-cells" opacity={step === 3 ? 1 : 0}>
+              {step === 3 &&
+                snapshot.areas.map((a, i) => (
+                  <polygon
+                    key={i}
+                    points={Array.from({ length: a.ring.length / 2 }, (_, j) =>
+                      geo([a.ring[j * 2], a.ring[j * 2 + 1]])
+                        .map((n) => n.toFixed(1))
+                        .join(","),
+                    ).join(" ")}
+                    fill={a.open > 0 ? "#8290ff" : "#3b3f4d"}
+                    stroke="#14151a"
+                    strokeWidth="1.4"
                   />
-                  <circle
-                    cx={project(u, v)[0]}
-                    cy={project(u, v)[1]}
-                    r="5"
-                    fill="#457464"
-                    stroke="#fff"
-                    strokeWidth="2"
+                ))}
+            </g>
+            <g className="system-edges" opacity={step === 2 && linked ? 1 : 0}>
+              {Array.from({ length: 95 }, (_, i) => {
+                const a = pos(i, 2),
+                  b = pos(Math.floor(i / 3), 2);
+                return (
+                  <path
+                    key={i}
+                    d={`M${a}Q600 220 ${b}`}
+                    stroke={i % 7 === 0 ? "#91a0ff" : "#444a61"}
+                    strokeWidth={i % 7 === 0 ? 1.3 : 0.7}
                   />
-                </g>
-              ))}
-            {stops.map((s, i) => {
-              const [x, y] = project(s.u, s.v);
+                );
+              })}
+            </g>
+            {Array.from({ length: step === 0 ? 95 : count }, (_, i) => {
+              const [x, y] = pos(i, step);
               return (
                 <g
+                  className="system-node"
                   key={i}
-                  opacity={i <= step ? 1 : 0.22}
-                  role="button"
-                  tabIndex={0}
-                  aria-label={`${["Observation", "Shared record", "Care team"][i]} — explore ${s.title.toLowerCase()}`}
-                  onClick={() => setStep(i)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      setStep(i);
-                    }
+                  style={{
+                    transform: `translate(${x}px,${y}px)`,
+                    opacity: i < count ? 1 : step === 0 ? 0.14 : 0,
+                    transitionDelay: `${Math.min(i, 25) * 5}ms`,
                   }}
-                  style={{ cursor: "pointer" }}
                 >
                   <circle
-                    cx={x}
-                    cy={y}
-                    r="15"
-                    fill="#f7f6ef"
-                    stroke={i <= step ? "#ed633d" : "#a4b29e"}
+                    r={
+                      step === 0 && i === 0
+                        ? 9
+                        : step === 1
+                          ? 3
+                          : step === 3
+                            ? 1.4
+                            : i % 7 === 0
+                              ? 4
+                              : 2
+                    }
+                    fill={i % 7 === 0 ? "#a6afff" : "#9a9fb0"}
                   />
-                  <circle
-                    cx={x}
-                    cy={y}
-                    r="5"
-                    fill={i <= step ? "#ed633d" : "#a4b29e"}
-                  />
-                  {i === step && (
-                    <circle
-                      className="map-pulse"
-                      cx={x}
-                      cy={y}
-                      r="23"
-                      fill="none"
-                      stroke="#ed633d"
-                    />
+                  {step === 1 && i < 15 && (
+                    <g>
+                      <rect x="-53" y="-27" width="106" height="54" rx="3" />
+                      <path d="M-35-9h14m-14 8h35m-35 8h28" />
+                      <circle cx="31" cy="-9" r="5" />
+                    </g>
                   )}
-                  <path d={`M${x},${y - 15}v-40`} stroke="#ed633d" />
-                  <g transform={`translate(${x - 58},${y - 81})`}>
-                    <rect
-                      width="116"
-                      height="27"
-                      rx="13.5"
-                      fill={i === step ? "#293f35" : "#f7f6ef"}
-                      stroke="#aab7a3"
-                    />
-                    <text
-                      x="58"
-                      y="17"
-                      textAnchor="middle"
-                      fill={i === step ? "#f7f6ef" : "#52654f"}
-                      fontSize="10"
-                      fontFamily="monospace"
-                    >
-                      {["OBSERVATION", "SHARED RECORD", "CARE TEAM"][i]}
-                    </text>
-                  </g>
                 </g>
               );
             })}
-            <g
-              transform={`translate(${project(6.5, 5.2)})`}
-              stroke="#624b3d"
-              strokeWidth="2.5"
-              fill="none"
-              strokeLinecap="round"
-            >
-              <path d="M-8-8h13l4-5 6 2-2 7H6v8M-6-8v12M-8-8l-5-5" />
+            <g className="main-observation" opacity={step === 0 ? 1 : 0}>
+              <circle cx="600" cy="220" r="25" />
+              <circle cx="600" cy="220" r="40" />
+              <path d="M600 180v-45h125" />
+              <text x="734" y="139">
+                ONE OBSERVATION
+              </text>
             </g>
-          </g>
-        </svg>
-        {step === 2 && (
-          <div className="connection-switch">
-            <span>ONE VARIABLE. A DIFFERENT SYSTEM.</span>
-            <button
-              role="switch"
-              aria-checked={linked}
-              onClick={() => setLinked((v) => !v)}
-            >
-              <i />
-              {linked ? "Shared record on" : "Shared record off"}
-            </button>
+            {step === 3 && (
+              <g className="city-label">
+                <path d="M790 295h130v30" />
+                <text x="850" y="350">
+                  COIMBATORE, INDIA
+                </text>
+                <text x="850" y="370">
+                  254 PUBLIC AREAS
+                </text>
+              </g>
+            )}
+          </svg>
+          <div className="engine-side">
+            <span>OBSERVE</span>
+            <span>CONNECT</span>
+            <span>BUILD</span>
           </div>
+        </div>
+        <div className="engine-bottom shell">
+          <div className="scene-narration" aria-live="polite">
+            <p>{notes[step]}</p>
+            {step === 3 ? (
+              <a
+                href="https://straypaw.kapoorjay.com/map"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Explore the real StrayPaw map"
+              >
+                Open StrayPaw <Arrow />
+              </a>
+            ) : (
+              <button
+                onClick={() => choose(step + 1)}
+                aria-label="Follow the connection"
+              >
+                Follow the connection <Arrow />
+              </button>
+            )}
+          </div>
+          <div
+            className="scale-control"
+            role="group"
+            aria-label="Explore the connections"
+          >
+            {stages.map((s, i) => (
+              <button
+                key={s}
+                aria-pressed={step === i}
+                onClick={() => choose(i)}
+              >
+                <span>0{i + 1}</span>
+                {s}
+                <i />
+              </button>
+            ))}
+          </div>
+        </div>
+        {step === 2 && (
+          <button
+            className="network-toggle"
+            role="switch"
+            aria-checked={linked}
+            onClick={() => setLinked(!linked)}
+          >
+            {linked ? "Disconnect" : "Reconnect"} records {linked ? "−" : "+"}
+          </button>
         )}
-        <div className="world-caption">
-          <span>
-            <i /> {scene.note}
-          </span>
-          <small>Illustrated system · not live data</small>
+        <div className="scene-provenance shell">
+          {step === 3 ? (
+            <a href={snapshot.source} target="_blank" rel="noreferrer">
+              Real public geography · retrieved 23 Oct 2026 <Arrow />
+            </a>
+          ) : (
+            <span>An illustrated connection. A real project at the end.</span>
+          )}
+          <span>SCROLL OR CHOOSE A SCALE</span>
         </div>
-        <div
-          className="scale-control"
-          role="group"
-          aria-label="Explore the system at different scales"
-        >
-          {["Observation", "Record", "System"].map((s, i) => (
-            <button
-              key={s}
-              aria-pressed={step === i}
-              onClick={() => setStep(i)}
-            >
-              <span>0{i + 1}</span>
-              {s}
-              <i />
-            </button>
-          ))}
-        </div>
-      </div>
-      <div className="hero-bottom">
-        <span>INDIVIDUAL STORIES. SHARED INFRASTRUCTURE.</span>
-        <a href="#selected">
-          EXPLORE THE CONNECTIONS <span>↓</span>
-        </a>
       </div>
     </section>
   );
