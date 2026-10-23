@@ -65,7 +65,7 @@ export const proofGroups = [
       },
       {
         title: "Juno-AI",
-        detail: "Research paper, PDF",
+        detail: "Research paper in IJEDR, PDF",
         href: "/work/juno-ai/Juno-AI-Research-Paper.pdf",
       },
       {

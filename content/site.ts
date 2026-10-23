@@ -141,7 +141,7 @@ export const projects: Project[] = [
       "Founded at 14 and grew to 10,000+ rural users.",
       "Closed four healthcare partnerships, driving 180% user growth in 12 months.",
       "Built a retrieval-grounded health assistant integrated with doctors, pharmacies and Practo bookings.",
-      "Published the system design and evaluation as a paper.",
+      "Published the system design and evaluation as a paper in IJEDR.",
     ],
     metrics: [
       { value: "10,000+", label: "rural users" },
@@ -490,25 +490,6 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "juno-adhd-os",
-    group: "side",
-    title: "Juno ADHD OS",
-    role: "Side project",
-    period: "Jan-May 2026",
-    category: "Prototype",
-    summary:
-      "An AI-powered productivity and behavioural operating system for people with ADHD.",
-    body: [
-      "An AI-powered productivity and behavioural operating system for people with ADHD.",
-    ],
-    links: [
-      {
-        label: "On LinkedIn",
-        href: "https://www.linkedin.com/in/jay-kapoor7/details/projects/",
-      },
-    ],
-  },
-  {
     slug: "accessible-smarttech",
     group: "research",
     title: "Accessible SmartTech Lab",
@@ -829,7 +810,7 @@ export const writing: Writing[] = [
   {
     title:
       "Juno AI: A Retrieval-Grounded Conversational Platform for Equitable Healthcare Information Access",
-    description: "System design and evaluation.",
+    description: "System design and evaluation. Published in IJEDR.",
     type: "Paper",
     year: "2024",
     href: "/work/juno-ai/Juno-AI-Research-Paper.pdf",
@@ -878,13 +859,6 @@ export const writing: Writing[] = [
     year: "2026",
     href: "/research/India-Fintech-Sector-Thesis.pdf",
     cover: "/covers/India-Fintech-Sector-Thesis.webp",
-  },
-  {
-    title:
-      "Ethnographic Study on Preventive Healthcare Adoption in Rural India",
-    description: "Published in IJEDR.",
-    type: "Paper",
-    year: "2022",
   },
 ];
 
