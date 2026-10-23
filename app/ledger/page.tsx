@@ -10,31 +10,23 @@ export const metadata: Metadata = {
 };
 
 const resultStyle: Record<CallResult, string> = {
-  HIT: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400",
-  MISS: "bg-rose-500/15 text-rose-700 dark:text-rose-400",
+  HIT: "bg-emerald-500/15 text-emerald-800 dark:text-emerald-400",
+  MISS: "bg-rose-500/15 text-rose-800 dark:text-rose-400",
   OPEN: "bg-fg/[0.06] text-muted",
 };
 const verdictStyle: Record<Verdict, string> = {
-  BUY: "text-emerald-700 dark:text-emerald-400",
+  BUY: "text-emerald-800 dark:text-emerald-400",
   HOLD: "text-muted",
-  WATCH: "text-amber-700 dark:text-amber-400",
-  PASS: "text-rose-700 dark:text-rose-400",
+  WATCH: "text-amber-800 dark:text-amber-400",
+  PASS: "text-rose-800 dark:text-rose-400",
 };
 
 export default function Ledger() {
   return (
     <>
       <PageHeader
-        eyebrow="Forecast ledger"
-        title={
-          <>
-            Calls I made,{" "}
-            <span className="font-serif font-normal italic">
-              on the record.
-            </span>
-          </>
-        }
-        lede="Each forecast is dated, given a probability when I make it, and scored when it resolves — including the ones I got wrong."
+        title="Forecast ledger"
+        lede="Every forecast is dated and given a probability when I make it. Then it gets scored, including the ones I got wrong."
       >
         <a
           href="/research/Memo-Library-and-Ledger.pdf"
@@ -50,9 +42,7 @@ export default function Ledger() {
         <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line md:grid-cols-4">
           {ledger.stats.map((s) => (
             <div key={s.label} className="bg-bg p-6 md:p-8">
-              <dd className="text-4xl font-medium tracking-[-0.035em] md:text-5xl">
-                {s.value}
-              </dd>
+              <dd className="display text-5xl md:text-6xl">{s.value}</dd>
               <dt className="mt-2 text-sm text-muted">{s.label}</dt>
             </div>
           ))}
@@ -64,10 +54,10 @@ export default function Ledger() {
 
       <section className="shell pt-20" aria-labelledby="calls">
         <div className="flex items-baseline justify-between border-b border-line pb-4">
-          <h2 id="calls" className="text-2xl font-medium tracking-tight">
+          <h2 id="calls" className="display text-4xl">
             Forecasts
           </h2>
-          <span className="font-mono text-xs text-faint">
+          <span className="text-[13px] tabular-nums text-faint">
             {ledger.calls.length} calls
           </span>
         </div>
@@ -77,7 +67,7 @@ export default function Ledger() {
               key={c.prediction}
               className="grid gap-3 border-b border-line py-5 sm:grid-cols-[40px_1fr_140px] sm:items-center sm:gap-6"
             >
-              <span className="hidden font-mono text-xs text-faint sm:block">
+              <span className="hidden text-[13px] tabular-nums text-faint sm:block">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <div>
@@ -94,11 +84,11 @@ export default function Ledger() {
                     style={{ width: `${c.conviction}%` }}
                   />
                 </div>
-                <span className="w-8 font-mono text-xs text-muted">
+                <span className="w-8 text-[13px] tabular-nums text-muted">
                   {c.conviction}%
                 </span>
                 <span
-                  className={`rounded-md px-2 py-0.5 font-mono text-[10.5px] font-medium ${resultStyle[c.result]}`}
+                  className={`rounded-md px-2 py-0.5 text-[12px] font-semibold ${resultStyle[c.result]}`}
                 >
                   {c.result}
                 </span>
@@ -110,10 +100,10 @@ export default function Ledger() {
 
       <section className="shell pt-20" aria-labelledby="coverage">
         <div className="flex items-baseline justify-between border-b border-line pb-4">
-          <h2 id="coverage" className="text-2xl font-medium tracking-tight">
+          <h2 id="coverage" className="display text-4xl">
             Coverage
           </h2>
-          <span className="font-mono text-xs text-faint">
+          <span className="text-[13px] tabular-nums text-faint">
             {ledger.coverage.length} memos
           </span>
         </div>
@@ -128,7 +118,7 @@ export default function Ledger() {
                 <p className="text-sm text-muted">{m.tag}</p>
               </div>
               <span
-                className={`font-mono text-xs font-medium ${verdictStyle[m.verdict]}`}
+                className={`text-[13px] font-semibold ${verdictStyle[m.verdict]}`}
               >
                 {m.verdict}
               </span>

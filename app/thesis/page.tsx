@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function Thesis() {
   return (
     <>
-      <PageHeader eyebrow="Research archive" title="Sector theses & memos." />
+      <PageHeader title="Theses and memos" />
       <section className="shell">
         <WritingList
           items={writing.filter((w) =>

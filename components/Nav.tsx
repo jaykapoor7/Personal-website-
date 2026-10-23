@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 const links = [
   { href: "/work", label: "Work" },
   { href: "/research", label: "Research" },
-  { href: "/ledger", label: "Ledger" },
+  { href: "/play", label: "Play" },
   { href: "/about", label: "About" },
 ];
 
@@ -52,11 +52,13 @@ export function Nav() {
           >
             <span
               aria-hidden="true"
-              className="grid h-8 w-8 place-items-center rounded-full bg-fg font-serif text-[18px] italic leading-none text-bg"
+              className="grid h-8 w-8 place-items-center rounded-full bg-fg font-display text-[13px] font-bold leading-none text-bg"
             >
-              j
+              JK
             </span>
-            <span className="hidden sm:inline">Jay Kapoor</span>
+            <span className="hidden font-display text-[15px] font-semibold sm:inline">
+              Jay Kapoor
+            </span>
           </Link>
           <div className="hidden items-center md:flex">
             {links.map((l) => {
@@ -121,7 +123,7 @@ export function Nav() {
             rel="noreferrer"
             className="block border-t border-line py-3.5 text-2xl font-medium tracking-tight"
           >
-            Résumé
+            Resume
           </a>
         </div>
       </div>

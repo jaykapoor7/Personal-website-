@@ -29,32 +29,27 @@ export const proofGroups = [
     items: [
       {
         title: "Project Nidaan",
-        detail: "Field research brief · PDF",
+        detail: "Field research brief, PDF",
         href: "/work/project-nidaan/Project-Nidaan-Field-Research-Brief.pdf",
       },
       {
         title: "Nidaan KPI dashboard",
-        detail: "Illustrative work sample · XLSX",
+        detail: "KPI dashboard, XLSX",
         href: "/work/project-nidaan/Project-Nidaan-KPI-Dashboard.xlsx",
       },
       {
         title: "Juno-AI",
-        detail: "System design & formative evaluation · PDF",
+        detail: "Research paper, PDF",
         href: "/work/juno-ai/Juno-AI-Research-Paper.pdf",
       },
       {
-        title: "Juno product screens",
-        detail: "Archived interface mockup · illustrative figures",
-        href: "/work/juno-ai/juno-product-dashboard.webp",
-      },
-      {
         title: "India HealthTech landscape",
-        detail: "Market map · PDF",
+        detail: "Market map, PDF",
         href: "/research/India-HealthTech-Market-Map.pdf",
       },
       {
         title: "HealthTech company dataset",
-        detail: "36-company downloadable subset · CSV",
+        detail: "36-company downloadable subset, CSV",
         href: "/research/India-HealthTech-Companies.csv",
       },
     ],
@@ -64,17 +59,17 @@ export const proofGroups = [
     items: [
       {
         title: "TOT Schools",
-        detail: "Operations case study · PDF",
+        detail: "Operations case study, PDF",
         href: "/work/tot-schools/TOT-Schools-Operations-Case-Study.pdf",
       },
       {
         title: "Crowwd",
-        detail: "Selected research & strategy · PDF",
+        detail: "Selected research & strategy, PDF",
         href: "/work/crowwd/Crowwd-Selected-Research-and-Strategy.pdf",
       },
       {
         title: "Crowwd teardown",
-        detail: "Competitive research · PDF",
+        detail: "Competitive research, PDF",
         href: "/work/crowwd/Crowwd-Fintech-Teardown.pdf",
       },
       {
@@ -84,12 +79,12 @@ export const proofGroups = [
       },
       {
         title: "The Finer Things Club",
-        detail: "Marketplace one-pager · PDF",
+        detail: "Marketplace one-pager, PDF",
         href: "/work/finer-things-club/Finer-Things-Marketplace-One-Pager.pdf",
       },
       {
         title: "TARC",
-        detail: "Development feasibility work sample · PDF",
+        detail: "Development feasibility work sample, PDF",
         href: "/work/tarc/Development-Feasibility-Memo-2025.pdf",
       },
     ],
@@ -99,7 +94,7 @@ export const proofGroups = [
     items: [
       {
         title: "Memo library & ledger",
-        detail: "Dated theses & forecasts · PDF",
+        detail: "Dated theses & forecasts, PDF",
         href: "/research/Memo-Library-and-Ledger.pdf",
       },
       {
@@ -109,27 +104,27 @@ export const proofGroups = [
       },
       {
         title: "Qure.ai",
-        detail: "Investment memo · PDF",
+        detail: "Investment memo, PDF",
         href: "/research/Qure-AI-Investment-Memo.pdf",
       },
       {
         title: "India’s GLP-1 inflection",
-        detail: "Sector thesis · PDF",
+        detail: "Sector thesis, PDF",
         href: "/research/India-GLP1-Sector-Thesis.pdf",
       },
       {
         title: "India’s retail-investing reset",
-        detail: "Sector thesis · PDF",
+        detail: "Sector thesis, PDF",
         href: "/research/India-Fintech-Sector-Thesis.pdf",
       },
       {
         title: "Apollo Hospitals",
-        detail: "HDFC research work sample · PDF",
+        detail: "HDFC research work sample, PDF",
         href: "/work/hdfc-bank/Apollo-Hospitals-Research-Note-Aug-2025.pdf",
       },
       {
         title: "HNI portfolio allocation",
-        detail: "HDFC portfolio-review work sample · PDF",
+        detail: "HDFC portfolio-review work sample, PDF",
         href: "/work/hdfc-bank/HNI-Portfolio-Allocation-Review.pdf",
       },
     ],

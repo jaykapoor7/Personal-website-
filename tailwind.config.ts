@@ -14,10 +14,11 @@ const config: Config = {
         line: token("line"),
         card: token("card"),
         accent: token("accent"),
+        paper: token("paper"),
       },
       fontFamily: {
         sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
-        serif: ["var(--font-serif)", "ui-serif", "Georgia", "serif"],
+        display: ["var(--font-display)", "var(--font-sans)", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       maxWidth: { shell: "1120px" },

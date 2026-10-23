@@ -11,28 +11,15 @@ export const metadata: Metadata = {
 export default function Contact() {
   return (
     <>
-      <PageHeader
-        eyebrow={`Contact · ${person.place}`}
-        title={
-          <>
-            Let’s <span className="font-serif font-normal italic">talk.</span>
-          </>
-        }
-        lede="I’m always up for a conversation about civic tech, healthcare access, fintech in India, or a problem you think nobody’s solving. Email is fastest."
-      />
+      <PageHeader title="Say hi" lede="Email is the fastest way to reach me." />
       <section className="shell">
         <a
           href={`mailto:${person.email}`}
-          className="group flex items-center justify-between gap-6 rounded-[24px] bg-fg p-6 text-bg transition-opacity hover:opacity-90 sm:p-10"
+          className="display block break-all text-[clamp(40px,8vw,128px)] transition-colors hover:text-accent"
         >
-          <span className="break-all text-2xl font-medium tracking-[-0.03em] sm:text-4xl md:text-5xl">
-            {person.email}
-          </span>
-          <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-bg text-fg transition-transform group-hover:rotate-45">
-            <Arrow />
-          </span>
+          {person.email}
         </a>
-        <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-16 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {person.links
             .filter((l) => l.label !== "Email")
             .map((l) => (
@@ -41,12 +28,12 @@ export default function Contact() {
                   href={l.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="group flex items-center justify-between rounded-2xl border border-line p-6 transition-colors hover:border-fg/30 hover:bg-card"
+                  className="group flex items-center justify-between rounded-2xl border border-line p-6 transition-colors hover:border-fg/40"
                 >
-                  <span className="text-lg font-medium tracking-tight">
+                  <span className="text-lg font-semibold tracking-tight">
                     {l.label}
                   </span>
-                  <Arrow className="text-faint transition-colors group-hover:text-fg" />
+                  <Arrow className="text-faint group-hover:text-accent" />
                 </a>
               </li>
             ))}

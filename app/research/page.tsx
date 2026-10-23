@@ -9,20 +9,20 @@ import { writing } from "@/content/site";
 export const metadata: Metadata = {
   title: "Research",
   description:
-    "Applied AI, accessibility, emergency-medicine, and field research by Jay Kapoor — plus investment memos and a healthtech market map.",
+    "Applied AI, accessibility, emergency medicine and field research by Jay Kapoor, plus investment memos and a healthtech market map.",
 };
 
 const labs = [
   {
     org: "Accessible SmartTech Lab",
-    role: "Research Assistant · with Prof. Dan Ding",
+    role: "Research Assistant, with Prof. Dan Ding",
     detail:
       "Human–machine interaction systems for accessible smart technologies.",
     period: "2026 – now",
   },
   {
     org: "SCI 3Sixty Fellowship",
-    role: "3Sixty Fellow · with Prof. Rosta Farzan",
+    role: "3Sixty Fellow, with Prof. Rosta Farzan",
     detail: "Applied AI research, including how nonprofits adopt AI.",
     period: "2026 – now",
   },
@@ -69,38 +69,28 @@ export default function Research() {
   return (
     <>
       <PageHeader
-        eyebrow="Research"
-        title={
-          <>
-            From cell cultures to{" "}
-            <span className="font-serif font-normal italic">
-              field interviews.
-            </span>
-          </>
-        }
-        lede="Lab and clinical research at Pitt and UPMC, fieldwork in Bengaluru, and independent investment research I publish and score."
+        title="Research"
+        lede="Labs at Pitt and UPMC, fieldwork in Bengaluru, and investment research I publish and score."
       />
 
       <section className="shell" aria-labelledby="labs">
         <SectionHeader
-          index="01"
-          title={<span id="labs">Labs &amp; fieldwork</span>}
+          index="Labs"
+          title={<span id="labs">Labs and fieldwork</span>}
         />
         <ul className="grid gap-4 md:grid-cols-2">
           {labs.map((l) => {
             const inner = (
               <>
                 <div className="flex items-start justify-between gap-4">
-                  <span className="font-mono text-xs uppercase tracking-wider text-faint">
+                  <span className="text-[15px] tabular-nums text-faint">
                     {l.period}
                   </span>
                   {l.href && (
                     <Arrow className="text-faint transition-colors group-hover:text-fg" />
                   )}
                 </div>
-                <p className="mt-6 text-xl font-medium tracking-tight">
-                  {l.org}
-                </p>
+                <p className="display mt-6 text-3xl">{l.org}</p>
                 <p className="mt-1 text-sm text-muted">{l.role}</p>
                 <p className="mt-4 text-[15px] leading-relaxed text-fg/80">
                   {l.detail}
@@ -129,21 +119,17 @@ export default function Research() {
 
       <section className="shell pt-24" aria-labelledby="writing">
         <SectionHeader
-          index="02"
-          title={<span id="writing">Papers, memos &amp; theses</span>}
+          index="Writing"
+          title={<span id="writing">Papers, memos and theses</span>}
           action={{ label: "Forecast ledger", href: "/ledger" }}
         />
         <WritingList items={writing} />
-        <p className="mt-5 text-sm text-muted">
-          Work samples. Assumptions and illustrative figures are labelled in
-          each file.
-        </p>
       </section>
 
       <section id="landscape" className="shell pt-24" aria-labelledby="map">
         <SectionHeader
-          index="03"
-          title={<span id="map">India healthtech, mapped</span>}
+          index="Data"
+          title={<span id="map">India healthtech, 36 companies</span>}
           action={{
             label: "Market map PDF",
             href: "/research/India-HealthTech-Market-Map.pdf",

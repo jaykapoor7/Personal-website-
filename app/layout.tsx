@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import {
   Inter_Tight,
-  Instrument_Serif,
+  Bricolage_Grotesque,
   JetBrains_Mono,
 } from "next/font/google";
 import "./globals.css";
@@ -15,11 +15,9 @@ const sans = Inter_Tight({
   variable: "--font-sans",
   display: "swap",
 });
-const serif = Instrument_Serif({
+const display = Bricolage_Grotesque({
   subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-  variable: "--font-serif",
+  variable: "--font-display",
   display: "swap",
 });
 const mono = JetBrains_Mono({
@@ -29,11 +27,11 @@ const mono = JetBrains_Mono({
 });
 
 const description =
-  "Jay Kapoor — founder of StrayPaw and Juno-AI. Economics & Statistics at the University of Pittsburgh. Building software for animal welfare, healthcare access, and the operations behind them.";
+  "Jay Kapoor. Founder of StrayPaw and Juno-AI. Economics and Statistics at the University of Pittsburgh.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: { default: "Jay Kapoor", template: "%s · Jay Kapoor" },
+  title: { default: "Jay Kapoor", template: "%s | Jay Kapoor" },
   description,
   openGraph: {
     type: "website",
@@ -48,8 +46,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fafaf9" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+    { media: "(prefers-color-scheme: light)", color: "#f2f0eb" },
+    { media: "(prefers-color-scheme: dark)", color: "#0e0e0d" },
   ],
 };
 
@@ -61,7 +59,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${sans.variable} ${serif.variable} ${mono.variable}`}
+      className={`${sans.variable} ${display.variable} ${mono.variable}`}
     >
       <body>
         <a
@@ -72,7 +70,7 @@ export default function RootLayout({
         </a>
         <Nav />
         <noscript>
-          <style>{`[data-reveal]{opacity:1!important;transform:none!important;filter:none!important}.hexmap polygon,.grow-bar{opacity:1!important;transform:none!important}`}</style>
+          <style>{`[data-reveal]{opacity:1!important;transform:none!important;filter:none!important}`}</style>
         </noscript>
         <main id="main">{children}</main>
         <Footer />

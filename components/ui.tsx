@@ -48,10 +48,8 @@ export function SectionHeader({
   return (
     <Reveal className="mb-10 flex items-end justify-between gap-6 border-t border-line pt-6 md:mb-14">
       <div>
-        <p className="eyebrow">{index}</p>
-        <h2 className="mt-3 text-3xl font-medium tracking-[-0.03em] md:text-[44px] md:leading-[1.05]">
-          {title}
-        </h2>
+        <p className="label">{index}</p>
+        <h2 className="display mt-3 text-[clamp(40px,5vw,72px)]">{title}</h2>
       </div>
       {action && (
         <SmartLink
@@ -72,7 +70,7 @@ export function PageHeader({
   lede,
   children,
 }: {
-  eyebrow: string;
+  eyebrow?: string;
   title: React.ReactNode;
   lede?: React.ReactNode;
   children?: React.ReactNode;
@@ -80,8 +78,8 @@ export function PageHeader({
   return (
     <header className="shell pb-16 pt-36 md:pb-24 md:pt-48">
       <Reveal>
-        <p className="eyebrow">{eyebrow}</p>
-        <h1 className="mt-6 max-w-5xl text-[clamp(52px,8.5vw,128px)] font-medium leading-[0.9] tracking-[-0.06em]">
+        {eyebrow && <p className="label">{eyebrow}</p>}
+        <h1 className="display mt-5 max-w-5xl text-[clamp(60px,10vw,160px)]">
           {title}
         </h1>
       </Reveal>

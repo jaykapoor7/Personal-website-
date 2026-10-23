@@ -1,57 +1,41 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Arrow } from "@/components/Arrow";
-import { ProjectCard } from "@/components/ProjectCard";
 import { Reveal } from "@/components/motion";
-import { PageHeader, SectionHeader } from "@/components/ui";
+import { PageHeader } from "@/components/ui";
+import { WorkIndex } from "@/components/WorkIndex";
 import { featuredProjects, projects } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Work",
   description:
-    "Companies, operating roles, research, and prototypes by Jay Kapoor.",
+    "Companies, operating roles, research and side projects by Jay Kapoor.",
 };
 
 export default function Work() {
   const rest = projects.filter((p) => !p.featured);
   return (
     <>
-      <PageHeader
-        eyebrow="Work"
-        title={
-          <>
-            Things I’ve started, run,{" "}
-            <span className="font-serif font-normal italic">and shipped.</span>
-          </>
-        }
-        lede="Two companies, eight centres, one founder’s office, and a lot of fieldwork."
-      />
+      <PageHeader title="Work" lede="Hover a name to see the real thing." />
       <section className="shell">
-        <div className="grid gap-x-8 gap-y-16 md:grid-cols-2">
-          {featuredProjects.map((p, i) => (
-            <Reveal key={p.slug} delay={(i % 2) * 0.1}>
-              <ProjectCard project={p} />
-            </Reveal>
-          ))}
-        </div>
+        <WorkIndex items={featuredProjects} />
       </section>
       <section className="shell pt-28">
-        <SectionHeader index="Also" title="Roles, research & prototypes" />
-        <ul className="border-t border-line">
+        <Reveal>
+          <h2 className="display mb-8 text-[clamp(40px,5vw,72px)]">
+            Side projects and research
+          </h2>
+        </Reveal>
+        <ul className="grid border-t border-line md:grid-cols-2 md:gap-x-12">
           {rest.map((p) => (
             <li key={p.slug}>
               <Link
                 href={`/work/${p.slug}`}
-                className="group grid items-baseline gap-1 border-b border-line py-5 transition-colors hover:bg-card/60 sm:grid-cols-[1.1fr_1.4fr_120px_24px] sm:gap-6"
+                className="group flex items-baseline gap-3 border-b border-line py-4 text-[15px] transition-colors hover:text-accent"
               >
-                <span className="text-lg font-medium tracking-tight">
-                  {p.title}
-                </span>
-                <span className="text-[15px] text-muted">{p.summary}</span>
-                <span className="font-mono text-xs uppercase tracking-wider text-faint">
-                  {p.period ?? p.category}
-                </span>
-                <Arrow className="hidden text-faint transition-colors group-hover:text-fg sm:block" />
+                <span className="font-semibold tracking-tight">{p.title}</span>
+                <span className="truncate text-muted">{p.summary}</span>
+                <Arrow className="ml-auto shrink-0 text-faint group-hover:text-accent" />
               </Link>
             </li>
           ))}

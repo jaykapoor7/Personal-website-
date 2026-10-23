@@ -13,16 +13,15 @@ export default function Artifacts() {
   return (
     <>
       <PageHeader
-        eyebrow="Files"
-        title="The receipts."
-        lede="Every paper, dataset, case study, and shipped product referenced on this site."
+        title="Files"
+        lede="Every paper, dataset, case study and live product on this site."
       />
       <div className="shell space-y-16">
         {proofGroups.map((g) => (
           <section key={g.title} aria-label={g.title}>
             <div className="flex items-baseline justify-between border-b border-line pb-4">
-              <h2 className="text-2xl font-medium tracking-tight">{g.title}</h2>
-              <span className="font-mono text-xs text-faint">
+              <h2 className="display text-4xl">{g.title}</h2>
+              <span className="text-[13px] tabular-nums text-faint">
                 {g.items.length} items
               </span>
             </div>

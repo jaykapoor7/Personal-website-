@@ -1,35 +1,30 @@
-# Jay Kapoor — systems for real-world problems
+# Jay Kapoor
 
-Personal portfolio at https://kapoorjay.com. Next.js 14 / React 18 / TypeScript, exported as static files. This repository and Vercel’s `personal-website` project are the only release targets.
+Personal site at https://kapoorjay.com. Next.js 14, React 18, TypeScript, Tailwind and framer-motion, exported as static files.
 
 ```sh
 npm ci
 npm run dev
-npm run build
+npm run build   # exports to out/
 ```
 
-No API keys, database, or server runtime are required. The build exports to `out/`.
+## How it is put together
 
-## Design
+- `content/site.ts` holds the profile, projects, experience, writing and photos. House style: no em dashes and "Resume" without accents.
+- `public/previews` are screenshots of the live sites (StrayPaw, the games, the side projects, Crowwd). `public/covers` are the first pages of the linked PDFs. Re-shoot them when a site changes.
+- `components/Desk.tsx`: the draggable desk on the home and about pages.
+- `components/Showcase.tsx`: a real site scrolls inside a browser window as the page scrolls.
+- `components/WorkIndex.tsx`: the work list, with the real preview following the cursor.
+- `components/LivePlay.tsx`: a screenshot that turns into the live site (iframe) when you press play. StrayPaw does not allow framing, so it is shown as a showcase instead.
+- `components/Shelf.tsx`: PDF first pages fanned out like papers.
 
-- Motion: `components/motion.tsx` (framer-motion) — word-rise headlines, scroll-lit statement, count-up numbers, scroll-scaling images, a pinned StrayPaw zoom, a scroll-driven horizontal work gallery, and cursor spotlights. Everything degrades to static content with reduced motion or no JavaScript.
-- Tailwind with a small token layer in `app/globals.css` (light and dark via `prefers-color-scheme`). Inter Tight for text, Instrument Serif italics for accents, JetBrains Mono for labels.
-- `app/page.tsx`: hero, highlight stats, StrayPaw feature (with the archived Coimbatore area map), selected work, experience, research & forecast ledger, side projects, and photos.
-- `/work/[slug]`: one template for every project — metrics, overview, what I did, artifacts, gallery.
-- `components/ProjectVisual.tsx`: photos where they exist; unit charts (one mark per centre, interview, or artisan) where they don’t.
-- `/research`, `/ledger`, `/about`, `/experience`, `/play`, `/artifacts`, `/contact`, plus the older `/writing` and `/thesis` routes.
+Every animation switches off with reduced motion, and pages still render without JavaScript.
 
-## Evidence
-
-`content/site.ts` holds the profile, projects, experience, writing, and photos; `content/proof.ts` holds the artifact index. `docs/master-redesign-audit.md` records claim limits, source conflicts, photography, and dataset provenance. Keep records distinct from outcomes, formative evaluations distinct from clinical validation, and sketches distinct from shipped products.
-
-## Verification
+## Checks
 
 ```sh
 python -m http.server 3000 --directory out
 npm run test:browser
 ```
 
-The browser suite loads every route on desktop, mobile, and dark mode; checks for horizontal overflow, browser errors, and WCAG 2.1 A/AA (axe); exercises the mobile menu, dataset filter, and physics toy; and confirms every local link resolves. Set `BASE_URL` for another origin (`npm run test:production` targets kapoorjay.com) or `PLAYWRIGHT_CHROMIUM_PATH` for a browser binary.
-
-Do not modify or deploy to StrayPaw or unrelated game projects.
+Loads every route on desktop, mobile, dark mode and full motion; checks overflow, browser errors and WCAG 2.1 AA (axe); exercises the menu, dataset filter and physics toy; and confirms every local link resolves. `npm run test:production` runs the same checks against kapoorjay.com.

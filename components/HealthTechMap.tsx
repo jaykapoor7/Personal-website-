@@ -57,9 +57,7 @@ export function HealthTechMap() {
           <li key={c.name} className="bg-bg p-5 sm:p-6">
             <div className="flex items-baseline justify-between gap-3">
               <p className="font-medium tracking-tight">{c.name}</p>
-              <span className="shrink-0 font-mono text-[10.5px] uppercase text-faint">
-                {c.stage}
-              </span>
+              <span className="shrink-0 text-[13px] text-faint">{c.stage}</span>
             </div>
             <p className="mt-1.5 text-sm leading-snug text-muted">
               {c.description}
@@ -67,9 +65,6 @@ export function HealthTechMap() {
           </li>
         ))}
       </ul>
-      <p className="border-t border-line px-6 py-4 text-xs text-faint">
-        Stages as of compilation. Historical data from the linked CSV.
-      </p>
     </div>
   );
 }
