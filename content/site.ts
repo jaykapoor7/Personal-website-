@@ -227,6 +227,8 @@ export const roles: Role[] = [
       "Rolled out Illumine for attendance, billing and parent communication, and CCTV in every centre.",
       "Hired centre heads, teachers and nurses; wrote the 12-document handbook and SOP suite.",
     ],
+    logo: "/logos/tot.png",
+    site: { label: "totlearning.in", href: "https://www.totlearning.in" },
     proof: [
       doc(
         "Operations case study",
