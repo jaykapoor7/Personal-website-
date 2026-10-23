@@ -1,73 +1,87 @@
-import { Arrow } from "@/components/Arrow";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { experience, archiveProjects } from "@/content/site";
+import { Arrow } from "@/components/Arrow";
+import { PageHeader } from "@/components/ui";
+import { education, experience } from "@/content/site";
+
 export const metadata: Metadata = {
   title: "Experience",
-  description: "Jay Kapoor’s work and research experience.",
+  description: "Jay Kapoor’s founder, operating, and research experience.",
 };
+
 export default function Experience() {
-  const additional = archiveProjects.filter((x) =>
-    [
-      "tarc",
-      "apodaca-lab",
-      "upmc-emergency-medicine",
-      "pitt-sociology",
-    ].includes(x.slug),
-  );
   return (
-    <div className="new-pro">
-      <header className="shell editorial-hero">
-        <span className="kicker">Experience / Selected</span>
-        <h1>Experience.</h1>
-      </header>
-      <section className="shell editorial-list">
-        <div className="section-label">
-          <span>RECENT WORK & RESEARCH</span>
-          <span>{String(experience.length).padStart(2, "0")}</span>
-        </div>
-        {experience.map((e, i) => (
-          <article key={e.name}>
-            <span className="list-number">
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <div>
-              <h2>{e.name}</h2>
-              <p>{e.detail}</p>
-              {"description" in e && e.description && (
-                <small>{e.description}</small>
-              )}
-            </div>
-            {e.href && (
-              <Link href={e.href} aria-label={`See ${e.name}`}>
-                <Arrow />
-              </Link>
-            )}
-          </article>
-        ))}
+    <>
+      <PageHeader
+        eyebrow="Experience"
+        title="Everywhere I’ve worked."
+        lede="Founder roles, operating jobs, and research — newest first."
+      >
+        <a
+          href="/jay-kapoor-resume.pdf"
+          target="_blank"
+          rel="noreferrer"
+          className="btn-primary mt-8"
+        >
+          Download résumé <Arrow />
+        </a>
+      </PageHeader>
+      <section className="shell">
+        <ol className="border-t border-line">
+          {experience.map((e) => {
+            const row = (
+              <>
+                <span className="font-mono text-xs uppercase tracking-wider text-faint md:pt-1.5">
+                  {e.period}
+                </span>
+                <div>
+                  <p className="text-xl font-medium tracking-tight">{e.org}</p>
+                  <p className="text-[15px] text-muted">{e.role}</p>
+                </div>
+                <p className="text-[15px] leading-relaxed text-muted">
+                  {e.detail}
+                </p>
+                <span className="hidden justify-self-end text-faint group-hover:text-fg md:block">
+                  {e.href && <Arrow />}
+                </span>
+              </>
+            );
+            const cls =
+              "group grid gap-2 border-b border-line py-7 md:grid-cols-[130px_1fr_1.3fr_24px] md:gap-8";
+            return (
+              <li key={e.org}>
+                {e.href ? (
+                  <Link
+                    href={e.href}
+                    className={`${cls} transition-colors hover:bg-card/60`}
+                  >
+                    {row}
+                  </Link>
+                ) : (
+                  <div className={cls}>{row}</div>
+                )}
+              </li>
+            );
+          })}
+        </ol>
+        <p className="eyebrow mt-20">Education</p>
+        <ul className="mt-5 border-t border-line">
+          {education.map((e) => (
+            <li
+              key={e.school}
+              className="grid gap-1 border-b border-line py-6 md:grid-cols-[130px_1fr] md:gap-8"
+            >
+              <span className="font-mono text-xs uppercase tracking-wider text-faint md:pt-1.5">
+                {e.period}
+              </span>
+              <div>
+                <p className="text-xl font-medium tracking-tight">{e.school}</p>
+                <p className="text-[15px] text-muted">{e.detail}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
       </section>
-      <section className="shell editorial-list more-list">
-        <div className="section-label">
-          <span>EARLIER EXPERIENCE</span>
-          <span>SELECTED</span>
-        </div>
-        {additional.map((e, i) => (
-          <article key={e.slug}>
-            <span className="list-number">
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <div>
-              <h2>{e.title}</h2>
-              <p>
-                {e.eyebrow} {e.period && `· ${e.period}`}
-              </p>
-            </div>
-            <Link href={`/work/${e.slug}`} aria-label={`See ${e.title}`}>
-              <Arrow />
-            </Link>
-          </article>
-        ))}
-      </section>
-    </div>
+    </>
   );
 }

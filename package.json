@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "test:browser": "node scripts/verify-portfolio.mjs",
-    "test:production": "node scripts/verify-production.mjs"
+    "test:production": "BASE_URL=https://kapoorjay.com node scripts/verify-portfolio.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

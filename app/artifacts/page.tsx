@@ -1,44 +1,51 @@
-import { proofGroups } from "@/content/proof";
+import type { Metadata } from "next";
 import { Arrow } from "@/components/Arrow";
-export const metadata = {
+import { PageHeader, SmartLink } from "@/components/ui";
+import { proofGroups } from "@/content/proof";
+
+export const metadata: Metadata = {
   title: "Files",
   description:
-    "Jay Kapoor’s project links, papers, datasets, and case studies.",
+    "Jay Kapoor’s papers, datasets, case studies, and shipped products in one place.",
 };
+
 export default function Artifacts() {
   return (
     <>
-      <header className="shell editorial-hero">
-        <span className="eyebrow">DOCUMENTS & LINKS</span>
-        <h1>Files.</h1>
-      </header>
-      <div className="shell artifact-groups">
+      <PageHeader
+        eyebrow="Files"
+        title="The receipts."
+        lede="Every paper, dataset, case study, and shipped product referenced on this site."
+      />
+      <div className="shell space-y-16">
         {proofGroups.map((g) => (
-          <section key={g.title}>
-            <div className="section-rule">
-              <h2>{g.title}</h2>
-              <span>{String(g.items.length).padStart(2, "0")} FILES</span>
+          <section key={g.title} aria-label={g.title}>
+            <div className="flex items-baseline justify-between border-b border-line pb-4">
+              <h2 className="text-2xl font-medium tracking-tight">{g.title}</h2>
+              <span className="font-mono text-xs text-faint">
+                {g.items.length} items
+              </span>
             </div>
-            <div className="archive-index">
+            <ul className="grid sm:grid-cols-2">
               {g.items.map((a) => (
-                <a
-                  key={a.href}
-                  href={a.href}
-                  target={
-                    a.href.startsWith("http") || a.href.includes(".")
-                      ? "_blank"
-                      : undefined
-                  }
-                  rel="noreferrer"
-                >
-                  <div>
-                    {a.title}
-                    <small>{a.detail}</small>
-                  </div>
-                  <Arrow />
-                </a>
+                <li key={a.href} className="border-b border-line">
+                  <SmartLink
+                    href={a.href}
+                    className="group flex items-center justify-between gap-4 py-4 sm:pr-6"
+                  >
+                    <span>
+                      <span className="block font-medium tracking-tight">
+                        {a.title}
+                      </span>
+                      <span className="block text-sm text-muted">
+                        {a.detail}
+                      </span>
+                    </span>
+                    <Arrow className="text-faint transition-colors group-hover:text-fg" />
+                  </SmartLink>
+                </li>
               ))}
-            </div>
+            </ul>
           </section>
         ))}
       </div>

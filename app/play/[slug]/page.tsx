@@ -1,42 +1,38 @@
-import { Arrow } from "@/components/Arrow";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Arrow } from "@/components/Arrow";
 import { EverythingFalls } from "@/components/EverythingFalls";
+
 export function generateStaticParams() {
   return [{ slug: "everything-falls" }];
 }
-export function generateMetadata({ params }: { params: { slug: string } }) {
+
+export function generateMetadata() {
   return {
-    title:
-      params.slug === "everything-falls" ? "Everything Falls" : "Playground",
-    description: "A browser physics experiment by Jay Kapoor.",
+    title: "Everything Falls",
+    description: "A browser physics toy by Jay Kapoor.",
   };
 }
+
 export default function PlayDetail({ params }: { params: { slug: string } }) {
   if (params.slug !== "everything-falls") notFound();
   return (
-    <div className="new-play">
-      <section className="shell standalone-play">
-        <Link href="/play" className="plain-link">
-          ← Playground
-        </Link>
-        <div className="standalone-head">
-          <span className="kicker">PHYSICS EXPERIMENT</span>
-          <h1>
-            Everything
-            <br />
-            <em>Falls.</em>
-          </h1>
-          <p>Drag and release. Gravity can be turned off.</p>
-        </div>
+    <section className="shell pt-12 md:pt-16">
+      <Link
+        href="/play"
+        className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-fg"
+      >
+        <Arrow direction="left" /> Play
+      </Link>
+      <h1 className="mt-8 text-5xl font-medium tracking-[-0.045em] md:text-7xl">
+        Everything <span className="font-serif font-normal italic">falls.</span>
+      </h1>
+      <p className="mt-4 text-lg text-muted">
+        Drag and release. Gravity can be turned off.
+      </p>
+      <div className="mt-10">
         <EverythingFalls />
-        <div className="play-credits">
-          <span>Made by Jay Kapoor</span>
-          <Link href="/work">
-            Work <Arrow />
-          </Link>
-        </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 }

@@ -39,4 +39,4 @@ Everybody’s on Strike and The World’s Worst Emergency Service are shipped ex
 
 ## Visual direction
 
-The previous cream/green/serif interface is removed from the root imports. `app/experience.css` is a new, self-contained design system: Space Grotesk, black/cobalt, wide editorial grids, a full-width dark connection engine, distinct project exhibits, an interactive personal archive, and a cobalt contact ending. The previous CSS remains in Git for history but is not bundled.
+Superseded by the October 2026 redesign: a light/dark, Tailwind-based system (Inter Tight, Instrument Serif accents, JetBrains Mono labels) built around the résumé’s outcomes. Claim limits above still apply: illustrative figures stay labelled, Juno’s paper is not clinical validation, StrayPaw record counts are not care outcomes, and reported figures (Juno users, artisans, revenue) come from the résumé. Where the résumé and LinkedIn conflict on dates, the coarser or previously audited date is shown.

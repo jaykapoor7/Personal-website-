@@ -1,37 +1,66 @@
 import Link from "next/link";
 import { person } from "@/content/site";
 import { Arrow } from "./Arrow";
+
 export function Footer() {
   return (
-    <footer className="site-footer">
-      <div className="shell">
-        <div className="footer-top">
-          <span className="eyebrow">CONTACT</span>
-          <Link href="/artifacts">
-            Files <Arrow />
-          </Link>
+    <footer className="mt-32 border-t border-line">
+      <div className="shell py-20 md:py-28">
+        <p className="eyebrow">Contact</p>
+        <h2 className="mt-5 max-w-3xl text-4xl font-medium leading-[1.05] tracking-[-0.035em] md:text-6xl">
+          Building something in health, civic tech, or{" "}
+          <span className="font-serif font-normal italic">messy markets?</span>{" "}
+          Let’s talk.
+        </h2>
+        <div className="mt-10 flex flex-wrap items-center gap-3">
+          <a href={`mailto:${person.email}`} className="btn-primary">
+            {person.email}
+            <Arrow />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/jay-kapoor7"
+            target="_blank"
+            rel="noreferrer"
+            className="btn-ghost"
+          >
+            LinkedIn <Arrow />
+          </a>
         </div>
-        <a href={`mailto:${person.email}`} className="footer-invitation">
-          Email me.
-          <Arrow />
-        </a>
-        <a className="footer-email" href={`mailto:${person.email}`}>
-          {person.email}
-          <Arrow />
-        </a>
-        <div className="footer-links">
-          <span>JAY KAPOOR © {new Date().getFullYear()}</span>
-          <div>
+      </div>
+      <div className="border-t border-line">
+        <div className="shell flex flex-col gap-4 py-8 text-sm text-muted md:flex-row md:items-center md:justify-between">
+          <p>
+            © {new Date().getFullYear()} Jay Kapoor · {person.place}
+          </p>
+          <ul className="flex flex-wrap gap-x-5 gap-y-2">
             {person.links
               .filter((l) => l.label !== "Email")
               .map((l) => (
-                <a href={l.href} key={l.label} target="_blank" rel="noreferrer">
-                  {l.label}
-                  <Arrow />
-                </a>
+                <li key={l.href}>
+                  <a
+                    href={l.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="transition-colors hover:text-fg"
+                  >
+                    {l.label}
+                  </a>
+                </li>
               ))}
-          </div>
-          <a href="#main">Back to top ↑</a>
+            <li>
+              <Link
+                href="/artifacts"
+                className="transition-colors hover:text-fg"
+              >
+                Files
+              </Link>
+            </li>
+            <li>
+              <Link href="/play" className="transition-colors hover:text-fg">
+                Play
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
     </footer>

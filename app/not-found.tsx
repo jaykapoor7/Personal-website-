@@ -1,19 +1,21 @@
-import { Arrow } from "@/components/Arrow";
 import Link from "next/link";
+import { Arrow } from "@/components/Arrow";
+import { PageHeader } from "@/components/ui";
+
 export default function NotFound() {
   return (
-    <section className="page-hero wrap archive-page">
-      <span className="eyebrow">404 / Not found</span>
-      <h1>
-        Nothing <em>here.</em>
-      </h1>
-      <p>That page may have moved.</p>
-      <Link href="/" className="text-link">
-        Back home{" "}
-        <span>
-          <Arrow />
-        </span>
+    <PageHeader
+      eyebrow="404"
+      title={
+        <>
+          Nothing <span className="font-serif font-normal italic">here.</span>
+        </>
+      }
+      lede="That page may have moved."
+    >
+      <Link href="/" className="btn-primary mt-8">
+        Back home <Arrow direction="right" />
       </Link>
-    </section>
+    </PageHeader>
   );
 }

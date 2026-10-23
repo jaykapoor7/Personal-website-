@@ -10,21 +10,17 @@ npm run build
 
 No API keys, database, or server runtime are required. The build exports to `out/`.
 
-## The experience
+## Design
 
-- `app/experience.css`: new responsive design system. Previous UI stylesheets have been removed.
-- `components/LivingSystem.tsx`: one point → records → network → actual StrayPaw geography, controlled by scroll or direct buttons. Reduced motion disables automatic progression.
-- `components/StrayPawExplorer.tsx`: archived Coimbatore area geometry and aggregate request counts, with provenance and a link to the real map.
-- `components/PhotoTimeline.tsx`: personal archive, full-team comparison, and track-to-pitch transition. Faces are unchanged.
-- `components/HealthTechMap.tsx`: interactive view of the actual downloadable company dataset.
-- `/artifacts`: all the historical PDFs, spreadsheets, research files, and shipped builds in one inspectable index.
-- `/play`: two shipped games, the gravity desk, a labelled miniature sketch, and utility prototypes.
-
-Routes `/work`, `/research`, `/about`, `/play`, `/contact`, `/experience`, `/writing`, `/ledger`, `/thesis`, and historical project detail URLs are preserved. All old local artifact paths remain available.
+- Tailwind with a small token layer in `app/globals.css` (light and dark via `prefers-color-scheme`). Inter Tight for text, Instrument Serif italics for accents, JetBrains Mono for labels.
+- `app/page.tsx`: hero, highlight stats, StrayPaw feature (with the archived Coimbatore area map), selected work, experience, research & forecast ledger, side projects, and photos.
+- `/work/[slug]`: one template for every project — metrics, overview, what I did, artifacts, gallery.
+- `components/ProjectVisual.tsx`: photos where they exist; unit charts (one mark per centre, interview, or artisan) where they don’t.
+- `/research`, `/ledger`, `/about`, `/experience`, `/play`, `/artifacts`, `/contact`, plus the older `/writing` and `/thesis` routes.
 
 ## Evidence
 
-`content/site.ts` holds project contributions and sources; `content/proof.ts` holds the artifact index. `docs/master-redesign-audit.md` records claim limits, source conflicts, photography, and dataset provenance. Keep records distinct from outcomes, formative evaluations distinct from clinical validation, and sketches distinct from shipped products.
+`content/site.ts` holds the profile, projects, experience, writing, and photos; `content/proof.ts` holds the artifact index. `docs/master-redesign-audit.md` records claim limits, source conflicts, photography, and dataset provenance. Keep records distinct from outcomes, formative evaluations distinct from clinical validation, and sketches distinct from shipped products.
 
 ## Verification
 
@@ -33,6 +29,6 @@ python -m http.server 3000 --directory out
 npm run test:browser
 ```
 
-The browser suite exercises desktop/touch/reduced motion, navigation, real area-data controls, research filters, photo comparison, game sketch, physics, route availability, no-JavaScript navigation, and WCAG A/AA scans. Set `BASE_URL` for another origin or `PLAYWRIGHT_CHROMIUM_PATH` for a browser binary. See `docs/verification.md` for measured results and limits.
+The browser suite loads every route on desktop, mobile, and dark mode; checks for horizontal overflow, browser errors, and WCAG 2.1 A/AA (axe); exercises the mobile menu, dataset filter, and physics toy; and confirms every local link resolves. Set `BASE_URL` for another origin (`npm run test:production` targets kapoorjay.com) or `PLAYWRIGHT_CHROMIUM_PATH` for a browser binary.
 
 Do not modify or deploy to StrayPaw or unrelated game projects.

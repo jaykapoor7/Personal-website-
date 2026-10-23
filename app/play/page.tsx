@@ -1,184 +1,130 @@
-import { GovernmentSketch } from "@/components/GovernmentSketch";
-import { Arrow } from "@/components/Arrow";
-import Link from "next/link";
+import type { Metadata } from "next";
 import dynamic from "next/dynamic";
+import Link from "next/link";
+import { Arrow } from "@/components/Arrow";
+import { PageHeader, SectionHeader, SmartLink } from "@/components/ui";
+import { builds } from "@/content/site";
+
 const EverythingFalls = dynamic(
   () => import("@/components/EverythingFalls").then((m) => m.EverythingFalls),
-  { loading: () => <p>Loading…</p> },
+  {
+    loading: () => (
+      <div className="h-[460px] rounded-2xl border border-line bg-card" />
+    ),
+  },
 );
-export const metadata = {
-  title: "Experiments",
-  description: "Browser games and prototypes by Jay Kapoor.",
+
+export const metadata: Metadata = {
+  title: "Play",
+  description: "Browser games, prototypes, and experiments by Jay Kapoor.",
 };
+
+const games = [
+  {
+    title: "Everybody’s on Strike",
+    detail:
+      "A browser comedy where the interface itself has walked off the job.",
+    href: "https://strike.kapoorjay.com",
+    art: (
+      <span className="-rotate-6 rounded-md border-4 border-current px-5 py-2 font-mono text-3xl font-bold tracking-tight sm:text-4xl">
+        ON STRIKE.
+      </span>
+    ),
+    tint: "bg-[#fde047] text-black",
+  },
+  {
+    title: "The World’s Worst Emergency Service",
+    detail:
+      "An illustrated game about running a dispatch centre very, very badly.",
+    href: "https://emergency.kapoorjay.com",
+    art: <span className="text-7xl sm:text-8xl">🦕</span>,
+    tint: "bg-[#ef4444] text-white",
+  },
+];
+
 export default function Play() {
+  const prototypes = builds.filter((b) => b.kind === "Prototype");
   return (
     <>
-      <header className="shell editorial-hero">
-        <span className="eyebrow">BROWSER GAMES & PROTOTYPES</span>
-        <h1>Experiments.</h1>
-      </header>
-      <section className="shell experiment-list">
-        <article className="experiment-feature">
+      <PageHeader
+        eyebrow="Play"
+        title={
+          <>
+            Side projects,{" "}
+            <span className="font-serif font-normal italic">for fun.</span>
+          </>
+        }
+        lede="Small games and prototypes I build to learn new tools — and because some ideas are too funny not to ship."
+      />
+      <section className="shell grid gap-8 md:grid-cols-2">
+        {games.map((g) => (
           <a
-            href="https://strike.kapoorjay.com"
+            key={g.href}
+            href={g.href}
             target="_blank"
             rel="noreferrer"
-            className="experiment-poster strike-poster"
-            aria-label="Everybody’s on Strike — play"
+            className="group block"
           >
-            <span className="picket">ON STRIKE.</span>
-            <small>
-              EVERYBODY’S ON STRIKE <Arrow />
-            </small>
-          </a>
-          <div>
-            <span className="eyebrow">01 / BROWSER GAME</span>
-            <h2>
-              Everybody’s
-              <br />
-              on Strike
-            </h2>
-            <p>A game about an interface on strike.</p>
-            <a
-              href="https://strike.kapoorjay.com"
-              target="_blank"
-              rel="noreferrer"
-              className="pill dark"
+            <div
+              className={`grid aspect-[4/3] place-items-center overflow-hidden rounded-[24px] ${g.tint}`}
             >
-              Play{" "}
-              <span>
-                <Arrow />
-              </span>
-            </a>
-          </div>
-        </article>
-        <article className="experiment-feature">
-          <a
-            href="https://emergency.kapoorjay.com"
-            target="_blank"
-            rel="noreferrer"
-            className="experiment-poster emergency-poster"
-            aria-label="The World’s Worst Emergency Service — play"
-          >
-            <span aria-hidden="true">🦕</span>
-            <small>
-              PLAY <Arrow />
-            </small>
-          </a>
-          <div>
-            <span className="eyebrow">02 / BROWSER GAME</span>
-            <h2>
-              The World’s Worst
-              <br />
-              Emergency Service
-            </h2>
-            <p>A game about running an emergency service.</p>
-            <a
-              href="https://emergency.kapoorjay.com"
-              target="_blank"
-              rel="noreferrer"
-              className="pill dark"
-            >
-              Play{" "}
-              <span>
-                <Arrow />
-              </span>
-            </a>
-          </div>
-        </article>
-        <div className="experiment-embed">
-          <details>
-            <summary>Everybody’s on Strike</summary>
-            <iframe
-              title="Everybody’s on Strike — playable game"
-              src="https://strike.kapoorjay.com"
-              loading="lazy"
-              allow="fullscreen"
-              referrerPolicy="strict-origin-when-cross-origin"
-            />
-          </details>
-          <details>
-            <summary>The World’s Worst Emergency Service</summary>
-            <iframe
-              title="The World’s Worst Emergency Service — playable game"
-              src="https://emergency.kapoorjay.com"
-              loading="lazy"
-              allow="fullscreen"
-              referrerPolicy="strict-origin-when-cross-origin"
-            />
-          </details>
-        </div>
-        <article className="physics-preview">
-          <div className="section-rule">
-            <span>03 / PHYSICS EXPERIMENT</span>
-            <Link href="/play/everything-falls">
-              Open <Arrow />
-            </Link>
-          </div>
-          <h2>
-            Permission
-            <br />
-            <em>to Fall.</em>
-          </h2>
-          <p style={{ marginBottom: 25 }}>Drag and release.</p>
-          <EverythingFalls compact />
-        </article>
-        <article className="concept-sketch">
-          <GovernmentSketch />
-          <div className="concept-copy">
-            <span className="eyebrow">04 / PROTOTYPE</span>
-            <h2>
-              A Very Small
-              <br />
-              <em>Government.</em>
-            </h2>
-            <p>A prototype about approving a park.</p>
-          </div>
-        </article>
-      </section>
-      <section className="shell reading-list">
-        <div className="section-rule">
-          <span>OTHER PROTOTYPES</span>
-        </div>
-        <div className="archive-index">
-          {[
-            {
-              title: "Juno ADHD OS",
-              href: "/work/juno-adhd-os",
-              detail: "Productivity & behavioral planning",
-            },
-            {
-              title: "Health OS",
-              href: "/work/recovery-intelligence",
-              detail: "Wearable data, explained",
-            },
-            {
-              title: "Juno Preventive Health",
-              href: "/work/juno-preventive-health",
-              detail: "Preventive-health information",
-            },
-            {
-              title: "Road360",
-              href: "/work/road360",
-              detail: "Driving signals",
-            },
-            {
-              title: "Search visibility checker",
-              href: "/work/seo-geo-optimiser",
-              detail: "Search visibility",
-            },
-          ].map((x) => (
-            <Link key={x.href} href={x.href}>
-              <div>
-                {x.title}
-                <small>{x.detail} · Prototype</small>
+              <div className="transition-transform duration-500 ease-out group-hover:scale-105">
+                {g.art}
               </div>
-              <span>
+            </div>
+            <div className="mt-5 flex items-start justify-between gap-4">
+              <div>
+                <span className="chip">Game</span>
+                <h2 className="mt-3 text-2xl font-medium tracking-[-0.025em]">
+                  {g.title}
+                </h2>
+                <p className="mt-1.5 text-[15px] text-muted">{g.detail}</p>
+              </div>
+              <span className="mt-1 grid h-9 w-9 shrink-0 place-items-center rounded-full border border-line text-muted transition-all group-hover:border-fg group-hover:bg-fg group-hover:text-bg">
                 <Arrow />
               </span>
-            </Link>
+            </div>
+          </a>
+        ))}
+      </section>
+
+      <section className="shell pt-24">
+        <SectionHeader
+          index="Experiment"
+          title="Everything Falls"
+          action={{ label: "Full screen", href: "/play/everything-falls" }}
+        />
+        <EverythingFalls compact />
+      </section>
+
+      <section className="shell pt-24">
+        <SectionHeader index="Prototypes" title="Tools I’ve hacked together" />
+        <ul className="grid gap-px overflow-hidden rounded-[24px] border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+          {prototypes.map((b) => (
+            <li
+              key={b.title}
+              className="bg-bg sm:last:col-span-2 lg:last:col-span-2"
+            >
+              <SmartLink
+                href={b.href}
+                className="group flex h-full flex-col justify-between gap-8 p-6 transition-colors hover:bg-card"
+              >
+                <Arrow className="self-end text-faint group-hover:text-fg" />
+                <div>
+                  <p className="font-medium tracking-tight">{b.title}</p>
+                  <p className="mt-1 text-sm text-muted">{b.detail}</p>
+                </div>
+              </SmartLink>
+            </li>
           ))}
-        </div>
+        </ul>
+        <p className="mt-6 text-sm text-muted">
+          Prototypes are experiments, not validated products.{" "}
+          <Link href="/work" className="link">
+            See the real work
+          </Link>
+          .
+        </p>
       </section>
     </>
   );

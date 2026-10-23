@@ -1,46 +1,24 @@
-import { Arrow } from "@/components/Arrow";
 import type { Metadata } from "next";
-import { writingItems } from "@/content/site";
+import { PageHeader } from "@/components/ui";
+import { WritingList } from "@/components/WritingList";
+import { writing } from "@/content/site";
+
 export const metadata: Metadata = {
-  title: "Writing & research",
-  description: "Research notes and papers by Jay Kapoor.",
+  title: "Writing",
+  description: "Papers, investment memos, and sector theses by Jay Kapoor.",
 };
-export default function Writing() {
+
+export default function WritingPage() {
   return (
-    <div className="new-pro">
-      <header className="shell editorial-hero">
-        <span className="kicker">Writing / Research</span>
-        <h1>Writing.</h1>
-      </header>
-      <section className="shell writing-editorial">
-        <div className="section-label">
-          <span>THE INDEX</span>
-          <span>{String(writingItems.length).padStart(2, "0")} ENTRIES</span>
-        </div>
-        {writingItems.map((x, i) => (
-          <article key={x.title}>
-            <span className="list-number">
-              {String(i + 1).padStart(2, "0")} / {x.type}
-            </span>
-            <div>
-              <h2>{x.title}</h2>
-              <p>{x.description}</p>
-              <div>
-                {x.links.map((l) => (
-                  <a
-                    key={l.href}
-                    href={l.href}
-                    target={l.href.endsWith(".pdf") ? "_blank" : undefined}
-                    rel="noreferrer"
-                  >
-                    {l.label} <Arrow />
-                  </a>
-                ))}
-              </div>
-            </div>
-          </article>
-        ))}
+    <>
+      <PageHeader
+        eyebrow="Writing"
+        title="Papers, memos & theses."
+        lede="Long-form work on healthcare access, healthtech, and Indian fintech."
+      />
+      <section className="shell">
+        <WritingList items={writing} />
       </section>
-    </div>
+    </>
   );
 }

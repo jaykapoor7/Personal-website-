@@ -1,38 +1,27 @@
 import type { Config } from "tailwindcss";
 
+const token = (name: string) => `rgb(var(--${name}) / <alpha-value>)`;
+
 const config: Config = {
-  content: [
-    "./app/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./content/**/*.{ts,tsx}",
-  ],
+  content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        // Minimal warm-cream editorial palette.
-        ink: "#242019", // warm near-black
-        paper: "#f5f0e6", // cream
-        muted: "#7c756a", // warm grey
-        line: "#e5ddce", // soft cream border
-        accent: "#8a6d43", // restrained bronze, used sparingly
+        bg: token("bg"),
+        fg: token("fg"),
+        muted: token("muted"),
+        faint: token("faint"),
+        line: token("line"),
+        card: token("card"),
+        accent: token("accent"),
       },
       fontFamily: {
-        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
-        // Headings use an elegant serif; keep mono aliased to sans so any
-        // stray font-mono renders cleanly.
-        display: ["var(--font-display)", "Georgia", "serif"],
-        mono: ["var(--font-sans)", "system-ui", "sans-serif"],
+        sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
+        serif: ["var(--font-serif)", "ui-serif", "Georgia", "serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
-      letterSpacing: {
-        tightest: "-0.03em",
-        tighter2: "-0.02em",
-      },
-      transitionTimingFunction: {
-        "out-expo": "cubic-bezier(0.16, 1, 0.3, 1)",
-      },
-      maxWidth: {
-        shell: "1200px",
-      },
+      maxWidth: { shell: "1120px" },
+      transitionTimingFunction: { out: "cubic-bezier(0.16, 1, 0.3, 1)" },
     },
   },
   plugins: [],
