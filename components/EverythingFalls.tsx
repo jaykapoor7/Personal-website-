@@ -101,10 +101,14 @@ export function EverythingFalls({ compact = false }: { compact?: boolean }) {
     } | null>(null);
   const [zero, setZero] = useState(false),
     [round, setRound] = useState(0),
-    [started, setStarted] = useState(false);
+    [started, setStarted] = useState(false),
+    [size, setSize] = useState(64);
+  const startedRef = useRef(false);
+  const zeroRef = useRef(false);
   const reset = useCallback(() => {
     setRound((n) => n + 1);
     setStarted(false);
+    startedRef.current = false;
   }, []);
   useEffect(() => {
     const el = stage.current;
@@ -126,9 +130,12 @@ export function EverythingFalls({ compact = false }: { compact?: boolean }) {
     const width = el.clientWidth,
       height = el.clientHeight;
     if (!width || !height) return;
-    const e = Matter.Engine.create({ gravity: { x: 0, y: zero ? 0 : 1.15 } });
+    // Bodies are dynamic from the start (a body created static never gets its
+    // mass back); they hang in place until the first touch turns gravity on.
+    const e = Matter.Engine.create({ gravity: { x: 0, y: 0 } });
     engine.current = e;
-    const size = Math.max(50, Math.min(78, width / 8.5));
+    const size = Math.round(Math.max(48, Math.min(76, width / 9)));
+    setSize(size);
     const items = things.map((item, i) =>
       Matter.Bodies.rectangle(item.x * width, item.y * height, size, size, {
         friction: 0.42,
@@ -136,12 +143,15 @@ export function EverythingFalls({ compact = false }: { compact?: boolean }) {
         frictionAir: 0.013,
         angle: (item.r * Math.PI) / 180,
         label: item.name,
-        isStatic: true,
+        chamfer: { radius: 12 },
       }),
     );
     bodies.current = items;
     const walls = [
       Matter.Bodies.rectangle(width / 2, height + 28, width + 100, 56, {
+        isStatic: true,
+      }),
+      Matter.Bodies.rectangle(width / 2, -28, width + 100, 56, {
         isStatic: true,
       }),
       Matter.Bodies.rectangle(-28, height / 2, 56, height * 2, {
@@ -156,6 +166,8 @@ export function EverythingFalls({ compact = false }: { compact?: boolean }) {
     const tick = (now: number) => {
       const dt = Math.min(now - previous, 33);
       previous = now;
+      if (!startedRef.current)
+        items.forEach((b) => Matter.Body.setVelocity(b, { x: 0, y: 0 }));
       Matter.Engine.update(e, dt);
       items.forEach((b, i) => {
         const node = el.querySelector<HTMLElement>(`[data-object="${i}"]`);
@@ -173,12 +185,14 @@ export function EverythingFalls({ compact = false }: { compact?: boolean }) {
     };
   }, [round]);
   useEffect(() => {
-    if (engine.current) engine.current.gravity.y = zero ? 0 : 1.15;
+    zeroRef.current = zero;
+    if (engine.current && startedRef.current)
+      engine.current.gravity.y = zero ? 0 : 1.15;
   }, [zero]);
   const releaseAll = () => {
-    bodies.current.forEach((b) => {
-      if (b.isStatic) Matter.Body.setStatic(b, false);
-    });
+    if (startedRef.current) return;
+    startedRef.current = true;
+    if (engine.current) engine.current.gravity.y = zeroRef.current ? 0 : 1.15;
     setStarted(true);
   };
   const point = (event: React.PointerEvent) => {
@@ -226,8 +240,7 @@ export function EverythingFalls({ compact = false }: { compact?: boolean }) {
     <div className={`falls ${compact ? "falls-compact" : ""}`}>
       <div className="falls-toolbar">
         <span>
-          <i className="live-dot" />{" "}
-          {started ? "things in motion" : "pick something up"}
+          {started ? "Things in motion" : "Pick something up and throw it"}
         </span>
         <div>
           <button
@@ -282,7 +295,7 @@ export function EverythingFalls({ compact = false }: { compact?: boolean }) {
               }
             }}
             onPointerDown={(e) => down(e, i)}
-            style={{ background: item.color }}
+            style={{ background: item.color, width: size, height: size }}
           >
             <ObjectDrawing index={i} />
           </button>

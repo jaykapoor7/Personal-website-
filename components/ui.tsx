@@ -76,16 +76,16 @@ export function PageHeader({
   children?: React.ReactNode;
 }) {
   return (
-    <header className="shell pb-16 pt-36 md:pb-24 md:pt-48">
+    <header className="shell pb-10 pt-28 md:pb-14 md:pt-36">
       <Reveal>
         {eyebrow && <p className="label">{eyebrow}</p>}
-        <h1 className="display mt-5 max-w-5xl text-[clamp(60px,10vw,160px)]">
+        <h1 className="display mt-3 max-w-5xl text-[clamp(56px,8vw,120px)]">
           {title}
         </h1>
       </Reveal>
       {lede && (
         <Reveal delay={0.12}>
-          <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted md:text-xl">
+          <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted md:text-xl">
             {lede}
           </p>
         </Reveal>

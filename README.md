@@ -10,15 +10,14 @@ npm run build   # exports to out/
 
 ## How it is put together
 
-- `content/site.ts` holds the profile, projects, experience, writing and photos. House style: no em dashes and "Resume" without accents.
-- `public/previews` are screenshots of the live sites (StrayPaw, the games, the side projects, Crowwd). `public/covers` are the first pages of the linked PDFs. Re-shoot them when a site changes.
-- `components/Desk.tsx`: the draggable desk on the home and about pages.
-- `components/Showcase.tsx`: a real site scrolls inside a browser window as the page scrolls.
-- `components/WorkIndex.tsx`: the work list, with the real preview following the cursor.
-- `components/LivePlay.tsx`: a screenshot that turns into the live site (iframe) when you press play. StrayPaw does not allow framing, so it is shown as a showcase instead.
-- `components/Shelf.tsx`: PDF first pages fanned out like papers.
+- `content/site.ts` holds everything: projects (each in a group: started, worked, research, side, game), the dated timeline, photos and writing. House style: no em dashes, "Resume" without accents.
+- `public/previews` are screenshots of the live sites and lab pages; `public/covers` are first pages of the PDFs.
+- `components/ProjectBrowser.tsx`: a browser with a tab per project. Sites that allow embedding run live in the tab; others show the real page or PDF, scrollable inside the window.
+- `components/Timeline.tsx`: everything on one stretched timeline, with photos pinned where the year is known. Tap a bar for the outcome.
+- `components/PhotoStack.tsx`: the swipeable photo pile on the home page. `components/Desk.tsx`: draggable polaroids on About.
+- `components/Shelf.tsx`: PDF first pages fanned out. `components/EverythingFalls.tsx`: the physics toy.
 
-Every animation switches off with reduced motion, and pages still render without JavaScript.
+Light only: white, indigo and soft mesh backgrounds. Every animation switches off with reduced motion.
 
 ## Checks
 

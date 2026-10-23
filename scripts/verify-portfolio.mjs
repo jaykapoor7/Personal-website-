@@ -98,9 +98,9 @@ try {
       await page.getByRole("button", { name: "Open menu" }).tap();
       await page
         .locator("#mobile-menu")
-        .getByRole("link", { name: "Research" })
+        .getByRole("link", { name: "Work" })
         .tap();
-      await page.waitForURL(/\/research\/$/);
+      await page.waitForURL(/\/work\/$/);
     }
 
     await page.goto(base + "/research/", { waitUntil: "networkidle" });

@@ -10,9 +10,9 @@ export const person = {
   degree: "B.S. Economics & Statistics, minor in Information Sciences",
   place: "Pittsburgh, PA",
   about: [
-    "I study Economics and Statistics at Pitt, with a minor in Information Sciences. Most of what I build started as something I noticed growing up in India.",
-    "I started Juno-AI when I was 14 and grew it to 10,000+ rural users. Since then I have interviewed delivery riders about their medicine, run operations for eight childcare centres, worked in a fintech founder's office, and written investment memos that I score in public.",
-    "These days I am building StrayPaw and doing applied AI and accessibility research at Pitt. When I am not working, I am probably playing football.",
+    "I went to school in Bangalore, spent my summers working in Delhi, and now live in Pittsburgh, where I study Economics and Statistics at Pitt.",
+    "Most of what I build starts with something I noticed. A dog outside a cafe with no one keeping track of it. A delivery rider carrying medicine he could not get for himself. Families hours away from the nearest doctor.",
+    "When I am not building, I am playing football, making silly browser games, or writing down predictions so I can find out exactly how wrong I was.",
   ],
   links: [
     { label: "Email", href: "mailto:jak581@pitt.edu" },
@@ -34,11 +34,27 @@ export type Preview =
       scroll?: string;
       /** height / width of the scroll screenshot */
       scrollRatio?: number;
+      /** The site allows embedding, so it can run live inside the page. */
+      live?: boolean;
+      /** Show it in a phone instead of a browser. */
+      phone?: boolean;
     }
+  | { type: "falls" }
   | { type: "doc"; cover: string; href: string };
+
+export type Group = "started" | "worked" | "research" | "side" | "game";
+
+export const groupLabels: Record<Group, string> = {
+  started: "Things I started",
+  worked: "Places I worked",
+  research: "Research",
+  side: "Side projects",
+  game: "Games",
+};
 
 export type Project = {
   slug: string;
+  group: Group;
   title: string;
   role: string;
   period?: string;
@@ -56,6 +72,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "straypaw",
+    group: "started",
     title: "StrayPaw",
     role: "Founder",
     period: "2026-now",
@@ -109,6 +126,7 @@ export const projects: Project[] = [
   },
   {
     slug: "juno-ai",
+    group: "started",
     title: "Juno-AI",
     role: "Founder",
     period: "2019-2023",
@@ -148,6 +166,7 @@ export const projects: Project[] = [
   },
   {
     slug: "crowwd",
+    group: "worked",
     title: "Crowwd",
     role: "Founder's Office",
     period: "2025",
@@ -200,6 +219,7 @@ export const projects: Project[] = [
   },
   {
     slug: "tot-schools",
+    group: "worked",
     title: "TOT Schools",
     role: "Operations Lead",
     period: "2025-2026",
@@ -234,6 +254,7 @@ export const projects: Project[] = [
   },
   {
     slug: "project-nidaan",
+    group: "started",
     title: "Project Nidaan",
     role: "Co-founder",
     period: "2022-2024",
@@ -271,6 +292,7 @@ export const projects: Project[] = [
   },
   {
     slug: "finer-things-club",
+    group: "started",
     title: "The Finer Things Club",
     role: "Founder",
     period: "2021-2024",
@@ -302,6 +324,7 @@ export const projects: Project[] = [
   },
   {
     slug: "hdfc-bank",
+    group: "worked",
     title: "HDFC Bank",
     role: "Wealth Management Intern",
     period: "2025",
@@ -329,6 +352,7 @@ export const projects: Project[] = [
   },
   {
     slug: "tarc",
+    group: "worked",
     title: "TARC",
     role: "Project and Operations Associate",
     period: "Jan-Aug 2026",
@@ -352,6 +376,7 @@ export const projects: Project[] = [
   },
   {
     slug: "juno-preventive-health",
+    group: "side",
     title: "Juno",
     role: "Side project",
     period: "2026",
@@ -363,6 +388,7 @@ export const projects: Project[] = [
     preview: {
       type: "site",
       url: "preventive-healthcare-xi.vercel.app",
+      live: true,
       desktop: "/previews/juno-preventive-d.webp",
       mobile: "/previews/juno-preventive-m.webp",
       scroll: "/previews/juno-preventive-scroll.webp",
@@ -381,6 +407,7 @@ export const projects: Project[] = [
   },
   {
     slug: "recovery-intelligence",
+    group: "side",
     title: "CURA",
     role: "Side project",
     period: "2026",
@@ -392,6 +419,7 @@ export const projects: Project[] = [
     preview: {
       type: "site",
       url: "explain-my-whoop-stats.vercel.app",
+      live: true,
       desktop: "/previews/health-os-d.webp",
       mobile: "/previews/health-os-m.webp",
     },
@@ -408,6 +436,7 @@ export const projects: Project[] = [
   },
   {
     slug: "road360",
+    group: "side",
     title: "Road360",
     role: "Side project",
     period: "2026",
@@ -420,6 +449,8 @@ export const projects: Project[] = [
     preview: {
       type: "site",
       url: "road360.vercel.app",
+      live: true,
+      phone: true,
       desktop: "/previews/road360-d.webp",
       mobile: "/previews/road360-m.webp",
     },
@@ -430,6 +461,7 @@ export const projects: Project[] = [
   },
   {
     slug: "seo-geo-optimiser",
+    group: "side",
     title: "LLM Visibility Lab",
     role: "Side project",
     period: "2026",
@@ -442,6 +474,7 @@ export const projects: Project[] = [
     preview: {
       type: "site",
       url: "llm-ai-search-checker.vercel.app",
+      live: true,
       desktop: "/previews/search-visibility-d.webp",
       mobile: "/previews/search-visibility-m.webp",
     },
@@ -458,6 +491,7 @@ export const projects: Project[] = [
   },
   {
     slug: "juno-adhd-os",
+    group: "side",
     title: "Juno ADHD OS",
     role: "Side project",
     period: "Jan-May 2026",
@@ -475,7 +509,51 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "accessible-smarttech",
+    group: "research",
+    title: "Accessible SmartTech Lab",
+    role: "Research Assistant",
+    period: "2026-now",
+    category: "Research",
+    summary:
+      "Human-machine interaction for accessible smart technology, with Prof. Dan Ding.",
+    body: [
+      "I am developing human-machine interaction systems for accessible smart technologies under Professor Dan Ding.",
+    ],
+    preview: {
+      type: "site",
+      url: "smarttech.pitt.edu",
+      desktop: "/previews/smarttech-d.webp",
+    },
+    links: [{ label: "The lab", href: "https://www.smarttech.pitt.edu" }],
+  },
+  {
+    slug: "sci-3sixty",
+    group: "research",
+    title: "SCI 3Sixty",
+    role: "3Sixty Fellow",
+    period: "2026-now",
+    category: "Research",
+    summary:
+      "Applied AI research with Prof. Rosta Farzan, including how nonprofits adopt AI.",
+    body: [
+      "Selected as a 3Sixty Fellow at Pitt's School of Computing and Information to do applied AI research under Professor Rosta Farzan.",
+    ],
+    preview: {
+      type: "site",
+      url: "sci.pitt.edu",
+      desktop: "/previews/sci-3sixty-d.webp",
+    },
+    links: [
+      {
+        label: "3Sixty",
+        href: "https://www.sci.pitt.edu/give-sci/3sixty-program",
+      },
+    ],
+  },
+  {
     slug: "apodaca-lab",
+    group: "research",
     title: "Apodaca Lab",
     role: "Research Assistant, Pitt",
     period: "2024-2025",
@@ -485,6 +563,11 @@ export const projects: Project[] = [
     body: [
       "I researched urothelial mechanotransduction and what it means for urinary health under Professor Gerard Apodaca. I cultured primary bladder urothelial cells for PIEZO/TMEM63 studies and made figures for manuscripts and grant submissions.",
     ],
+    preview: {
+      type: "site",
+      url: "people.dom.pitt.edu",
+      desktop: "/previews/apodaca-d.webp",
+    },
     links: [
       {
         label: "Apodaca Lab",
@@ -494,6 +577,7 @@ export const projects: Project[] = [
   },
   {
     slug: "upmc-emergency-medicine",
+    group: "research",
     title: "UPMC Emergency Medicine",
     role: "Research Assistant",
     period: "2025-2026",
@@ -503,6 +587,11 @@ export const projects: Project[] = [
     body: [
       "I analysed prehospital care patterns and emergency outcomes across UPMC's regional EMS system, abstracting and coding medical record data into REDCap.",
     ],
+    preview: {
+      type: "site",
+      url: "emergencymedicine.pitt.edu",
+      desktop: "/previews/pitt-em-d.webp",
+    },
     links: [
       {
         label: "Pitt Emergency Medicine",
@@ -512,6 +601,7 @@ export const projects: Project[] = [
   },
   {
     slug: "pitt-sociology",
+    group: "research",
     title: "Pitt Sociology",
     role: "Research Assistant",
     category: "Research",
@@ -525,6 +615,7 @@ export const projects: Project[] = [
   },
   {
     slug: "max-hospital",
+    group: "research",
     title: "Max Hospital",
     role: "Clinical shadowing",
     period: "2023-2024",
@@ -532,6 +623,68 @@ export const projects: Project[] = [
     summary: "Shadowed emergency and internal medicine teams in New Delhi.",
     body: ["I shadowed emergency and internal medicine teams in New Delhi."],
     links: [{ label: "Max Healthcare", href: "https://www.maxhealthcare.in" }],
+  },
+  {
+    slug: "everybodys-on-strike",
+    group: "game",
+    title: "Everybody's on Strike",
+    role: "Game",
+    period: "2026",
+    category: "Game",
+    summary: "A productivity app where every button has walked off the job.",
+    body: [
+      "A browser comedy dressed up as a slick productivity startup. Everything you click is on strike.",
+    ],
+    preview: {
+      type: "site",
+      url: "strike.kapoorjay.com",
+      desktop: "/previews/strike-d.webp",
+      live: true,
+    },
+    links: [
+      { label: "Play", href: "https://strike.kapoorjay.com" },
+      {
+        label: "Code",
+        href: "https://github.com/jaykapoor7/everybodys-on-strike",
+      },
+    ],
+  },
+  {
+    slug: "worst-emergency-service",
+    group: "game",
+    title: "The World's Worst Emergency Service",
+    role: "Game",
+    period: "2026",
+    category: "Game",
+    summary: "You run the dispatch desk. Please remain mildly concerned.",
+    body: [
+      "An illustrated game where you answer the town's emergencies with the worst possible response, and every choice leaves a mark on the map.",
+    ],
+    preview: {
+      type: "site",
+      url: "emergency.kapoorjay.com",
+      desktop: "/previews/emergency-d.webp",
+      live: true,
+    },
+    links: [
+      { label: "Play", href: "https://emergency.kapoorjay.com" },
+      {
+        label: "Code",
+        href: "https://github.com/jaykapoor7/worst-emergency-service",
+      },
+    ],
+  },
+  {
+    slug: "everything-falls",
+    group: "game",
+    title: "Everything Falls",
+    role: "Toy",
+    period: "2026",
+    category: "Game",
+    summary: "Pick things up and throw them. Turn gravity off if you like.",
+    body: ["A small physics toy built on Matter.js."],
+    preview: { type: "falls" },
+    links: [{ label: "Full screen", href: "/play/everything-falls" }],
   },
 ];
 
@@ -790,4 +943,220 @@ export const photos = [
     alt: "Jay's childhood football team on the pitch with their coach",
     caption: "First team",
   },
+];
+
+/** Dates as decimal years (2025.33 = May 2025). `end: null` means still going. */
+export type Lane = "started" | "worked" | "research" | "school";
+export type Stint = {
+  id: string;
+  title: string;
+  role: string;
+  lane: Lane;
+  start: number;
+  end: number | null;
+  when: string;
+  line: string;
+  href?: string;
+  link?: string;
+};
+
+const m = (year: number, month: number) => year + (month - 1) / 12;
+
+export const now = m(2026, 10);
+
+export const timeline: Stint[] = [
+  {
+    id: "juno-ai",
+    title: "Juno-AI",
+    role: "Founder",
+    lane: "started",
+    start: m(2019, 6),
+    end: m(2023, 8),
+    when: "Jun 2019 to Aug 2023",
+    line: "Started at 14. An AI health assistant wired to doctors, pharmacies and Practo bookings, used by 10,000+ rural users.",
+    href: "/work/juno-ai",
+    link: "See Juno-AI",
+  },
+  {
+    id: "finer-things-club",
+    title: "Finer Things Club",
+    role: "Founder",
+    lane: "started",
+    start: m(2021, 7),
+    end: m(2024, 8),
+    when: "Jul 2021 to Aug 2024",
+    line: "Got 300+ rural artisans selling online. $8k+ in revenue through NGO and marketplace partners.",
+    href: "/work/finer-things-club",
+    link: "See the club",
+  },
+  {
+    id: "project-nidaan",
+    title: "Project Nidaan",
+    role: "Co-founder",
+    lane: "started",
+    start: m(2022, 5),
+    end: m(2024, 8),
+    when: "May 2022 to Aug 2024",
+    line: "55 interviews with delivery riders about getting their own medicine. Zomato and Swiggy came on as partners.",
+    href: "/work/project-nidaan",
+    link: "See Nidaan",
+  },
+  {
+    id: "straypaw",
+    title: "StrayPaw",
+    role: "Founder",
+    lane: "started",
+    start: m(2026, 6),
+    end: null,
+    when: "Jun 2026 to now",
+    line: "From 50 Delhi dogs to 30,288 animal records and 19 NGO partners in two months.",
+    href: "/work/straypaw",
+    link: "See StrayPaw",
+  },
+  {
+    id: "crowwd",
+    title: "Crowwd",
+    role: "Founder's Office Intern",
+    lane: "worked",
+    start: m(2025, 5),
+    end: m(2025, 8),
+    when: "May to Aug 2025, New Delhi",
+    line: "Growth for a 20,000-user investing app, a seven-platform teardown, and the Arthavaad speaker series.",
+    href: "/work/crowwd",
+    link: "See Crowwd",
+  },
+  {
+    id: "hdfc-bank",
+    title: "HDFC Bank",
+    role: "Wealth Management Intern",
+    lane: "worked",
+    start: m(2025, 5),
+    end: m(2025, 8),
+    when: "May to Aug 2025, New Delhi",
+    line: "Equity and fund research for HNI portfolio reviews.",
+    href: "/work/hdfc-bank/Apollo-Hospitals-Research-Note-Aug-2025.pdf",
+    link: "Read the Apollo note",
+  },
+  {
+    id: "tot-schools",
+    title: "TOT Schools",
+    role: "Operations Lead",
+    lane: "worked",
+    start: m(2025, 6),
+    end: m(2026, 4),
+    when: "Jun 2025 to Apr 2026",
+    line: "Ran six functions across eight childcare centres and wrote the 12-document handbook they run on.",
+    href: "/work/tot-schools/TOT-Schools-Operations-Case-Study.pdf",
+    link: "Read the case study",
+  },
+  {
+    id: "tarc",
+    title: "TARC India",
+    role: "Project and Operations Associate",
+    lane: "worked",
+    start: m(2026, 1),
+    end: m(2026, 8),
+    when: "Jan to Aug 2026, New Delhi",
+    line: "Project and operations work at a real estate developer, including a feasibility memo.",
+    href: "/work/tarc/Development-Feasibility-Memo-2025.pdf",
+    link: "Read the memo",
+  },
+  {
+    id: "apodaca-lab",
+    title: "Apodaca Lab",
+    role: "Research Assistant",
+    lane: "research",
+    start: m(2024, 8),
+    end: m(2025, 5),
+    when: "Aug 2024 to May 2025",
+    line: "Urothelial mechanotransduction and urinary health with Prof. Gerard Apodaca.",
+    href: "https://people.dom.pitt.edu/people/gerard-apodaca-phd",
+    link: "The lab",
+  },
+  {
+    id: "upmc",
+    title: "UPMC EM",
+    role: "Research Assistant",
+    lane: "research",
+    start: m(2025, 8),
+    end: m(2026, 1),
+    when: "Aug 2025 to Jan 2026",
+    line: "Prehospital care patterns and emergency outcomes across UPMC's regional EMS system.",
+    href: "https://www.emergencymedicine.pitt.edu",
+    link: "The department",
+  },
+  {
+    id: "memos",
+    title: "Investment memos",
+    role: "Independent",
+    lane: "research",
+    start: m(2026, 5),
+    end: null,
+    when: "May 2026 to now",
+    line: "Dated theses on Indian healthtech and fintech, scored in public.",
+    href: "/ledger",
+    link: "See the ledger",
+  },
+  {
+    id: "smarttech",
+    title: "SmartTech Lab",
+    role: "Research Assistant",
+    lane: "research",
+    start: m(2026, 8),
+    end: null,
+    when: "Aug 2026 to now",
+    line: "Human-machine interaction for accessible smart technology, with Prof. Dan Ding.",
+    href: "https://www.smarttech.pitt.edu",
+    link: "The lab",
+  },
+  {
+    id: "3sixty",
+    title: "SCI 3Sixty",
+    role: "Fellow",
+    lane: "research",
+    start: m(2026, 9),
+    end: null,
+    when: "Sep 2026 to now",
+    line: "Applied AI research with Prof. Rosta Farzan.",
+    href: "https://www.sci.pitt.edu/give-sci/3sixty-program",
+    link: "3Sixty",
+  },
+  {
+    id: "tisb",
+    title: "TISB",
+    role: "IB Diploma, entrepreneurship club founder",
+    lane: "school",
+    start: m(2021, 8),
+    end: m(2023, 8),
+    when: "Aug 2021 to Aug 2023, Bangalore",
+    line: "Founded the entrepreneurship club. Ran vendors for a 4,000-person event: 25 vendors, a $10k budget. Led the team that won Best Contingent at the National Economics Fest against 500+ colleges.",
+    href: "https://www.tisb.org",
+    link: "TISB",
+  },
+  {
+    id: "pitt",
+    title: "Pitt",
+    role: "Economics & Statistics",
+    lane: "school",
+    start: m(2024, 8),
+    end: null,
+    when: "Aug 2024 to May 2028",
+    line: "B.S. Economics & Statistics, minor in Information Sciences. Also: JumpStart team leader, sociology research, and economics research on Kisan Rail.",
+    href: "/jay-kapoor-resume.pdf",
+    link: "Resume",
+  },
+];
+
+export const laneLabels: Record<Lane, string> = {
+  started: "Started",
+  worked: "Worked",
+  research: "Researched",
+  school: "School",
+};
+
+/** Photos pinned to the timeline, only where the year is certain. */
+export const moments = [
+  { name: "02_childhood_running", caption: "Little me", at: 2018.6 },
+  { name: "07_school_ceremony", caption: "Graduation", at: m(2023, 6) },
+  { name: "pitt_portrait", caption: "Pitt", at: m(2025, 4) },
 ];

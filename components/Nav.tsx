@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 
 const links = [
   { href: "/work", label: "Work" },
-  { href: "/research", label: "Research" },
-  { href: "/play", label: "Play" },
+  { href: "/experience", label: "Experience" },
+  { href: "/writing", label: "Writing" },
   { href: "/about", label: "About" },
 ];
 
@@ -40,7 +40,7 @@ export function Nav() {
         hidden && !open ? "-translate-y-24" : ""
       }`}
     >
-      <div className="w-full max-w-[720px] rounded-[26px] border border-line/80 bg-bg/70 shadow-[0_8px_32px_-12px_rgba(0,0,0,0.18)] backdrop-blur-2xl backdrop-saturate-150">
+      <div className="w-full max-w-[720px] rounded-[26px] border border-white/70 bg-white/75 shadow-[0_8px_32px_-12px_rgba(0,0,0,0.18)] backdrop-blur-2xl backdrop-saturate-150">
         <nav
           className="flex h-12 items-center justify-between pl-2 pr-2"
           aria-label="Main"
@@ -52,7 +52,7 @@ export function Nav() {
           >
             <span
               aria-hidden="true"
-              className="grid h-8 w-8 place-items-center rounded-full bg-fg font-display text-[13px] font-bold leading-none text-bg"
+              className="grid h-8 w-8 place-items-center rounded-full bg-accent font-display text-[13px] font-bold leading-none text-white"
             >
               JK
             </span>
@@ -82,7 +82,7 @@ export function Nav() {
               href="/contact"
               className="btn-primary hidden h-8 px-4 text-[13px] md:inline-flex"
             >
-              Contact
+              Say hi
             </Link>
             <button
               type="button"
@@ -108,7 +108,7 @@ export function Nav() {
           </div>
         </nav>
         <div id="mobile-menu" hidden={!open} className="px-5 pb-5 md:hidden">
-          {[...links, { href: "/contact", label: "Contact" }].map((l) => (
+          {[...links, { href: "/contact", label: "Say hi" }].map((l) => (
             <Link
               key={l.href}
               href={l.href}

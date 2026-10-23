@@ -50,7 +50,9 @@ export function HealthTechMap() {
         ))}
       </div>
       <ul
-        className="grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-3"
+        tabIndex={0}
+        aria-label="Companies"
+        className="grid max-h-[460px] gap-px overflow-y-auto bg-line sm:grid-cols-2 lg:grid-cols-3"
         aria-live="polite"
       >
         {shown.map((c) => (

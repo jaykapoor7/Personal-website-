@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import {
   Inter_Tight,
   Bricolage_Grotesque,
+  Caveat,
   JetBrains_Mono,
 } from "next/font/google";
 import "./globals.css";
@@ -18,6 +19,11 @@ const sans = Inter_Tight({
 const display = Bricolage_Grotesque({
   subsets: ["latin"],
   variable: "--font-display",
+  display: "swap",
+});
+const hand = Caveat({
+  subsets: ["latin"],
+  variable: "--font-hand",
   display: "swap",
 });
 const mono = JetBrains_Mono({
@@ -44,12 +50,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f2f0eb" },
-    { media: "(prefers-color-scheme: dark)", color: "#0e0e0d" },
-  ],
-};
+export const viewport: Viewport = { themeColor: "#ffffff" };
 
 export default function RootLayout({
   children,
@@ -59,7 +60,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${sans.variable} ${display.variable} ${mono.variable}`}
+      className={`${sans.variable} ${display.variable} ${mono.variable} ${hand.variable}`}
     >
       <body>
         <a

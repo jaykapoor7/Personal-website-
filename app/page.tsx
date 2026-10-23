@@ -1,451 +1,276 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Arrow } from "@/components/Arrow";
-import { SmartLink } from "@/components/ui";
-import { Desk, DeskRow, type DeskItem } from "@/components/Desk";
-import { BrowserFrame, Paper, PhoneFrame, Polaroid } from "@/components/frames";
-import { LivePlay } from "@/components/LivePlay";
-import { Counter, Reveal, RiseWords } from "@/components/motion";
-import { Shelf } from "@/components/Shelf";
-import { Showcase } from "@/components/Showcase";
-import { WorkIndex } from "@/components/WorkIndex";
-import {
-  experience,
-  featuredProjects,
-  games,
-  photos,
-  projects,
-  writing,
-} from "@/content/site";
+import { Reveal, RiseWords } from "@/components/motion";
+import { PhotoStack } from "@/components/PhotoStack";
+import { ProjectBrowser } from "@/components/ProjectBrowser";
+import { Timeline } from "@/components/Timeline";
+import { ledger } from "@/content/ledger";
+import { projects, writing } from "@/content/site";
 
-const site = (src: string, url: string, alt: string) => (
-  <BrowserFrame url={url} className="deep-shadow">
-    <div className="relative aspect-[16/10]">
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        sizes="460px"
-        priority
-        className="object-cover object-top"
-        draggable={false}
-      />
-    </div>
-  </BrowserFrame>
-);
-
-const heroItems: DeskItem[] = [
+const stack = [
   {
-    id: "straypaw",
-    label: "StrayPaw",
-    href: "/work/straypaw",
-    x: 2,
-    y: 14,
-    rotate: -5,
-    width: 440,
-    node: site(
-      "/previews/straypaw-d.webp",
-      "straypaw.org",
-      "StrayPaw home page",
-    ),
+    src: "/photos/pitt_portrait-640.webp",
+    alt: "Jay on the Cathedral of Learning lawn at Pitt",
+    caption: "Pitt",
   },
   {
-    id: "portrait",
-    label: "About Jay",
-    href: "/about",
-    x: 78,
-    y: 12,
-    rotate: 6,
-    width: 210,
-    node: <Polaroid name="pitt_portrait" alt="Jay at Pitt" caption="Pitt" />,
+    src: "/work/crowwd/arthavaad-stage-640.webp",
+    alt: "Jay at an Arthavaad talk he ran for Crowwd",
+    caption: "Running Arthavaad",
   },
   {
-    id: "arthavaad",
-    label: "Crowwd",
-    href: "/work/crowwd",
-    x: 58,
-    y: 12,
-    rotate: -4,
-    width: 180,
-    node: (
-      <Polaroid
-        src="/work/crowwd/arthavaad-stage-640.webp"
-        alt="Jay at an Arthavaad talk"
-        caption="Arthavaad, Crowwd"
-      />
-    ),
+    src: "/photos/01_trojans_team-640.webp",
+    alt: "Jay with the Trojans football team",
+    caption: "The Trojans",
   },
   {
-    id: "juno",
-    label: "Juno-AI paper",
-    href: "/work/juno-ai",
-    x: 5,
-    y: 60,
-    rotate: -9,
-    width: 180,
-    node: (
-      <Paper
-        src="/covers/Juno-AI-Research-Paper.webp"
-        alt="Juno-AI research paper"
-      />
-    ),
+    src: "/photos/07_school_ceremony-640.webp",
+    alt: "Jay on stage at his school graduation",
+    caption: "Graduation",
   },
   {
-    id: "emergency",
-    label: "The World's Worst Emergency Service",
-    href: "https://emergency.kapoorjay.com",
-    x: 33,
-    y: 68,
-    rotate: -2,
-    width: 340,
-    node: site(
-      "/previews/emergency-d.webp",
-      "emergency.kapoorjay.com",
-      "The World's Worst Emergency Service",
-    ),
+    src: "/photos/04_childhood_football_team-640.webp",
+    alt: "Jay's childhood football team",
+    caption: "First team",
   },
   {
-    id: "map",
-    label: "StrayPaw map",
-    href: "https://www.straypaw.org/map",
-    x: 66,
-    y: 50,
-    rotate: 7,
-    width: 170,
-    node: (
-      <PhoneFrame className="deep-shadow">
-        <div className="relative aspect-[390/844]">
-          <Image
-            src="/previews/straypaw-map-m.webp"
-            alt="StrayPaw map on a phone"
-            fill
-            sizes="170px"
-            className="object-cover object-top"
-            draggable={false}
-          />
-        </div>
-      </PhoneFrame>
-    ),
-  },
-  {
-    id: "tot",
-    label: "TOT Schools case study",
-    href: "/work/tot-schools",
-    x: 84,
-    y: 58,
-    rotate: 8,
-    width: 160,
-    node: (
-      <Paper
-        src="/covers/TOT-Schools-Operations-Case-Study.webp"
-        alt="TOT Schools case study"
-      />
-    ),
+    src: "/photos/02_childhood_running-640.webp",
+    alt: "Jay running at a childhood sports day",
+    caption: "Sports day",
   },
 ];
 
-const photoItems: DeskItem[] = photos.slice(1).map((p, i) => ({
-  id: p.name,
-  label: p.caption,
-  href: "/about",
-  x: [4, 27, 52, 74][i],
-  y: [14, 30, 8, 26][i],
-  rotate: [-6, 4, -3, 7][i],
-  width: [260, 240, 250, 240][i],
-  node: <Polaroid name={p.name} alt={p.alt} caption={p.caption} />,
-}));
+const quirks = [
+  {
+    href: "/about",
+    text: "Football, always",
+    icon: (
+      <path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm0 4 3.5 2.5-1.3 4h-4.4l-1.3-4Z" />
+    ),
+  },
+  {
+    href: "/play",
+    text: "I make silly browser games",
+    icon: (
+      <path d="M7 9v6M4 12h6M15 11h.01M18 13h.01M6 5h12a4 4 0 0 1 4 4v5a4 4 0 0 1-7 2.6L14 15h-4l-1 1.6A4 4 0 0 1 2 14V9a4 4 0 0 1 4-4Z" />
+    ),
+  },
+  {
+    href: "/ledger",
+    text: "I score my own predictions",
+    icon: <path d="M4 19V9M10 19V5M16 19v-7M22 19H2" />,
+  },
+];
 
-const prototypes = projects.filter((p) =>
-  [
-    "juno-preventive-health",
-    "recovery-intelligence",
-    "seo-geo-optimiser",
-  ].includes(p.slug),
-);
-const road360 = projects.find((p) => p.slug === "road360")!;
-
-const heading = "display text-[clamp(56px,8vw,120px)]";
+const resolved = ledger.calls.filter((c) => c.result !== "OPEN");
+const papers = [
+  "Juno-AI-Research-Paper",
+  "Qure-AI-Investment-Memo",
+  "India-GLP1-Sector-Thesis",
+].map((n) => writing.find((w) => w.cover?.includes(n))!);
 
 export default function Home() {
   return (
     <>
-      {/* Hero: a desk of real things */}
-      <section className="relative">
-        <h1 className="sr-only">Jay Kapoor</h1>
-        <Desk
-          items={heroItems}
-          className="hidden h-[100svh] min-h-[780px] lg:block"
-        >
-          <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
-            <p
-              className="display text-[clamp(96px,13vw,210px)]"
-              aria-hidden="true"
-            >
-              <RiseWords text="Jay Kapoor" delay={0.05} />
-            </p>
-            <Reveal delay={0.7} y={10}>
-              <p className="mt-6 text-xl text-muted">
-                Founder of StrayPaw. Economics and Statistics at Pitt.
-              </p>
-            </Reveal>
-          </div>
-          <p className="absolute bottom-6 left-1/2 -translate-x-1/2 text-sm text-faint">
-            Everything on this desk is real. Drag it around, click to open.
-          </p>
-        </Desk>
-        <div className="pt-32 lg:hidden">
-          <div className="shell text-center">
-            <p
-              className="display text-[clamp(64px,19vw,120px)]"
-              aria-hidden="true"
-            >
-              <RiseWords text="Jay Kapoor" delay={0.05} />
-            </p>
-            <p className="mt-5 text-lg text-muted">
-              Founder of StrayPaw. Economics and Statistics at Pitt.
-            </p>
-          </div>
-          <DeskRow items={heroItems} />
-        </div>
-      </section>
-
-      {/* Numbers */}
-      <section aria-label="Numbers" className="shell pt-16 lg:pt-24">
-        <dl className="grid grid-cols-2 gap-x-6 gap-y-10 border-t border-line pt-10 md:grid-cols-4">
-          {[
-            ["30,288", "animal records on StrayPaw"],
-            ["19", "NGO partners on StrayPaw"],
-            ["10,000+", "rural users on Juno-AI"],
-            ["0.134", "Brier score on 15 public forecasts"],
-          ].map(([v, l], i) => (
-            <Reveal key={l} delay={i * 0.08}>
-              <dd className="display text-[clamp(44px,6vw,84px)]">
-                <Counter value={v} />
-              </dd>
-              <dt className="mt-2 text-[15px] text-muted">{l}</dt>
-            </Reveal>
-          ))}
-        </dl>
-      </section>
-
-      {/* StrayPaw */}
-      <section aria-labelledby="straypaw" className="pt-28 lg:pt-40">
-        <Reveal className="shell flex items-end justify-between gap-6">
-          <div>
-            <p className="label">What I&apos;m building</p>
-            <h2
-              id="straypaw"
-              className="display mt-3 text-[clamp(64px,11vw,168px)]"
-            >
-              StrayPaw
-            </h2>
-          </div>
-          <p className="hidden max-w-xs pb-4 text-right text-muted md:block">
-            A shared record for every stray animal in India. Live, and used
-            every day.
-          </p>
-        </Reveal>
-        <Showcase
-          url="straypaw.org"
-          scroll="/previews/straypaw-scroll.webp"
-          scrollRatio={5167 / 1200}
-          phone={{
-            src: "/previews/straypaw-map-m.webp",
-            alt: "StrayPaw's map on a phone",
-          }}
-          steps={[
-            {
-              title: "Every stray in India.",
-              text: "30,288 animal records across 28 cities, and 19 NGO partners working from the same record.",
-            },
-            {
-              title: "Every animal has a profile.",
-              text: "Photos, locations and case history that anyone can look up.",
-            },
-            {
-              title: "It runs on WhatsApp.",
-              text: "Rescue groups post in their own group. The StrayPaw bot files it as a case.",
-            },
-            {
-              title: "Followed to the end.",
-              text: "First report, treatment, closure. Next up: a pilot with the Ludhiana municipality.",
-            },
-          ]}
-          footer={
-            <div className="mt-10 flex flex-wrap gap-3">
-              <a
-                href="https://www.straypaw.org"
-                target="_blank"
-                rel="noreferrer"
-                className="btn-primary"
-              >
-                Visit StrayPaw <Arrow />
-              </a>
-              <Link href="/work/straypaw" className="btn-ghost">
-                The story
-              </Link>
-            </div>
-          }
+      {/* Hello */}
+      <section className="bg-mesh relative overflow-hidden">
+        <div
+          className="bg-grid fade-mask pointer-events-none absolute inset-0"
+          aria-hidden="true"
         />
-        <div className="shell mt-10 flex flex-wrap gap-3 lg:hidden">
-          <a
-            href="https://www.straypaw.org"
-            target="_blank"
-            rel="noreferrer"
-            className="btn-primary"
-          >
-            Visit StrayPaw <Arrow />
-          </a>
-          <Link href="/work/straypaw" className="btn-ghost">
-            The story
-          </Link>
+        <div className="shell relative grid min-h-[100svh] items-center gap-16 pb-24 pt-32 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10 lg:pb-16">
+          <div>
+            <Reveal y={10}>
+              <p className="hand text-[32px] text-accent">hey, I&apos;m</p>
+            </Reveal>
+            <h1 className="display -mt-1 text-[clamp(68px,10vw,148px)]">
+              <RiseWords text="Jay Kapoor" delay={0.1} />
+            </h1>
+            <Reveal delay={0.45}>
+              <p className="mt-6 max-w-xl text-[clamp(18px,1.6vw,21px)] leading-relaxed text-fg/80">
+                I study Economics and Statistics at Pitt and build things for
+                problems I&apos;ve seen up close in India. Right now that&apos;s{" "}
+                <Link
+                  href="/work/straypaw"
+                  className="font-semibold text-accent underline decoration-accent/30 underline-offset-4 hover:decoration-accent"
+                >
+                  StrayPaw
+                </Link>
+                , a shared record for the country&apos;s street animals.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a href="mailto:jak581@pitt.edu" className="btn-primary">
+                  Say hi <Arrow />
+                </a>
+                <a
+                  href="/jay-kapoor-resume.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-ghost"
+                >
+                  Resume
+                </a>
+              </div>
+              <ul className="mt-10 flex flex-wrap gap-2.5">
+                {quirks.map((q, i) => (
+                  <li
+                    key={q.text}
+                    style={{ rotate: `${[-1.5, 1, -0.5][i]}deg` }}
+                  >
+                    <Link
+                      href={q.href}
+                      className="inline-flex items-center gap-2 rounded-xl bg-white/85 px-3.5 py-2 text-[14px] font-medium shadow-[0_6px_16px_-8px_rgba(30,27,75,0.35)] ring-1 ring-white transition-transform hover:-translate-y-0.5 hover:rotate-0"
+                    >
+                      <svg
+                        viewBox="0 0 24 24"
+                        className="h-4 w-4 fill-none stroke-accent"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden="true"
+                      >
+                        {q.icon}
+                      </svg>
+                      {q.text}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+          </div>
+          <Reveal delay={0.3} className="pb-14">
+            <PhotoStack photos={stack} />
+          </Reveal>
         </div>
       </section>
 
-      {/* Work */}
-      <section aria-labelledby="work" className="shell pt-28 lg:pt-40">
-        <Reveal className="mb-10 flex items-end justify-between">
-          <h2 id="work" className={heading}>
-            Work
-          </h2>
+      {/* Made */}
+      <section
+        id="made"
+        aria-labelledby="made-h"
+        className="shell scroll-mt-24 pt-24 md:pt-32"
+      >
+        <Reveal className="mb-8 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <h2 id="made-h" className="display text-[clamp(44px,6vw,88px)]">
+              Things I&apos;ve made
+            </h2>
+            <p className="hand mt-1 text-[26px] text-accent">
+              click a tab. the games and apps actually work in here
+            </p>
+          </div>
           <Link
             href="/work"
-            className="mb-3 inline-flex items-center gap-1.5 text-[15px] text-muted hover:text-fg"
+            className="inline-flex items-center gap-1.5 text-[15px] font-medium text-muted hover:text-fg"
           >
-            Everything <Arrow />
+            Jobs and research too <Arrow />
           </Link>
         </Reveal>
-        <WorkIndex
-          items={featuredProjects.filter((p) => p.slug !== "straypaw")}
-        />
+        <Reveal>
+          <ProjectBrowser
+            items={projects}
+            groups={["started", "side", "game"]}
+          />
+        </Reveal>
       </section>
 
-      {/* Made for fun */}
-      <section aria-labelledby="fun" className="shell pt-28 lg:pt-40">
-        <Reveal className="mb-12 max-w-2xl">
-          <h2 id="fun" className={heading}>
-            For fun
-          </h2>
-          <p className="mt-4 text-lg text-muted">
-            Things I built on weekends. They are all live. Press play and use
-            them right here.
-          </p>
-        </Reveal>
-        <div className="grid gap-10 md:grid-cols-2">
-          {games.map((g, i) => (
-            <Reveal key={g.href} delay={i * 0.1}>
-              <LivePlay
-                title={g.title}
-                href={g.href}
-                url={g.url}
-                image={g.image}
-              />
-            </Reveal>
-          ))}
-        </div>
-        <div className="mt-16 grid items-end gap-10 sm:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,0.6fr)]">
-          {prototypes.map((p, i) =>
-            p.preview?.type === "site" ? (
-              <Reveal key={p.slug} delay={i * 0.08}>
-                <LivePlay
-                  title={p.title}
-                  href={p.links[0].href}
-                  url={p.preview.url}
-                  image={p.preview.desktop}
-                  cta="Try it here"
-                />
-              </Reveal>
-            ) : null,
-          )}
-          {road360.preview?.type === "site" && (
-            <Reveal delay={0.24}>
-              <LivePlay
-                title={road360.title}
-                href={road360.links[0].href}
-                url={road360.preview.url}
-                image={road360.preview.mobile!}
-                phone
-                cta="Try it"
-              />
-            </Reveal>
-          )}
+      {/* Story */}
+      <section aria-labelledby="story-h" className="relative mt-24 md:mt-32">
+        <div
+          className="bg-dots absolute inset-x-0 top-0 h-full [mask-image:linear-gradient(to_bottom,transparent,#000_15%,#000_85%,transparent)]"
+          aria-hidden="true"
+        />
+        <div className="shell relative py-10">
+          <Reveal className="mb-6">
+            <h2 id="story-h" className="display text-[clamp(44px,6vw,88px)]">
+              The story so far
+            </h2>
+            <p className="hand mt-1 text-[26px] text-accent">
+              tap any bar to see where it went
+            </p>
+          </Reveal>
+          <Reveal>
+            <Timeline />
+          </Reveal>
         </div>
       </section>
 
       {/* Writing */}
-      <section aria-labelledby="writing" className="pt-28 lg:pt-40">
-        <Reveal className="shell flex flex-wrap items-end justify-between gap-6">
-          <h2 id="writing" className={heading}>
-            Writing
-          </h2>
-          <Link href="/ledger" className="group mb-3 text-right">
-            <span className="display block text-4xl">
-              <Counter value="0.134" />
-            </span>
-            <span className="inline-flex items-center gap-1 text-[15px] text-muted group-hover:text-fg">
-              Brier score on my public forecasts <Arrow />
-            </span>
-          </Link>
-        </Reveal>
-        <Shelf items={writing} />
-      </section>
-
-      {/* Elsewhere */}
-      <section aria-labelledby="elsewhere" className="shell pt-28 lg:pt-40">
+      <section aria-labelledby="write-h" className="shell pt-24 md:pt-32">
         <Reveal>
-          <h2 id="elsewhere" className={`mb-10 ${heading}`}>
-            Elsewhere
+          <h2 id="write-h" className="display mb-8 text-[clamp(44px,6vw,88px)]">
+            I write things down
           </h2>
         </Reveal>
-        <ul className="grid border-t border-line md:grid-cols-2 md:gap-x-12">
-          {experience.map((e) => {
-            const row = (
-              <>
-                <span className="font-semibold tracking-tight">{e.org}</span>
-                <span className="text-muted">{e.role}</span>
-                <span className="ml-auto shrink-0 tabular-nums text-faint">
-                  {e.period}
-                </span>
-              </>
-            );
-            const cls =
-              "flex flex-wrap items-baseline gap-x-3 gap-y-1 border-b border-line py-4 text-[15px]";
-            return (
-              <li key={`${e.org}-${e.role}`}>
-                {e.href ? (
-                  <SmartLink
-                    href={e.href}
-                    className={`${cls} transition-colors hover:text-accent`}
+        <div className="grid gap-6 lg:grid-cols-[1fr_1.1fr]">
+          <Reveal>
+            <Link
+              href="/ledger"
+              className="bg-indigo-deep group relative flex h-full flex-col overflow-hidden rounded-[28px] p-7 text-white md:p-9"
+            >
+              <p className="text-[15px] text-indigo-100">
+                Every prediction gets a date and a probability, then a score.
+              </p>
+              <div className="mt-6 flex flex-wrap items-end gap-x-10 gap-y-4">
+                {ledger.stats.slice(0, 3).map((s) => (
+                  <div key={s.label}>
+                    <p className="display text-[56px]">{s.value}</p>
+                    <p className="text-[13px] text-indigo-200">{s.label}</p>
+                  </div>
+                ))}
+              </div>
+              <ul className="mt-8 space-y-2">
+                {resolved.map((c) => (
+                  <li
+                    key={c.prediction}
+                    className="flex items-start gap-3 rounded-xl bg-white/10 px-4 py-2.5 text-[14px]"
                   >
-                    {row}
-                  </SmartLink>
-                ) : (
-                  <div className={cls}>{row}</div>
-                )}
-              </li>
-            );
-          })}
-        </ul>
-      </section>
-
-      {/* Photos */}
-      <section aria-labelledby="photos" className="pt-28 lg:pt-40">
-        <Reveal className="shell flex items-end justify-between">
-          <h2 id="photos" className={heading}>
-            Off the clock
-          </h2>
-          <Link
-            href="/about"
-            className="mb-3 inline-flex items-center gap-1.5 text-[15px] text-muted hover:text-fg"
-          >
-            About me <Arrow />
-          </Link>
-        </Reveal>
-        <div className="shell">
-          <Desk items={photoItems} className="hidden h-[560px] lg:block" />
-        </div>
-        <div className="lg:hidden">
-          <DeskRow items={photoItems} />
+                    <span
+                      className={`mt-0.5 shrink-0 rounded-md px-1.5 text-[11px] font-bold ${c.result === "HIT" ? "bg-emerald-300 text-emerald-950" : "bg-rose-300 text-rose-950"}`}
+                    >
+                      {c.result}
+                    </span>
+                    {c.prediction}
+                  </li>
+                ))}
+              </ul>
+              <span className="mt-6 inline-flex items-center gap-1.5 text-[15px] font-semibold">
+                See every call{" "}
+                <Arrow className="transition-transform group-hover:translate-x-1" />
+              </span>
+            </Link>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <Link
+              href="/writing"
+              className="bg-mesh group relative flex h-full min-h-[420px] items-center justify-center overflow-hidden rounded-[28px] ring-1 ring-line"
+            >
+              {papers.map((w, i) => (
+                <span
+                  key={w.title}
+                  className="absolute w-[44%] max-w-[230px] transition-transform duration-500 ease-out"
+                  style={{
+                    transform: `translateX(${(i - 1) * 62}%) rotate(${(i - 1) * 9}deg)`,
+                    zIndex: i === 1 ? 2 : 1,
+                  }}
+                >
+                  <span className="paper-shadow relative block aspect-[900/1273] overflow-hidden rounded-[3px] bg-white transition-transform duration-500 group-hover:-translate-y-3">
+                    <Image
+                      src={w.cover!}
+                      alt={`First page of ${w.title}`}
+                      fill
+                      sizes="230px"
+                      className="object-cover object-top"
+                    />
+                  </span>
+                </span>
+              ))}
+              <span className="absolute bottom-5 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full bg-white px-4 py-2 text-[14px] font-semibold shadow-lg">
+                Papers, memos and theses <Arrow className="inline" />
+              </span>
+            </Link>
+          </Reveal>
         </div>
       </section>
     </>

@@ -1,49 +1,114 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Arrow } from "@/components/Arrow";
+import { Reveal } from "@/components/motion";
 import { PageHeader, SmartLink } from "@/components/ui";
 import { proofGroups } from "@/content/proof";
 
 export const metadata: Metadata = {
   title: "Files",
   description:
-    "Jay Kapoor’s papers, datasets, case studies, and shipped products in one place.",
+    "Every paper, dataset, case study, live site and repo on Jay Kapoor's site.",
 };
+
+const sites: Record<string, string> = {
+  "straypaw.org/map": "/previews/straypaw-map-d.webp",
+  "straypaw.org": "/previews/straypaw-d.webp",
+  "strike.kapoorjay.com": "/previews/strike-d.webp",
+  "emergency.kapoorjay.com": "/previews/emergency-d.webp",
+  "preventive-healthcare": "/previews/juno-preventive-d.webp",
+  "explain-my-whoop": "/previews/health-os-d.webp",
+  "road360.vercel": "/previews/road360-d.webp",
+  "llm-ai-search-checker.vercel": "/previews/search-visibility-d.webp",
+  "crowwd.io": "/previews/crowwd-d.webp",
+};
+
+/** A real picture of each file: the first page of a PDF, a screenshot of a site, or the photo itself. */
+function thumb(href: string) {
+  if (href.endsWith(".pdf"))
+    return {
+      src: `/covers/${href.split("/").pop()!.replace(".pdf", ".webp")}`,
+      doc: true,
+    };
+  if (/\.(jpg|webp)$/.test(href)) return { src: href, doc: false };
+  if (href.includes("github.com")) return null;
+  const key = Object.keys(sites).find((k) => href.includes(k));
+  return key ? { src: sites[key], doc: false } : null;
+}
+
+const kind = (href: string) =>
+  href.includes("github.com")
+    ? "Code"
+    : href.endsWith(".pdf")
+      ? "PDF"
+      : href.endsWith(".csv")
+        ? "CSV"
+        : href.endsWith(".xlsx")
+          ? "Spreadsheet"
+          : href.startsWith("/") && !href.includes(".")
+            ? "Page"
+            : /\.(jpg|webp)$/.test(href)
+              ? "Photo"
+              : "Live site";
 
 export default function Artifacts() {
   return (
     <>
       <PageHeader
         title="Files"
-        lede="Every paper, dataset, case study and live product on this site."
+        lede="The receipts: every paper, dataset, live site and repo behind this site."
       />
-      <div className="shell space-y-16">
+      <div className="shell space-y-14">
         {proofGroups.map((g) => (
           <section key={g.title} aria-label={g.title}>
-            <div className="flex items-baseline justify-between border-b border-line pb-4">
-              <h2 className="display text-4xl">{g.title}</h2>
-              <span className="text-[13px] tabular-nums text-faint">
-                {g.items.length} items
-              </span>
-            </div>
-            <ul className="grid sm:grid-cols-2">
-              {g.items.map((a) => (
-                <li key={a.href} className="border-b border-line">
-                  <SmartLink
-                    href={a.href}
-                    className="group flex items-center justify-between gap-4 py-4 sm:pr-6"
+            <h2 className="display mb-5 text-[clamp(28px,3vw,40px)]">
+              {g.title}
+            </h2>
+            <ul className="-mx-5 flex snap-x gap-4 overflow-x-auto px-5 pb-2 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-3 sm:overflow-visible sm:px-0 lg:grid-cols-5 [&::-webkit-scrollbar]:hidden">
+              {g.items.map((a, i) => {
+                const t = thumb(a.href);
+                return (
+                  <li
+                    key={a.href}
+                    className="w-[42vw] shrink-0 snap-start sm:w-auto"
                   >
-                    <span>
-                      <span className="block font-medium tracking-tight">
-                        {a.title}
-                      </span>
-                      <span className="block text-sm text-muted">
-                        {a.detail}
-                      </span>
-                    </span>
-                    <Arrow className="text-faint transition-colors group-hover:text-fg" />
-                  </SmartLink>
-                </li>
-              ))}
+                    <Reveal delay={(i % 5) * 0.04}>
+                      <SmartLink href={a.href} className="group block">
+                        <span
+                          className={`relative block overflow-hidden rounded-xl bg-white ring-1 ring-line transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-[0_18px_40px_-18px_rgba(30,27,75,0.5)] ${
+                            t?.doc ? "aspect-[900/1273]" : "aspect-[4/3]"
+                          }`}
+                        >
+                          {t ? (
+                            <Image
+                              src={t.src}
+                              alt=""
+                              fill
+                              sizes="240px"
+                              className="object-cover object-top"
+                            />
+                          ) : (
+                            <span className="bg-indigo-deep absolute inset-0 grid place-items-center font-mono text-[13px] text-white">
+                              {kind(a.href)}
+                            </span>
+                          )}
+                        </span>
+                        <span className="mt-2.5 flex items-start justify-between gap-2">
+                          <span>
+                            <span className="block text-[14px] font-semibold leading-snug">
+                              {a.title}
+                            </span>
+                            <span className="block text-[12.5px] text-muted">
+                              {kind(a.href)}
+                            </span>
+                          </span>
+                          <Arrow className="mt-0.5 shrink-0 text-faint group-hover:text-accent" />
+                        </span>
+                      </SmartLink>
+                    </Reveal>
+                  </li>
+                );
+              })}
             </ul>
           </section>
         ))}
