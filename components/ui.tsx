@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Arrow } from "./Arrow";
+import { Reveal } from "./motion";
 
 export const isExternal = (href: string) =>
   href.startsWith("http") || /\.(pdf|xlsx|csv|webp|jpg)$/.test(href);
@@ -45,7 +46,7 @@ export function SectionHeader({
   action?: { label: string; href: string };
 }) {
   return (
-    <div className="mb-10 flex items-end justify-between gap-6 border-t border-line pt-6 md:mb-14">
+    <Reveal className="mb-10 flex items-end justify-between gap-6 border-t border-line pt-6 md:mb-14">
       <div>
         <p className="eyebrow">{index}</p>
         <h2 className="mt-3 text-3xl font-medium tracking-[-0.03em] md:text-[44px] md:leading-[1.05]">
@@ -61,7 +62,7 @@ export function SectionHeader({
           <Arrow className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
         </SmartLink>
       )}
-    </div>
+    </Reveal>
   );
 }
 
@@ -77,17 +78,21 @@ export function PageHeader({
   children?: React.ReactNode;
 }) {
   return (
-    <header className="shell rise pb-16 pt-16 md:pb-20 md:pt-24">
-      <p className="eyebrow">{eyebrow}</p>
-      <h1 className="mt-5 max-w-4xl text-5xl font-medium leading-[0.98] tracking-[-0.045em] md:text-7xl">
-        {title}
-      </h1>
+    <header className="shell pb-16 pt-36 md:pb-24 md:pt-48">
+      <Reveal>
+        <p className="eyebrow">{eyebrow}</p>
+        <h1 className="mt-6 max-w-5xl text-[clamp(52px,8.5vw,128px)] font-medium leading-[0.9] tracking-[-0.06em]">
+          {title}
+        </h1>
+      </Reveal>
       {lede && (
-        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted md:text-xl">
-          {lede}
-        </p>
+        <Reveal delay={0.12}>
+          <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted md:text-xl">
+            {lede}
+          </p>
+        </Reveal>
       )}
-      {children}
+      {children && <Reveal delay={0.2}>{children}</Reveal>}
     </header>
   );
 }

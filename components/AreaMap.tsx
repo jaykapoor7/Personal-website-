@@ -21,6 +21,13 @@ const project = (x: number, y: number) =>
   `${((x - minX) * scale).toFixed(1)},${(H - (y - minY) * scale * 1.02).toFixed(1)}`;
 
 const openTotal = areas.reduce((n, a) => n + a.open, 0);
+const [midX, midY] = [(minX + maxX) / 2, (minY + maxY) / 2];
+const reach = Math.hypot(maxX - midX, maxY - midY);
+// Entrance delay in ms: a ripple outward from the city centre.
+const delay = (a: (typeof areas)[number]) =>
+  Math.round(
+    Math.min(1, Math.hypot(a.ring[0] - midX, a.ring[1] - midY) / reach) * 1400,
+  );
 
 /** The 254 Coimbatore areas from StrayPaw’s public archive, shaded by open requests. */
 export function AreaMap({ className = "" }: { className?: string }) {
@@ -28,7 +35,7 @@ export function AreaMap({ className = "" }: { className?: string }) {
     <figure className={className}>
       <svg
         viewBox={`0 0 ${W} ${H}`}
-        className="w-full overflow-hidden"
+        className="hexmap w-full overflow-hidden"
         role="img"
         aria-label={`Map of ${areas.length} archived StrayPaw areas in ${snapshot.city}; ${openTotal} open requests at the time of the archive.`}
       >
@@ -47,6 +54,8 @@ export function AreaMap({ className = "" }: { className?: string }) {
             }
             stroke="rgba(255,255,255,0.14)"
             strokeWidth="0.8"
+            className={a.crit > 0 ? "urgent-pulse" : undefined}
+            style={{ "--d": delay(a) } as React.CSSProperties}
           >
             <title>{`${a.name}: ${a.open} open`}</title>
           </polygon>

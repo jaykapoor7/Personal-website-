@@ -17,10 +17,9 @@ export const person = {
   intro:
     "Founder of StrayPaw. Economics & Statistics at the University of Pittsburgh. I started my first company, Juno-AI, at 14.",
   about: [
-    "I’m an Economics & Statistics student at the University of Pittsburgh, with a minor in Information Sciences. Most of what I build starts with something I saw growing up in India.",
-    "At 14 I started Juno-AI, a health-information and care-navigation platform that reached 10,000+ rural users. Since then I’ve interviewed delivery riders about medication access, run operations for an eight-centre childcare business, worked in a fintech founder’s office, and written investment memos I score against what actually happens.",
-    "Right now I’m building StrayPaw — records, maps, and reporting infrastructure for the NGOs and municipalities that care for India’s street animals — while doing applied AI and accessibility research at Pitt.",
-    "Outside of work: football, mostly. I’ve played since I could run.",
+    "Economics & Statistics at Pitt, minor in Information Sciences. Most of what I build starts with something I saw growing up in India.",
+    "I started Juno-AI at 14 and grew it to 10,000+ rural users. Since then: fieldwork with delivery riders, operations across eight childcare centres, a fintech founder’s office, and investment memos I score in public.",
+    "Now I’m building StrayPaw and doing applied AI and accessibility research at Pitt. Off the clock, it’s football.",
   ],
   links: [
     { label: "Email", href: "mailto:jak581@pitt.edu" },

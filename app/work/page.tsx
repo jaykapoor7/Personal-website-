@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Arrow } from "@/components/Arrow";
 import { ProjectCard } from "@/components/ProjectCard";
+import { Reveal } from "@/components/motion";
 import { PageHeader, SectionHeader } from "@/components/ui";
 import { featuredProjects, projects } from "@/content/site";
 
@@ -23,12 +24,14 @@ export default function Work() {
             <span className="font-serif font-normal italic">and shipped.</span>
           </>
         }
-        lede="Two companies, an operations role across eight centres, a founder’s office, fieldwork, and a handful of prototypes. Each links to the original work."
+        lede="Two companies, eight centres, one founder’s office, and a lot of fieldwork."
       />
       <section className="shell">
         <div className="grid gap-x-8 gap-y-16 md:grid-cols-2">
-          {featuredProjects.map((p) => (
-            <ProjectCard key={p.slug} project={p} />
+          {featuredProjects.map((p, i) => (
+            <Reveal key={p.slug} delay={(i % 2) * 0.1}>
+              <ProjectCard project={p} />
+            </Reveal>
           ))}
         </div>
       </section>

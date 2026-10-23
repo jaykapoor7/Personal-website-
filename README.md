@@ -12,6 +12,7 @@ No API keys, database, or server runtime are required. The build exports to `out
 
 ## Design
 
+- Motion: `components/motion.tsx` (framer-motion) — word-rise headlines, scroll-lit statement, count-up numbers, scroll-scaling images, a pinned StrayPaw zoom, a scroll-driven horizontal work gallery, and cursor spotlights. Everything degrades to static content with reduced motion or no JavaScript.
 - Tailwind with a small token layer in `app/globals.css` (light and dark via `prefers-color-scheme`). Inter Tight for text, Instrument Serif italics for accents, JetBrains Mono for labels.
 - `app/page.tsx`: hero, highlight stats, StrayPaw feature (with the archived Coimbatore area map), selected work, experience, research & forecast ledger, side projects, and photos.
 - `/work/[slug]`: one template for every project — metrics, overview, what I did, artifacts, gallery.

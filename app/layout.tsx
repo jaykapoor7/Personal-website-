@@ -71,6 +71,9 @@ export default function RootLayout({
           Skip to content
         </a>
         <Nav />
+        <noscript>
+          <style>{`[data-reveal]{opacity:1!important;transform:none!important;filter:none!important}.hexmap polygon,.grow-bar{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
         <main id="main">{children}</main>
         <Footer />
       </body>

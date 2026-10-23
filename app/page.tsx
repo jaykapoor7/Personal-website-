@@ -2,443 +2,508 @@ import Image from "next/image";
 import Link from "next/link";
 import { Arrow } from "@/components/Arrow";
 import { AreaMap } from "@/components/AreaMap";
-import { ProjectCard } from "@/components/ProjectCard";
-import { Photo, SectionHeader, SmartLink } from "@/components/ui";
 import {
-  builds,
-  experience,
-  person,
-  photos,
-  projects,
-  stats,
-  writing,
-} from "@/content/site";
+  Counter,
+  HorizontalGallery,
+  InView,
+  Reveal,
+  RiseWords,
+  ScrollScale,
+  ScrollText,
+  Spotlight,
+  ZoomStage,
+} from "@/components/motion";
+import { ProjectVisual } from "@/components/ProjectVisual";
+import { Photo } from "@/components/ui";
+import { photos, projects, stats } from "@/content/site";
 import { ledger } from "@/content/ledger";
+import companies from "@/content/healthtech-map.json";
 
 const straypaw = projects.find((p) => p.slug === "straypaw")!;
-const bySlug = (slug: string) => projects.find((p) => p.slug === slug)!;
-const resolved = ledger.calls.filter((c) => c.result !== "OPEN");
+const gallery = [
+  "juno-ai",
+  "crowwd",
+  "tot-schools",
+  "project-nidaan",
+  "finer-things-club",
+].map((s) => projects.find((p) => p.slug === s)!);
+const orgs = [
+  "Crowwd",
+  "HDFC Bank",
+  "TOT Schools",
+  "UPMC Emergency Medicine",
+  "Accessible SmartTech Lab",
+  "SCI 3Sixty",
+  "Apodaca Lab",
+  "JumpStart · AmeriCorps",
+  "Juno-AI",
+  "Project Nidaan",
+];
+const hits = ledger.calls.filter((c) => c.result === "HIT").length;
+const resolved = ledger.calls.filter((c) => c.result !== "OPEN").length;
+
+function Marquee({
+  children,
+  speed = "40s",
+}: {
+  children: React.ReactNode;
+  speed?: string;
+}) {
+  return (
+    <div className="marquee-wrap fade-x overflow-hidden">
+      <div
+        className="marquee"
+        style={{ "--speed": speed } as React.CSSProperties}
+      >
+        <div className="flex shrink-0">{children}</div>
+        <div className="flex shrink-0" aria-hidden="true">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const display =
+  "text-[clamp(44px,6.5vw,96px)] font-medium leading-[0.9] tracking-[-0.055em]";
 
 export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="shell grid items-center gap-12 pb-20 pt-12 md:grid-cols-[1.35fr_1fr] md:gap-16 md:pb-28 md:pt-20">
-        <div className="rise">
-          <Link
-            href="/work/straypaw"
-            className="inline-flex items-center gap-2.5 rounded-full border border-line bg-card/60 py-1.5 pl-3 pr-4 text-[13px] text-muted transition-colors hover:text-fg"
-          >
-            <span className="live-dot" aria-hidden="true" />
-            Currently building StrayPaw
-            <Arrow direction="right" className="text-faint" />
-          </Link>
-          <h1 className="mt-7 text-[44px] font-medium leading-[0.98] tracking-[-0.045em] sm:text-6xl lg:text-[76px]">
-            I build software for{" "}
-            <span className="font-serif font-normal italic tracking-[-0.02em]">
-              messy, real&#8209;world
-            </span>{" "}
-            systems.
-          </h1>
-          <p className="mt-7 max-w-xl text-lg leading-relaxed text-muted md:text-[19px]">
-            I’m Jay — founder of{" "}
-            <Link href="/work/straypaw" className="link text-fg">
-              StrayPaw
-            </Link>
-            , infrastructure for the people who care for India’s street animals.
-            I started my first company,{" "}
-            <Link href="/work/juno-ai" className="link text-fg">
-              Juno-AI
-            </Link>
-            , at 14. Economics &amp; Statistics at the University of Pittsburgh.
-          </p>
-          <div className="mt-9 flex flex-wrap items-center gap-3">
-            <a href={`mailto:${person.email}`} className="btn-primary">
-              Email me <Arrow />
-            </a>
-            <a
-              href="/jay-kapoor-resume.pdf"
-              target="_blank"
-              rel="noreferrer"
-              className="btn-ghost"
+      <section className="relative overflow-hidden pt-36 md:pt-44">
+        <div
+          aria-hidden="true"
+          className="glow pointer-events-none absolute -top-40 left-1/2 h-[640px] w-[640px] -translate-x-1/2 rounded-full blur-3xl"
+        />
+        <div className="shell relative text-center">
+          <Reveal y={12}>
+            <Link
+              href="/work/straypaw"
+              className="inline-flex items-center gap-2.5 rounded-full border border-line bg-bg/60 py-1.5 pl-3 pr-4 text-[13px] text-muted backdrop-blur transition-colors hover:text-fg"
             >
-              Résumé
-            </a>
-            <div className="ml-1 flex items-center gap-4 text-sm text-muted">
-              {person.links
-                .filter((l) => ["LinkedIn", "GitHub", "X"].includes(l.label))
-                .map((l) => (
-                  <a
-                    key={l.href}
-                    href={l.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="transition-colors hover:text-fg"
-                  >
-                    {l.label}
-                  </a>
-                ))}
-            </div>
-          </div>
+              <span className="live-dot" aria-hidden="true" />
+              Now building StrayPaw
+              <Arrow direction="right" className="text-faint" />
+            </Link>
+          </Reveal>
+          <h1 className="mt-8 text-[clamp(60px,13.5vw,196px)] font-medium leading-[0.86] tracking-[-0.065em]">
+            <RiseWords text="Jay Kapoor." delay={0.1} />
+          </h1>
+          <p className="mt-4 font-serif text-[clamp(30px,5.4vw,72px)] italic leading-none tracking-[-0.02em] text-muted">
+            <RiseWords
+              text="Builds for the real world."
+              delay={0.35}
+              stagger={0.06}
+            />
+          </p>
+          <Reveal delay={0.8} y={10}>
+            <p className="mx-auto mt-9 max-w-md text-[15px] text-fg/75">
+              Founder of StrayPaw &amp; Juno-AI · Econ &amp; Stats, Pitt ’28
+            </p>
+          </Reveal>
         </div>
-        <div className="rise relative mx-auto w-full max-w-sm md:max-w-none [animation-delay:120ms]">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[28px] border border-line bg-card">
+        <div className="mx-auto mt-16 max-w-[1240px] px-3 sm:px-6 md:mt-20">
+          <ScrollScale className="relative aspect-[4/5] overflow-hidden bg-card sm:aspect-[16/10] md:aspect-[2/1]">
             <Photo
               name="pitt_portrait"
               alt="Jay Kapoor on the Cathedral of Learning lawn, University of Pittsburgh"
               priority
-              className="h-full w-full object-cover object-[50%_62%]"
+              className="absolute inset-0 h-full w-full object-cover object-[50%_60%]"
             />
-          </div>
-          <div className="absolute -bottom-4 left-5 right-5 flex items-center justify-between rounded-2xl border border-line bg-bg/85 px-4 py-3 text-sm shadow-[0_10px_30px_-12px_rgba(0,0,0,0.25)] backdrop-blur-md">
-            <div>
-              <p className="font-medium">University of Pittsburgh</p>
-              <p className="text-muted">Econ &amp; Stats · Class of 2028</p>
-            </div>
-            <span className="font-serif text-3xl italic text-accent">’28</span>
-          </div>
+          </ScrollScale>
         </div>
       </section>
 
-      {/* Stats */}
-      <section aria-label="Highlights" className="border-y border-line">
-        <dl className="shell grid grid-cols-2 md:grid-cols-4">
+      {/* Statement */}
+      <section className="shell py-32 md:py-48">
+        <ScrollText
+          className="mx-auto max-w-4xl text-center text-[clamp(30px,4.6vw,60px)] font-medium leading-[1.08] tracking-[-0.035em]"
+          text="I start companies where systems break — street animals with no records, villages with no doctor, riders who deliver medicine they can’t get themselves."
+        />
+      </section>
+
+      {/* Numbers */}
+      <section aria-label="By the numbers" className="shell">
+        <dl className="grid gap-x-10 gap-y-16 sm:grid-cols-2">
           {stats.map((s, i) => (
-            <div
+            <Reveal
               key={s.label}
-              className={`py-8 md:py-10 ${i % 2 === 1 ? "pl-6 md:pl-8" : ""} ${
-                i > 0 ? "md:border-l md:border-line md:pl-8" : ""
-              } ${i % 2 === 1 ? "border-l border-line" : ""} ${i > 1 ? "border-t border-line md:border-t-0" : ""}`}
+              delay={(i % 2) * 0.1}
+              className="border-t border-line pt-6"
             >
-              <dd className="text-3xl font-medium tracking-[-0.035em] md:text-[42px]">
-                {s.value}
+              <dd className="text-[clamp(64px,10vw,136px)] font-medium leading-none tracking-[-0.06em]">
+                <Counter value={s.value} />
               </dd>
-              <dt className="mt-2 max-w-[24ch] text-sm leading-snug text-muted">
-                {s.label}
-              </dt>
-            </div>
+              <dt className="mt-4 text-[17px] text-muted">{s.label}</dt>
+            </Reveal>
           ))}
         </dl>
       </section>
 
+      {/* Organisations */}
+      <section aria-label="Organisations" className="pt-32 md:pt-44">
+        <p className="eyebrow mb-8 text-center">Worked with</p>
+        <Marquee speed="55s">
+          {orgs.map((o) => (
+            <span
+              key={o}
+              className="flex items-center whitespace-nowrap px-6 text-[clamp(28px,4vw,52px)] font-medium tracking-[-0.04em] text-fg/50 transition-colors hover:text-fg md:px-10"
+            >
+              {o}
+              <span
+                className="ml-12 text-[0.5em] text-accent/60 md:ml-20"
+                aria-hidden="true"
+              >
+                ✦
+              </span>
+            </span>
+          ))}
+        </Marquee>
+      </section>
+
       {/* StrayPaw */}
-      <section className="shell pt-24 md:pt-32" aria-labelledby="now">
-        <SectionHeader
-          index="01 — Now"
-          title={<span id="now">What I’m building</span>}
-          action={{ label: "Case study", href: "/work/straypaw" }}
-        />
-        <article className="overflow-hidden rounded-[28px] bg-[#0b0b0b] text-white ring-1 ring-white/10">
-          <div className="grid gap-12 p-6 sm:p-10 md:grid-cols-[1fr_1.1fr] md:p-14">
-            <div className="flex flex-col">
-              <div className="flex items-center gap-3">
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-[#fb923c] text-xl text-black">
-                  🐾
-                </span>
-                <div>
-                  <h3 className="text-2xl font-medium tracking-tight">
-                    StrayPaw
-                  </h3>
-                  <p className="text-sm text-white/55">
-                    Solo founder · 2026 – present
-                  </p>
-                </div>
-              </div>
-              <p className="mt-8 text-2xl font-medium leading-snug tracking-[-0.02em] md:text-[28px]">
-                A shared record for India’s street animals — so feeders, NGOs,
-                and cities can{" "}
-                <span className="font-serif font-normal italic text-[#fdba74]">
-                  coordinate care
-                </span>{" "}
-                instead of guessing.
-              </p>
-              <ul className="mt-8 space-y-3 text-[15px] leading-relaxed text-white/70">
-                {straypaw.highlights!.slice(1, 4).map((h) => (
-                  <li key={h} className="flex gap-3">
-                    <span className="mt-[9px] h-1 w-1 shrink-0 rounded-full bg-[#fb923c]" />
-                    {h}
-                  </li>
-                ))}
-              </ul>
-              <dl className="mt-10 grid grid-cols-3 gap-4 border-t border-white/10 pt-6">
-                {straypaw.metrics!.map((m) => (
-                  <div key={m.label}>
-                    <dd className="text-2xl font-medium tracking-tight md:text-3xl">
-                      {m.value}
-                    </dd>
-                    <dt className="mt-1 text-xs leading-snug text-white/50">
-                      {m.label}
-                    </dt>
-                  </div>
-                ))}
-              </dl>
-              <div className="mt-10 flex flex-wrap gap-3 md:mt-auto md:pt-10">
-                <a
-                  href="https://straypaw.kapoorjay.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn bg-white text-black hover:bg-white/85"
-                >
-                  Visit StrayPaw <Arrow />
-                </a>
-                <Link
-                  href="/work/straypaw"
-                  className="btn border border-white/15 hover:bg-white/10"
-                >
-                  Read the case study
-                </Link>
-              </div>
-            </div>
-            <div className="flex flex-col justify-center rounded-2xl bg-white/[0.03] p-5 ring-1 ring-white/10 sm:p-8">
-              <AreaMap />
-            </div>
-          </div>
-          <div className="relative aspect-[16/9] md:aspect-[21/8]">
+      <section
+        aria-labelledby="straypaw"
+        className="mt-32 bg-[#0b0b0b] text-white md:mt-44"
+      >
+        <ZoomStage
+          image={
             <Image
               src="/straypaw/field-observation.webp"
-              alt="A street dog standing at a sunlit intersection, seen from above"
+              alt=""
               fill
-              sizes="(max-width: 1120px) 100vw, 1120px"
+              sizes="100vw"
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0b0b0b] via-transparent to-transparent" />
+          }
+        >
+          <div className="text-center">
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/70">
+              Now · Solo founder
+            </p>
+            <h2
+              id="straypaw"
+              className="mt-5 text-[clamp(64px,14vw,200px)] font-medium leading-[0.85] tracking-[-0.065em]"
+            >
+              StrayPaw.
+            </h2>
+            <p className="mt-6 font-serif text-[clamp(26px,3.6vw,48px)] italic text-white/85">
+              Every street animal. One record.
+            </p>
           </div>
-        </article>
+        </ZoomStage>
+        <div className="shell grid items-center gap-16 py-28 md:grid-cols-[1fr_1.2fr] md:py-40">
+          <div>
+            <Reveal>
+              <h3 className="text-[clamp(36px,4.4vw,60px)] font-medium leading-[1] tracking-[-0.045em]">
+                254 neighbourhoods.
+                <br />
+                <span className="text-white/40">One map.</span>
+              </h3>
+            </Reveal>
+            <dl className="mt-14 grid grid-cols-3 gap-6">
+              {straypaw.metrics!.map((m, i) => (
+                <Reveal key={m.label} delay={i * 0.1}>
+                  <dd className="text-[clamp(32px,4vw,52px)] font-medium tracking-[-0.05em]">
+                    <Counter value={m.value} />
+                  </dd>
+                  <dt className="mt-1 text-sm text-white/55">{m.label}</dt>
+                </Reveal>
+              ))}
+            </dl>
+            <Reveal delay={0.2} className="mt-14 flex flex-wrap gap-3">
+              <a
+                href="https://straypaw.kapoorjay.com"
+                target="_blank"
+                rel="noreferrer"
+                className="btn h-12 bg-white px-6 text-black hover:bg-white/85"
+              >
+                Visit StrayPaw <Arrow />
+              </a>
+              <Link
+                href="/work/straypaw"
+                className="btn h-12 border border-white/20 px-6 hover:bg-white/10"
+              >
+                Case study
+              </Link>
+            </Reveal>
+          </div>
+          <InView>
+            <AreaMap />
+          </InView>
+        </div>
       </section>
 
       {/* Selected work */}
-      <section className="shell pt-24 md:pt-32" aria-labelledby="work">
-        <SectionHeader
-          index="02 — Selected work"
-          title={<span id="work">Companies, operations &amp; fieldwork</span>}
-          action={{ label: "All work", href: "/work" }}
-        />
-        <div className="grid gap-x-8 gap-y-16 md:grid-cols-2">
-          {["juno-ai", "crowwd"].map((s) => (
-            <ProjectCard key={s} project={bySlug(s)} />
-          ))}
-        </div>
-        <div className="mt-16 grid gap-x-8 gap-y-16 md:grid-cols-3">
-          {["tot-schools", "project-nidaan", "finer-things-club"].map((s) => (
-            <ProjectCard key={s} project={bySlug(s)} />
-          ))}
-        </div>
-      </section>
-
-      {/* Experience */}
-      <section className="shell pt-24 md:pt-32" aria-labelledby="experience">
-        <SectionHeader
-          index="03 — Experience"
-          title={<span id="experience">Where I’ve worked</span>}
-          action={{ label: "Full experience", href: "/experience" }}
-        />
-        <ol className="border-t border-line">
-          {experience.slice(0, 8).map((e) => {
-            const row = (
-              <>
-                <span className="font-mono text-xs uppercase tracking-wider text-faint md:pt-1">
-                  {e.period}
-                </span>
-                <div>
-                  <p className="text-lg font-medium tracking-tight">{e.org}</p>
-                  <p className="text-sm text-muted">{e.role}</p>
-                </div>
-                <p className="text-[15px] leading-relaxed text-muted">
-                  {e.detail}
-                </p>
-                <span className="hidden justify-self-end text-faint transition-colors group-hover:text-fg md:block">
-                  {e.href && <Arrow />}
-                </span>
-              </>
-            );
-            const cls =
-              "group grid gap-2 border-b border-line py-6 md:grid-cols-[130px_1fr_1.3fr_24px] md:gap-8";
-            return (
-              <li key={e.org}>
-                {e.href ? (
-                  <Link
-                    href={e.href}
-                    className={`${cls} transition-colors hover:bg-card/60`}
-                  >
-                    {row}
-                  </Link>
-                ) : (
-                  <div className={cls}>{row}</div>
-                )}
-              </li>
-            );
-          })}
-        </ol>
-      </section>
-
-      {/* Research & writing */}
-      <section className="shell pt-24 md:pt-32" aria-labelledby="research">
-        <SectionHeader
-          index="04 — Research & writing"
-          title={
-            <span id="research">I write down what I think will happen</span>
-          }
-          action={{ label: "All research", href: "/research" }}
-        />
-        <div className="grid gap-8 lg:grid-cols-[1fr_1.15fr]">
-          <Link
-            href="/ledger"
-            className="group flex flex-col rounded-[24px] border border-line bg-card p-6 transition-colors hover:border-fg/30 sm:p-8"
-          >
-            <div className="flex items-center justify-between">
-              <p className="eyebrow">Forecast ledger</p>
-              <Arrow className="text-faint transition-colors group-hover:text-fg" />
-            </div>
-            <p className="mt-6 text-2xl font-medium leading-snug tracking-[-0.02em]">
-              15 public, dated forecasts on healthcare and fintech — each with a
-              stated probability, scored when it resolves.
-            </p>
-            <dl className="mt-8 grid grid-cols-3 gap-4">
-              {ledger.stats.slice(0, 3).map((s) => (
-                <div key={s.label}>
-                  <dd className="text-3xl font-medium tracking-tight">
-                    {s.value}
-                  </dd>
-                  <dt className="mt-1 text-xs leading-snug text-muted">
-                    {s.label}
-                  </dt>
-                </div>
-              ))}
-            </dl>
-            <ul className="mt-8 space-y-px overflow-hidden rounded-xl border border-line bg-line">
-              {resolved.map((c) => (
-                <li
-                  key={c.prediction}
-                  className="flex items-start gap-3 bg-bg px-4 py-3 text-sm"
-                >
-                  <span
-                    className={`mt-0.5 shrink-0 rounded-md px-1.5 py-0.5 font-mono text-[10px] font-medium ${
-                      c.result === "HIT"
-                        ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400"
-                        : "bg-rose-500/15 text-rose-700 dark:text-rose-400"
-                    }`}
-                  >
-                    {c.result}
-                  </span>
-                  <span className="leading-snug">{c.prediction}</span>
-                  <span className="ml-auto shrink-0 font-mono text-xs text-faint">
-                    {c.conviction}%
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </Link>
-          <ul className="border-t border-line">
-            {writing.slice(0, 6).map((w) => {
-              const inner = (
-                <>
-                  <span className="chip w-fit">{w.type}</span>
-                  <div>
-                    <p className="font-medium leading-snug tracking-tight">
-                      {w.title}
-                    </p>
-                    <p className="mt-1 text-sm text-muted">{w.description}</p>
-                  </div>
-                  <span className="hidden font-mono text-xs text-faint sm:block">
-                    {w.year}
-                  </span>
-                </>
-              );
-              const cls =
-                "group grid gap-3 border-b border-line py-5 sm:grid-cols-[92px_1fr_auto] sm:items-start sm:gap-6";
-              return (
-                <li key={w.title}>
-                  {w.href ? (
-                    <SmartLink href={w.href} className={cls}>
-                      {inner}
-                    </SmartLink>
-                  ) : (
-                    <div className={cls}>{inner}</div>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </section>
-
-      {/* Builds */}
-      <section className="shell pt-24 md:pt-32" aria-labelledby="builds">
-        <SectionHeader
-          index="05 — Side projects"
-          title={<span id="builds">Things I’ve shipped for fun</span>}
-          action={{ label: "Play", href: "/play" }}
-        />
-        <ul className="grid gap-px overflow-hidden rounded-[24px] border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
-          {builds.map((b) => (
-            <li key={b.title} className="bg-bg">
-              <SmartLink
-                href={b.href}
-                className="group flex h-full min-h-[170px] flex-col justify-between p-6 transition-colors hover:bg-card"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="chip">{b.kind}</span>
-                  <Arrow className="text-faint transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-fg" />
-                </div>
-                <div className="mt-8">
-                  <p className="font-medium tracking-tight">{b.title}</p>
-                  <p className="mt-1 text-sm leading-snug text-muted">
-                    {b.detail}
-                  </p>
-                </div>
-              </SmartLink>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      {/* About */}
-      <section className="shell pt-24 md:pt-32" aria-labelledby="about">
-        <SectionHeader
-          index="06 — About"
-          title={<span id="about">Off the screen</span>}
-          action={{ label: "More about me", href: "/about" }}
-        />
-        <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
-          <div className="space-y-5 text-lg leading-relaxed text-muted">
-            <p>{person.about[0]}</p>
-            <p>{person.about[3]}</p>
-            <Link href="/about" className="link inline-block text-fg">
-              Read more
+      <HorizontalGallery
+        header={
+          <div className="shell mb-10 flex items-end justify-between md:mb-14">
+            <h2 className={display}>
+              Selected{" "}
+              <span className="font-serif font-normal italic">work.</span>
+            </h2>
+            <Link
+              href="/work"
+              className="hidden items-center gap-1.5 text-sm text-muted hover:text-fg sm:inline-flex"
+            >
+              All work <Arrow />
             </Link>
           </div>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-            {photos.slice(1, 4).map((p, i) => (
-              <figure
-                key={p.name}
-                className={`relative overflow-hidden rounded-2xl border border-line bg-card ${
-                  i === 0
-                    ? "col-span-2 aspect-[4/3] sm:col-span-1 sm:row-span-2 sm:aspect-auto"
-                    : "aspect-square"
-                }`}
+        }
+      >
+        {gallery.map((p) => (
+          <Link
+            key={p.slug}
+            href={`/work/${p.slug}`}
+            className="group block w-[80vw] shrink-0 snap-start sm:w-[400px] md:w-[440px]"
+          >
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[28px] border border-line">
+              <ProjectVisual project={p} sizes="440px" />
+              <div className="absolute inset-x-0 bottom-0 flex translate-y-3 items-center justify-between bg-gradient-to-t from-black/60 to-transparent p-5 pt-16 text-white opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                <span className="text-sm">View project</span>
+                <span className="grid h-9 w-9 place-items-center rounded-full bg-white text-black">
+                  <Arrow />
+                </span>
+              </div>
+            </div>
+            <div className="mt-5 flex items-baseline justify-between gap-4">
+              <h3 className="text-2xl font-medium tracking-[-0.03em]">
+                {p.title}
+              </h3>
+              {p.metrics && (
+                <span className="shrink-0 text-sm text-muted">
+                  <span className="font-medium text-fg">
+                    {p.metrics[0].value}
+                  </span>{" "}
+                  {p.metrics[0].label}
+                </span>
+              )}
+            </div>
+            <p className="mt-1 text-[15px] text-muted">{p.role}</p>
+          </Link>
+        ))}
+        <Link
+          href="/work"
+          className="group grid aspect-[4/5] w-[80vw] shrink-0 snap-start place-items-center rounded-[28px] border border-dashed border-line transition-colors hover:bg-card sm:w-[400px] md:w-[440px]"
+        >
+          <span className="text-center">
+            <span className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-fg text-2xl text-bg transition-transform duration-500 group-hover:rotate-45">
+              <Arrow />
+            </span>
+            <span className="mt-5 block text-2xl font-medium tracking-tight">
+              Everything else
+            </span>
+            <span className="mt-1 block text-sm text-muted">
+              {projects.length} projects
+            </span>
+          </span>
+        </Link>
+      </HorizontalGallery>
+
+      {/* Bento */}
+      <section className="shell pt-24 md:pt-32" aria-labelledby="more">
+        <Reveal>
+          <h2 id="more" className={`mb-12 ${display}`}>
+            And <span className="font-serif font-normal italic">more.</span>
+          </h2>
+        </Reveal>
+        <Spotlight className="grid auto-rows-[minmax(220px,auto)] gap-4 md:grid-cols-4">
+          <Reveal className="md:col-span-2 md:row-span-2">
+            <Link
+              href="/ledger"
+              data-spot
+              className="group flex h-full flex-col justify-between overflow-hidden rounded-[28px] border border-line bg-card p-7 md:p-9"
+            >
+              <div className="flex items-start justify-between">
+                <p className="eyebrow">Forecast ledger</p>
+                <Arrow className="text-faint transition-colors group-hover:text-fg" />
+              </div>
+              <div className="mt-10">
+                <p className="text-[clamp(72px,9vw,128px)] font-medium leading-none tracking-[-0.06em]">
+                  <Counter value="0.134" />
+                </p>
+                <p className="mt-3 text-muted">
+                  Brier score · {hits} of {resolved} resolved calls right
+                </p>
+              </div>
+              <InView className="mt-10">
+                <div className="flex h-28 items-end gap-1.5" aria-hidden="true">
+                  {ledger.calls.map((c, i) => (
+                    <i
+                      key={i}
+                      className={`grow-bar block flex-1 rounded-t-md ${
+                        c.result === "HIT"
+                          ? "bg-emerald-500"
+                          : c.result === "MISS"
+                            ? "bg-rose-500"
+                            : "bg-fg/15"
+                      }`}
+                      style={
+                        {
+                          height: `${c.conviction}%`,
+                          "--d": i * 60,
+                        } as React.CSSProperties
+                      }
+                    />
+                  ))}
+                </div>
+                <p className="mt-3 font-mono text-[10.5px] uppercase tracking-[0.12em] text-muted">
+                  15 calls · bar height = conviction
+                </p>
+              </InView>
+            </Link>
+          </Reveal>
+
+          <Reveal className="md:col-span-2" delay={0.08}>
+            <Link
+              href="/research"
+              data-spot
+              className="group flex h-full flex-col justify-between rounded-[28px] border border-line p-7 md:p-9"
+            >
+              <div className="flex items-start justify-between">
+                <p className="eyebrow">Research</p>
+                <Arrow className="text-faint transition-colors group-hover:text-fg" />
+              </div>
+              <div className="mt-8">
+                <p className="text-[clamp(36px,4vw,56px)] font-medium leading-none tracking-[-0.05em]">
+                  Pitt <span className="text-faint">×</span> UPMC
+                </p>
+                <p className="mt-3 text-muted">
+                  Applied AI · accessibility · emergency medicine · cell biology
+                </p>
+              </div>
+            </Link>
+          </Reveal>
+
+          <Reveal delay={0.12}>
+            <Link
+              href="/research#landscape"
+              data-spot
+              className="group flex h-full flex-col justify-between rounded-[28px] border border-line p-7"
+            >
+              <InView>
+                <div
+                  className="grid w-fit grid-cols-9 gap-1.5"
+                  aria-hidden="true"
+                >
+                  {companies.map((_, i) => (
+                    <i
+                      key={i}
+                      className="grow-bar block h-2.5 w-2.5 rounded-full bg-accent"
+                      style={
+                        {
+                          "--d": i * 25,
+                          opacity: 0.35 + (i % 4) * 0.2,
+                        } as React.CSSProperties
+                      }
+                    />
+                  ))}
+                </div>
+              </InView>
+              <div className="mt-8">
+                <p className="text-5xl font-medium tracking-[-0.05em]">
+                  <Counter value={String(companies.length)} />
+                </p>
+                <p className="mt-2 text-sm text-muted">
+                  Indian healthtech companies, mapped
+                </p>
+              </div>
+            </Link>
+          </Reveal>
+
+          <Reveal delay={0.16}>
+            <a
+              href="/work/juno-ai/Juno-AI-Research-Paper.pdf"
+              target="_blank"
+              rel="noreferrer"
+              data-spot
+              className="group flex h-full flex-col justify-between rounded-[28px] border border-line p-7"
+            >
+              <div className="flex items-start justify-between">
+                <p className="eyebrow">Paper</p>
+                <Arrow className="text-faint transition-colors group-hover:text-fg" />
+              </div>
+              <div>
+                <p className="font-serif text-3xl italic leading-tight">
+                  Juno AI
+                </p>
+                <p className="mt-2 text-sm text-muted">
+                  Retrieval-grounded health information for rural India
+                </p>
+              </div>
+            </a>
+          </Reveal>
+
+          <Reveal className="md:col-span-2" delay={0.08}>
+            <a
+              href="https://strike.kapoorjay.com"
+              target="_blank"
+              rel="noreferrer"
+              className="group relative flex h-full min-h-[240px] items-center justify-center overflow-hidden rounded-[28px] bg-[#fde047] text-black"
+            >
+              <span className="-rotate-6 rounded-lg border-[5px] border-black px-6 py-2 font-mono text-4xl font-bold tracking-tight transition-transform duration-500 group-hover:rotate-3 group-hover:scale-110 md:text-5xl">
+                ON STRIKE.
+              </span>
+              <span className="absolute bottom-5 left-6 text-sm font-medium">
+                Everybody’s on Strike · Play ↗
+              </span>
+            </a>
+          </Reveal>
+          <Reveal className="md:col-span-2" delay={0.14}>
+            <a
+              href="https://emergency.kapoorjay.com"
+              target="_blank"
+              rel="noreferrer"
+              className="group relative flex h-full min-h-[240px] items-center justify-center overflow-hidden rounded-[28px] bg-[#b91c1c] text-white"
+            >
+              <span
+                aria-hidden="true"
+                className="text-8xl transition-transform duration-500 group-hover:-translate-y-2 group-hover:rotate-[-8deg] group-hover:scale-110"
               >
-                <Photo
-                  name={p.name}
-                  alt={p.alt}
-                  className="absolute inset-0 h-full w-full object-cover"
-                />
-                <figcaption className="absolute bottom-2 left-2 rounded-full bg-black/55 px-2.5 py-1 text-[11px] text-white backdrop-blur">
-                  {p.caption}
-                </figcaption>
-              </figure>
-            ))}
-            <figure className="relative col-span-2 aspect-[2/1] overflow-hidden rounded-2xl border border-line bg-card">
+                🦕
+              </span>
+              <span className="absolute bottom-5 left-6 text-sm font-medium">
+                The World’s Worst Emergency Service · Play ↗
+              </span>
+            </a>
+          </Reveal>
+        </Spotlight>
+      </section>
+
+      {/* Photos */}
+      <section aria-labelledby="clock" className="pt-32 md:pt-44">
+        <Reveal className="shell mb-12 flex items-end justify-between">
+          <h2 id="clock" className={display}>
+            Off the{" "}
+            <span className="font-serif font-normal italic">clock.</span>
+          </h2>
+          <Link
+            href="/about"
+            className="hidden items-center gap-1.5 text-sm text-muted hover:text-fg sm:inline-flex"
+          >
+            About me <Arrow />
+          </Link>
+        </Reveal>
+        <Marquee speed="60s">
+          {photos.slice(1).map((p, i) => (
+            <figure
+              key={p.name}
+              className={`relative mx-2 h-[300px] shrink-0 overflow-hidden rounded-[24px] bg-card md:mx-3 md:h-[420px] ${
+                i % 2 ? "w-[260px] md:w-[360px]" : "w-[380px] md:w-[540px]"
+              }`}
+            >
               <Photo
-                name="04_childhood_football_team"
-                alt="Jay’s childhood football team on the pitch with their coach"
+                name={p.name}
+                alt={p.alt}
                 className="absolute inset-0 h-full w-full object-cover"
               />
-              <figcaption className="absolute bottom-2 left-2 rounded-full bg-black/55 px-2.5 py-1 text-[11px] text-white backdrop-blur">
-                First team
+              <figcaption className="absolute bottom-3 left-3 rounded-full bg-black/55 px-3 py-1 text-xs text-white backdrop-blur">
+                {p.caption}
               </figcaption>
             </figure>
-          </div>
-        </div>
+          ))}
+        </Marquee>
       </section>
     </>
   );

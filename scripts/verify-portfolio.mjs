@@ -44,9 +44,21 @@ const errors = [];
 
 try {
   for (const [name, options] of [
-    ["desktop", { viewport: { width: 1440, height: 1000 } }],
+    // Accessibility scans run with reduced motion so scroll-revealed content is visible.
+    [
+      "desktop",
+      { viewport: { width: 1440, height: 1000 }, reducedMotion: "reduce" },
+    ],
     ["mobile", { ...devices["iPhone 13"] }],
-    ["dark", { viewport: { width: 1280, height: 900 }, colorScheme: "dark" }],
+    [
+      "dark",
+      {
+        viewport: { width: 1280, height: 900 },
+        colorScheme: "dark",
+        reducedMotion: "reduce",
+      },
+    ],
+    ["motion", { viewport: { width: 1280, height: 900 } }],
   ]) {
     const context = await browser.newContext(options);
     const page = await context.newPage();
@@ -67,7 +79,8 @@ try {
         `Horizontal overflow on ${route} (${name})`,
       );
       assert.equal(await page.locator("h1").count(), 1, `One h1 on ${route}`);
-      if (name !== "mobile") {
+      if (name === "desktop" || name === "dark") {
+        await page.waitForTimeout(2000); // let entrance animations settle
         const axe = await new AxeBuilder({ page })
           .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
           .analyze();
@@ -80,7 +93,7 @@ try {
     }
 
     await page.goto(base + "/", { waitUntil: "networkidle" });
-    assert.match(await page.locator("h1").innerText(), /messy, real/);
+    assert.match(await page.locator("h1").innerText(), /Jay Kapoor/);
     if (name === "mobile") {
       await page.getByRole("button", { name: "Open menu" }).tap();
       await page
@@ -126,7 +139,7 @@ try {
     assert.equal(res.status(), 200, `Broken local link ${href}`);
   }
   console.log(
-    `Checked ${routes.length} routes × 3 contexts and ${links.size} local links.`,
+    `Checked ${routes.length} routes × 4 contexts and ${links.size} local links.`,
   );
   assert.deepEqual(errors, [], "Browser errors");
   console.log("All portfolio checks passed.");

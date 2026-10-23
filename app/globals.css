@@ -173,3 +173,117 @@
     height: 400px;
   }
 }
+
+/* Hex map: areas ripple in from the centre once the map is in view */
+.hexmap polygon {
+  opacity: 0;
+  transform: scale(0.3);
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--d, 0) * 1ms);
+}
+[data-inview="true"] .hexmap polygon {
+  opacity: 1;
+  transform: none;
+}
+.urgent-pulse {
+  animation: hex-pulse 2.8s ease-in-out infinite;
+  animation-delay: calc(var(--d, 0) * 1ms + 1.6s);
+}
+@keyframes hex-pulse {
+  0%,
+  100% {
+    fill: #fb923c;
+  }
+  50% {
+    fill: #fed7aa;
+  }
+}
+
+/* Bars that grow once in view */
+.grow-bar {
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--d, 0) * 1ms);
+}
+[data-inview="true"] .grow-bar {
+  transform: none;
+}
+
+/* Infinite marquee; the second copy is aria-hidden */
+.marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee var(--speed, 40s) linear infinite;
+}
+.marquee-wrap:hover .marquee {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.fade-x {
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+}
+
+/* Cursor spotlight on bento tiles */
+[data-spot] {
+  position: relative;
+  isolation: isolate;
+}
+[data-spot]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(
+    420px circle at var(--x, 50%) var(--y, 50%),
+    rgb(var(--accent) / 0.1),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+[data-spot]:hover::before {
+  opacity: 1;
+}
+
+/* Slow drifting glow behind the hero */
+.glow {
+  background: radial-gradient(
+    closest-side,
+    rgb(var(--accent) / 0.22),
+    transparent
+  );
+  animation: drift 18s ease-in-out infinite alternate;
+}
+@keyframes drift {
+  to {
+    transform: translate(12%, 18%) scale(1.15);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hexmap polygon,
+  .grow-bar {
+    transition-delay: 0s !important;
+  }
+  .marquee,
+  .glow,
+  .urgent-pulse {
+    animation: none !important;
+  }
+}
