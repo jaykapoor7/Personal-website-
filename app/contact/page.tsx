@@ -10,10 +10,7 @@ export default function Contact() {
     <div className="new-pro">
       <section className="shell contact-editorial">
         <span className="kicker">Contact / Pittsburgh, PA</span>
-        <h1>
-          Say <em>hello.</em>
-        </h1>
-        <p>Email is the easiest way to reach me.</p>
+        <h1>Contact.</h1>
         <a className="email-line" href={`mailto:${person.email}`}>
           {person.email}
           <span>
@@ -21,7 +18,7 @@ export default function Contact() {
           </span>
         </a>
         <div className="contact-index">
-          <span className="kicker">Elsewhere</span>
+          <span className="kicker">Links</span>
           {person.links
             .filter((x) => x.label !== "Email")
             .map((x) => (

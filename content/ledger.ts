@@ -23,7 +23,7 @@ export interface CoverageItem {
 
 export const ledger = {
   intro:
-    "Anyone can write a confident memo. The harder thing is to date the call, attach a probability, and let reality grade it. Every prediction below carries a conviction level and a resolution date.",
+    "Dated forecasts, probabilities, and outcomes.",
   stats: [
     { value: "15", label: "calls tracked", source: "published" as const },
     { value: "75%", label: "hit rate on resolved calls", source: "published" as const },

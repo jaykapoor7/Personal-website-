@@ -3,25 +3,25 @@ import { useState } from "react";
 const care = [
   {
     name: "Observe",
-    title: "Someone notices.",
-    text: "A resident records an animal, its condition, and its location.",
+    title: "Animal report.",
+    text: "Photo, condition, and location.",
   },
   {
     name: "Record",
-    title: "The observation stays.",
-    text: "A shared profile keeps sightings and care history together.",
+    title: "Shared record.",
+    text: "Sightings and care history.",
   },
   {
     name: "Coordinate",
-    title: "The next person can act.",
-    text: "Rescue teams can review requests, assign cases, and record follow-ups.",
+    title: "Case follow-up.",
+    text: "Teams review, assign, and update cases.",
   },
 ];
 export function CarePath() {
   const [step, setStep] = useState(0);
   return (
     <div className="care-path">
-      <div className="mini-label">STRAYPAW / FROM SIGHTING TO FOLLOW-UP</div>
+      <div className="mini-label">STRAYPAW / WORKFLOW</div>
       <div
         className="care-stations"
         role="group"
@@ -50,23 +50,20 @@ export function CarePath() {
 const barriers = [
   {
     name: "Cost",
-    short: "The medicine costs money.",
-    detail:
-      "Medication competes with daily essentials. Affordability has to be part of the intervention.",
+    short: "Medication costs.",
+    detail: "Cost was a recurring barrier.",
     symbol: "₹",
   },
   {
     name: "Time",
-    short: "The visit costs a shift.",
-    detail:
-      "A clinic visit can mean unpaid hours. Care needs to fit the workday.",
+    short: "Time off work.",
+    detail: "Clinic visits can mean lost income.",
     symbol: "◷",
   },
   {
     name: "Continuity",
-    short: "The story starts over.",
-    detail:
-      "Fragmented care makes follow-up harder. A regular point of care changes the pathway.",
+    short: "Follow-up care.",
+    detail: "Riders described fragmented care.",
     symbol: "↻",
   },
 ];
@@ -74,7 +71,7 @@ export function FieldNotes() {
   const [active, setActive] = useState(0);
   return (
     <div className="field-notes">
-      <div className="mini-label">NIDAAN / NOTES FROM BENGALURU</div>
+      <div className="mini-label">NIDAAN / BENGALURU</div>
       <div className="field-count">
         55
         <span>
@@ -103,8 +100,7 @@ export function FieldNotes() {
         <p>{barriers[active].detail}</p>
       </div>
       <small className="source-note">
-        Qualitative themes from the field brief. One city; not a representative
-        population sample.
+        Qualitative fieldwork; not a representative sample.
       </small>
     </div>
   );
@@ -114,20 +110,20 @@ export function JunoPath() {
   const items = [
     {
       label: "Question",
-      text: "Start with a health concern, in everyday language.",
+      text: "Health query.",
     },
     {
       label: "Sources",
-      text: "Retrieve relevant material from a curated information base.",
+      text: "Curated information.",
     },
     {
       label: "Next step",
-      text: "Explain the information and point toward appropriate human care.",
+      text: "Care navigation.",
     },
   ];
   return (
     <div className="juno-path">
-      <div className="mini-label">JUNO-AI / INFORMATION TO ORIENTATION</div>
+      <div className="mini-label">JUNO-AI / PROTOTYPE</div>
       <div className="juno-symbol" aria-hidden="true">
         <i />
         <i />
@@ -151,10 +147,7 @@ export function JunoPath() {
         ))}
       </div>
       <p aria-live="polite">{items[stage].text}</p>
-      <small>
-        Architecture described in the research paper. A prototype, not a
-        clinically validated service.
-      </small>
+      <small>Research prototype; not clinically validated.</small>
     </div>
   );
 }

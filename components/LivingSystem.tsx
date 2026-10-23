@@ -3,12 +3,12 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Arrow } from "./Arrow";
 import snapshot from "@/content/straypaw-snapshot.json";
-const stages = ["A point", "A record", "A network", "A real system"];
+const stages = ["Observation", "Record", "Network", "StrayPaw"];
 const notes = [
-  "One observation is a beginning.",
-  "A shared record. A place, a history, a next step.",
-  "Connect the people who can act.",
-  "StrayPaw, Coimbatore. A real system.",
+  "Animal report.",
+  "A shared record.",
+  "Care teams.",
+  "StrayPaw · Coimbatore.",
 ];
 const centers = snapshot.areas.map((a) => {
   const xs = a.ring.filter((_, i) => i % 2 === 0),
@@ -73,27 +73,20 @@ export function LivingSystem() {
     <section className="system-hero" aria-labelledby="hero-title">
       <div className="hero-heading shell">
         <div className="hero-topline">
-          <span className="eyebrow">JAY KAPOOR — BUILDER & RESEARCHER</span>
+          <span className="eyebrow">ECONOMICS & STATISTICS / PITT</span>
           <span className="eyebrow">PITTSBURGH ↔ INDIA</span>
         </div>
         <h1 id="hero-title">
-          I build systems for
-          <br />
-          <span>real-world problems.</span>
+          Jay Kapoor.
+          <span className="hero-subtitle">Student at Pitt.</span>
         </h1>
         <div className="hero-intro">
-          <p>
-            Software. Data. Access to care.
-            <br />
-            Economics & Statistics at Pitt.
-          </p>
+          <p>I’m interested in software, data, and public health.</p>
           <Link href="#selected" className="hero-work-link">
-            Explore selected work <Arrow direction="down" />
+            Work <Arrow direction="down" />
           </Link>
           <span className="eyebrow hero-aside">
-            SERIOUS WORK.
-            <br />
-            PLAYFUL MIND.
+            CURRENTLY BUILDING STRAYPAW
           </span>
         </div>
       </div>
@@ -103,7 +96,7 @@ export function LivingSystem() {
       >
         <div className="system-caption shell">
           <span className="eyebrow">
-            <i className="live-dot" /> THE CONNECTION ENGINE
+            <i className="live-dot" /> STRAYPAW / WORKFLOW
           </span>
           <span className="scene-index">0{step + 1} / 04</span>
         </div>
@@ -202,7 +195,7 @@ export function LivingSystem() {
               <circle cx="600" cy="220" r="40" />
               <path d="M600 180v-45h125" />
               <text x="734" y="139">
-                ONE OBSERVATION
+                OBSERVATION
               </text>
             </g>
             {step === 3 && (
@@ -233,21 +226,18 @@ export function LivingSystem() {
                 rel="noreferrer"
                 aria-label="Explore the real StrayPaw map"
               >
-                Open StrayPaw <Arrow />
+                Website <Arrow />
               </a>
             ) : (
-              <button
-                onClick={() => choose(step + 1)}
-                aria-label="Follow the connection"
-              >
-                Follow the connection <Arrow />
+              <button onClick={() => choose(step + 1)} aria-label="Next">
+                Next <Arrow />
               </button>
             )}
           </div>
           <div
             className="scale-control"
             role="group"
-            aria-label="Explore the connections"
+            aria-label="StrayPaw workflow"
           >
             {stages.map((s, i) => (
               <button
@@ -275,12 +265,12 @@ export function LivingSystem() {
         <div className="scene-provenance shell">
           {step === 3 ? (
             <a href={snapshot.source} target="_blank" rel="noreferrer">
-              Real public geography · retrieved 23 Oct 2026 <Arrow />
+              Public area data · 23 Oct 2026 <Arrow />
             </a>
           ) : (
-            <span>An illustrated connection. A real project at the end.</span>
+            <span>Workflow diagram; final view uses archived data.</span>
           )}
-          <span>SCROLL OR CHOOSE A SCALE</span>
+          <span>CHOOSE A VIEW</span>
         </div>
       </div>
     </section>

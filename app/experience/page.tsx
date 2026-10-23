@@ -19,15 +19,7 @@ export default function Experience() {
     <div className="new-pro">
       <header className="shell editorial-hero">
         <span className="kicker">Experience / Selected</span>
-        <h1>
-          Where I’ve
-          <br />
-          <em>spent my time.</em>
-        </h1>
-        <p>
-          A simple list of roles and research. Projects have their own space on
-          the work page.
-        </p>
+        <h1>Experience.</h1>
       </header>
       <section className="shell editorial-list">
         <div className="section-label">

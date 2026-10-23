@@ -3918,3 +3918,82 @@ img {
     display: none;
   }
 }
+
+/* Direct labels and shorter descriptions. */
+.hero-heading h1 .hero-subtitle {
+  display: block;
+  font-size: clamp(28px, 3.4vw, 48px);
+  letter-spacing: -0.045em;
+  margin-top: 14px;
+}
+.hero-aside {
+  max-width: 170px;
+  line-height: 1.7;
+}
+.stray-intro > div + div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+.stray-intro .feature-links {
+  align-self: stretch;
+}
+.footer-invitation {
+  font-size: clamp(60px, 7vw, 100px);
+  padding: 35px 0 22px;
+}
+.footer-invitation > .arrow-icon {
+  width: 65px;
+  height: 65px;
+  bottom: 28px;
+}
+.selected-heading {
+  padding-bottom: 45px;
+}
+.research-intro {
+  padding-block: 25px 35px;
+}
+.play-note:empty {
+  display: none;
+}
+.about-title h1,
+.editorial-hero h1,
+.page-hero h1 {
+  margin-bottom: 20px;
+}
+.field-finding {
+  min-height: 90px;
+}
+.juno-path > p {
+  min-height: 45px;
+}
+@media (max-width: 760px) {
+  .hero-heading h1 .hero-subtitle {
+    font-size: 29px;
+    margin-top: 12px;
+  }
+  .hero-aside {
+    display: none;
+  }
+  .footer-invitation {
+    font-size: 56px;
+    padding: 25px 0 18px;
+  }
+  .footer-invitation > .arrow-icon {
+    width: 40px;
+    height: 40px;
+    bottom: 23px;
+  }
+  .stray-intro > div + div {
+    display: flex;
+    gap: 12px;
+  }
+  .selected-heading {
+    padding-bottom: 30px;
+  }
+  .field-notes,
+  .juno-path {
+    min-height: 350px;
+  }
+}

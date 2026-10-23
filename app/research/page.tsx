@@ -19,31 +19,18 @@ export default function Research() {
   return (
     <>
       <header className="shell editorial-hero">
-        <span className="eyebrow">RESEARCH / QUESTIONS BEFORE ANSWERS</span>
-        <h1>
-          Questions first.
-          <br />
-          <em>Evidence always.</em>
-        </h1>
-        <p>
-          Care access. Accessible technology. Human behavior. Here is what I
-          worked on, and what you can inspect.
-        </p>
+        <span className="eyebrow">RESEARCH</span>
+        <h1>Research.</h1>
       </header>
       <section className="shell research-focus">
         <div>
           <span className="eyebrow">FIELDWORK / BENGALURU</span>
-          <h2 style={{ marginTop: 20 }}>
-            What makes care
-            <br />
-            hard to reach?
-          </h2>
+          <h2 style={{ marginTop: 20 }}>Project Nidaan</h2>
           <p>
-            For Project Nidaan, I interviewed delivery riders about medication
-            and care access, then organized and analyzed their responses.
+            Interviews and analysis on medication access for delivery riders.
           </p>
           <Link className="text-link" href="/work/project-nidaan">
-            Explore the fieldwork{" "}
+            Details{" "}
             <span>
               <Arrow />
             </span>
@@ -51,18 +38,12 @@ export default function Research() {
         </div>
         <div>
           <span className="eyebrow">RESEARCH ASSISTANT / UPMC</span>
-          <h2 style={{ marginTop: 20 }}>
-            Before the
-            <br />
-            hospital door.
-          </h2>
+          <h2 style={{ marginTop: 20 }}>UPMC Emergency Medicine</h2>
           <p>
-            My work included EMR abstraction and coding in REDCap for
-            retrospective trauma studies, and analysis of prehospital care
-            patterns and emergency outcomes.
+            EMR abstraction, REDCap coding, and analysis of prehospital care.
           </p>
           <Link className="text-link" href="/work/upmc-emergency-medicine">
-            See the contribution{" "}
+            Details{" "}
             <span>
               <Arrow />
             </span>
@@ -77,16 +58,16 @@ export default function Research() {
             target="_blank"
             rel="noreferrer"
           >
-            Full landscape <Arrow />
+            PDF <Arrow />
           </a>
         </div>
         <HealthTechMap />
       </section>
       <section id="experience" className="shell editorial-list">
         <div className="section-label">
-          <span>RESEARCH ROLES & WORKSTREAMS</span>
+          <span>RESEARCH ROLES</span>
           <Link href="/experience">
-            Full experience <Arrow />
+            Experience <Arrow />
           </Link>
         </div>
         {research.map((e, i) => (
@@ -135,7 +116,7 @@ export default function Research() {
       </section>
       <div className="shell research-artifacts-cta">
         <a href="/artifacts">
-          Open every research file, case study, and dataset <Arrow />
+          Files <Arrow />
         </a>
       </div>
       <section className="shell writing-editorial reading-list">
@@ -167,8 +148,8 @@ export default function Research() {
           </article>
         ))}
         <p className="source-note">
-          Independent analyses and portfolio work samples. Illustrative figures
-          and model assumptions are identified in the underlying documents.
+          Work samples; assumptions and illustrative figures are labelled in
+          each file.
         </p>
       </section>
     </>

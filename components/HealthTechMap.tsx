@@ -11,10 +11,8 @@ export function HealthTechMap() {
     <div className="health-landscape">
       <div className="landscape-head">
         <div>
-          <span className="eyebrow">
-            INDIA HEALTHTECH / THE UNDERLYING DATA
-          </span>
-          <h3>Follow the landscape.</h3>
+          <span className="eyebrow">INDIA HEALTHTECH</span>
+          <h3>Company dataset</h3>
         </div>
         <a href="/research/India-HealthTech-Companies.csv" download>
           Download CSV <Arrow />
@@ -65,13 +63,12 @@ export function HealthTechMap() {
             target="_blank"
             rel="noreferrer"
           >
-            Read the full market map <Arrow />
+            Market map <Arrow />
           </a>
         </div>
       </div>
       <p className="landscape-note">
-        36 companies in the downloadable dataset. Historical research; company
-        descriptions and stages reflect the source file.
+        36 companies. Historical data from the linked CSV.
       </p>
     </div>
   );

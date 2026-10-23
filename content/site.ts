@@ -13,18 +13,32 @@ export const person = {
   course: "Economics & Statistics",
   place: "Pittsburgh, PA",
   intro:
-    "I’m a student at the University of Pittsburgh. I’m working on StrayPaw and a few research projects. Here’s some of what I’ve been working on.",
+    "I study Economics and Statistics at Pitt. I’m interested in software, data, and public health.",
   about: [
-    "I’m Jay. I study Economics and Statistics at the University of Pittsburgh, with a minor in Information Sciences.",
-    "Lately, most of my time outside class has gone into StrayPaw, a way to keep better records for street animals in India. I also work on research with people at Pitt and spend time reading about healthcare, technology, and investing.",
-    "Before this, I worked on a healthcare project called Juno-AI, helped run projects at Crowwd, and did a mix of research and operations work. The work page has the details.",
+    "I study Economics and Statistics at Pitt, with a minor in Information Sciences.",
+    "I like software, public health, and football.",
   ],
   links: [
-    { label: "Email", href: "mailto:jak581@pitt.edu" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/jay-kapoor7" },
-    { label: "GitHub", href: "https://github.com/jaykapoor7" },
-    { label: "X", href: "https://x.com/jaybuildsvx" },
-    { label: "Résumé", href: "/jay-kapoor-resume.pdf" },
+    {
+      label: "Email",
+      href: "mailto:jak581@pitt.edu",
+    },
+    {
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/jay-kapoor7",
+    },
+    {
+      label: "GitHub",
+      href: "https://github.com/jaykapoor7",
+    },
+    {
+      label: "X",
+      href: "https://x.com/jaybuildsvx",
+    },
+    {
+      label: "Résumé",
+      href: "/jay-kapoor-resume.pdf",
+    },
   ],
 };
 
@@ -48,45 +62,40 @@ export const projects: Project[] = [
   {
     slug: "straypaw",
     title: "StrayPaw",
-    eyebrow: "Founder · Current project",
+    eyebrow: "Founder · Current",
     period: "Current",
-    summary:
-      "A shared record for street animals in India, from the first sighting to the care they receive.",
+    summary: "Animal records and care coordination in India.",
     image: "/straypaw/field-observation.webp",
     imageAlt: "Street dog photographed for StrayPaw’s field observation atlas",
     imagePosition: "center 54%",
     tone: "forest",
     body: [
-      "StrayPaw gives residents, rescue teams, and local governments a way to work from the same record. Someone can report an animal; a field team can follow the case; a city can see where care is happening and where it is missing.",
-      "I started it because much of this work already happens through feeders, rescuers, and NGOs, but the records are often scattered. The product now includes animal profiles, case tracking, and a live map. The project register contains over 30,000 animal records across 28 Indian cities. My October LinkedIn update reports 19 NGO partnerships, including PAWS Chennai, Pawsome People Project, and The Kind Hour Foundation. A record count is not a count of animals rescued or treated.",
-    ],
-    did: [
-      "Product design and development",
-      "Field workflows for reports and case follow-up",
-      "Outreach to feeder networks and NGOs",
-      "NGO case workspaces, maps, field access, and municipal ABC/ARV reporting",
+      "I built animal profiles, case tracking, maps, and reporting tools for residents, rescue teams, and municipalities in India.",
     ],
     gallery: [
       {
         src: "/straypaw/field-observation.webp",
         alt: "Field-observation photographs from the StrayPaw project",
-        caption: "The field-observation archive",
+        caption: "Field photographs",
       },
       {
         src: "/straypaw/street-dog.jpg",
         alt: "Street dog documented in Delhi",
-        caption: "From StrayPaw’s field photographs",
+        caption: "Field photograph",
       },
       {
         src: "/straypaw/skyline-dog.webp",
         alt: "StrayPaw’s city and street dog image",
-        caption: "StrayPaw, from the street up",
+        caption: "StrayPaw",
       },
     ],
     links: [
-      { label: "Visit StrayPaw", href: "https://straypaw.kapoorjay.com" },
       {
-        label: "Explore the live map",
+        label: "Website",
+        href: "https://straypaw.kapoorjay.com",
+      },
+      {
+        label: "Map",
         href: "https://straypaw.kapoorjay.com/map",
       },
     ],
@@ -96,28 +105,20 @@ export const projects: Project[] = [
     title: "Juno-AI",
     eyebrow: "Founder · Healthcare",
     period: "Founded 2019",
-    summary:
-      "A healthcare access project I started to help people find information, doctors, and pharmacies.",
+    summary: "Health information and care navigation.",
     image: "/work/juno-ai/juno-product-dashboard.webp",
     imageAlt: "Juno-AI product screens and dashboard",
     tone: "lilac",
     body: [
-      "I started Juno-AI as a teenager in India. It combined health information with tools for finding care, especially for people in places where reliable guidance can be hard to get.",
-      "I built the product, led outreach, and developed healthcare partnerships. My résumé and LinkedIn report 10,000+ rural users. The linked paper documents the retrieval-grounded information and care-navigation prototype; it does not independently audit that historical user count.",
-      "The paper reports a small formative evaluation, not clinical effectiveness. The historical platform and the more recent preventive-health experiment are listed separately.",
-    ],
-    did: [
-      "Health information and care navigation",
-      "Doctor and pharmacy discovery",
-      "Research paper on the approach",
+      "I built health-information and care-navigation tools. The paper describes a prototype and formative evaluation; it is not clinically validated.",
     ],
     links: [
       {
-        label: "Read the paper",
+        label: "Paper",
         href: "/work/juno-ai/Juno-AI-Research-Paper.pdf",
       },
       {
-        label: "Archived interface mockup · illustrative figures",
+        label: "Interface mockup · illustrative data",
         href: "/work/juno-ai/juno-product-dashboard.webp",
       },
     ],
@@ -127,19 +128,12 @@ export const projects: Project[] = [
     title: "Crowwd",
     eyebrow: "Founder’s Office Intern · Fintech",
     period: "2025",
-    summary: "Growth, events, and research at an investing platform in India.",
+    summary: "Growth, research, and the Arthavaad speaker series.",
     image: "/work/crowwd/arthavaad-stage.jpg",
     imageAlt: "Arthavaad event at The Circle.Work",
     tone: "clay",
     body: [
-      "In Crowwd’s founder’s office, I ran multi-channel user acquisition, benchmarked seven social-investing platforms, and wrote a GEO playbook for the founder.",
-      "I launched Arthavaad, a multi-city monthly speaker series, and handled speaker outreach, brand partnerships, logistics, and execution. Event photographs and selected strategy work are linked below.",
-      "The work ranged from looking at acquisition channels to finding speakers and running events. I also wrote research notes on fintech products.",
-    ],
-    did: [
-      "Arthavaad speaker series",
-      "Research on investing products",
-      "User acquisition experiments",
+      "I worked on user acquisition, competitive research, and the Arthavaad speaker series.",
     ],
     gallery: [
       {
@@ -149,13 +143,16 @@ export const projects: Project[] = [
       },
     ],
     links: [
-      { label: "Visit Crowwd", href: "https://crowwd.io" },
+      {
+        label: "Website",
+        href: "https://crowwd.io",
+      },
       {
         label: "Fintech teardown",
         href: "/work/crowwd/Crowwd-Fintech-Teardown.pdf",
       },
       {
-        label: "Selected research",
+        label: "Research & strategy",
         href: "/work/crowwd/Crowwd-Selected-Research-and-Strategy.pdf",
       },
     ],
@@ -165,21 +162,18 @@ export const projects: Project[] = [
     title: "Project Nidaan",
     eyebrow: "Co-founder · Health research",
     period: "May 2022–Aug 2024",
-    summary:
-      "Research into medication access for delivery riders in Bengaluru.",
+    summary: "Medication-access fieldwork with delivery riders.",
     tone: "sand",
     body: [
-      "I interviewed 55 delivery riders in Bengaluru about medication and care access, then organized and analyzed the responses. The project looked at barriers that do not always show up in formal healthcare data.",
-      "Cost, time away from paid work, and fragmented care emerged as recurring themes. The work points toward care that fits riders’ schedules and reduces the cost of seeking help.",
-      "This is qualitative work in one city. The field brief preserves the project’s interview count, but its coded percentages are illustrative. They should not be read as measured population estimates.",
+      "I interviewed 55 delivery riders in Bengaluru and analyzed medication-access barriers. Percentages in the field brief are illustrative.",
     ],
     links: [
       {
-        label: "Field research brief",
+        label: "Field brief",
         href: "/work/project-nidaan/Project-Nidaan-Field-Research-Brief.pdf",
       },
       {
-        label: "KPI dashboard · illustrative work sample",
+        label: "KPI dashboard · illustrative",
         href: "/work/project-nidaan/Project-Nidaan-KPI-Dashboard.xlsx",
       },
     ],
@@ -189,14 +183,14 @@ export const projects: Project[] = [
     title: "The Finer Things Club",
     eyebrow: "Founder · Commerce",
     period: "Jul 2021–Aug 2024",
-    summary: "An artisan marketplace: 300+ rural artisans, $8k+ in revenue.",
+    summary: "An artisan marketplace in India.",
     tone: "peach",
     body: [
-      "I founded an artisan-commerce initiative and worked on onboarding, distribution, and operations through NGO and marketplace partnerships. My résumé and LinkedIn record report 300+ rural artisans onboarded and $8k+ in revenue; the one-pager preserves the project account.",
+      "I worked on artisan onboarding, online sales, and NGO partnerships.",
     ],
     links: [
       {
-        label: "Project one-pager",
+        label: "Project summary",
         href: "/work/finer-things-club/Finer-Things-Marketplace-One-Pager.pdf",
       },
     ],
@@ -206,15 +200,14 @@ export const projects: Project[] = [
     title: "TOT Schools",
     eyebrow: "Operations Lead",
     period: "Jun 2025–Apr 2026",
-    summary: "Six operating functions. Eight early-childhood centres.",
+    summary: "Operations across eight childcare centres.",
     tone: "blue",
     body: [
-      "I ran technology, facilities, people, nutrition, documentation, and finance across eight centres. I rolled out Illumine for attendance, billing, and parent communications, and CCTV across the centres.",
-      "I hired and onboarded staff and wrote a 12-document handbook and SOP suite. The linked case study documents the scope and work delivered, as reported by me.",
+      "I managed technology, staffing, facilities, nutrition, documentation, and finance across eight childcare centres.",
     ],
     links: [
       {
-        label: "Operations case study",
+        label: "Case study",
         href: "/work/tot-schools/TOT-Schools-Operations-Case-Study.pdf",
       },
     ],
@@ -224,10 +217,10 @@ export const projects: Project[] = [
     title: "HDFC Bank",
     eyebrow: "Wealth Management Intern",
     period: "2025",
-    summary: "Investment research for the wealth management team.",
+    summary: "Investment research for portfolio reviews.",
     tone: "sand",
     body: [
-      "I researched equities, mutual funds, and other products for portfolio reviews. These are two examples of the work.",
+      "I researched equities, mutual funds, and market trends for HNI portfolio reviews.",
     ],
     links: [
       {
@@ -243,7 +236,11 @@ export const projects: Project[] = [
 ];
 
 export const experience = [
-  { name: "StrayPaw", detail: "Founder", href: "/work/straypaw" },
+  {
+    name: "StrayPaw",
+    detail: "Founder",
+    href: "/work/straypaw",
+  },
   {
     name: "Accessible SmartTech Lab",
     detail: "Research Assistant · Aug 2026–present",
@@ -259,7 +256,10 @@ export const experience = [
     name: "Research with Prof. Rosta Farzan",
     detail: "AI adoption among nonprofits",
   },
-  { name: "Prof. Yasir Khan", detail: "Economics research on Kisan Rail" },
+  {
+    name: "Prof. Yasir Khan",
+    detail: "Economics research on Kisan Rail",
+  },
   {
     name: "JumpStart / AmeriCorps",
     detail: "Team Leader",
@@ -303,11 +303,13 @@ export const experience = [
 export const writingItems = [
   {
     title: "India HealthTech Market Map",
-    description:
-      "A map of companies working across healthcare in India, with the underlying data.",
+    description: "Company research and dataset.",
     type: "Research",
     links: [
-      { label: "Open PDF", href: "/research/India-HealthTech-Market-Map.pdf" },
+      {
+        label: "Open PDF",
+        href: "/research/India-HealthTech-Market-Map.pdf",
+      },
       {
         label: "Download CSV",
         href: "/research/India-HealthTech-Companies.csv",
@@ -316,74 +318,85 @@ export const writingItems = [
   },
   {
     title: "Memo Library & Calibration Ledger",
-    description:
-      "Investment memos and a dated list of forecasts. I keep the calls and their outcomes together.",
+    description: "Investment memos and dated forecasts.",
     type: "Memos",
     links: [
-      { label: "See the ledger", href: "/ledger" },
-      { label: "Open PDF", href: "/research/Memo-Library-and-Ledger.pdf" },
+      {
+        label: "See the ledger",
+        href: "/ledger",
+      },
+      {
+        label: "Open PDF",
+        href: "/research/Memo-Library-and-Ledger.pdf",
+      },
     ],
   },
   {
     title: "India’s GLP-1 Inflection",
-    description:
-      "Notes on the companies and products around metabolic care in India.",
+    description: "Notes on metabolic care in India.",
     type: "Research",
     links: [
-      { label: "Open PDF", href: "/research/India-GLP1-Sector-Thesis.pdf" },
+      {
+        label: "Open PDF",
+        href: "/research/India-GLP1-Sector-Thesis.pdf",
+      },
     ],
   },
   {
     title: "India’s Retail-Investing Reset",
-    description: "A look at where India’s retail investing market may go next.",
+    description: "Notes on retail investing in India.",
     type: "Research",
     links: [
-      { label: "Open PDF", href: "/research/India-Fintech-Sector-Thesis.pdf" },
+      {
+        label: "Open PDF",
+        href: "/research/India-Fintech-Sector-Thesis.pdf",
+      },
     ],
   },
   {
     title: "Juno-AI research paper",
-    description: "The research behind the healthcare access project.",
+    description: "System design and formative evaluation.",
     type: "Paper",
     links: [
-      { label: "Open PDF", href: "/work/juno-ai/Juno-AI-Research-Paper.pdf" },
+      {
+        label: "Open PDF",
+        href: "/work/juno-ai/Juno-AI-Research-Paper.pdf",
+      },
     ],
   },
 ];
 
-/** Smaller projects remain accessible without taking over the main work page. */
 export const archiveProjects: Project[] = [
   {
     slug: "juno-adhd-os",
     title: "Juno ADHD OS",
-    eyebrow: "Documented prototype · Productivity",
+    eyebrow: "Prototype · Productivity",
     period: "Jan–May 2026",
-    summary: "A productivity and behavioral-planning prototype for ADHD users.",
+    summary: "An ADHD productivity prototype.",
     tone: "blue",
     body: [
-      "My LinkedIn project record describes a prototype exploring AI-assisted productivity and behavioral planning for ADHD users. It is separate from Juno’s healthcare-access platform and the preventive-health experiment.",
+      "A prototype for AI-assisted productivity and behavioral planning, documented on LinkedIn.",
     ],
     links: [
       {
-        label: "LinkedIn project record",
+        label: "LinkedIn",
         href: "https://www.linkedin.com/in/jay-kapoor7",
       },
     ],
   },
-
   {
     slug: "juno-preventive-health",
     title: "Juno Preventive Health",
-    eyebrow: "Small build · Healthcare",
+    eyebrow: "Prototype · Healthcare",
     period: "2026",
-    summary: "An experiment with AI and preventive health information.",
+    summary: "A preventive-health information prototype.",
     tone: "lilac",
     body: [
-      "I built an early version using the Claude API to explore how people might make sense of preventive care.",
+      "I built an early preventive-health information tool using the Claude API.",
     ],
     links: [
       {
-        label: "Open the build",
+        label: "Prototype",
         href: "https://preventive-healthcare-xi.vercel.app/",
       },
     ],
@@ -393,14 +406,12 @@ export const archiveProjects: Project[] = [
     title: "TARC",
     eyebrow: "Project and Operations Associate",
     period: "Jan–Aug 2026",
-    summary: "Feasibility research for potential real estate projects.",
+    summary: "Real-estate feasibility research.",
     tone: "sand",
-    body: [
-      "I looked at regulations, pricing, and project assumptions for possible developments.",
-    ],
+    body: ["I researched zoning, pricing, and development assumptions."],
     links: [
       {
-        label: "Read a feasibility memo",
+        label: "Feasibility memo",
         href: "/work/tarc/Development-Feasibility-Memo-2025.pdf",
       },
     ],
@@ -408,17 +419,16 @@ export const archiveProjects: Project[] = [
   {
     slug: "seo-geo-optimiser",
     title: "Search visibility checker",
-    eyebrow: "Small build · Search",
+    eyebrow: "Prototype · Search",
     period: "2026",
-    summary:
-      "A tool that reviews a site’s search visibility and produces a report.",
+    summary: "A search-visibility checker.",
     tone: "blue",
     body: [
-      "I made this after working on search distribution at Crowwd. It looks at conventional search and AI search results.",
+      "I built a tool for checking website visibility in conventional and AI search.",
     ],
     links: [
       {
-        label: "Open the tool",
+        label: "Prototype",
         href: "https://llm-ai-search-checker.vercel.app/",
       },
     ],
@@ -426,18 +436,16 @@ export const archiveProjects: Project[] = [
   {
     slug: "recovery-intelligence",
     title: "Health OS",
-    eyebrow: "Small build · Health data",
+    eyebrow: "Prototype · Health data",
     period: "2026",
-    summary:
-      "A browser-based prototype that explains wearable data and personal patterns.",
+    summary: "A wearable-data interface prototype.",
     tone: "peach",
     body: [
-      "The current repository describes Health OS: a personal health-data interface with recovery, sleep, activity, and trend explanations. Health records are stored in the browser.",
-      "Its current scoring calculators are deterministic placeholders, not validated health algorithms. I treat it as an interface and data-explanation prototype.",
+      "A browser-based health-data interface. Its scores are placeholders, not validated health measures.",
     ],
     links: [
       {
-        label: "Open the tool",
+        label: "Prototype",
         href: "https://explain-my-whoop-stats.vercel.app/",
       },
     ],
@@ -445,24 +453,29 @@ export const archiveProjects: Project[] = [
   {
     slug: "road360",
     title: "Road360",
-    eyebrow: "Small build · Transport",
+    eyebrow: "Prototype · Transport",
     period: "2026",
-    summary: "A driving experiment built around Delhi’s road conditions.",
+    summary: "A driving-data experiment.",
     tone: "clay",
     body: [
-      "I explored whether horn noise and harsh braking could help describe a drive.",
+      "I explored horn noise and harsh braking as signals of road conditions.",
     ],
-    links: [{ label: "Open the tool", href: "https://road360.vercel.app/" }],
+    links: [
+      {
+        label: "Prototype",
+        href: "https://road360.vercel.app/",
+      },
+    ],
   },
   {
     slug: "apodaca-lab",
     title: "Apodaca Lab",
     eyebrow: "Research Assistant · Pitt",
     period: "2024–2025",
-    summary: "Cell biology research at the Pitt School of Medicine.",
+    summary: "Cell-biology research at Pitt.",
     tone: "sand",
     body: [
-      "I cultured primary bladder urothelial cells for PIEZO/TMEM63 mechanotransduction studies under Prof. Gerard Apodaca and contributed figures toward manuscripts and grant submissions. This describes a research-assistant contribution, not authorship of a published finding.",
+      "I cultured bladder urothelial cells for PIEZO/TMEM63 studies and prepared research figures.",
     ],
     links: [],
   },
@@ -470,10 +483,10 @@ export const archiveProjects: Project[] = [
     slug: "pitt-sociology",
     title: "Pitt Sociology",
     eyebrow: "Research assistant · Pitt",
-    summary: "Literature review and data work in Pitt’s sociology department.",
+    summary: "Literature reviews and survey analysis.",
     tone: "blue",
     body: [
-      "The work involved reading studies, working with surveys, and analysis in R and Stata.",
+      "I worked on literature reviews, survey data, and analysis in R and Stata.",
     ],
     links: [],
   },
@@ -482,10 +495,10 @@ export const archiveProjects: Project[] = [
     title: "UPMC Emergency Medicine",
     eyebrow: "Research Assistant",
     period: "Aug 2025–Jan 2026",
-    summary: "Research on prehospital care and emergency outcomes.",
+    summary: "Clinical data and prehospital-care research.",
     tone: "lilac",
     body: [
-      "My work included abstracting and coding EMR data in REDCap for retrospective trauma studies, and analysis of prehospital care patterns and emergency outcomes. Patient-level research data are not published here.",
+      "I abstracted EMR data, coded records in REDCap, and analyzed prehospital care patterns.",
     ],
     links: [],
   },
@@ -494,10 +507,11 @@ export const archiveProjects: Project[] = [
     title: "Max Hospital",
     eyebrow: "Clinical shadowing",
     period: "2023–2024",
-    summary: "Clinical shadowing in emergency and internal medicine.",
+    summary: "Clinical shadowing in New Delhi.",
     tone: "peach",
-    body: ["I observed care at a hospital in New Delhi."],
+    body: ["I shadowed emergency and internal-medicine teams."],
     links: [],
   },
 ];
+
 export const allProjects = [...projects, ...archiveProjects];

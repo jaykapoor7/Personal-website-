@@ -289,8 +289,7 @@ export function EverythingFalls({ compact = false }: { compact?: boolean }) {
         ))}
       </div>
       <p className="falls-caption">
-        Drag an object and let go. Keyboard: focus an object, then Enter or the
-        arrow keys.
+        Drag and release. Keyboard: Enter or arrow keys.
       </p>
     </div>
   );

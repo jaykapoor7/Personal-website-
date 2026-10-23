@@ -16,56 +16,30 @@ export default function Home() {
         <div className="section-rule">
           <span>01 / SELECTED WORK</span>
           <Link href="/artifacts">
-            Open the artifact index <Arrow />
+            Files <Arrow />
           </Link>
         </div>
         <div className="selected-heading">
-          <h2>
-            Built.
-            <br />
-            <em>Out in the world.</em>
-          </h2>
-          <p>
-            A live product. Fieldwork.
-            <br />
-            And the evidence behind them.
-          </p>
+          <h2>Projects.</h2>
         </div>
         <article className="stray-feature">
           <div className="stray-intro">
             <div>
-              <span className="eyebrow">01 — STRAYPAW / SOLO FOUNDER</span>
-              <h3>
-                Every animal.
-                <br />
-                On the record.
-              </h3>
+              <span className="eyebrow">01 / FOUNDER</span>
+              <h3>StrayPaw</h3>
             </div>
             <div>
-              <p>
-                Scattered sightings → shared records → coordinated care.
-                <br />I built the product and its field workflows.
-              </p>
-              <div className="stray-metrics">
-                <div>
-                  <strong>30k+</strong>
-                  <span>animal records</span>
-                </div>
-                <div>
-                  <strong>28</strong>
-                  <span>Indian cities</span>
-                </div>
-              </div>
+              <p>Street-animal records and care coordination in India.</p>
               <div className="feature-links">
                 <Link href="/work/straypaw">
-                  Inside the project <Arrow />
+                  Details <Arrow />
                 </Link>
                 <a
                   href="https://straypaw.kapoorjay.com"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Open StrayPaw <Arrow />
+                  Website <Arrow />
                 </a>
               </div>
             </div>
@@ -73,15 +47,13 @@ export default function Home() {
           <StrayPawExplorer />
           <CarePath />
           <div className="evidence-caption">
-            <span>
-              Record counts describe the register, not animals treated.
-            </span>
+            <span>Archived area data.</span>
             <a
               href="https://github.com/jaykapoor7/Pok-mon-go-dog-"
               target="_blank"
               rel="noreferrer"
             >
-              Inspect the repository <Arrow />
+              GitHub <Arrow />
             </a>
           </div>
         </article>
@@ -93,9 +65,8 @@ export default function Home() {
                 <span className="eyebrow">02 / FIELDWORK · BENGALURU</span>
                 <h3>Project Nidaan</h3>
                 <p>
-                  I interviewed riders, coded responses,
-                  <br />
-                  and mapped barriers to medication access.
+                  Interviews and analysis on medication access for delivery
+                  riders.
                 </p>
                 <a
                   className="artifact-inline"
@@ -103,7 +74,7 @@ export default function Home() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Read the field brief <Arrow />
+                  Field brief <Arrow />
                 </a>
               </div>
               <Link
@@ -123,18 +94,14 @@ export default function Home() {
                   03 / HEALTH INFORMATION · PROTOTYPE
                 </span>
                 <h3>Juno-AI</h3>
-                <p>
-                  I built a health-information platform,
-                  <br />
-                  then documented its design and evaluation.
-                </p>
+                <p>Health information and care navigation.</p>
                 <a
                   className="artifact-inline"
                   href="/work/juno-ai/Juno-AI-Research-Paper.pdf"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Read the research paper <Arrow />
+                  Paper <Arrow />
                 </a>
               </div>
               <Link
@@ -150,7 +117,7 @@ export default function Home() {
       </section>
       <section className="shell operating-section">
         <div className="section-rule">
-          <span>02 / BUILT BEYOND THE BROWSER</span>
+          <span>02 / EXPERIENCE</span>
           <Link href="/work">
             All work <Arrow />
           </Link>
@@ -172,19 +139,15 @@ export default function Home() {
               </picture>
               <span>ARTHAVAAD / CROWWD</span>
             </Link>
-            <h3>Get people in the room.</h3>
-            <p>
-              I launched the speaker series. Ran outreach.
-              <br />
-              Built distribution and competitive research.
-            </p>
+            <h3>Crowwd</h3>
+            <p>Growth, research, and the Arthavaad speaker series.</p>
             <a
               className="text-link"
               href="/work/crowwd/Crowwd-Selected-Research-and-Strategy.pdf"
               target="_blank"
               rel="noreferrer"
             >
-              Open the strategy work <Arrow />
+              Research & strategy <Arrow />
             </a>
           </article>
           <article className="tot-feature">
@@ -196,18 +159,10 @@ export default function Home() {
                 </i>
               ))}
             </div>
-            <h3>
-              Eight centres.
-              <br />
-              All the moving parts.
-            </h3>
-            <p>
-              Technology, people, facilities, nutrition,
-              <br />
-              documentation, and finance.
-            </p>
+            <h3>TOT Schools</h3>
+            <p>Operations across eight childcare centres.</p>
             <Link href="/work/tot-schools" className="text-link">
-              See the operating work <Arrow />
+              Details <Arrow />
             </Link>
             <a
               className="artifact-inline"
@@ -215,7 +170,7 @@ export default function Home() {
               target="_blank"
               rel="noreferrer"
             >
-              Read the case study <Arrow />
+              Case study <Arrow />
             </a>
           </article>
         </div>
@@ -224,42 +179,33 @@ export default function Home() {
         <div className="section-rule">
           <span>03 / RESEARCH</span>
           <Link href="/research">
-            Questions & evidence <Arrow />
+            Research <Arrow />
           </Link>
         </div>
         <div className="research-intro">
-          <h2>
-            First,
-            <br />
-            <em>look closer.</em>
-          </h2>
-          <p>
-            Public health. Accessible technology.
-            <br />
-            Human behavior. Data that needs context.
-          </p>
+          <h2>Research.</h2>
         </div>
         <div className="research-rows">
           <Link href="/research#experience">
             <span>01</span>
-            <h3>Technology people can use.</h3>
-            <small>Accessible SmartTech Lab · Research assistant</small>
+            <h3>Accessible SmartTech Lab</h3>
+            <small>Research assistant</small>
             <b>
               <Arrow />
             </b>
           </Link>
           <Link href="/work/upmc-emergency-medicine">
             <span>02</span>
-            <h3>What happens before hospital?</h3>
-            <small>UPMC Emergency Medicine · Research assistant</small>
+            <h3>UPMC Emergency Medicine</h3>
+            <small>Research assistant</small>
             <b>
               <Arrow />
             </b>
           </Link>
           <Link href="/research#landscape">
             <span>03</span>
-            <h3>Map the healthcare landscape.</h3>
-            <small>India HealthTech · Research + dataset</small>
+            <h3>India HealthTech</h3>
+            <small>Market map & dataset</small>
             <b>
               <Arrow />
             </b>
@@ -269,25 +215,17 @@ export default function Home() {
       <section className="play-preview">
         <div className="shell">
           <div className="section-rule">
-            <span>04 / OFF THE CLOCK</span>
+            <span>04 / EXPERIMENTS</span>
             <Link href="/play">
               Experiments <Arrow />
             </Link>
           </div>
           <div className="play-preview-layout">
             <div>
-              <h2>
-                Serious work.
-                <br />
-                <em>Playful mind.</em>
-              </h2>
-              <p>
-                Sometimes the interface goes on strike.
-                <br />
-                Sometimes a dinosaur answers the call.
-              </p>
+              <h2>Experiments.</h2>
+              <p>Small browser games and prototypes.</p>
               <Link className="pill dark" href="/play">
-                Take a curious detour <Arrow />
+                Play <Arrow />
               </Link>
             </div>
             <Link
@@ -295,11 +233,10 @@ export default function Home() {
               className="play-art"
               aria-label="Explore the playable experiments"
             >
-              <span className="orbit-word">PLEASE DO NOT PRESS</span>
+              <span className="orbit-word">BROWSER GAMES</span>
               <div className="big-button">
                 <Arrow />
               </div>
-              <span className="play-note">(you were going to anyway)</span>
               <i className="spark s1">✳</i>
               <i className="spark s2">✦</i>
             </Link>
@@ -308,14 +245,10 @@ export default function Home() {
       </section>
       <section className="shell home-about">
         <div>
-          <span className="eyebrow">05 / THE PERSON BEHIND IT</span>
-          <h2>
-            Different teams.
-            <br />
-            <em>Same game.</em>
-          </h2>
+          <span className="eyebrow">05 / ABOUT</span>
+          <h2>About.</h2>
           <Link className="text-link" href="/about">
-            The story so far <Arrow />
+            Photos <Arrow />
           </Link>
         </div>
         <Link href="/about" className="home-memory">
@@ -326,7 +259,7 @@ export default function Home() {
             sizes="(max-width:760px) 100vw, 55vw"
           />
           <span>
-            A FEW THINGS THAT STAYED <Arrow />
+            FOOTBALL <Arrow />
           </span>
         </Link>
       </section>

@@ -55,19 +55,16 @@ try {
     await visit(page, "/");
     const activate = async (locator) =>
       name === "touch" ? locator.tap() : locator.click();
-    assert.match(
-      await page.locator("#hero-title").innerText(),
-      /I build systems/,
-    );
+    assert.match(await page.locator("#hero-title").innerText(), /Jay Kapoor/);
     await activate(
-      page.getByRole("button", { name: "02 A record", exact: false }),
+      page.getByRole("button", { name: "02 Record", exact: false }),
     );
     assert.match(
       await page.locator(".scene-narration").innerText(),
       /shared record/,
     );
     await activate(
-      page.getByRole("button", { name: "03 A network", exact: false }),
+      page.getByRole("button", { name: "03 Network", exact: false }),
     );
     await activate(page.getByRole("switch"));
     assert.equal(
@@ -76,7 +73,7 @@ try {
     );
     await activate(page.getByRole("switch"));
     await activate(
-      page.getByRole("button", { name: "04 A real system", exact: false }),
+      page.getByRole("button", { name: "04 StrayPaw", exact: false }),
     );
     assert.match(
       await page.locator(".scene-narration").innerText(),
@@ -108,17 +105,17 @@ try {
     );
     assert.match(
       await page.locator(".care-description").innerText(),
-      /next person can act/,
+      /Case follow-up/,
     );
     await activate(page.getByRole("button", { name: "◷ Time", exact: true }));
     assert.match(
       await page.locator(".field-finding").innerText(),
-      /visit costs a shift/,
+      /lost income/,
     );
     await activate(page.getByRole("button", { name: "Sources", exact: false }));
     assert.match(
       await page.locator(".juno-path>p").innerText(),
-      /curated information/,
+      /Curated information/,
     );
     if (name === "touch") {
       await page.getByRole("button", { name: "Menu +" }).tap();
@@ -258,7 +255,7 @@ try {
   await visit(pagePlain, "/");
   assert.equal(await pagePlain.locator("#hero-title").isVisible(), true);
   assert.equal(await pagePlain.locator(".scale-control").isVisible(), false);
-  await pagePlain.getByRole("link", { name: "Explore selected work" }).click();
+  await pagePlain.locator(".hero-work-link").click();
   assert.ok(pagePlain.url().endsWith("/#selected"));
   await plain.close();
   assert.deepEqual(errors, [], "Uncaught browser errors");

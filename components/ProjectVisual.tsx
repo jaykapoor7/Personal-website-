@@ -43,7 +43,7 @@ export function ProjectVisual({
           <span>
             <Arrow />
           </span>
-          <small>Street animals, on the record.</small>
+          <small>Animal records & care coordination.</small>
         </div>
       )}
     </div>

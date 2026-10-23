@@ -6,15 +6,13 @@ export function Footer() {
     <footer className="site-footer">
       <div className="shell">
         <div className="footer-top">
-          <span className="eyebrow">NEXT / SOMETHING WORTH BUILDING</span>
+          <span className="eyebrow">CONTACT</span>
           <Link href="/artifacts">
-            The artifact index <Arrow />
+            Files <Arrow />
           </Link>
         </div>
         <a href={`mailto:${person.email}`} className="footer-invitation">
-          Good problems
-          <br />
-          welcome.
+          Email me.
           <Arrow />
         </a>
         <a className="footer-email" href={`mailto:${person.email}`}>

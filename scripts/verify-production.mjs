@@ -40,7 +40,7 @@ try {
   for (const route of routes) {
     const res = await api.get(base + route);
     assert.equal(res.status(), 200, route);
-    assert.match(await res.text(), /Good problems/);
+    assert.match(await res.text(), /Email me/);
   }
   for (const [name, options] of [
     ["desktop", { viewport: { width: 1440, height: 1000 } }],
@@ -76,12 +76,9 @@ try {
       );
     };
     await visit("/");
-    assert.match(
-      await page.locator("#hero-title").innerText(),
-      /I build systems for/,
-    );
+    assert.match(await page.locator("#hero-title").innerText(), /Jay Kapoor/);
     await page
-      .getByRole("button", { name: "04 A real system", exact: false })
+      .getByRole("button", { name: "04 StrayPaw", exact: false })
       .click();
     assert.match(
       await page.locator(".scene-narration").innerText(),

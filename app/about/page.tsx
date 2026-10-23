@@ -4,30 +4,25 @@ import Link from "next/link";
 export const metadata = {
   title: "About",
   description:
-    "Jay Kapoor, beyond the projects. Football, family photographs, and the story so far.",
+    "Jay Kapoor — student at Pitt. Software, public health, and football.",
 };
 export default function About() {
   return (
     <>
       <header className="shell editorial-hero about-title">
-        <span className="eyebrow">ABOUT / THE PERSON BEHIND THE TABS</span>
-        <h1>
-          A few things
-          <br />
-          <em>that stayed.</em>
-        </h1>
+        <span className="eyebrow">PITTSBURGH / INDIA</span>
+        <h1>About.</h1>
         <p>
-          India → Pittsburgh.
-          <br />A builder. A student. Still a football person.
+          I study Economics and Statistics at Pitt. I like software, public
+          health, and football.
         </p>
       </header>
       <div className="shell">
         <PhotoTimeline />
       </div>
       <section className="shell about-ending">
-        <p>The rest is a work in progress.</p>
         <Link className="pill dark" href="/work">
-          See what I’m building <Arrow />
+          Work <Arrow />
         </Link>
       </section>
     </>

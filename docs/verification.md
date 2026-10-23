@@ -33,6 +33,12 @@ The connection engine omits its hidden geographic polygons until the real-system
 
 The current portfolio repository’s GitHub Vercel status confirms team `jaykapoor700-1687s-projects`, project `personal-website`. Release by fast-forwarding this repository’s `main` branch. Production is checked with `npm run test:production`: TLS-verified HTTP reads of routes, desktop/mobile interactions, photo loading, and checksum comparison of public artifact bytes against the release.
 
+## Plain-copy update
+
+The follow-up copy edit replaces slogans with Jay’s name, course, interests, project descriptions, and direct links. Project summaries and body copy total 291 words, down from 903. All 38 unique links and image paths in the project content are preserved. No photographs or public documents changed.
+
+The production build and existing browser suite passed after the edit, including desktop, touch, reduced motion, accessibility scans, 360–1920px layouts, and navigation without JavaScript. Desktop and mobile homepage screenshots were also reviewed.
+
 ## Limits
 
 Tests use Chromium and mobile emulation, not physical Safari devices or a human screen-reader session. Automated checks do not establish complete accessibility conformance. Publicly unavailable research data and unverified outcomes were not fabricated. Publishing the original private 2022 Juno document is excluded unless the user specifically approves it.

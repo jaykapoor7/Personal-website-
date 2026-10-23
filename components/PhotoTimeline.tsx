@@ -49,20 +49,18 @@ export function PhotoTimeline() {
   return (
     <div className={`photo-journey memory-${active}`} ref={root}>
       <aside className="memory-rail">
-        <span className="eyebrow">THE STORY SO FAR</span>
+        <span className="eyebrow">PHOTOS</span>
         <nav aria-label="Personal memories">
-          {["Early days", "Same game", "A milestone", "Right here"].map(
-            (t, i) => (
-              <a
-                key={t}
-                href={`#memory-${i}`}
-                aria-current={active === i ? "location" : undefined}
-              >
-                <span>0{i + 1}</span>
-                {t}
-              </a>
-            ),
-          )}
+          {["Running", "Football", "School", "Pitt"].map((t, i) => (
+            <a
+              key={t}
+              href={`#memory-${i}`}
+              aria-current={active === i ? "location" : undefined}
+            >
+              <span>0{i + 1}</span>
+              {t}
+            </a>
+          ))}
         </nav>
         <span className="memory-line" aria-hidden="true">
           <i style={{ height: `${(active + 1) * 25}%` }} />
@@ -71,8 +69,8 @@ export function PhotoTimeline() {
       <div className="memory-sequence">
         <section className="memory-scene" id="memory-0" data-memory="0">
           <div className="memory-heading">
-            <span className="eyebrow">01 / EARLY DAYS</span>
-            <h2>Always running.</h2>
+            <span className="eyebrow">01</span>
+            <h2>Running.</h2>
           </div>
           <figure className="running-frame">
             <Photo
@@ -90,7 +88,6 @@ export function PhotoTimeline() {
               <rect x="-115" y="125" width="830" height="530" rx="225" />
               <rect x="-80" y="160" width="760" height="460" rx="190" />
             </svg>
-            <figcaption>From the family archive.</figcaption>
           </figure>
         </section>
         <div className="track-to-pitch" aria-hidden="true">
@@ -109,12 +106,8 @@ export function PhotoTimeline() {
           data-memory="1"
         >
           <div className="memory-heading">
-            <span className="eyebrow">02 / THEN ↔ NOW</span>
-            <h2>
-              Different teams.
-              <br />
-              <em>Same game.</em>
-            </h2>
+            <span className="eyebrow">02</span>
+            <h2>Football.</h2>
           </div>
           <div
             className="then-now"
@@ -141,7 +134,7 @@ export function PhotoTimeline() {
             </div>
           </div>
           <label className="photo-scrub">
-            <span>Drag through the years</span>
+            <span>Compare photos</span>
             <input
               aria-label="Compare childhood and Trojans football teams"
               type="range"
@@ -165,17 +158,15 @@ export function PhotoTimeline() {
           data-memory="2"
         >
           <div className="memory-heading">
-            <span className="eyebrow">03 / A MOMENT TO KEEP</span>
-            <h2>Before Pittsburgh.</h2>
+            <span className="eyebrow">03</span>
+            <h2>School.</h2>
           </div>
           <figure className="award-photo">
             <Photo
               name="07_school_ceremony"
               alt="Jay in cap and gown receiving an award at a school ceremony, with two presenters"
             />
-            <figcaption>
-              A school ceremony. A photograph worth keeping.
-            </figcaption>
+            <figcaption>School ceremony.</figcaption>
           </figure>
         </section>
         <section
@@ -184,12 +175,8 @@ export function PhotoTimeline() {
           data-memory="3"
         >
           <div className="memory-heading">
-            <span className="eyebrow">04 / RIGHT HERE</span>
-            <h2>
-              Still figuring
-              <br />
-              <em>things out.</em>
-            </h2>
+            <span className="eyebrow">04</span>
+            <h2>Pittsburgh.</h2>
           </div>
           <figure className="portrait-frame">
             <Photo
@@ -199,11 +186,7 @@ export function PhotoTimeline() {
           </figure>
           <div className="portrait-note">
             <div>
-              <p>
-                Economics & Statistics at Pitt.
-                <br />
-                Building StrayPaw. Following the next question.
-              </p>
+              <p>University of Pittsburgh.</p>
               <a
                 className="portrait-source"
                 href="/jay-kapoor.jpg"
@@ -214,7 +197,7 @@ export function PhotoTimeline() {
               </a>
             </div>
             <Link className="text-link" href="/experience">
-              The work along the way <Arrow />
+              Experience <Arrow />
             </Link>
           </div>
         </section>

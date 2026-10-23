@@ -82,7 +82,7 @@ export function StrayPawExplorer() {
           </text>
         </svg>
         <div className="atlas-record">
-          <span className="eyebrow">ONE CITY. A SHARED PICTURE.</span>
+          <span className="eyebrow">COIMBATORE</span>
           <strong>254</strong>
           <p>recorded areas</p>
           <div
@@ -114,14 +114,12 @@ export function StrayPawExplorer() {
             target="_blank"
             rel="noreferrer"
           >
-            Explore the actual map <Arrow />
+            Map <Arrow />
           </a>
         </div>
       </div>
       <div className="atlas-source">
-        <span>
-          Archive retrieved · 23 Oct 2026 · Area aggregates, not live outcomes.
-        </span>
+        <span>Archived area data · 23 Oct 2026</span>
         <a href={snapshot.source} target="_blank" rel="noreferrer">
           Source <Arrow />
         </a>

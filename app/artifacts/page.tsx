@@ -1,32 +1,23 @@
 import { proofGroups } from "@/content/proof";
 import { Arrow } from "@/components/Arrow";
 export const metadata = {
-  title: "Artifacts",
+  title: "Files",
   description:
-    "Open the work: live products, research papers, operating case studies, datasets, and investment memos by Jay Kapoor.",
+    "Jay Kapoor’s project links, papers, datasets, and case studies.",
 };
 export default function Artifacts() {
   return (
     <>
       <header className="shell editorial-hero">
-        <span className="eyebrow">THE ARTIFACT INDEX</span>
-        <h1>
-          Open the work.
-          <br />
-          <em>Make up your mind.</em>
-        </h1>
-        <p>
-          Live builds, field notes, and the original files.
-          <br />
-          Work-sample limitations stay with each document.
-        </p>
+        <span className="eyebrow">DOCUMENTS & LINKS</span>
+        <h1>Files.</h1>
       </header>
       <div className="shell artifact-groups">
         {proofGroups.map((g) => (
           <section key={g.title}>
             <div className="section-rule">
               <h2>{g.title}</h2>
-              <span>{String(g.items.length).padStart(2, "0")} ARTIFACTS</span>
+              <span>{String(g.items.length).padStart(2, "0")} FILES</span>
             </div>
             <div className="archive-index">
               {g.items.map((a) => (

@@ -26,7 +26,7 @@ export default function OpengraphImage() {
             textTransform: "uppercase",
           }}
         >
-          Jay Kapoor · Software, data, access to care.
+          Economics & Statistics · University of Pittsburgh
         </div>
         <div
           style={{
@@ -39,7 +39,7 @@ export default function OpengraphImage() {
           Jay Kapoor<span style={{ color: "#304cf4" }}>.</span>
         </div>
         <div style={{ fontFamily: "Arial,sans-serif", fontSize: 28 }}>
-          I build systems for real-world problems.
+          Software, data, public health.
         </div>
       </div>
     ),

@@ -13,7 +13,7 @@ const sans = Space_Grotesk({
   display: "swap",
 });
 const description =
-  "I build systems for real-world problems. Jay Kapoor — StrayPaw, research, operating work, and playable experiments. Economics & Statistics at Pitt.";
+  "Jay Kapoor. Economics and Statistics student at Pitt. Interested in software, data, and public health. Projects, research, and photos.";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: { default: "Jay Kapoor", template: "%s · Jay Kapoor" },

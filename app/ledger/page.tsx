@@ -10,17 +10,10 @@ export default function Ledger() {
     <>
       <header className="page-hero wrap">
         <span className="eyebrow">Research / Archive</span>
-        <h1>
-          Calibration
-          <br />
-          <em>ledger.</em>
-        </h1>
-        <p>
-          A list of predictions I wrote down with probabilities. The resolved
-          calls stay here alongside the open ones.
-        </p>
+        <h1>Forecasts.</h1>
+        <p>Dated predictions, probabilities, and outcomes.</p>
         <a className="text-link" href="/research/Memo-Library-and-Ledger.pdf">
-          Read the memo library{" "}
+          Memo library{" "}
           <span>
             <Arrow />
           </span>
@@ -28,7 +21,7 @@ export default function Ledger() {
       </header>
       <section className="ledger-section wrap">
         <div className="section-heading">
-          <span className="eyebrow">Dated calls</span>
+          <span className="eyebrow">Forecasts</span>
           <span className="quiet-link">{ledger.calls.length} total</span>
         </div>
         <div className="ledger-list">

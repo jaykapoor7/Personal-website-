@@ -9,8 +9,7 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   return {
     title:
       params.slug === "everything-falls" ? "Everything Falls" : "Playground",
-    description:
-      "Pick things up and watch them fall. An interactive experiment by Jay Kapoor.",
+    description: "A browser physics experiment by Jay Kapoor.",
   };
 }
 export default function PlayDetail({ params }: { params: { slug: string } }) {
@@ -22,22 +21,19 @@ export default function PlayDetail({ params }: { params: { slug: string } }) {
           ← Playground
         </Link>
         <div className="standalone-head">
-          <span className="kicker">An interactive little thing / 01</span>
+          <span className="kicker">PHYSICS EXPERIMENT</span>
           <h1>
             Everything
             <br />
             <em>Falls.</em>
           </h1>
-          <p>
-            Drag something, let go, and see what happens. Turn gravity off if
-            you want to rearrange the desk.
-          </p>
+          <p>Drag and release. Gravity can be turned off.</p>
         </div>
         <EverythingFalls />
         <div className="play-credits">
           <span>Made by Jay Kapoor</span>
           <Link href="/work">
-            See the portfolio <Arrow />
+            Work <Arrow />
           </Link>
         </div>
       </section>

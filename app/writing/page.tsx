@@ -10,12 +10,7 @@ export default function Writing() {
     <div className="new-pro">
       <header className="shell editorial-hero">
         <span className="kicker">Writing / Research</span>
-        <h1>
-          Notes from
-          <br />
-          <em>the desk.</em>
-        </h1>
-        <p>Some research, papers, and ideas I wanted to put in writing.</p>
+        <h1>Writing.</h1>
       </header>
       <section className="shell writing-editorial">
         <div className="section-label">

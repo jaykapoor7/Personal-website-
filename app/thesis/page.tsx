@@ -9,13 +9,7 @@ export default function Thesis() {
   return (
     <section className="page-hero wrap archive-page">
       <span className="eyebrow">Research archive</span>
-      <h1>
-        Older <em>notes.</em>
-      </h1>
-      <p>
-        These notes are still here, though they’re no longer a separate part of
-        the site.
-      </p>
+      <h1>Research archive.</h1>
       <div className="archive-links">
         <a href="/research/India-GLP1-Sector-Thesis.pdf">
           India’s GLP-1 Inflection <Arrow />

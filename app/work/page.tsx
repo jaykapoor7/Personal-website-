@@ -20,16 +20,8 @@ export default function Work() {
   return (
     <>
       <header className="shell editorial-hero">
-        <span className="eyebrow">WORK / SELECTED CONNECTIONS</span>
-        <h1>
-          Real problems.
-          <br />
-          <em>Things I’ve built.</em>
-        </h1>
-        <p>
-          Software, fieldwork, and healthcare information. Products and
-          operating work, with the files behind them.
-        </p>
+        <span className="eyebrow">PROJECTS & EXPERIENCE</span>
+        <h1>Work.</h1>
       </header>
       <section className="shell all-work">
         {selected.map((p, i) => (
@@ -40,7 +32,7 @@ export default function Work() {
               <h2 style={{ marginTop: 18 }}>{p.title}</h2>
               <p>{p.summary}</p>
               <Link href={`/work/${p.slug}`} className="text-link">
-                Explore the project{" "}
+                Details{" "}
                 <span>
                   <Arrow />
                 </span>
@@ -64,9 +56,9 @@ export default function Work() {
       </section>
       <section className="shell">
         <div className="section-rule">
-          <span>THE WIDER INDEX</span>
+          <span>OTHER WORK</span>
           <Link href="/artifacts">
-            Every artifact <Arrow />
+            Files <Arrow />
           </Link>
           <Link href="/experience">
             Experience <Arrow />
