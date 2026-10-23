@@ -1,0 +1,204 @@
+"use client";
+import { AnimatePresence, motion } from "framer-motion";
+import dynamic from "next/dynamic";
+import Image from "next/image";
+import { useState } from "react";
+import { builds, type Build } from "@/content/site";
+import { Arrow } from "./Arrow";
+import { SmartLink } from "./ui";
+
+const EverythingFalls = dynamic(
+  () => import("./EverythingFalls").then((m) => m.EverythingFalls),
+  { ssr: false, loading: () => <div className="h-full w-full bg-paper" /> },
+);
+
+function Play({ onClick, label }: { onClick: () => void; label: string }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="group absolute inset-0 grid place-items-center bg-indigo-950/0 transition-colors hover:bg-indigo-950/15"
+    >
+      <span className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-[14px] font-semibold text-white shadow-[0_12px_30px_-8px_rgba(79,70,229,0.7)] transition-transform group-hover:scale-105">
+        <svg
+          viewBox="0 0 24 24"
+          className="h-4 w-4 fill-current"
+          aria-hidden="true"
+        >
+          <path d="M8 5v14l11-7z" />
+        </svg>
+        {label}
+      </span>
+    </button>
+  );
+}
+
+function View({
+  b,
+  live,
+  goLive,
+}: {
+  b: Build;
+  live: boolean;
+  goLive: () => void;
+}) {
+  if (b.falls)
+    return (
+      <div className="h-full overflow-hidden [&_.falls]:h-full [&_.falls]:rounded-none [&_.falls]:border-0 [&_.falls-stage]:!h-[calc(100%-90px)]">
+        <EverythingFalls compact />
+      </div>
+    );
+  const label = b.kind === "Game" ? "Play it here" : "Try it here";
+  if (b.phone)
+    return (
+      <div className="bg-dots flex h-full items-center justify-center bg-[#eef0fb] py-5">
+        <div className="h-full rounded-[34px] bg-[#111] p-1.5 shadow-2xl">
+          <div
+            className="relative h-full overflow-hidden rounded-[28px] bg-black"
+            style={{ aspectRatio: "390 / 844" }}
+          >
+            {live ? (
+              <iframe
+                src={b.href}
+                title={b.name}
+                className="absolute inset-0 h-full w-full bg-white"
+              />
+            ) : (
+              <>
+                <Image
+                  src={b.image!}
+                  alt={`${b.name} on a phone`}
+                  fill
+                  sizes="260px"
+                  className="object-cover object-top"
+                />
+                <Play onClick={goLive} label={label} />
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  if (live)
+    return (
+      <iframe
+        src={b.href}
+        title={b.name}
+        className="h-full w-full bg-white"
+        allow="fullscreen; autoplay; microphone"
+        referrerPolicy="strict-origin-when-cross-origin"
+      />
+    );
+  return (
+    <div className="relative h-full">
+      <Image
+        src={b.image!}
+        alt={`${b.name} home page`}
+        fill
+        sizes="(max-width: 1024px) 100vw, 760px"
+        className="object-cover object-top"
+      />
+      <Play onClick={goLive} label={label} />
+    </div>
+  );
+}
+
+/** Tools and games, each runnable right on the page. */
+export function BuildsBrowser() {
+  const [id, setId] = useState(builds[0].id);
+  const [live, setLive] = useState<string | null>(null);
+  const b = builds.find((x) => x.id === id)!;
+  const kinds = ["Tool", "Game"] as const;
+
+  return (
+    <div className="card grid overflow-hidden lg:grid-cols-[300px_1fr]">
+      <div className="border-b border-line p-3 lg:border-b-0 lg:border-r">
+        {kinds.map((k) => (
+          <div key={k} className="mb-2">
+            <p className="px-3 pb-1.5 pt-2 text-[12px] font-semibold uppercase tracking-[0.1em] text-faint">
+              {k}s
+            </p>
+            <ul
+              role="tablist"
+              aria-label={`${k}s`}
+              className="flex gap-1 overflow-x-auto lg:flex-col"
+            >
+              {builds
+                .filter((x) => x.kind === k)
+                .map((x) => (
+                  <li key={x.id} role="presentation" className="shrink-0">
+                    <button
+                      type="button"
+                      role="tab"
+                      aria-selected={x.id === id}
+                      onClick={() => {
+                        setId(x.id);
+                        setLive(null);
+                      }}
+                      className={`w-full rounded-xl px-3 py-2.5 text-left transition-colors ${
+                        x.id === id
+                          ? "bg-indigo-50 ring-1 ring-indigo-200"
+                          : "hover:bg-card"
+                      }`}
+                    >
+                      <span
+                        className={`block text-[14.5px] font-semibold ${x.id === id ? "text-accent" : ""}`}
+                      >
+                        {x.name}
+                      </span>
+                      <span className="hidden text-[13px] leading-snug text-muted lg:block">
+                        {x.summary}
+                      </span>
+                    </button>
+                  </li>
+                ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <div className="flex min-w-0 flex-col">
+        <div className="flex h-11 items-center gap-3 border-b border-line px-4">
+          <span className="flex gap-1.5" aria-hidden="true">
+            <i className="h-2.5 w-2.5 rounded-full bg-black/10" />
+            <i className="h-2.5 w-2.5 rounded-full bg-black/10" />
+            <i className="h-2.5 w-2.5 rounded-full bg-black/10" />
+          </span>
+          <span className="min-w-0 flex-1 truncate rounded-lg bg-card px-3 py-1 font-mono text-[12px] text-muted">
+            {b.url}
+          </span>
+          {b.code && (
+            <SmartLink
+              href={b.code}
+              className="shrink-0 text-[13px] font-medium text-muted hover:text-fg"
+            >
+              Code
+            </SmartLink>
+          )}
+          <SmartLink
+            href={b.href!}
+            className="inline-flex shrink-0 items-center gap-1 text-[13px] font-semibold text-accent hover:underline"
+          >
+            Open <Arrow />
+          </SmartLink>
+        </div>
+        <div className="relative h-[60vh] max-h-[540px] min-h-[380px] bg-paper">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={b.id}
+              className="absolute inset-0"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <View b={b} live={live === b.id} goLive={() => setLive(b.id)} />
+            </motion.div>
+          </AnimatePresence>
+        </div>
+        <p className="border-t border-line px-4 py-3 text-[14px] text-muted lg:hidden">
+          {b.summary}
+        </p>
+      </div>
+    </div>
+  );
+}

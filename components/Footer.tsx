@@ -6,21 +6,28 @@ import { Arrow } from "./Arrow";
 export function Footer() {
   const [copied, setCopied] = useState(false);
   return (
-    <footer className="shell mt-28 pb-10">
-      <div className="bg-indigo-deep relative overflow-hidden rounded-[32px] px-6 py-14 text-white sm:px-12 md:py-20">
+    <footer id="contact" className="shell scroll-mt-24 pb-10 pt-28">
+      <div className="bg-indigo-deep relative overflow-hidden rounded-[28px] px-6 py-12 text-white sm:px-12 md:py-16">
         <div
-          className="bg-grid pointer-events-none absolute inset-0 opacity-40 [mask-image:linear-gradient(to_bottom,#000,transparent)]"
+          className="bg-grid pointer-events-none absolute inset-0 opacity-30 [mask-image:linear-gradient(to_bottom,#000,transparent)]"
           aria-hidden="true"
         />
-        <div className="relative">
-          <p className="hand text-3xl text-indigo-200">come say hi</p>
-          <a
-            href={`mailto:${person.email}`}
-            className="display mt-2 block break-all text-[clamp(40px,8vw,120px)] transition-opacity hover:opacity-80"
-          >
-            {person.email}
-          </a>
-          <div className="mt-8 flex flex-wrap gap-3">
+        <div className="relative grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-end">
+          <div>
+            <p className="text-[12px] font-semibold uppercase tracking-[0.12em] text-indigo-200">
+              Get in touch
+            </p>
+            <a
+              href={`mailto:${person.email}`}
+              className="mt-3 block break-all text-[clamp(34px,5.5vw,72px)] font-semibold leading-[1] tracking-[-0.045em] hover:opacity-85"
+            >
+              {person.email}
+            </a>
+            <p className="mt-4 max-w-md text-[16px] text-indigo-100">
+              Email is the fastest way to reach me. I am based in Pittsburgh.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2.5 lg:justify-end">
             <button
               type="button"
               onClick={() => {
@@ -28,30 +35,30 @@ export function Footer() {
                 setCopied(true);
                 setTimeout(() => setCopied(false), 1800);
               }}
-              className="btn bg-white text-indigo-700 hover:bg-indigo-50"
+              className="btn h-10 bg-white px-4 text-[14px] text-indigo-700 hover:bg-indigo-50"
             >
               {copied ? "Copied" : "Copy email"}
             </button>
-            {person.links
-              .filter((l) => l.label !== "Email")
-              .map((l) => (
+            {[{ label: "Resume", href: person.resume }, ...person.links].map(
+              (l) => (
                 <a
                   key={l.href}
                   href={l.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="btn bg-white/10 text-white ring-1 ring-white/25 hover:bg-white/20"
+                  className="btn h-10 bg-white/10 px-4 text-[14px] text-white ring-1 ring-white/25 hover:bg-white/20"
                 >
                   {l.label} <Arrow />
                 </a>
-              ))}
+              ),
+            )}
           </div>
         </div>
       </div>
-      <div className="mt-6 flex flex-wrap items-center justify-between gap-3 px-2 text-[13px] text-muted">
-        <p>Made by Jay in {person.place}.</p>
+      <div className="mt-5 flex flex-wrap items-center justify-between gap-3 px-1 text-[13px] text-muted">
+        <p>Jay Kapoor, {person.place}</p>
         <a href="/artifacts/" className="hover:text-fg">
-          Every file on this site
+          All documents and links
         </a>
       </div>
     </footer>

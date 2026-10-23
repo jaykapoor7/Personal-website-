@@ -1,24 +1,7 @@
-import type { Metadata } from "next";
-import { PageHeader } from "@/components/ui";
-import { WritingList } from "@/components/WritingList";
-import { writing } from "@/content/site";
+import { Redirect } from "@/components/Redirect";
 
-export const metadata: Metadata = {
-  title: "Theses",
-  description: "Sector theses and investment memos by Jay Kapoor.",
-};
+export const metadata = { title: "Writing" };
 
-export default function Thesis() {
-  return (
-    <>
-      <PageHeader title="Theses and memos" />
-      <section className="shell">
-        <WritingList
-          items={writing.filter((w) =>
-            ["Thesis", "Memo", "Memos"].includes(w.type),
-          )}
-        />
-      </section>
-    </>
-  );
+export default function Page() {
+  return <Redirect to="/#writing" label="Writing" />;
 }

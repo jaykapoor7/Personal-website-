@@ -1,10 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import {
-  Inter_Tight,
-  Bricolage_Grotesque,
-  Caveat,
-  JetBrains_Mono,
-} from "next/font/google";
+import { Inter_Tight, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 import { Nav } from "@/components/Nav";
@@ -16,16 +11,6 @@ const sans = Inter_Tight({
   variable: "--font-sans",
   display: "swap",
 });
-const display = Bricolage_Grotesque({
-  subsets: ["latin"],
-  variable: "--font-display",
-  display: "swap",
-});
-const hand = Caveat({
-  subsets: ["latin"],
-  variable: "--font-hand",
-  display: "swap",
-});
 const mono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
@@ -33,7 +18,7 @@ const mono = JetBrains_Mono({
 });
 
 const description =
-  "Jay Kapoor. Founder of StrayPaw and Juno-AI. Economics and Statistics at the University of Pittsburgh.";
+  "Jay Kapoor: founder of StrayPaw and Juno-AI, researcher at the University of Pittsburgh, Economics and Statistics.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -58,10 +43,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`${sans.variable} ${display.variable} ${mono.variable} ${hand.variable}`}
-    >
+    <html lang="en" className={`${sans.variable} ${mono.variable}`}>
       <body>
         <a
           href="#main"

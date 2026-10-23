@@ -10,14 +10,12 @@ npm run build   # exports to out/
 
 ## How it is put together
 
-- `content/site.ts` holds everything: projects (each in a group: started, worked, research, side, game), the dated timeline, photos and writing. House style: no em dashes, "Resume" without accents.
-- `public/previews` are screenshots of the live sites and lab pages; `public/covers` are first pages of the PDFs.
-- `components/ProjectBrowser.tsx`: a browser with a tab per project. Sites that allow embedding run live in the tab; others show the real page or PDF, scrollable inside the window.
-- `components/Timeline.tsx`: everything on one stretched timeline, with photos pinned where the year is known. Tap a bar for the outcome.
-- `components/PhotoStack.tsx`: the swipeable photo pile on the home page. `components/Desk.tsx`: draggable polaroids on About.
-- `components/Shelf.tsx`: PDF first pages fanned out. `components/EverythingFalls.tsx`: the physics toy.
+- `content/site.ts` holds everything, each item once: ventures, roles, labs, writing, builds, leadership, education and personal photos. Every item links to the real organisation or product first; PDFs are listed as supporting documents.
+- `app/page.tsx` is the whole portfolio: an introduction, then sections (Ventures, Experience, Research, Writing, Builds, Education & leadership) that switch in place, then About. `/#research` and friends open a section directly; old URLs like `/work` forward there.
+- `components/Sections.tsx` renders each section. `components/BuildsBrowser.tsx` runs the tools and games live in the page. `components/PortfolioTabs.tsx` handles the section switcher.
+- `public/previews` are screenshots of live sites and lab pages, `public/covers` first pages of the PDFs, `public/logos` organisation logos.
 
-Light only: white, indigo and soft mesh backgrounds. Every animation switches off with reduced motion.
+Light only: white and indigo, one typeface (Inter Tight). Animations switch off with reduced motion.
 
 ## Checks
 

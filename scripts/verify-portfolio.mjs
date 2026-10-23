@@ -18,6 +18,7 @@ const browser = await chromium.launch({
   args: ["--no-sandbox"],
 });
 
+// Old section URLs (/work, /research, ...) now forward to the home page.
 const routes = [
   "/",
   "/work/",
@@ -98,20 +99,21 @@ try {
       await page.getByRole("button", { name: "Open menu" }).tap();
       await page
         .locator("#mobile-menu")
-        .getByRole("link", { name: "Work" })
+        .getByRole("link", { name: "Experience" })
         .tap();
-      await page.waitForURL(/\/work\/$/);
+      await page.waitForURL(/#experience$/);
     }
 
-    await page.goto(base + "/research/", { waitUntil: "networkidle" });
-    const all = await page.locator("#landscape li").count();
-    await page
-      .getByRole("button", { name: "Diagnostics", exact: true })
-      .click();
-    const filtered = await page.locator("#landscape li").count();
-    assert.ok(
-      filtered > 0 && filtered < all,
-      "Sector filter narrows the dataset",
+    // Sections switch in place, and a hash opens the right one.
+    await page.goto(base + "/#builds", { waitUntil: "networkidle" });
+    assert.match(
+      await page.locator("[role=tabpanel]:not([hidden])").innerText(),
+      /Everybody's on Strike/,
+    );
+    await page.getByRole("tab", { name: /^Research/ }).click();
+    assert.match(
+      await page.locator("[role=tabpanel]:not([hidden])").innerText(),
+      /Accessible SmartTech Lab/,
     );
 
     await page.goto(base + "/play/everything-falls/", {
@@ -128,11 +130,12 @@ try {
   const page = await browser.newPage();
   const links = new Set();
   for (const route of routes) {
-    await page.goto(base + route, { waitUntil: "domcontentloaded" });
+    await page.goto(base + route, { waitUntil: "networkidle" });
+    await page.waitForLoadState("networkidle"); // let forwarding pages finish
     for (const href of await page.$$eval("a[href^='/'], img[src^='/']", (els) =>
       els.map((e) => e.getAttribute("href") || e.getAttribute("src")),
     ))
-      links.add(href.split("#")[0]);
+      links.add(href.split("#")[0] || "/");
   }
   for (const href of links) {
     const res = await page.request.get(base + href);

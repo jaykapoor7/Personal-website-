@@ -78,57 +78,6 @@ export function RiseWords({
   );
 }
 
-/** Counts a figure such as "30,000+" or "0.134" up from zero when it scrolls into view. */
-export function Counter({
-  value,
-  className,
-}: {
-  value: string;
-  className?: string;
-}) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "0px 0px -10% 0px" });
-  const reduce = useReducedMotion();
-  const m = value.match(/^([^\d]*)([\d,]*\.?\d+)(.*)$/);
-
-  useIsoLayoutEffect(() => {
-    if (!m || reduce || !ref.current) return;
-    ref.current.textContent = format(0);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  useEffect(() => {
-    if (!m || reduce || !inView || !ref.current) return;
-    const el = ref.current;
-    const c = animate(0, target, {
-      duration: 1.8,
-      ease,
-      onUpdate: (v) => (el.textContent = format(v)),
-    });
-    return () => c.stop();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inView]);
-
-  if (!m) return <span className={className}>{value}</span>;
-  const [, prefix, num, suffix] = m;
-  const decimals = num.includes(".") ? num.split(".")[1].length : 0;
-  const target = parseFloat(num.replace(/,/g, ""));
-  function format(v: number) {
-    const s = num.includes(",")
-      ? Math.round(v).toLocaleString("en-US")
-      : v.toFixed(decimals);
-    return `${prefix}${s}${suffix}`;
-  }
-  return (
-    <span
-      ref={ref}
-      className={`tabular-nums ${className ?? ""}`}
-      aria-label={value}
-    >
-      {value}
-    </span>
-  );
-}
-
 /** A frame that grows to full size and squares its corners as it scrolls in. */
 export function ScrollScale({
   children,
