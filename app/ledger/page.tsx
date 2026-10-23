@@ -109,19 +109,27 @@ export default function Ledger() {
         </div>
         <ul className="grid gap-px overflow-hidden bg-line sm:grid-cols-2">
           {ledger.coverage.map((m) => (
-            <li
-              key={m.id}
-              className="flex items-center justify-between gap-4 bg-bg py-4 sm:pr-6 [&:nth-child(even)]:sm:pl-6"
-            >
-              <div>
-                <p className="font-medium tracking-tight">{m.company}</p>
-                <p className="text-sm text-muted">{m.tag}</p>
-              </div>
-              <span
-                className={`text-[13px] font-semibold ${verdictStyle[m.verdict]}`}
+            <li key={m.id} className="bg-bg">
+              <a
+                href={
+                  m.company === "Qure.ai"
+                    ? "/research/Qure-AI-Investment-Memo.pdf"
+                    : "/research/Memo-Library-and-Ledger.pdf"
+                }
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center justify-between gap-4 py-4 transition-colors hover:text-accent sm:pr-6 [li:nth-child(even)>&]:sm:pl-6"
               >
-                {m.verdict}
-              </span>
+                <div>
+                  <p className="font-medium tracking-tight">{m.company}</p>
+                  <p className="text-sm text-muted">{m.tag}</p>
+                </div>
+                <span
+                  className={`text-[13px] font-semibold ${verdictStyle[m.verdict]}`}
+                >
+                  {m.verdict}
+                </span>
+              </a>
             </li>
           ))}
         </ul>

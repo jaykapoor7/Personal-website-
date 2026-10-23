@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Arrow } from "@/components/Arrow";
+import { SmartLink } from "@/components/ui";
 import { Desk, DeskRow, type DeskItem } from "@/components/Desk";
 import { BrowserFrame, Paper, PhoneFrame, Polaroid } from "@/components/frames";
 import { LivePlay } from "@/components/LivePlay";
@@ -412,12 +413,12 @@ export default function Home() {
             return (
               <li key={`${e.org}-${e.role}`}>
                 {e.href ? (
-                  <Link
+                  <SmartLink
                     href={e.href}
                     className={`${cls} transition-colors hover:text-accent`}
                   >
                     {row}
-                  </Link>
+                  </SmartLink>
                 ) : (
                   <div className={cls}>{row}</div>
                 )}

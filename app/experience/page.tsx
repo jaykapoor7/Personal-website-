@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Arrow } from "@/components/Arrow";
+import { SmartLink } from "@/components/ui";
 import { PageHeader } from "@/components/ui";
 import { education, experience } from "@/content/site";
 
@@ -50,12 +50,12 @@ export default function Experience() {
             return (
               <li key={`${e.org}-${e.role}`}>
                 {e.href ? (
-                  <Link
+                  <SmartLink
                     href={e.href}
                     className={`${cls} transition-colors hover:text-accent`}
                   >
                     {row}
-                  </Link>
+                  </SmartLink>
                 ) : (
                   <div className={cls}>{row}</div>
                 )}

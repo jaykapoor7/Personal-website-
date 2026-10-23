@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Arrow } from "@/components/Arrow";
 import { HealthTechMap } from "@/components/HealthTechMap";
-import { PageHeader, SectionHeader } from "@/components/ui";
+import { PageHeader, SectionHeader, SmartLink } from "@/components/ui";
 import { WritingList } from "@/components/WritingList";
 import { writing } from "@/content/site";
 
@@ -19,12 +18,14 @@ const labs = [
     detail:
       "Human-machine interaction systems for accessible smart technologies.",
     period: "2026-now",
+    href: "https://www.smarttech.pitt.edu",
   },
   {
     org: "SCI 3Sixty Fellowship",
     role: "3Sixty Fellow, with Prof. Rosta Farzan",
     detail: "Applied AI research, including how nonprofits adopt AI.",
     period: "2026-now",
+    href: "https://www.sci.pitt.edu/give-sci/3sixty-program",
   },
   {
     org: "UPMC Emergency Medicine",
@@ -102,12 +103,12 @@ export default function Research() {
             return (
               <li key={l.org}>
                 {l.href ? (
-                  <Link
+                  <SmartLink
                     href={l.href}
                     className={`${cls} hover:border-fg/30 hover:bg-card/60`}
                   >
                     {inner}
-                  </Link>
+                  </SmartLink>
                 ) : (
                   <div className={cls}>{inner}</div>
                 )}

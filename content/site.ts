@@ -104,6 +104,7 @@ export const projects: Project[] = [
         label: "Architecture",
         href: "https://github.com/jaykapoor7/Pok-mon-go-dog-/blob/main/docs/ARCHITECTURE.md",
       },
+      { label: "Code", href: "https://github.com/jaykapoor7/Pok-mon-go-dog-" },
     ],
   },
   {
@@ -346,6 +347,7 @@ export const projects: Project[] = [
         label: "Feasibility memo",
         href: "/work/tarc/Development-Feasibility-Memo-2025.pdf",
       },
+      { label: "TARC", href: "https://www.tarc.in" },
     ],
   },
   {
@@ -371,6 +373,10 @@ export const projects: Project[] = [
         label: "Open Juno",
         href: "https://preventive-healthcare-xi.vercel.app/",
       },
+      {
+        label: "Code",
+        href: "https://github.com/jaykapoor7/Preventive-healthcare-",
+      },
     ],
   },
   {
@@ -394,6 +400,10 @@ export const projects: Project[] = [
         label: "Open CURA",
         href: "https://explain-my-whoop-stats.vercel.app/",
       },
+      {
+        label: "Code",
+        href: "https://github.com/jaykapoor7/Explain-my-whoop-stats-",
+      },
     ],
   },
   {
@@ -413,7 +423,10 @@ export const projects: Project[] = [
       desktop: "/previews/road360-d.webp",
       mobile: "/previews/road360-m.webp",
     },
-    links: [{ label: "Open Road360", href: "https://road360.vercel.app/" }],
+    links: [
+      { label: "Open Road360", href: "https://road360.vercel.app/" },
+      { label: "Code", href: "https://github.com/jaykapoor7/Road360" },
+    ],
   },
   {
     slug: "seo-geo-optimiser",
@@ -437,6 +450,10 @@ export const projects: Project[] = [
         label: "Open the lab",
         href: "https://llm-ai-search-checker.vercel.app/",
       },
+      {
+        label: "Code",
+        href: "https://github.com/jaykapoor7/LLM-AI-search-checker",
+      },
     ],
   },
   {
@@ -451,7 +468,10 @@ export const projects: Project[] = [
       "An AI-powered productivity and behavioural operating system for people with ADHD.",
     ],
     links: [
-      { label: "LinkedIn", href: "https://www.linkedin.com/in/jay-kapoor7" },
+      {
+        label: "On LinkedIn",
+        href: "https://www.linkedin.com/in/jay-kapoor7/details/projects/",
+      },
     ],
   },
   {
@@ -465,7 +485,12 @@ export const projects: Project[] = [
     body: [
       "I researched urothelial mechanotransduction and what it means for urinary health under Professor Gerard Apodaca. I cultured primary bladder urothelial cells for PIEZO/TMEM63 studies and made figures for manuscripts and grant submissions.",
     ],
-    links: [],
+    links: [
+      {
+        label: "Apodaca Lab",
+        href: "https://people.dom.pitt.edu/people/gerard-apodaca-phd",
+      },
+    ],
   },
   {
     slug: "upmc-emergency-medicine",
@@ -478,7 +503,12 @@ export const projects: Project[] = [
     body: [
       "I analysed prehospital care patterns and emergency outcomes across UPMC's regional EMS system, abstracting and coding medical record data into REDCap.",
     ],
-    links: [],
+    links: [
+      {
+        label: "Pitt Emergency Medicine",
+        href: "https://www.emergencymedicine.pitt.edu",
+      },
+    ],
   },
   {
     slug: "pitt-sociology",
@@ -489,7 +519,9 @@ export const projects: Project[] = [
     body: [
       "I worked on literature reviews, survey data and analysis in R and Stata.",
     ],
-    links: [],
+    links: [
+      { label: "Pitt Sociology", href: "https://www.sociology.pitt.edu" },
+    ],
   },
   {
     slug: "max-hospital",
@@ -499,7 +531,7 @@ export const projects: Project[] = [
     category: "Healthcare",
     summary: "Shadowed emergency and internal medicine teams in New Delhi.",
     body: ["I shadowed emergency and internal medicine teams in New Delhi."],
-    links: [],
+    links: [{ label: "Max Healthcare", href: "https://www.maxhealthcare.in" }],
   },
 ];
 
@@ -519,11 +551,13 @@ export const experience: Role[] = [
     org: "SCI 3Sixty, Pitt",
     role: "3Sixty Fellow, applied AI with Prof. Rosta Farzan",
     period: "2026-now",
+    href: "https://www.sci.pitt.edu/give-sci/3sixty-program",
   },
   {
     org: "Accessible SmartTech Lab, Pitt",
     role: "Research Assistant with Prof. Dan Ding",
     period: "2026-now",
+    href: "https://www.smarttech.pitt.edu",
   },
   {
     org: "Investment Memo Series",
@@ -594,13 +628,20 @@ export const experience: Role[] = [
     org: "International School of Bangalore",
     role: "Founder, Entrepreneurship Club",
     period: "2021-2023",
+    href: "https://www.tisb.org",
   },
   {
     org: "International School of Bangalore",
     role: "Head of Vendor Acquisition: 25 vendors, a $10k budget, a 4,000-person event",
     period: "2022",
+    href: "https://www.tisb.org",
   },
-  { org: "JumpStart / AmeriCorps", role: "Team Leader", period: "Pittsburgh" },
+  {
+    org: "JumpStart / AmeriCorps",
+    role: "Team Leader",
+    period: "Pittsburgh",
+    href: "https://www.jstart.org",
+  },
   {
     org: "Economics research with Prof. Yasir Khan",
     role: "Kisan Rail",
