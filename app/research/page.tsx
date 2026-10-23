@@ -17,29 +17,29 @@ const labs = [
     org: "Accessible SmartTech Lab",
     role: "Research Assistant, with Prof. Dan Ding",
     detail:
-      "Human–machine interaction systems for accessible smart technologies.",
-    period: "2026 – now",
+      "Human-machine interaction systems for accessible smart technologies.",
+    period: "2026-now",
   },
   {
     org: "SCI 3Sixty Fellowship",
     role: "3Sixty Fellow, with Prof. Rosta Farzan",
     detail: "Applied AI research, including how nonprofits adopt AI.",
-    period: "2026 – now",
+    period: "2026-now",
   },
   {
     org: "UPMC Emergency Medicine",
     role: "Research Assistant",
     detail:
-      "EMR abstraction and REDCap coding for retrospective trauma studies.",
-    period: "2025 – 2026",
+      "Prehospital care patterns and emergency outcomes across UPMC's regional EMS system.",
+    period: "2025-2026",
     href: "/work/upmc-emergency-medicine",
   },
   {
-    org: "Apodaca Lab, Pitt School of Medicine",
+    org: "Apodaca Lab, Pitt",
     role: "Research Assistant",
     detail:
-      "Primary bladder urothelial cell culture for PIEZO/TMEM63 mechanotransduction studies; figures for manuscripts and grants.",
-    period: "2024 – 2025",
+      "Urothelial mechanotransduction and urinary health, with Prof. Gerard Apodaca.",
+    period: "2024-2025",
     href: "/work/apodaca-lab",
   },
   {
@@ -47,7 +47,7 @@ const labs = [
     role: "Co-founder & Research Coordinator",
     detail:
       "55 field interviews on medication access among delivery riders in Bengaluru.",
-    period: "2022 – 2024",
+    period: "2022-2024",
     href: "/work/project-nidaan",
   },
   {

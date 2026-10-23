@@ -44,7 +44,7 @@ const heroItems: DeskItem[] = [
     width: 440,
     node: site(
       "/previews/straypaw-d.webp",
-      "straypaw.kapoorjay.com",
+      "straypaw.org",
       "StrayPaw home page",
     ),
   },
@@ -106,7 +106,7 @@ const heroItems: DeskItem[] = [
   {
     id: "map",
     label: "StrayPaw map",
-    href: "https://straypaw.kapoorjay.com/map",
+    href: "https://www.straypaw.org/map",
     x: 66,
     y: 50,
     rotate: 7,
@@ -213,7 +213,7 @@ export default function Home() {
         <dl className="grid grid-cols-2 gap-x-6 gap-y-10 border-t border-line pt-10 md:grid-cols-4">
           {[
             ["30,288", "animal records on StrayPaw"],
-            ["28", "cities in India"],
+            ["19", "NGO partners on StrayPaw"],
             ["10,000+", "rural users on Juno-AI"],
             ["0.134", "Brier score on 15 public forecasts"],
           ].map(([v, l], i) => (
@@ -245,7 +245,7 @@ export default function Home() {
           </p>
         </Reveal>
         <Showcase
-          url="straypaw.kapoorjay.com"
+          url="straypaw.org"
           scroll="/previews/straypaw-scroll.webp"
           scrollRatio={5167 / 1200}
           phone={{
@@ -255,7 +255,7 @@ export default function Home() {
           steps={[
             {
               title: "Every stray in India.",
-              text: "30,288 animal records across 28 cities, on one shared record.",
+              text: "30,288 animal records across 28 cities, and 19 NGO partners working from the same record.",
             },
             {
               title: "Every animal has a profile.",
@@ -267,13 +267,13 @@ export default function Home() {
             },
             {
               title: "Followed to the end.",
-              text: "Reported, team arrived, care recorded, case closed. Cities get the reports.",
+              text: "First report, treatment, closure. Next up: a pilot with the Ludhiana municipality.",
             },
           ]}
           footer={
             <div className="mt-10 flex flex-wrap gap-3">
               <a
-                href="https://straypaw.kapoorjay.com"
+                href="https://www.straypaw.org"
                 target="_blank"
                 rel="noreferrer"
                 className="btn-primary"
@@ -288,7 +288,7 @@ export default function Home() {
         />
         <div className="shell mt-10 flex flex-wrap gap-3 lg:hidden">
           <a
-            href="https://straypaw.kapoorjay.com"
+            href="https://www.straypaw.org"
             target="_blank"
             rel="noreferrer"
             className="btn-primary"
@@ -410,7 +410,7 @@ export default function Home() {
             const cls =
               "flex flex-wrap items-baseline gap-x-3 gap-y-1 border-b border-line py-4 text-[15px]";
             return (
-              <li key={e.org}>
+              <li key={`${e.org}-${e.role}`}>
                 {e.href ? (
                   <Link
                     href={e.href}

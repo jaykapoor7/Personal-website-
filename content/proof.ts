@@ -5,7 +5,7 @@ export const proofGroups = [
       {
         title: "StrayPaw",
         detail: "Public product & animal map",
-        href: "https://straypaw.kapoorjay.com/map",
+        href: "https://www.straypaw.org/map",
       },
       {
         title: "StrayPaw architecture",

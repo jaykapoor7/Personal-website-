@@ -57,28 +57,29 @@ export const projects: Project[] = [
   {
     slug: "straypaw",
     title: "StrayPaw",
-    role: "Solo founder",
+    role: "Founder",
     period: "2026-now",
     category: "Civic tech",
     featured: true,
     summary: "A shared record for every stray animal in India.",
     body: [
-      "Feeders, rescue groups and city Animal Birth Control programmes all keep their own notebooks, WhatsApp groups and spreadsheets. StrayPaw puts every sighting, case and outcome on one record, so the people doing the work can see each other's work.",
+      "It started as a small Delhi dataset of 50 dogs, about half of them reported by me, before the domain was even registered. Two months later it held 30,000+ animal records across India. The map goes from city-wide coverage down to individual animals, showing open cases, response times, treatment outcomes and the localities nobody is covering.",
     ],
     highlights: [
-      "Built and launched a live platform with 30,000+ animal records across 28 Indian cities.",
-      "Shipped NGO case workspaces, municipal ABC/ARV analytics, maps, offline field access and embeddable partner widgets.",
-      "A WhatsApp bot that turns rescue-group posts into tracked cases.",
-      "Contacted 40+ NGOs, feeders and government bodies. Partnering with VaccSafe (Hyderabad) on microchip-linked dog profiles.",
+      "30,000+ animal records across 28 Indian cities, grown from 50 dogs in two months.",
+      "Partnered with 19 NGOs, including PAWS Chennai, Pawsome People Project and The Kind Hour Foundation.",
+      "Rebuilt the dashboard after NGO pilots so teams can follow a case from first report to treatment and closure, import their old records, and reuse the data for reports and their own websites.",
+      "Starting a pilot with the Ludhiana municipality.",
+      "Running community animal workshops with STRAW India and The Kind Hour Foundation, with the material free online for schools and volunteers.",
     ],
     metrics: [
       { value: "30,288", label: "animal records" },
       { value: "28", label: "cities" },
-      { value: "40+", label: "NGOs and agencies contacted" },
+      { value: "19", label: "NGO partners" },
     ],
     preview: {
       type: "site",
-      url: "straypaw.kapoorjay.com",
+      url: "straypaw.org",
       desktop: "/previews/straypaw-d.webp",
       mobile: "/previews/straypaw-map-m.webp",
       scroll: "/previews/straypaw-scroll.webp",
@@ -93,12 +94,12 @@ export const projects: Project[] = [
       {
         src: "/straypaw/street-dog.jpg",
         alt: "A street dog outside a cafe in Delhi",
-        caption: "Delhi",
+        caption: "Where it started: Delhi",
       },
     ],
     links: [
-      { label: "Visit StrayPaw", href: "https://straypaw.kapoorjay.com" },
-      { label: "Live map", href: "https://straypaw.kapoorjay.com/map" },
+      { label: "StrayPaw.org", href: "https://www.straypaw.org" },
+      { label: "Live map", href: "https://www.straypaw.org/map" },
       {
         label: "Architecture",
         href: "https://github.com/jaykapoor7/Pok-mon-go-dog-/blob/main/docs/ARCHITECTURE.md",
@@ -109,18 +110,18 @@ export const projects: Project[] = [
     slug: "juno-ai",
     title: "Juno-AI",
     role: "Founder",
-    period: "2019-2024",
+    period: "2019-2023",
     category: "Healthcare access",
     featured: true,
     summary:
       "Health answers, doctors and pharmacies for rural India. Started at 14.",
     body: [
-      "Juno started as a way to get reliable health information to families who lived hours from a doctor. It grew into a platform with a health assistant grounded in vetted sources, doctor discovery, pharmacy support and a personal health dashboard. I wrote up the system design as a research paper.",
+      "Juno started as a way to get reliable health information to families who lived hours from a doctor. It grew into an AI health assistant grounded in vetted sources and connected to doctors, pharmacies and Practo bookings, so people could get a remote consultation without the trip. I wrote up the system design as a research paper.",
     ],
     highlights: [
       "Founded at 14 and grew to 10,000+ rural users.",
       "Closed four healthcare partnerships, driving 180% user growth in 12 months.",
-      "Built a retrieval-grounded health assistant, doctor discovery, pharmacy support and a health dashboard.",
+      "Built a retrieval-grounded health assistant integrated with doctors, pharmacies and Practo bookings.",
       "Published the system design and evaluation as a paper.",
     ],
     metrics: [
@@ -329,11 +330,11 @@ export const projects: Project[] = [
     slug: "tarc",
     title: "TARC",
     role: "Project and Operations Associate",
-    period: "2026",
+    period: "Jan-Aug 2026",
     category: "Real estate",
-    summary: "Feasibility work on a housing project in Gurugram.",
+    summary: "Project and operations work at a Delhi real estate developer.",
     body: [
-      "I researched zoning, pricing and development assumptions for a feasibility memo.",
+      "An internship in New Delhi on the project and operations side. I researched zoning, pricing and development assumptions for a feasibility memo on a Gurugram housing site.",
     ],
     preview: {
       type: "doc",
@@ -442,11 +443,12 @@ export const projects: Project[] = [
     slug: "juno-adhd-os",
     title: "Juno ADHD OS",
     role: "Side project",
-    period: "2026",
+    period: "Jan-May 2026",
     category: "Prototype",
-    summary: "AI-assisted planning for people with ADHD.",
+    summary:
+      "An AI-powered productivity and behavioural operating system for people with ADHD.",
     body: [
-      "A planning tool for people with ADHD that breaks the day into steps and nudges at the right moment.",
+      "An AI-powered productivity and behavioural operating system for people with ADHD.",
     ],
     links: [
       { label: "LinkedIn", href: "https://www.linkedin.com/in/jay-kapoor7" },
@@ -455,12 +457,13 @@ export const projects: Project[] = [
   {
     slug: "apodaca-lab",
     title: "Apodaca Lab",
-    role: "Research Assistant, Pitt School of Medicine",
+    role: "Research Assistant, Pitt",
     period: "2024-2025",
     category: "Research",
-    summary: "Bladder cell biology for PIEZO and TMEM63 studies.",
+    summary:
+      "Urothelial mechanotransduction and urinary health, with Prof. Gerard Apodaca.",
     body: [
-      "I cultured primary bladder urothelial cells for PIEZO/TMEM63 mechanotransduction studies and made figures for manuscripts and grant submissions.",
+      "I researched urothelial mechanotransduction and what it means for urinary health under Professor Gerard Apodaca. I cultured primary bladder urothelial cells for PIEZO/TMEM63 studies and made figures for manuscripts and grant submissions.",
     ],
     links: [],
   },
@@ -470,9 +473,10 @@ export const projects: Project[] = [
     role: "Research Assistant",
     period: "2025-2026",
     category: "Research",
-    summary: "EMR abstraction and REDCap coding for trauma studies.",
+    summary:
+      "Prehospital care patterns and emergency outcomes across UPMC's regional EMS system.",
     body: [
-      "I abstracted and coded medical record data into REDCap for retrospective trauma and prehospital care studies.",
+      "I analysed prehospital care patterns and emergency outcomes across UPMC's regional EMS system, abstracting and coding medical record data into REDCap.",
     ],
     links: [],
   },
@@ -507,16 +511,32 @@ export type Role = { org: string; role: string; period: string; href?: string };
 export const experience: Role[] = [
   {
     org: "StrayPaw",
-    role: "Solo Founder",
+    role: "Founder",
     period: "2026-now",
     href: "/work/straypaw",
   },
   {
-    org: "Accessible SmartTech Lab, Pitt",
-    role: "Research Assistant",
+    org: "SCI 3Sixty, Pitt",
+    role: "3Sixty Fellow, applied AI with Prof. Rosta Farzan",
     period: "2026-now",
   },
-  { org: "SCI 3Sixty, Pitt", role: "3Sixty Fellow", period: "2026-now" },
+  {
+    org: "Accessible SmartTech Lab, Pitt",
+    role: "Research Assistant with Prof. Dan Ding",
+    period: "2026-now",
+  },
+  {
+    org: "Investment Memo Series",
+    role: "Theses on Indian healthtech and fintech",
+    period: "2026-now",
+    href: "/ledger",
+  },
+  {
+    org: "TARC India",
+    role: "Project and Operations Associate",
+    period: "2026",
+    href: "/work/tarc",
+  },
   {
     org: "TOT Schools",
     role: "Operations Lead",
@@ -531,7 +551,7 @@ export const experience: Role[] = [
   },
   {
     org: "Crowwd",
-    role: "Founder's Office",
+    role: "Founder's Office Intern",
     period: "2025",
     href: "/work/crowwd",
   },
@@ -548,12 +568,6 @@ export const experience: Role[] = [
     href: "/work/apodaca-lab",
   },
   {
-    org: "Juno-AI",
-    role: "Founder",
-    period: "2019-2024",
-    href: "/work/juno-ai",
-  },
-  {
     org: "Project Nidaan",
     role: "Co-founder",
     period: "2022-2024",
@@ -565,16 +579,32 @@ export const experience: Role[] = [
     period: "2021-2024",
     href: "/work/finer-things-club",
   },
+  {
+    org: "Juno-AI",
+    role: "Founder",
+    period: "2019-2023",
+    href: "/work/juno-ai",
+  },
+  {
+    org: "National Economics Fest",
+    role: "Contingent Leader, Best Contingent out of 500+ colleges",
+    period: "2023",
+  },
+  {
+    org: "International School of Bangalore",
+    role: "Founder, Entrepreneurship Club",
+    period: "2021-2023",
+  },
+  {
+    org: "International School of Bangalore",
+    role: "Head of Vendor Acquisition: 25 vendors, a $10k budget, a 4,000-person event",
+    period: "2022",
+  },
   { org: "JumpStart / AmeriCorps", role: "Team Leader", period: "Pittsburgh" },
   {
     org: "Economics research with Prof. Yasir Khan",
     role: "Kisan Rail",
     period: "Pitt",
-  },
-  {
-    org: "International School of Bangalore",
-    role: "Founded the entrepreneurship club",
-    period: "2021-2023",
   },
 ];
 

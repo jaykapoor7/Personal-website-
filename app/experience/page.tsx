@@ -48,7 +48,7 @@ export default function Experience() {
             const cls =
               "flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-line py-5";
             return (
-              <li key={e.org}>
+              <li key={`${e.org}-${e.role}`}>
                 {e.href ? (
                   <Link
                     href={e.href}

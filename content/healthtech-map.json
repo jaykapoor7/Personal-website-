@@ -1,1 +1,218 @@
-[{"name":"Practo","sector":"Telemedicine","description":"Doctor discovery, e-consults, practice-management SaaS","stage":"Series D"},{"name":"Apollo 24/7","sector":"Telemedicine","description":"Omnichannel arm of Apollo Hospitals (consults, pharmacy, diagnostics)","stage":"Corporate-backed"},{"name":"MediBuddy","sector":"Telemedicine","description":"Enterprise B2B2C teleconsult + diagnostics + medicine","stage":"Series C"},{"name":"mfine","sector":"Telemedicine","description":"Hospital-partnered specialist consults","stage":"Series C"},{"name":"Orange Health","sector":"Diagnostics","description":"On-demand at-home diagnostics, ~6-hour reports","stage":"Series B"},{"name":"Redcliffe Labs","sector":"Diagnostics","description":"Full-stack diagnostics chain, pan-India","stage":"Series C"},{"name":"Tata 1mg (Labs)","sector":"Diagnostics","description":"Diagnostics bundled into e-pharmacy super-app","stage":"Corporate-owned"},{"name":"Thyrocare","sector":"Diagnostics","description":"Asset-light preventive testing, franchise labs","stage":"Acquired"},{"name":"Tata 1mg","sector":"Pharmacy","description":"E-pharmacy, diagnostics, e-consults; ABHA-integrated","stage":"Corporate-owned"},{"name":"PharmEasy (API Holdings)","sector":"Pharmacy","description":"E-pharmacy + diagnostics + B2B distribution","stage":"Late-stage"},{"name":"Netmeds","sector":"Pharmacy","description":"E-pharmacy across 20,000+ pin codes","stage":"Acquired"},{"name":"Apollo Pharmacy","sector":"Pharmacy","description":"Largest offline + online pharmacy chain","stage":"Corporate-backed"},{"name":"Qure.ai","sector":"AI Healthcare","description":"Radiology AI (chest X-ray, head CT) for TB, stroke, lung nodules","stage":"Series D"},{"name":"Innovaccer","sector":"AI Healthcare","description":"Healthcare data platform / EMR intelligence","stage":"Series F (Unicorn)"},{"name":"SigTuple","sector":"AI Healthcare","description":"AI microscopy (AI100), blood/urine slide analysis","stage":"Series C"},{"name":"Tricog Health","sector":"AI Healthcare","description":"Cloud ECG AI, 140+ cardiac conditions, real-time triage","stage":"Series B"},{"name":"HealthPlix","sector":"AI Healthcare","description":"AI-powered EMR for doctors (point-of-care)","stage":"Series C"},{"name":"Onsurity","sector":"Insurance","description":"Monthly SME group health membership + wellness","stage":"Series B"},{"name":"Plum","sector":"Insurance","description":"Employee health benefits platform (+ Plum Health)","stage":"Series A+"},{"name":"Loop Health","sector":"Insurance","description":"Group insurance + primary-care layer","stage":"Series B"},{"name":"Acko","sector":"Insurance","description":"Digital-native general + health insurer","stage":"Late-stage (Unicorn)"},{"name":"Medyseva","sector":"Rural Healthcare","description":"Phygital 'Kendra' clinics + telemedicine for Tier 2/3 & rural","stage":"Seed"},{"name":"Karma Primary Healthcare","sector":"Rural Healthcare","description":"Nurse-assisted remote consults + diagnostics in rural clinics","stage":"Series A"},{"name":"eSanjeevani","sector":"Rural Healthcare","description":"National govt teleconsultation (Ayushman Bharat)","stage":"Government"},{"name":"Wysa","sector":"Mental Health","description":"AI conversational agent + human-therapist backup","stage":"Series B"},{"name":"Amaha (InnerHour)","sector":"Mental Health","description":"Omnichannel clinical care, therapy + psychiatry + digital self-care","stage":"Series A"},{"name":"YourDOST","sector":"Mental Health","description":"Emotional wellness + corporate EAP","stage":"Seed/Series A"},{"name":"LISSUN","sector":"Mental Health","description":"Scalable mental + maternal/child emotional health","stage":"Series A"},{"name":"Nua","sector":"Women's Health","description":"Menstrual care D2C + period tracker + content","stage":"Series B"},{"name":"Gynoveda","sector":"Women's Health","description":"Ayurvedic PCOS/fertility platform + clinics","stage":"Series A+"},{"name":"Veera Health","sector":"Women's Health","description":"Digital therapeutics for PCOS","stage":"Seed"},{"name":"Proactive For Her","sector":"Women's Health","description":"Full-stack women's clinics (menstrual, sexual, fertility, postpartum)","stage":"Acquired"},{"name":"Dozee","sector":"Hospital Infrastructure","description":"Contactless AI remote patient monitoring (bedside sensors)","stage":"Series B"},{"name":"Pristyn Care","sector":"Hospital Infrastructure","description":"Asset-light elective surgery network","stage":"Late-stage (Unicorn)"},{"name":"HexaHealth","sector":"Hospital Infrastructure","description":"Surgery-care discovery + management ecosystem","stage":"Series A"},{"name":"Cloudphysician","sector":"Hospital Infrastructure","description":"Tele-ICU command centers for under-resourced hospitals","stage":"Series B"}]
+[
+  {
+    "name": "Practo",
+    "sector": "Telemedicine",
+    "description": "Doctor discovery, e-consults, practice-management SaaS",
+    "stage": "Series D"
+  },
+  {
+    "name": "Apollo 24/7",
+    "sector": "Telemedicine",
+    "description": "Omnichannel arm of Apollo Hospitals (consults, pharmacy, diagnostics)",
+    "stage": "Corporate-backed"
+  },
+  {
+    "name": "MediBuddy",
+    "sector": "Telemedicine",
+    "description": "Enterprise B2B2C teleconsult + diagnostics + medicine",
+    "stage": "Series C"
+  },
+  {
+    "name": "mfine",
+    "sector": "Telemedicine",
+    "description": "Hospital-partnered specialist consults",
+    "stage": "Series C"
+  },
+  {
+    "name": "Orange Health",
+    "sector": "Diagnostics",
+    "description": "On-demand at-home diagnostics, ~6-hour reports",
+    "stage": "Series B"
+  },
+  {
+    "name": "Redcliffe Labs",
+    "sector": "Diagnostics",
+    "description": "Full-stack diagnostics chain, pan-India",
+    "stage": "Series C"
+  },
+  {
+    "name": "Tata 1mg (Labs)",
+    "sector": "Diagnostics",
+    "description": "Diagnostics bundled into e-pharmacy super-app",
+    "stage": "Corporate-owned"
+  },
+  {
+    "name": "Thyrocare",
+    "sector": "Diagnostics",
+    "description": "Asset-light preventive testing, franchise labs",
+    "stage": "Acquired"
+  },
+  {
+    "name": "Tata 1mg",
+    "sector": "Pharmacy",
+    "description": "E-pharmacy, diagnostics, e-consults; ABHA-integrated",
+    "stage": "Corporate-owned"
+  },
+  {
+    "name": "PharmEasy (API Holdings)",
+    "sector": "Pharmacy",
+    "description": "E-pharmacy + diagnostics + B2B distribution",
+    "stage": "Late-stage"
+  },
+  {
+    "name": "Netmeds",
+    "sector": "Pharmacy",
+    "description": "E-pharmacy across 20,000+ pin codes",
+    "stage": "Acquired"
+  },
+  {
+    "name": "Apollo Pharmacy",
+    "sector": "Pharmacy",
+    "description": "Largest offline + online pharmacy chain",
+    "stage": "Corporate-backed"
+  },
+  {
+    "name": "Qure.ai",
+    "sector": "AI Healthcare",
+    "description": "Radiology AI (chest X-ray, head CT) for TB, stroke, lung nodules",
+    "stage": "Series D"
+  },
+  {
+    "name": "Innovaccer",
+    "sector": "AI Healthcare",
+    "description": "Healthcare data platform / EMR intelligence",
+    "stage": "Series F (Unicorn)"
+  },
+  {
+    "name": "SigTuple",
+    "sector": "AI Healthcare",
+    "description": "AI microscopy (AI100), blood/urine slide analysis",
+    "stage": "Series C"
+  },
+  {
+    "name": "Tricog Health",
+    "sector": "AI Healthcare",
+    "description": "Cloud ECG AI, 140+ cardiac conditions, real-time triage",
+    "stage": "Series B"
+  },
+  {
+    "name": "HealthPlix",
+    "sector": "AI Healthcare",
+    "description": "AI-powered EMR for doctors (point-of-care)",
+    "stage": "Series C"
+  },
+  {
+    "name": "Onsurity",
+    "sector": "Insurance",
+    "description": "Monthly SME group health membership + wellness",
+    "stage": "Series B"
+  },
+  {
+    "name": "Plum",
+    "sector": "Insurance",
+    "description": "Employee health benefits platform (+ Plum Health)",
+    "stage": "Series A+"
+  },
+  {
+    "name": "Loop Health",
+    "sector": "Insurance",
+    "description": "Group insurance + primary-care layer",
+    "stage": "Series B"
+  },
+  {
+    "name": "Acko",
+    "sector": "Insurance",
+    "description": "Digital-native general + health insurer",
+    "stage": "Late-stage (Unicorn)"
+  },
+  {
+    "name": "Medyseva",
+    "sector": "Rural Healthcare",
+    "description": "Phygital 'Kendra' clinics + telemedicine for Tier 2/3 & rural",
+    "stage": "Seed"
+  },
+  {
+    "name": "Karma Primary Healthcare",
+    "sector": "Rural Healthcare",
+    "description": "Nurse-assisted remote consults + diagnostics in rural clinics",
+    "stage": "Series A"
+  },
+  {
+    "name": "eSanjeevani",
+    "sector": "Rural Healthcare",
+    "description": "National govt teleconsultation (Ayushman Bharat)",
+    "stage": "Government"
+  },
+  {
+    "name": "Wysa",
+    "sector": "Mental Health",
+    "description": "AI conversational agent + human-therapist backup",
+    "stage": "Series B"
+  },
+  {
+    "name": "Amaha (InnerHour)",
+    "sector": "Mental Health",
+    "description": "Omnichannel clinical care, therapy + psychiatry + digital self-care",
+    "stage": "Series A"
+  },
+  {
+    "name": "YourDOST",
+    "sector": "Mental Health",
+    "description": "Emotional wellness + corporate EAP",
+    "stage": "Seed/Series A"
+  },
+  {
+    "name": "LISSUN",
+    "sector": "Mental Health",
+    "description": "Scalable mental + maternal/child emotional health",
+    "stage": "Series A"
+  },
+  {
+    "name": "Nua",
+    "sector": "Women's Health",
+    "description": "Menstrual care D2C + period tracker + content",
+    "stage": "Series B"
+  },
+  {
+    "name": "Gynoveda",
+    "sector": "Women's Health",
+    "description": "Ayurvedic PCOS/fertility platform + clinics",
+    "stage": "Series A+"
+  },
+  {
+    "name": "Veera Health",
+    "sector": "Women's Health",
+    "description": "Digital therapeutics for PCOS",
+    "stage": "Seed"
+  },
+  {
+    "name": "Proactive For Her",
+    "sector": "Women's Health",
+    "description": "Full-stack women's clinics (menstrual, sexual, fertility, postpartum)",
+    "stage": "Acquired"
+  },
+  {
+    "name": "Dozee",
+    "sector": "Hospital Infrastructure",
+    "description": "Contactless AI remote patient monitoring (bedside sensors)",
+    "stage": "Series B"
+  },
+  {
+    "name": "Pristyn Care",
+    "sector": "Hospital Infrastructure",
+    "description": "Asset-light elective surgery network",
+    "stage": "Late-stage (Unicorn)"
+  },
+  {
+    "name": "HexaHealth",
+    "sector": "Hospital Infrastructure",
+    "description": "Surgery-care discovery + management ecosystem",
+    "stage": "Series A"
+  },
+  {
+    "name": "Cloudphysician",
+    "sector": "Hospital Infrastructure",
+    "description": "Tele-ICU command centers for under-resourced hospitals",
+    "stage": "Series B"
+  }
+]
