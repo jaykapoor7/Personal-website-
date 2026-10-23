@@ -1,26 +1,42 @@
-# Jay Kapoor’s website
+# Jay Kapoor — The Living System
 
-A static Next.js site with two connected areas: a Playground of existing interactive builds and a straightforward portfolio. `npm run build` exports the site to `out/`.
+Personal portfolio at https://kapoorjay.com. Static Next.js 14 App Router export, React 18, TypeScript. This repository and Vercel's `personal-website` project are the only deployment targets for this site.
 
-```bash
-npm install
+```sh
+npm ci
 npm run dev
 npm run build
 ```
 
-## Updating content
+The build exports every route and artifact to `out/`. No API keys, database, CMS, or server runtime are required.
 
-- `content/site.ts`: introduction, professional projects, experience, writing, and links. Project pages and their sitemap entries come from these arrays.
-- `content/play.ts`: the Playground collection. Add an item only when a working experiment exists. Each item gets `/play/[slug]` and a live embedded preview with an external fallback.
-- `components/ProjectMorph.tsx`: the five featured projects share one SVG composition. Each scene has five paths with matching command types; keep that structure when adding another composition so the shapes interpolate cleanly.
-- `public/`: project images, source documents, and the current résumé PDF.
+## Experience
 
-Keep titles, dates, and claims tied to a source. Some organizations Jay named have no verified dates, so the site omits those dates.
+The homepage follows one observation into a shared record and a wider care workflow. Three scale controls and the map markers offer direct navigation. At system scale, toggle shared records to see the handoffs disappear and reconnect. CSS drives camera movement; reduced motion disables transitions and ambient pulses. This is an illustrated system, not a map of live StrayPaw data.
 
-## Design and motion
+Main routes: `/`, `/work`, `/research`, `/play`, `/about`. Existing `/experience`, `/writing`, `/contact`, `/ledger`, `/thesis`, project detail routes, PDFs, and résumé remain available.
 
-The Playground uses warm paper, navy, and distinct colors for each build. The professional side keeps the quieter green palette. The mode switch uses the browser View Transitions API when available; normal navigation remains available without it. The project navigator uses Framer Motion to interpolate SVG paths. Reduced motion removes these transitions.
+## Content and source integrity
 
-## Routes
+- `content/site.ts`: projects, role dates, documents, links. Major projects are curated in `app/work/page.tsx`.
+- `components/LivingSystem.tsx`: illustrated neighborhood and causal shared-record interaction.
+- `components/ProjectInteractions.tsx`: care workflow, Nidaan qualitative themes, Juno information pathway.
+- `components/EverythingFalls.tsx`: pointer, touch, and keyboard physics experiment.
+- `app/globals.css`: full responsive design system; original CSS is no longer imported.
+- `docs/portfolio-evidence-audit.md`: positioning, source hierarchy, verification limits.
+- `public/`: original project artifacts and photography.
 
-`/` and `/play` are the Playground. `/play/[slug]` contains live projects. `/about`, `/work`, `/work/[slug]`, `/experience`, `/writing`, and `/contact` form the portfolio. Older research routes and project URLs remain available.
+Preserve distinctions between data records and outcomes, research contributions and ownership, prototypes and deployed clinical products, and illustrative analysis and measured findings. LinkedIn was inaccessible directly during this redesign; dates rely on the documented existing portfolio record and résumé.
+
+StrayPaw and all other project repositories/deployments are outside this repository's scope. Do not deploy this portfolio to their Vercel projects.
+
+## Browser verification
+
+After building, serve the export and run the browser suite in another terminal:
+
+```sh
+python -m http.server 3000 --directory out
+npm run test:browser
+```
+
+The suite uses system Chromium when available, or Playwright's installed browser. Set `PLAYWRIGHT_CHROMIUM_PATH` for a custom binary and `BASE_URL` to verify another origin. It checks the causal map interaction, project controls, keyboard and touch physics, responsive layouts, reduced motion, accessibility, route availability, and navigation without JavaScript.

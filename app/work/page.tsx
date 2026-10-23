@@ -1,6 +1,73 @@
-import type {Metadata} from "next";
+import { Arrow } from "@/components/Arrow";
 import Link from "next/link";
-import {projects,archiveProjects} from "@/content/site";
-import {ProjectNavigator} from "@/components/ProjectNavigator";
-export const metadata:Metadata={title:"Work",description:"Projects by Jay Kapoor, including StrayPaw, Juno-AI, and Crowwd."};
-export default function Work(){return <div className="new-pro"><header className="pro-intro shell"><span className="kicker">Portfolio / Selected work</span><h1>Things I’ve<br/><em>worked on.</em></h1><p>Mostly StrayPaw these days. These are a few other things from along the way.</p></header><div className="shell"><ProjectNavigator/></div><section className="project-index shell"><div className="section-label"><span>PROJECT INDEX</span><span>{String(projects.length).padStart(2,"0")} SELECTED</span></div>{projects.map((p,i)=><Link href={`/work/${p.slug}`} key={p.slug}><span className="list-number">{String(i+1).padStart(2,"0")}</span><strong>{p.title}</strong><span>{p.eyebrow}</span><b>↗</b></Link>)}</section><section className="archive-index shell"><div className="section-label"><span>ALSO HERE</span><span>SMALLER BUILDS & RESEARCH</span></div><div>{archiveProjects.map(p=><Link href={`/work/${p.slug}`} key={p.slug}>{p.title}<span>↗</span></Link>)}</div></section></div>}
+import { allProjects } from "@/content/site";
+import { ProjectVisual } from "@/components/ProjectVisual";
+export const metadata = {
+  title: "Selected work",
+  description:
+    "StrayPaw, Project Nidaan, Juno-AI, and the broader project index.",
+};
+const slugs = ["straypaw", "project-nidaan", "juno-ai"];
+export default function Work() {
+  const selected = slugs.map((s) => allProjects.find((p) => p.slug === s)!);
+  const other = allProjects.filter((p) => !slugs.includes(p.slug));
+  return (
+    <>
+      <header className="shell editorial-hero">
+        <span className="eyebrow">WORK / SELECTED CONNECTIONS</span>
+        <h1>
+          Real problems.
+          <br />
+          <em>Things I’ve built.</em>
+        </h1>
+        <p>
+          Software, fieldwork, and healthcare information. Three projects that
+          explain where I’m heading.
+        </p>
+      </header>
+      <section className="shell all-work">
+        {selected.map((p, i) => (
+          <article key={p.slug} className="work-entry">
+            <span className="eyebrow">0{i + 1}</span>
+            <div>
+              <span className="eyebrow">{p.eyebrow}</span>
+              <h2 style={{ marginTop: 18 }}>{p.title}</h2>
+              <p>{p.summary}</p>
+              <Link href={`/work/${p.slug}`} className="text-link">
+                Explore the project{" "}
+                <span>
+                  <Arrow />
+                </span>
+              </Link>
+            </div>
+            <ProjectVisual project={p} />
+          </article>
+        ))}
+      </section>
+      <section className="shell">
+        <div className="section-rule">
+          <span>THE WIDER INDEX</span>
+          <Link href="/experience">
+            Experience <Arrow />
+          </Link>
+        </div>
+        <div className="archive-index">
+          {other.map((p) => (
+            <Link key={p.slug} href={`/work/${p.slug}`}>
+              <div>
+                {p.title}
+                <small>
+                  {p.eyebrow}
+                  {p.period && ` · ${p.period}`}
+                </small>
+              </div>
+              <span>
+                <Arrow />
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
+    </>
+  );
+}

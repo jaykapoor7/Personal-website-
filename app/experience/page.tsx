@@ -1,5 +1,81 @@
-import type {Metadata} from "next";
+import { Arrow } from "@/components/Arrow";
+import type { Metadata } from "next";
 import Link from "next/link";
-import {experience,archiveProjects} from "@/content/site";
-export const metadata:Metadata={title:"Experience",description:"Jay Kapoor’s work and research experience."};
-export default function Experience(){const additional=archiveProjects.filter(x=>["tarc","apodaca-lab","upmc-emergency-medicine","pitt-sociology"].includes(x.slug));return <div className="new-pro"><header className="shell editorial-hero"><span className="kicker">Experience / Selected</span><h1>Where I’ve<br/><em>spent my time.</em></h1><p>A simple list of roles and research. Projects have their own space on the work page.</p></header><section className="shell editorial-list"><div className="section-label"><span>RECENT WORK & RESEARCH</span><span>{String(experience.length).padStart(2,"0")}</span></div>{experience.map((e,i)=><article key={e.name}><span className="list-number">{String(i+1).padStart(2,"0")}</span><div><h2>{e.name}</h2><p>{e.detail}</p>{"description" in e&&e.description&&<small>{e.description}</small>}</div>{e.href&&<Link href={e.href} aria-label={`See ${e.name}`}>↗</Link>}</article>)}</section><section className="shell editorial-list more-list"><div className="section-label"><span>EARLIER EXPERIENCE</span><span>SELECTED</span></div>{additional.map((e,i)=><article key={e.slug}><span className="list-number">{String(i+1).padStart(2,"0")}</span><div><h2>{e.title}</h2><p>{e.eyebrow} {e.period&&`· ${e.period}`}</p></div><Link href={`/work/${e.slug}`} aria-label={`See ${e.title}`}>↗</Link></article>)}</section></div>}
+import { experience, archiveProjects } from "@/content/site";
+export const metadata: Metadata = {
+  title: "Experience",
+  description: "Jay Kapoor’s work and research experience.",
+};
+export default function Experience() {
+  const additional = archiveProjects.filter((x) =>
+    [
+      "tarc",
+      "apodaca-lab",
+      "upmc-emergency-medicine",
+      "pitt-sociology",
+    ].includes(x.slug),
+  );
+  return (
+    <div className="new-pro">
+      <header className="shell editorial-hero">
+        <span className="kicker">Experience / Selected</span>
+        <h1>
+          Where I’ve
+          <br />
+          <em>spent my time.</em>
+        </h1>
+        <p>
+          A simple list of roles and research. Projects have their own space on
+          the work page.
+        </p>
+      </header>
+      <section className="shell editorial-list">
+        <div className="section-label">
+          <span>RECENT WORK & RESEARCH</span>
+          <span>{String(experience.length).padStart(2, "0")}</span>
+        </div>
+        {experience.map((e, i) => (
+          <article key={e.name}>
+            <span className="list-number">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <div>
+              <h2>{e.name}</h2>
+              <p>{e.detail}</p>
+              {"description" in e && e.description && (
+                <small>{e.description}</small>
+              )}
+            </div>
+            {e.href && (
+              <Link href={e.href} aria-label={`See ${e.name}`}>
+                <Arrow />
+              </Link>
+            )}
+          </article>
+        ))}
+      </section>
+      <section className="shell editorial-list more-list">
+        <div className="section-label">
+          <span>EARLIER EXPERIENCE</span>
+          <span>SELECTED</span>
+        </div>
+        {additional.map((e, i) => (
+          <article key={e.slug}>
+            <span className="list-number">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <div>
+              <h2>{e.title}</h2>
+              <p>
+                {e.eyebrow} {e.period && `· ${e.period}`}
+              </p>
+            </div>
+            <Link href={`/work/${e.slug}`} aria-label={`See ${e.title}`}>
+              <Arrow />
+            </Link>
+          </article>
+        ))}
+      </section>
+    </div>
+  );
+}
