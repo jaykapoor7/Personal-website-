@@ -17,9 +17,9 @@ function Play({ onClick, label }: { onClick: () => void; label: string }) {
     <button
       type="button"
       onClick={onClick}
-      className="group absolute inset-0 grid place-items-center bg-indigo-950/0 transition-colors hover:bg-indigo-950/15"
+      className="group absolute inset-0 grid place-items-center bg-black/0 transition-colors hover:bg-black/15"
     >
-      <span className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-[14px] font-semibold text-white shadow-[0_12px_30px_-8px_rgba(79,70,229,0.7)] transition-transform group-hover:scale-105">
+      <span className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-[14px] font-semibold text-white shadow-[0_12px_30px_-8px_rgba(0,0,0,0.5)] transition-transform group-hover:scale-105">
         <svg
           viewBox="0 0 24 24"
           className="h-4 w-4 fill-current"
@@ -51,7 +51,7 @@ function View({
   const label = b.kind === "Game" ? "Play it here" : "Try it here";
   if (b.phone)
     return (
-      <div className="bg-dots flex h-full items-center justify-center bg-[#eef0fb] py-5">
+      <div className="bg-dots flex h-full items-center justify-center bg-card py-5">
         <div className="h-full rounded-[34px] bg-[#111] p-1.5 shadow-2xl">
           <div
             className="relative h-full overflow-hidden rounded-[28px] bg-black"
@@ -115,7 +115,7 @@ export function BuildsBrowser() {
       <div className="border-b border-line p-3 lg:border-b-0 lg:border-r">
         {kinds.map((k) => (
           <div key={k} className="mb-2">
-            <p className="px-3 pb-1.5 pt-2 text-[12px] font-semibold uppercase tracking-[0.1em] text-faint">
+            <p className="px-3 pb-1.5 pt-2 font-mono text-[11px] uppercase tracking-[0.14em] text-faint">
               {k}s
             </p>
             <ul
@@ -136,17 +136,15 @@ export function BuildsBrowser() {
                         setLive(null);
                       }}
                       className={`w-full rounded-xl px-3 py-2.5 text-left transition-colors ${
-                        x.id === id
-                          ? "bg-indigo-50 ring-1 ring-indigo-200"
-                          : "hover:bg-card"
+                        x.id === id ? "bg-fg text-white" : "hover:bg-card"
                       }`}
                     >
-                      <span
-                        className={`block text-[14.5px] font-semibold ${x.id === id ? "text-accent" : ""}`}
-                      >
+                      <span className="block text-[14.5px] font-semibold">
                         {x.name}
                       </span>
-                      <span className="hidden text-[13px] leading-snug text-muted lg:block">
+                      <span
+                        className={`hidden text-[13px] leading-snug lg:block ${x.id === id ? "text-white/70" : "text-muted"}`}
+                      >
                         {x.summary}
                       </span>
                     </button>

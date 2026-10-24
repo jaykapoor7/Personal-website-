@@ -1,14 +1,27 @@
 import type { Metadata, Viewport } from "next";
-import { Inter_Tight, JetBrains_Mono } from "next/font/google";
+import {
+  Instrument_Serif,
+  Inter_Tight,
+  JetBrains_Mono,
+} from "next/font/google";
+import { ViewTransitions } from "next-view-transitions";
 import "./globals.css";
 
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { Woof } from "@/components/Woof";
 import { siteUrl } from "@/lib/site";
 
 const sans = Inter_Tight({
   subsets: ["latin"],
   variable: "--font-sans",
+  display: "swap",
+});
+const serif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-serif",
   display: "swap",
 });
 const mono = JetBrains_Mono({
@@ -18,7 +31,7 @@ const mono = JetBrains_Mono({
 });
 
 const description =
-  "Jay Kapoor: founder of StrayPaw and Juno-AI, researcher at the University of Pittsburgh, Economics and Statistics.";
+  "Jay Kapoor: companies, research, papers, games and photos, from Bangalore to Pittsburgh.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -35,7 +48,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-export const viewport: Viewport = { themeColor: "#ffffff" };
+export const viewport: Viewport = { themeColor: "#f6f6f3" };
 
 export default function RootLayout({
   children,
@@ -43,21 +56,27 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${sans.variable} ${mono.variable}`}>
-      <body>
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-fg focus:px-4 focus:py-2 focus:text-bg"
-        >
-          Skip to content
-        </a>
-        <Nav />
-        <noscript>
-          <style>{`[data-reveal]{opacity:1!important;transform:none!important;filter:none!important}`}</style>
-        </noscript>
-        <main id="main">{children}</main>
-        <Footer />
-      </body>
-    </html>
+    <ViewTransitions>
+      <html
+        lang="en"
+        className={`${sans.variable} ${serif.variable} ${mono.variable}`}
+      >
+        <body>
+          <a
+            href="#main"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-fg focus:px-4 focus:py-2 focus:text-bg"
+          >
+            Skip to content
+          </a>
+          <Nav />
+          <noscript>
+            <style>{`[data-reveal]{opacity:1!important;transform:none!important;filter:none!important}`}</style>
+          </noscript>
+          <main id="main">{children}</main>
+          <Footer />
+          <Woof />
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }

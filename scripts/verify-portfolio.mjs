@@ -18,7 +18,7 @@ const browser = await chromium.launch({
   args: ["--no-sandbox"],
 });
 
-// Old section URLs (/work, /research, ...) now forward to the home page.
+// Old section URLs (/work, /research, ...) and old project slugs forward to their new homes.
 const routes = [
   "/",
   "/work/",
@@ -30,6 +30,12 @@ const routes = [
   "/work/finer-things-club/",
   "/work/hdfc-bank/",
   "/work/upmc-emergency-medicine/",
+  "/work/tarc/",
+  "/work/accessible-smarttech/",
+  "/work/apodaca-lab/",
+  "/work/road360/",
+  "/play/strike/",
+  "/play/road360/",
   "/research/",
   "/ledger/",
   "/market-map/",
@@ -85,7 +91,9 @@ try {
       assert.equal(await page.locator("h1").count(), 1, `One h1 on ${route}`);
       if (name === "desktop" || name === "dark") {
         await page.waitForTimeout(2000); // let entrance animations settle
+        // Embedded live builds are separate sites with their own checks.
         const axe = await new AxeBuilder({ page })
+          .exclude("iframe")
           .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
           .analyze();
         assert.deepEqual(
@@ -97,26 +105,35 @@ try {
     }
 
     await page.goto(base + "/", { waitUntil: "networkidle" });
-    assert.match(await page.locator("h1").innerText(), /Jay Kapoor/);
+    assert.match(await page.locator("h1").innerText(), /Jay/);
     if (name === "mobile") {
       await page.getByRole("button", { name: "Open menu" }).tap();
       await page
         .locator("#mobile-menu")
-        .getByRole("link", { name: "Experience" })
+        .getByRole("link", { name: "Questions" })
         .tap();
-      await page.waitForURL(/#experience$/);
+      await page.waitForURL(/#questions$/);
     }
 
-    // Sections switch in place, and a hash opens the right one.
-    await page.goto(base + "/#builds", { waitUntil: "networkidle" });
+    // Each question opens to show the work behind it.
+    const q = page.getByRole("button", { name: /bladder cell/ });
+    await q.scrollIntoViewIfNeeded();
+    await q.click();
+    await page.waitForTimeout(600);
     assert.match(
-      await page.locator("[role=tabpanel]:not([hidden])").innerText(),
-      /Everybody's on Strike/,
+      await page.locator("#a-apodaca-lab").innerText(),
+      /PIEZO/,
+      "Question opens its answer",
     );
-    await page.getByRole("tab", { name: /^Research/ }).click();
+
+    // Bet against me: lock in odds and see mine.
+    const lock = page.getByRole("button", { name: "Lock it in" });
+    await lock.scrollIntoViewIfNeeded();
+    await lock.click();
     assert.match(
-      await page.locator("[role=tabpanel]:not([hidden])").innerText(),
-      /Accessible SmartTech Lab/,
+      await page.locator("#predictions").innerText(),
+      /I said \d+%/,
+      "Bet reveals my odds",
     );
 
     // The market map filters by sector.

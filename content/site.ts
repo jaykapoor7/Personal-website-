@@ -129,6 +129,8 @@ export const ventures: Venture[] = [
     shot: {
       src: "/previews/juno-preventive-d.webp",
       url: "preventive-healthcare-xi.vercel.app",
+      scroll: "/previews/juno-preventive-scroll.webp",
+      ratio: 3500 / 1200,
     },
     proof: [
       doc("Research paper, IJEDR", "/work/juno-ai/Juno-AI-Research-Paper.pdf"),
@@ -183,6 +185,8 @@ export const ventures: Venture[] = [
 /* Experience: places I worked */
 export type Role = {
   id: string;
+  /** The question the job was really about. */
+  question: string;
   org: string;
   role: string;
   period: string;
@@ -198,6 +202,7 @@ export type Role = {
 export const roles: Role[] = [
   {
     id: "tarc",
+    question: "What should be built on a plot of land in Gurugram?",
     org: "TARC India",
     role: "Project and Operations Associate",
     period: "Jan to Aug 2026",
@@ -217,6 +222,7 @@ export const roles: Role[] = [
   },
   {
     id: "tot-schools",
+    question: "How do you run eight preschools at once?",
     org: "TOT Schools",
     role: "Operations Lead",
     period: "Jun 2025 to Apr 2026",
@@ -238,6 +244,7 @@ export const roles: Role[] = [
   },
   {
     id: "crowwd",
+    question: "Where does an investing app find its next users?",
     org: "Crowwd",
     role: "Founder's Office Intern",
     period: "May to Aug 2025",
@@ -265,6 +272,7 @@ export const roles: Role[] = [
   },
   {
     id: "hdfc-bank",
+    question: "Where should a wealthy family put its money?",
     org: "HDFC Bank",
     role: "Wealth Management Intern, HNI Division",
     period: "May to Aug 2025",
@@ -290,6 +298,7 @@ export const roles: Role[] = [
 /* Research */
 export type Lab = {
   id: string;
+  question: string;
   name: string;
   role: string;
   period: string;
@@ -303,6 +312,7 @@ export type Lab = {
 export const labs: Lab[] = [
   {
     id: "smarttech",
+    question: "How should smart technology work for people with disabilities?",
     name: "Accessible SmartTech Lab",
     role: "Research Assistant",
     period: "Aug 2026 to present",
@@ -318,6 +328,7 @@ export const labs: Lab[] = [
   },
   {
     id: "3sixty",
+    question: "How do nonprofits actually start using AI?",
     name: "SCI 3Sixty",
     role: "Fellow",
     period: "Sep 2026 to present",
@@ -333,6 +344,7 @@ export const labs: Lab[] = [
   },
   {
     id: "upmc",
+    question: "What happens to a patient before they reach the emergency room?",
     name: "UPMC Emergency Medicine",
     role: "Research Assistant",
     period: "Aug 2025 to Jan 2026",
@@ -350,6 +362,7 @@ export const labs: Lab[] = [
   },
   {
     id: "apodaca",
+    question: "How does a bladder cell know it is being stretched?",
     name: "Apodaca Lab",
     role: "Research Assistant",
     period: "Aug 2024 to May 2025",
@@ -622,27 +635,15 @@ export const life = [
   },
 ];
 
-/** Old project URLs, so links shared elsewhere still land somewhere useful. */
+/** Old project URLs that are not case pages any more, so shared links still land well. */
 export const legacy: Record<string, string> = {
-  straypaw: "/#ventures",
-  "juno-ai": "/#ventures",
-  "project-nidaan": "/#ventures",
-  "finer-things-club": "/#ventures",
-  crowwd: "/#experience",
-  "tot-schools": "/#experience",
-  "hdfc-bank": "/#experience",
-  tarc: "/#experience",
-  "accessible-smarttech": "/#research",
-  "sci-3sixty": "/#research",
-  "upmc-emergency-medicine": "/#research",
-  "apodaca-lab": "/#research",
-  "pitt-sociology": "/#research",
-  "max-hospital": "/#research",
-  "juno-preventive-health": "/#ventures",
-  "recovery-intelligence": "/#builds",
-  road360: "/#builds",
-  "seo-geo-optimiser": "/#builds",
-  "everybodys-on-strike": "/#builds",
-  "worst-emergency-service": "/#builds",
-  "everything-falls": "/#builds",
+  "pitt-sociology": "/#questions",
+  "max-hospital": "/#questions",
+  "juno-preventive-health": "/work/juno-ai",
+  "recovery-intelligence": "/play/cura",
+  road360: "/play/road360",
+  "seo-geo-optimiser": "/play/llm-lab",
+  "everybodys-on-strike": "/play/strike",
+  "worst-emergency-service": "/play/emergency",
+  "everything-falls": "/play/everything-falls",
 };

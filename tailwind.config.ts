@@ -22,9 +22,10 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
         display: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
+        serif: ["var(--font-serif)", "Georgia", "serif"],
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
-      maxWidth: { shell: "1120px" },
+      maxWidth: { shell: "1240px" },
       transitionTimingFunction: { out: "cubic-bezier(0.16, 1, 0.3, 1)" },
     },
   },

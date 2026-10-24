@@ -1,16 +1,36 @@
 "use client";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const links = [
-  { href: "/#ventures", label: "Ventures" },
-  { href: "/#experience", label: "Experience" },
-  { href: "/#research", label: "Research" },
-  { href: "/#writing", label: "Writing" },
-  { href: "/#builds", label: "Builds" },
-  { href: "/#about", label: "About" },
+  { href: "/#noticed", label: "Noticed" },
+  { href: "/#questions", label: "Questions" },
+  { href: "/#predictions", label: "Predictions" },
+  { href: "/#play", label: "Play" },
+  { href: "/#photos", label: "Photos" },
 ];
+
+/** Local time in Pittsburgh, so visitors know if it is 3am here. */
+function Clock() {
+  const [t, setT] = useState("");
+  useEffect(() => {
+    const f = new Intl.DateTimeFormat("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      timeZone: "America/New_York",
+    });
+    const tick = () => setT(f.format(new Date()));
+    tick();
+    const id = setInterval(tick, 20000);
+    return () => clearInterval(id);
+  }, []);
+  return (
+    <span className="hidden font-mono text-[11px] uppercase tracking-[0.14em] text-muted md:inline">
+      Pittsburgh {t}
+    </span>
+  );
+}
 
 export function Nav() {
   const path = usePathname();
@@ -34,83 +54,93 @@ export function Nav() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        solid || open
-          ? "border-b border-line bg-white/80 backdrop-blur-xl backdrop-saturate-150"
-          : "border-b border-transparent"
+        solid || open ? "bg-bg/85 backdrop-blur-xl" : ""
       }`}
     >
       <nav
-        className="shell flex h-[68px] items-center justify-between"
+        className="shell flex h-[60px] items-center justify-between gap-4"
         aria-label="Main"
       >
-        <Link
-          href="/"
-          className="flex items-center gap-2.5 text-[15px] font-semibold tracking-[-0.01em]"
-        >
-          <span
-            aria-hidden="true"
-            className="grid h-8 w-8 place-items-center rounded-lg bg-accent text-[12px] font-bold text-white"
+        <div className="flex items-center gap-5">
+          <Link
+            href="/"
+            className="text-[15px] font-semibold tracking-[-0.02em]"
           >
-            JK
-          </span>
-          Jay Kapoor
-        </Link>
-        <div className="hidden items-center gap-1 lg:flex">
+            Jay Kapoor
+          </Link>
+          <Clock />
+        </div>
+        <div className="hidden items-center gap-1 md:flex">
           {links.map((l) => (
-            <a
+            <Link
               key={l.href}
               href={l.href}
-              onClick={() => setOpen(false)}
-              className="rounded-lg px-3 py-2 text-[14px] font-medium text-muted transition-colors hover:bg-card hover:text-fg"
+              className="rounded-full px-3 py-1.5 text-[14px] font-medium text-muted transition-colors hover:bg-fg hover:text-white"
             >
               {l.label}
-            </a>
+            </Link>
           ))}
-        </div>
-        <div className="flex items-center gap-2">
+          <a
+            href="/jay-kapoor-resume.pdf"
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-full px-3 py-1.5 text-[14px] font-medium text-muted transition-colors hover:bg-fg hover:text-white"
+          >
+            Resume
+          </a>
           <a
             href="mailto:jak581@pitt.edu"
-            className="btn-primary hidden h-9 px-4 text-[14px] sm:inline-flex"
+            className="ml-2 rounded-full bg-fg px-4 py-1.5 text-[14px] font-medium text-white transition-colors hover:bg-accent"
           >
             Email me
           </a>
-          <button
-            type="button"
-            className="grid h-10 w-10 place-items-center rounded-lg lg:hidden"
-            aria-expanded={open}
-            aria-controls="mobile-menu"
-            aria-label={open ? "Close menu" : "Open menu"}
-            onClick={() => setOpen((v) => !v)}
-          >
-            <span className="relative block h-3 w-5" aria-hidden="true">
-              <span
-                className={`absolute left-0 top-0 h-[1.5px] w-5 bg-fg transition-transform duration-300 ${open ? "translate-y-[5px] rotate-45" : ""}`}
-              />
-              <span
-                className={`absolute bottom-0 left-0 h-[1.5px] w-5 bg-fg transition-transform duration-300 ${open ? "-translate-y-[5px] -rotate-45" : ""}`}
-              />
-            </span>
-          </button>
         </div>
+        <button
+          type="button"
+          className="grid h-10 w-10 place-items-center rounded-full md:hidden"
+          aria-expanded={open}
+          aria-controls="mobile-menu"
+          aria-label={open ? "Close menu" : "Open menu"}
+          onClick={() => setOpen((v) => !v)}
+        >
+          <span className="relative block h-3 w-5" aria-hidden="true">
+            <span
+              className={`absolute left-0 top-0 h-[1.5px] w-5 bg-fg transition-transform duration-300 ${open ? "translate-y-[5px] rotate-45" : ""}`}
+            />
+            <span
+              className={`absolute bottom-0 left-0 h-[1.5px] w-5 bg-fg transition-transform duration-300 ${open ? "-translate-y-[5px] -rotate-45" : ""}`}
+            />
+          </span>
+        </button>
       </nav>
-      <div id="mobile-menu" hidden={!open} className="shell pb-5 lg:hidden">
+      <div
+        id="mobile-menu"
+        hidden={!open}
+        className="shell h-[calc(100svh-60px)] pb-8 pt-4 md:hidden"
+      >
         {links.map((l) => (
-          <a
+          <Link
             key={l.href}
             href={l.href}
             onClick={() => setOpen(false)}
-            className="block border-t border-line py-3.5 text-xl font-semibold tracking-[-0.02em]"
+            className="block border-t border-line py-3 text-[40px] font-semibold leading-none tracking-[-0.05em]"
           >
             {l.label}
-          </a>
+          </Link>
         ))}
         <a
           href="/jay-kapoor-resume.pdf"
           target="_blank"
           rel="noreferrer"
-          className="block border-t border-line py-3.5 text-xl font-semibold tracking-[-0.02em]"
+          className="block border-t border-line py-3 text-[40px] font-semibold leading-none tracking-[-0.05em]"
         >
           Resume
+        </a>
+        <a
+          href="mailto:jak581@pitt.edu"
+          className="serif mt-6 block text-[26px] text-accent"
+        >
+          jak581@pitt.edu
         </a>
       </div>
     </header>

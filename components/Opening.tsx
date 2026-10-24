@@ -1,0 +1,144 @@
+"use client";
+import { motion, useReducedMotion } from "framer-motion";
+import Image from "next/image";
+import { useEffect, useRef } from "react";
+import { portrait } from "@/content/site";
+
+const ease = [0.16, 1, 0.3, 1] as const;
+
+/** Words get heavier as the cursor comes near them. */
+function useWeight(ref: React.RefObject<HTMLElement>) {
+  const reduce = useReducedMotion();
+  useEffect(() => {
+    const root = ref.current;
+    if (!root || reduce || !window.matchMedia("(pointer: fine)").matches)
+      return;
+    const words = Array.from(root.querySelectorAll<HTMLElement>("[data-w]"));
+    let raf = 0;
+    const on = (e: PointerEvent) => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        for (const w of words) {
+          const b = w.getBoundingClientRect();
+          const d = Math.hypot(
+            e.clientX - (b.left + b.width / 2),
+            e.clientY - (b.top + b.height / 2),
+          );
+          const k = Math.max(0, 1 - d / 360);
+          w.style.fontVariationSettings = `"wght" ${Math.round(500 + 380 * k)}`;
+        }
+      });
+    };
+    window.addEventListener("pointermove", on, { passive: true });
+    return () => {
+      window.removeEventListener("pointermove", on);
+      cancelAnimationFrame(raf);
+    };
+  }, [ref, reduce]);
+}
+
+function Words({ text, start }: { text: string; start: number }) {
+  const reduce = useReducedMotion();
+  return (
+    <>
+      {text.split(" ").map((w, i) => (
+        <span
+          key={i}
+          className="inline-block overflow-hidden pb-[0.08em] align-bottom"
+        >
+          <motion.span
+            data-w
+            className="inline-block"
+            initial={reduce ? false : { y: "105%" }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.9, ease, delay: start + i * 0.05 }}
+          >
+            {w}&nbsp;
+          </motion.span>
+        </span>
+      ))}
+    </>
+  );
+}
+
+export function Opening() {
+  const ref = useRef<HTMLHeadingElement>(null);
+  const reduce = useReducedMotion();
+  useWeight(ref);
+  return (
+    <section
+      aria-label="Introduction"
+      className="shell flex min-h-[100svh] flex-col justify-between pb-8 pt-24 md:pt-28"
+    >
+      <div className="flex justify-between font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+        <span>Jay Kapoor</span>
+        <span>Economics and Statistics, Pitt</span>
+      </div>
+
+      <h1
+        ref={ref}
+        className="my-10 text-[clamp(44px,8.4vw,132px)] font-medium leading-[0.95] tracking-[-0.055em]"
+      >
+        <span className="sr-only">
+          I&apos;m Jay. Most things I make start with something I noticed.
+        </span>
+        <span aria-hidden="true">
+          <Words text="I'm Jay" start={0.1} />
+          <motion.span
+            className="relative mx-[0.12em] inline-block h-[0.78em] w-[1.25em] -rotate-3 overflow-hidden rounded-full align-[-0.06em]"
+            initial={reduce ? false : { scale: 0, rotate: -40 }}
+            animate={{ scale: 1, rotate: -3 }}
+            transition={{
+              type: "spring",
+              stiffness: 180,
+              damping: 15,
+              delay: 0.35,
+            }}
+          >
+            <Image
+              src={portrait.src}
+              alt=""
+              fill
+              priority
+              sizes="200px"
+              className="object-cover object-[50%_58%]"
+            />
+          </motion.span>
+          <Words text=". Most things I make start with something" start={0.3} />
+          <span className="serif inline-block text-[1.08em] font-normal">
+            <Words text="I noticed." start={0.75} />
+          </span>
+        </span>
+      </h1>
+
+      <div className="flex flex-wrap items-end justify-between gap-6">
+        <p className="max-w-[40ch] text-[16px] leading-relaxed text-muted">
+          Four of them I started myself. Others became research, jobs, a
+          forecasting habit and a few games that should not exist.
+        </p>
+        <motion.a
+          href="#noticed"
+          className="group flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.14em]"
+          initial={reduce ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.4 }}
+        >
+          Here is what I noticed
+          <span className="grid h-10 w-10 place-items-center rounded-full ring-1 ring-fg transition-colors group-hover:bg-fg group-hover:text-white">
+            <motion.svg
+              viewBox="0 0 24 24"
+              className="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              animate={reduce ? undefined : { y: [0, 3, 0] }}
+              transition={{ repeat: Infinity, duration: 1.6 }}
+            >
+              <path d="M12 4v16M6 14l6 6 6-6" />
+            </motion.svg>
+          </span>
+        </motion.a>
+      </div>
+    </section>
+  );
+}
