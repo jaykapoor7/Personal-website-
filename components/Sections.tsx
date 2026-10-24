@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ledger } from "@/content/ledger";
+import { ledger, ledgerStats } from "@/content/ledger";
 import {
   education,
   labs,
@@ -552,7 +552,7 @@ export function Writing() {
           {[
             [String(ledger.calls.length), "calls"],
             [`${hits}/${resolved.length}`, "resolved right"],
-            ["0.134", "Brier score"],
+            [ledgerStats.brier, "Brier score"],
           ].map(([v, l]) => (
             <div key={l}>
               <dd className="text-[34px] font-semibold tracking-[-0.03em]">

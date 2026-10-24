@@ -32,6 +32,7 @@ const routes = [
   "/work/upmc-emergency-medicine/",
   "/research/",
   "/ledger/",
+  "/market-map/",
   "/about/",
   "/experience/",
   "/writing/",
@@ -116,6 +117,21 @@ try {
     assert.match(
       await page.locator("[role=tabpanel]:not([hidden])").innerText(),
       /Accessible SmartTech Lab/,
+    );
+
+    // The market map filters by sector.
+    await page.goto(base + "/market-map/", { waitUntil: "networkidle" });
+    const tiles = () => page.locator("main ul button[aria-pressed]").count();
+    const allTiles = await tiles();
+    await page
+      .getByRole("group", { name: "Filter by sector" })
+      .getByRole("button", { name: "Diagnostics", exact: true })
+      .click();
+    await page.waitForTimeout(400);
+    const some = await tiles();
+    assert.ok(
+      some > 0 && some < allTiles,
+      "Sector filter narrows the market map",
     );
 
     await page.goto(base + "/play/everything-falls/", {

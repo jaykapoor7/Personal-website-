@@ -12,6 +12,8 @@ export interface LedgerCall {
   /** Stated conviction at call time, percent. */
   conviction: number;
   result: CallResult;
+  /** When it resolves, for open calls. */
+  due?: string;
 }
 
 export interface CoverageItem {
@@ -23,20 +25,6 @@ export interface CoverageItem {
 
 export const ledger = {
   intro: "Dated forecasts, probabilities, and outcomes.",
-  stats: [
-    { value: "15", label: "calls tracked", source: "published" as const },
-    {
-      value: "75%",
-      label: "hit rate on resolved calls",
-      source: "published" as const,
-    },
-    {
-      value: "0.134",
-      label: "avg Brier score (lower is better)",
-      source: "published" as const,
-    },
-    { value: "55%", label: "avg conviction", source: "published" as const },
-  ],
   calls: [
     {
       prediction: "Groww lists in its 2025 IPO above a $7B valuation.",
@@ -72,6 +60,7 @@ export const ledger = {
       detail: "Called Jun 2026",
       conviction: 65,
       result: "OPEN",
+      due: "FY26 results",
     },
     {
       prediction:
@@ -79,12 +68,14 @@ export const ledger = {
       detail: "Called Jun 2026",
       conviction: 75,
       result: "OPEN",
+      due: "Dec 2026",
     },
     {
       prediction: "PharmEasy does NOT file an IPO/DRHP in 2026.",
       detail: "Called Jun 2026",
       conviction: 70,
       result: "OPEN",
+      due: "Dec 2026",
     },
     {
       prediction:
@@ -92,6 +83,7 @@ export const ledger = {
       detail: "Called Jun 2026",
       conviction: 55,
       result: "OPEN",
+      due: "Dec 2026",
     },
     {
       prediction:
@@ -99,6 +91,7 @@ export const ledger = {
       detail: "Called Jun 2026",
       conviction: 50,
       result: "OPEN",
+      due: "Dec 2026",
     },
     {
       prediction:
@@ -106,6 +99,7 @@ export const ledger = {
       detail: "Called Jun 2026",
       conviction: 60,
       result: "OPEN",
+      due: "Dec 2026",
     },
     {
       prediction:
@@ -113,12 +107,14 @@ export const ledger = {
       detail: "Called Jun 2026",
       conviction: 40,
       result: "OPEN",
+      due: "Open-ended",
     },
     {
       prediction: "CRED does NOT post a profitable full-year FY26.",
       detail: "Called Jun 2026",
       conviction: 55,
       result: "OPEN",
+      due: "FY26 results",
     },
     {
       prediction:
@@ -126,22 +122,77 @@ export const ledger = {
       detail: "Called Jun 2026",
       conviction: 45,
       result: "OPEN",
+      due: "Dec 2026",
     },
     {
       prediction: "OpenEvidence raises again at a $20B+ valuation by Q1 2027.",
       detail: "Called Jun 2026",
       conviction: 45,
       result: "OPEN",
+      due: "Mar 2027",
     },
     {
       prediction: "Qure.ai closes a Series E of $70M+ by mid-2027.",
       detail: "Called Jun 2026",
       conviction: 45,
       result: "OPEN",
+      due: "Jun 2027",
+    },
+    {
+      prediction:
+        "PhonePe lists on Indian exchanges before its SEBI approval lapses in July 2027.",
+      detail:
+        "Called Oct 2026. SEBI approved the offer in Jan 2026 (valid 18 months); the listing was paused in March.",
+      conviction: 55,
+      result: "OPEN",
+      due: "Jul 2027",
+    },
+    {
+      prediction: "Zepto lists on Indian exchanges by 30 June 2027.",
+      detail:
+        "Called Oct 2026. Updated DRHP filed June 2026; IPO paused in July with FY26 losses of about Rs 5,900 crore.",
+      conviction: 45,
+      result: "OPEN",
+      due: "Jun 2027",
+    },
+    {
+      prediction:
+        "UPI processes 30 billion+ transactions in a single month before the end of 2027.",
+      detail:
+        "Called Oct 2026. Record so far is 24.5B (Aug 2026), growing about 23% a year.",
+      conviction: 70,
+      result: "OPEN",
+      due: "Dec 2027",
+    },
+    {
+      prediction:
+        "UPI averages 1 billion+ transactions a day across a full calendar month before the end of 2027.",
+      detail: "Called Oct 2026. September 2026 averaged about 802M a day.",
+      conviction: 45,
+      result: "OPEN",
+      due: "Dec 2027",
+    },
+    {
+      prediction:
+        "Generic semaglutide passes 50% of India's semaglutide market by value before the end of 2027.",
+      detail:
+        "Called Oct 2026. Generics launched 20 Mar 2026 and hold about 30% six months in.",
+      conviction: 55,
+      result: "OPEN",
+      due: "Dec 2027",
+    },
+    {
+      prediction:
+        "Novo Nordisk cuts Ozempic's Indian starting price below Rs 4,500 a month before the end of 2027.",
+      detail:
+        "Called Oct 2026. Cut once in April 2026 to about Rs 5,660 as generics launched from Rs 1,300.",
+      conviction: 40,
+      result: "OPEN",
+      due: "Dec 2027",
     },
   ] as LedgerCall[],
   scoring:
-    "Hit rate counts resolved calls (a partial counts as a half). The Brier score measures calibration, the squared distance between the stated probability and the outcome, where lower is better and a coin-flip scores 0.25. At 0.134 across the book, the calls are meaningfully better-calibrated than chance.",
+    "Hit rate counts resolved calls (a partial counts as a half). The Brier score measures calibration, the squared distance between the stated probability and the outcome, where lower is better and a coin-flip scores 0.25. The resolved calls so far score well below that.",
   coverage: [
     {
       id: "JK-2026-001",
@@ -206,4 +257,25 @@ export const ledger = {
   ] as CoverageItem[],
   disclaimer:
     "For research and discussion only. Nothing here is investment advice, a solicitation, or a recommendation to buy or sell any security; figures are drawn from public reporting that may be incomplete or out of date. The author is not a registered investment adviser. © 2026 Jay Kapoor.",
+};
+
+/** Scored only on resolved calls; open calls count toward the total. */
+const resolved = ledger.calls.filter((c) => c.result !== "OPEN");
+const hits = resolved.filter((c) => c.result === "HIT").length;
+const brier =
+  resolved.reduce(
+    (sum, c) => sum + (c.conviction / 100 - (c.result === "HIT" ? 1 : 0)) ** 2,
+    0,
+  ) / resolved.length;
+
+export const ledgerStats = {
+  calls: ledger.calls.length,
+  open: ledger.calls.length - resolved.length,
+  resolved: resolved.length,
+  hits,
+  hitRate: Math.round((hits / resolved.length) * 100),
+  brier: brier.toFixed(3),
+  avgConviction: Math.round(
+    ledger.calls.reduce((s, c) => s + c.conviction, 0) / ledger.calls.length,
+  ),
 };

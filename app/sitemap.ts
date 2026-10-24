@@ -4,10 +4,14 @@ import { siteUrl } from "@/lib/site";
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return ["", "/ledger", "/artifacts", "/play/everything-falls"].map(
-    (path) => ({
-      url: `${siteUrl}${path}/`,
-      lastModified: new Date(),
-    }),
-  );
+  return [
+    "",
+    "/ledger",
+    "/market-map",
+    "/artifacts",
+    "/play/everything-falls",
+  ].map((path) => ({
+    url: `${siteUrl}${path}/`,
+    lastModified: new Date(),
+  }));
 }

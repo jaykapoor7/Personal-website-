@@ -1,0 +1,362 @@
+[
+  {
+    "name": "Practo",
+    "sector": "Telemedicine",
+    "what": "Doctor discovery, e-consults, practice-management SaaS",
+    "funding": "~$231M",
+    "usdM": 231.0,
+    "stage": "Series D",
+    "investors": "Peak XV (Sequoia India), Tencent, Z47 (Matrix)",
+    "edge": "Only profitable major player; dual B2C + B2B SaaS; 300M+ patient base"
+  },
+  {
+    "name": "Apollo 24/7",
+    "sector": "Telemedicine",
+    "what": "Omnichannel arm of Apollo Hospitals (consults, pharmacy, diagnostics)",
+    "funding": "Captive (Apollo HealthCo)",
+    "usdM": null,
+    "stage": "Corporate-backed",
+    "investors": "Apollo Hospitals, Advent International",
+    "edge": "Largest physical hospital + pharmacy network feeding digital funnel"
+  },
+  {
+    "name": "MediBuddy",
+    "sector": "Telemedicine",
+    "what": "Enterprise B2B2C teleconsult + diagnostics + medicine",
+    "funding": "~$160M",
+    "usdM": 160.0,
+    "stage": "Series C",
+    "investors": "Quadria Capital, Lightrock",
+    "edge": "Corporate distribution; low CAC via enterprise accounts"
+  },
+  {
+    "name": "mfine",
+    "sector": "Telemedicine",
+    "what": "Hospital-partnered specialist consults",
+    "funding": "~$97M",
+    "usdM": 97.0,
+    "stage": "Series C",
+    "investors": "Prime Venture Partners, SBI Investment",
+    "edge": "Quality-over-scale; real-time top-hospital doctor access"
+  },
+  {
+    "name": "Orange Health",
+    "sector": "Diagnostics",
+    "what": "On-demand at-home diagnostics, ~6-hour reports",
+    "funding": "~$35M+",
+    "usdM": 35.0,
+    "stage": "Series B",
+    "investors": "Accel, Bertelsmann, General Catalyst",
+    "edge": "Speed + reliability; tech-built logistics; metro density"
+  },
+  {
+    "name": "Redcliffe Labs",
+    "sector": "Diagnostics",
+    "what": "Full-stack diagnostics chain, pan-India",
+    "funding": "~$100M+",
+    "usdM": 100.0,
+    "stage": "Series C",
+    "investors": "LeapFrog, Schroders Capital",
+    "edge": "Owned-lab network + affordability in Tier 2/3"
+  },
+  {
+    "name": "Tata 1mg (Labs)",
+    "sector": "Diagnostics",
+    "what": "Diagnostics bundled into e-pharmacy super-app",
+    "funding": "Part of ~$240M",
+    "usdM": 240.0,
+    "stage": "Corporate-owned",
+    "investors": "Tata Digital",
+    "edge": "Cross-sell off pharmacy traffic + Tata balance sheet"
+  },
+  {
+    "name": "Thyrocare",
+    "sector": "Diagnostics",
+    "what": "Asset-light preventive testing, franchise labs",
+    "funding": "Public (acq. by PharmEasy)",
+    "usdM": null,
+    "stage": "Acquired",
+    "investors": "API Holdings / PharmEasy",
+    "edge": "National processing scale; low cost per test"
+  },
+  {
+    "name": "Tata 1mg",
+    "sector": "Pharmacy",
+    "what": "E-pharmacy, diagnostics, e-consults; ABHA-integrated",
+    "funding": "~$240M (then Tata-owned)",
+    "usdM": 240.0,
+    "stage": "Corporate-owned",
+    "investors": "Tata Digital",
+    "edge": "E-pharmacy leader (~31% share); vertical integration + corporate parent"
+  },
+  {
+    "name": "PharmEasy (API Holdings)",
+    "sector": "Pharmacy",
+    "what": "E-pharmacy + diagnostics + B2B distribution",
+    "funding": "Well over $1B across rounds",
+    "usdM": 1000.0,
+    "stage": "Late-stage",
+    "investors": "Prosus, TPG, Temasek, B Capital",
+    "edge": "Roll-up scale (MedLife, Thyrocare); cautionary down-round case"
+  },
+  {
+    "name": "Netmeds",
+    "sector": "Pharmacy",
+    "what": "E-pharmacy across 20,000+ pin codes",
+    "funding": "Acq. ~$72M (2020)",
+    "usdM": 72.0,
+    "stage": "Acquired",
+    "investors": "Reliance Retail Ventures",
+    "edge": "Reliance + JioMart distribution"
+  },
+  {
+    "name": "Apollo Pharmacy",
+    "sector": "Pharmacy",
+    "what": "Largest offline + online pharmacy chain",
+    "funding": "Captive",
+    "usdM": null,
+    "stage": "Corporate-backed",
+    "investors": "Apollo Hospitals",
+    "edge": "Omnichannel density no pureplay can match"
+  },
+  {
+    "name": "Qure.ai",
+    "sector": "AI Healthcare",
+    "what": "Radiology AI (chest X-ray, head CT) for TB, stroke, lung nodules",
+    "funding": "~$125M",
+    "usdM": 125.0,
+    "stage": "Series D",
+    "investors": "Novo Holdings, HealthQuad, MassMutual Ventures, Peak XV",
+    "edge": "Regulatory clearances; global deployments; IPO-track"
+  },
+  {
+    "name": "Innovaccer",
+    "sector": "AI Healthcare",
+    "what": "Healthcare data platform / EMR intelligence",
+    "funding": "~$675M (incl. $275M Series F)",
+    "usdM": 675.0,
+    "stage": "Series F (Unicorn)",
+    "investors": "Kleiner Perkins, Tiger Global, B Capital",
+    "edge": "Data-aggregation moat; AI co-pilots for care teams"
+  },
+  {
+    "name": "SigTuple",
+    "sector": "AI Healthcare",
+    "what": "AI microscopy (AI100), blood/urine slide analysis",
+    "funding": "~$40M",
+    "usdM": 40.0,
+    "stage": "Series C",
+    "investors": "Accel, IDG, pi Ventures",
+    "edge": "FDA 510(k) cleared; robotics + vision; patent stack"
+  },
+  {
+    "name": "Tricog Health",
+    "sector": "AI Healthcare",
+    "what": "Cloud ECG AI, 140+ cardiac conditions, real-time triage",
+    "funding": "~$25M+",
+    "usdM": 25.0,
+    "stage": "Series B",
+    "investors": "Blume Ventures, UTEC, Dream Incubator",
+    "edge": "Connects rural clinics to virtual cardiologists; speed-to-diagnosis"
+  },
+  {
+    "name": "HealthPlix",
+    "sector": "AI Healthcare",
+    "what": "AI-powered EMR for doctors (point-of-care)",
+    "funding": "~$44M",
+    "usdM": 44.0,
+    "stage": "Series C",
+    "investors": "Lightspeed, Chiratae",
+    "edge": "Embedded in physician workflow; prescription data network effects"
+  },
+  {
+    "name": "Onsurity",
+    "sector": "Insurance",
+    "what": "Monthly SME group health membership + wellness",
+    "funding": "~$66M",
+    "usdM": 66.0,
+    "stage": "Series B",
+    "investors": "Quona, Creaegis, Nexus, IFC",
+    "edge": "Owns under-served SME segment; 300K+ members"
+  },
+  {
+    "name": "Plum",
+    "sector": "Insurance",
+    "what": "Employee health benefits platform (+ Plum Health)",
+    "funding": "~$98M",
+    "usdM": 98.0,
+    "stage": "Series A+",
+    "investors": "Tiger Global, Peak XV",
+    "edge": "HR-dashboard UX; expanding into diagnostics/teleconsult bundle"
+  },
+  {
+    "name": "Loop Health",
+    "sector": "Insurance",
+    "what": "Group insurance + primary-care layer",
+    "funding": "~$40M+",
+    "usdM": 40.0,
+    "stage": "Series B",
+    "investors": "General Catalyst, Khosla, Elevation",
+    "edge": "Bundles care delivery with coverage to lower claims"
+  },
+  {
+    "name": "Acko",
+    "sector": "Insurance",
+    "what": "Digital-native general + health insurer",
+    "funding": "~$450M+",
+    "usdM": 450.0,
+    "stage": "Late-stage (Unicorn)",
+    "investors": "Multiple",
+    "edge": "Own insurance license; embedded distribution; data-driven pricing"
+  },
+  {
+    "name": "Medyseva",
+    "sector": "Rural Healthcare",
+    "what": "Phygital 'Kendra' clinics + telemedicine for Tier 2/3 & rural",
+    "funding": "~$480K seed",
+    "usdM": null,
+    "stage": "Seed",
+    "investors": "Unicorn India Ventures, AIC RNTU",
+    "edge": "100K+ consults; hybrid clinic model; ABDM-aligned"
+  },
+  {
+    "name": "Karma Primary Healthcare",
+    "sector": "Rural Healthcare",
+    "what": "Nurse-assisted remote consults + diagnostics in rural clinics",
+    "funding": "~$1.8M",
+    "usdM": 1.8,
+    "stage": "Series A",
+    "investors": "UBS Optimus Foundation, Ankur Capital, Grand Challenges Canada",
+    "edge": "Community-health-worker model; impact-capital backing"
+  },
+  {
+    "name": "eSanjeevani",
+    "sector": "Rural Healthcare",
+    "what": "National govt teleconsultation (Ayushman Bharat)",
+    "funding": "Public infrastructure",
+    "usdM": null,
+    "stage": "Government",
+    "investors": "Govt of India (MoHFW)",
+    "edge": "340M+ consults, the rails private players ride"
+  },
+  {
+    "name": "Wysa",
+    "sector": "Mental Health",
+    "what": "AI conversational agent + human-therapist backup",
+    "funding": "~$29M",
+    "usdM": 29.0,
+    "stage": "Series B",
+    "investors": "W Health Ventures, British International Investment, Google",
+    "edge": "Clinically validated; NHS/global enterprise + payer deployments"
+  },
+  {
+    "name": "Amaha (InnerHour)",
+    "sector": "Mental Health",
+    "what": "Omnichannel clinical care, therapy + psychiatry + digital self-care",
+    "funding": "~$12M",
+    "usdM": 12.0,
+    "stage": "Series A",
+    "investors": "Fireside Ventures",
+    "edge": "Clinician-founded credibility; hybrid model; 4.5M+ users"
+  },
+  {
+    "name": "YourDOST",
+    "sector": "Mental Health",
+    "what": "Emotional wellness + corporate EAP",
+    "funding": "Early-stage",
+    "usdM": null,
+    "stage": "Seed/Series A",
+    "investors": "Fireside Ventures, others",
+    "edge": "Early-mover trust; B2B EAP revenue"
+  },
+  {
+    "name": "LISSUN",
+    "sector": "Mental Health",
+    "what": "Scalable mental + maternal/child emotional health",
+    "funding": "~Rs 28 Cr",
+    "usdM": null,
+    "stage": "Series A",
+    "investors": "IPV, others",
+    "edge": "Offline centers + digital; underserved maternal niche"
+  },
+  {
+    "name": "Nua",
+    "sector": "Women's Health",
+    "what": "Menstrual care D2C + period tracker + content",
+    "funding": "~$24M",
+    "usdM": 24.0,
+    "stage": "Series B",
+    "investors": "Lightbox, Kae Capital",
+    "edge": "Brand + content community among urban women"
+  },
+  {
+    "name": "Gynoveda",
+    "sector": "Women's Health",
+    "what": "Ayurvedic PCOS/fertility platform + clinics",
+    "funding": "Growth-stage",
+    "usdM": null,
+    "stage": "Series A+",
+    "investors": "Multiple",
+    "edge": "Ayurveda-meets-tech positioning; offline fertility clinics"
+  },
+  {
+    "name": "Veera Health",
+    "sector": "Women's Health",
+    "what": "Digital therapeutics for PCOS",
+    "funding": "~$3M",
+    "usdM": 3.0,
+    "stage": "Seed",
+    "investors": "Sequoia (Peak XV), Nexus",
+    "edge": "Chronic-condition clinical depth vs. commerce-first peers"
+  },
+  {
+    "name": "Proactive For Her",
+    "sector": "Women's Health",
+    "what": "Full-stack women's clinics (menstrual, sexual, fertility, postpartum)",
+    "funding": "~$5.5M (acq. by IVF Access, 2025)",
+    "usdM": 5.5,
+    "stage": "Acquired",
+    "investors": "Sequoia surge, others",
+    "edge": "Clinical breadth; consolidation signal into fertility platforms"
+  },
+  {
+    "name": "Dozee",
+    "sector": "Hospital Infrastructure",
+    "what": "Contactless AI remote patient monitoring (bedside sensors)",
+    "funding": "~$33M",
+    "usdM": 33.0,
+    "stage": "Series B",
+    "investors": "Prime Venture Partners, 3one4, YourNest",
+    "edge": "No wearables; reduces nurse load; step-down/home monitoring"
+  },
+  {
+    "name": "Pristyn Care",
+    "sector": "Hospital Infrastructure",
+    "what": "Asset-light elective surgery network",
+    "funding": "~$180M+",
+    "usdM": 180.0,
+    "stage": "Late-stage (Unicorn)",
+    "investors": "Peak XV, Tiger Global, Hummingbird",
+    "edge": "Aggregates surgeons + clinics without owning hospitals"
+  },
+  {
+    "name": "HexaHealth",
+    "sector": "Hospital Infrastructure",
+    "what": "Surgery-care discovery + management ecosystem",
+    "funding": "~$12M+",
+    "usdM": 12.0,
+    "stage": "Series A",
+    "investors": "Omidyar Network, 360 ONE",
+    "edge": "End-to-end elective surgery journey + insurance navigation"
+  },
+  {
+    "name": "Cloudphysician",
+    "sector": "Hospital Infrastructure",
+    "what": "Tele-ICU command centers for under-resourced hospitals",
+    "funding": "~$24M+",
+    "usdM": 24.0,
+    "stage": "Series B",
+    "investors": "Peak XV, Chiratae",
+    "edge": "Brings critical-care expertise to hospitals without intensivists"
+  }
+]

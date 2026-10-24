@@ -421,10 +421,7 @@ export const writing: Writing[] = [
     note: "36 companies across nine sectors, with the dataset.",
     href: "/research/India-HealthTech-Market-Map.pdf",
     cover: cover("/research/India-HealthTech-Market-Map.pdf"),
-    extra: {
-      label: "Dataset (CSV)",
-      href: "/research/India-HealthTech-Companies.csv",
-    },
+    extra: { label: "Explore the map", href: "/market-map" },
   },
   {
     title: "Qure.ai: AI Diagnostics for the Global South",
