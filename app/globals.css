@@ -233,3 +233,63 @@
     ),
     linear-gradient(135deg, #3730a3, #4f46e5 55%, #6366f1);
 }
+
+/* Logo orbit around the portrait */
+.orbit {
+  --r: 50%;
+  animation: orbit-spin 70s linear infinite;
+}
+.orbit li {
+  --r: 41cqw;
+}
+.orbit-counter {
+  animation: orbit-spin 70s linear infinite reverse;
+}
+.orbit:hover,
+.orbit:hover .orbit-counter {
+  animation-play-state: paused;
+}
+@keyframes orbit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Slow drifting colour behind the introduction */
+.drift-a,
+.drift-b {
+  animation: drift 22s ease-in-out infinite alternate;
+}
+.drift-b {
+  animation-duration: 28s;
+  animation-direction: alternate-reverse;
+}
+@keyframes drift {
+  to {
+    transform: translate(8%, 10%) scale(1.12);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .orbit,
+  .orbit-counter,
+  .drift-a,
+  .drift-b {
+    animation: none !important;
+  }
+}
+
+/* Experience rail draws downward when the section opens */
+.rail {
+  transform-origin: top;
+  animation: rail-draw 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes rail-draw {
+  from {
+    transform: scaleY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rail {
+    animation: none;
+  }
+}

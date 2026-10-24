@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Arrow } from "@/components/Arrow";
 import { BuildsBrowser } from "@/components/BuildsBrowser";
 import { Reveal, RiseWords } from "@/components/motion";
+import { Dock, NowTicker, PortraitOrbit } from "@/components/Hero";
 import { PortfolioTabs } from "@/components/PortfolioTabs";
 import {
   Experience,
@@ -27,26 +28,36 @@ export default function Home() {
     <>
       {/* Introduction */}
       <section className="relative overflow-hidden">
-        <div className="bg-mesh absolute inset-0" aria-hidden="true" />
+        <div className="absolute inset-0 bg-[#fbfbff]" aria-hidden="true" />
+        <div
+          className="drift-a pointer-events-none absolute -left-[10%] -top-[20%] h-[70%] w-[60%] rounded-full bg-[radial-gradient(closest-side,rgba(165,180,252,0.55),transparent)] blur-2xl"
+          aria-hidden="true"
+        />
+        <div
+          className="drift-b pointer-events-none absolute -right-[10%] top-[10%] h-[80%] w-[55%] rounded-full bg-[radial-gradient(closest-side,rgba(196,181,253,0.45),transparent)] blur-2xl"
+          aria-hidden="true"
+        />
+        <div
+          className="drift-a pointer-events-none absolute bottom-[-30%] left-[30%] h-[60%] w-[50%] rounded-full bg-[radial-gradient(closest-side,rgba(186,230,253,0.55),transparent)] blur-2xl"
+          aria-hidden="true"
+        />
         <div
           className="bg-grid fade-mask pointer-events-none absolute inset-0"
           aria-hidden="true"
         />
-        <div className="shell relative grid items-center gap-12 pb-16 pt-32 md:pt-40 lg:grid-cols-[1.25fr_0.75fr] lg:gap-16 lg:pb-24">
+        <div className="shell relative grid items-center gap-8 pb-10 pt-24 md:pt-28 lg:grid-cols-[1.2fr_0.8fr] lg:gap-10 lg:pb-14">
           <div>
             <Reveal y={8}>
-              <p className="label">
-                Economics & Statistics, University of Pittsburgh
-              </p>
+              <NowTicker />
             </Reveal>
-            <h1 className="mt-5 text-[clamp(56px,8.5vw,120px)] font-semibold leading-[0.92] tracking-[-0.05em]">
+            <h1 className="mt-6 text-[clamp(56px,8.5vw,116px)] font-semibold leading-[0.92] tracking-[-0.05em]">
               <RiseWords text="Jay Kapoor" delay={0.05} />
             </h1>
             <Reveal delay={0.35}>
-              <p className="mt-7 max-w-xl text-[clamp(18px,1.7vw,22px)] leading-[1.5] text-fg/80">
+              <p className="mt-6 max-w-xl text-[clamp(18px,1.6vw,21px)] leading-[1.5] text-fg/80">
                 {person.intro}
               </p>
-              <div className="mt-9 flex flex-wrap items-center gap-3">
+              <div className="mt-8 flex flex-wrap items-center gap-3">
                 <a href={`mailto:${person.email}`} className="btn-primary">
                   Email me <Arrow />
                 </a>
@@ -74,20 +85,8 @@ export default function Home() {
               </div>
             </Reveal>
           </div>
-          <Reveal
-            delay={0.2}
-            className="mx-auto w-full max-w-[380px] lg:max-w-none"
-          >
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[28px] bg-card shadow-[0_40px_80px_-40px_rgba(30,27,75,0.6)] ring-1 ring-white">
-              <Image
-                src={portrait.src}
-                alt={portrait.alt}
-                fill
-                priority
-                sizes="(max-width: 1024px) 380px, 420px"
-                className="object-cover object-[50%_60%]"
-              />
-            </div>
+          <Reveal delay={0.2}>
+            <PortraitOrbit src={portrait.src} alt={portrait.alt} />
           </Reveal>
         </div>
       </section>
@@ -148,7 +147,7 @@ export default function Home() {
       <section
         id="about"
         aria-labelledby="about-h"
-        className="shell scroll-mt-24 pt-28"
+        className="shell scroll-mt-24 pt-16"
       >
         <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
           <Reveal>
@@ -204,6 +203,11 @@ export default function Home() {
           </Reveal>
         </div>
       </section>
+      <Dock
+        email={person.email}
+        resume={person.resume}
+        linkedin={person.links[0].href}
+      />
     </>
   );
 }

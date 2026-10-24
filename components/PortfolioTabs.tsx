@@ -45,6 +45,17 @@ export function PortfolioTabs({ tabs }: { tabs: Tab[] }) {
         <div
           role="tablist"
           aria-label="Sections"
+          onKeyDown={(e) => {
+            if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+            const i = tabs.findIndex((t) => t.id === active);
+            const next =
+              tabs[
+                (i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) %
+                  tabs.length
+              ];
+            choose(next.id);
+            document.getElementById(`tab-${next.id}`)?.focus();
+          }}
           className="mx-auto flex w-fit max-w-full gap-1 overflow-x-auto rounded-2xl bg-white/85 p-1.5 shadow-[0_8px_30px_-12px_rgba(30,27,75,0.25)] ring-1 ring-line backdrop-blur-xl [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {tabs.map((t) => (
@@ -53,6 +64,7 @@ export function PortfolioTabs({ tabs }: { tabs: Tab[] }) {
               id={`tab-${t.id}`}
               role="tab"
               aria-selected={t.id === active}
+              tabIndex={t.id === active ? 0 : -1}
               aria-controls={`panel-${t.id}`}
               onClick={() => choose(t.id)}
               className={`relative shrink-0 rounded-xl px-4 py-2 text-[14.5px] font-medium transition-colors ${
@@ -81,7 +93,7 @@ export function PortfolioTabs({ tabs }: { tabs: Tab[] }) {
         </div>
       </div>
 
-      <p className="mx-auto mb-8 mt-4 max-w-2xl text-center text-[17px] leading-relaxed text-muted">
+      <p className="mx-auto mb-6 mt-1 max-w-2xl text-center text-[16.5px] leading-relaxed text-muted">
         {current.intro}
       </p>
 

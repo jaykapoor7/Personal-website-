@@ -74,7 +74,9 @@ try {
       assert.equal(res.status(), 200, route);
       assert.equal(
         await page.evaluate(
-          () => document.documentElement.scrollWidth > innerWidth,
+          () =>
+            document.documentElement.scrollWidth > innerWidth ||
+            innerWidth > screen.width,
         ),
         false,
         `Horizontal overflow on ${route} (${name})`,

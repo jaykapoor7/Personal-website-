@@ -15,6 +15,7 @@ import {
 } from "@/content/site";
 import { Arrow } from "./Arrow";
 import { BrowserFrame } from "./frames";
+import { Counter, Stagger, StaggerItem, Tilt } from "./motion";
 import { SmartLink } from "./ui";
 
 /* Small building blocks */
@@ -180,7 +181,7 @@ function Metrics({
           <dd
             className={`font-semibold tracking-[-0.03em] ${big ? "text-[34px]" : "text-[26px]"}`}
           >
-            {m.value}
+            <Counter value={m.value} />
           </dd>
           <dt className="text-[13px] text-muted">{m.label}</dt>
         </div>
@@ -278,49 +279,55 @@ export function Ventures() {
   const [lead, ...rest] = ventures;
   return (
     <div className="space-y-6">
-      <article className="card grid overflow-hidden lg:grid-cols-[1.15fr_1fr]">
-        <div className="bg-dots bg-[#eef0fb] p-5 sm:p-8">
-          <Screen
-            shot={lead.shot!}
-            label={lead.name}
-            scroll
-            className="shadow-[0_30px_60px_-28px_rgba(30,27,75,0.55)]"
-          />
-        </div>
-        <div className="flex flex-col gap-6 p-6 sm:p-8">
-          <Head
-            logo={lead.logo}
-            name={lead.name}
-            sub={`${lead.role}, ${lead.period}`}
-          />
-          <p className="text-[19px] leading-snug tracking-[-0.01em]">
-            {lead.summary}
-          </p>
-          <Metrics items={lead.metrics} big />
-          <ul className="space-y-2 text-[14.5px] leading-snug text-muted">
-            {lead.points.map((p) => (
-              <li key={p} className="flex gap-2.5">
-                <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-accent" />
-                {p}
-              </li>
-            ))}
-          </ul>
-          <div className="mt-auto flex flex-wrap items-center gap-1">
-            <SiteButton link={lead.site!} />
-            {lead.links?.map((l) => (
-              <TextLink key={l.href} link={l} />
-            ))}
-            {lead.proof.map((l) => (
-              <TextLink key={l.href} link={l} />
-            ))}
+      <Tilt className="rounded-2xl" max={2}>
+        <article className="card grid overflow-hidden lg:grid-cols-[1.15fr_1fr]">
+          <div className="bg-dots bg-[#eef0fb] p-5 sm:p-8">
+            <Screen
+              shot={lead.shot!}
+              label={lead.name}
+              scroll
+              className="shadow-[0_30px_60px_-28px_rgba(30,27,75,0.55)]"
+            />
           </div>
-        </div>
-      </article>
-      <div className="grid gap-6 md:grid-cols-3">
+          <div className="flex flex-col gap-6 p-6 sm:p-8">
+            <Head
+              logo={lead.logo}
+              name={lead.name}
+              sub={`${lead.role}, ${lead.period}`}
+            />
+            <p className="text-[19px] leading-snug tracking-[-0.01em]">
+              {lead.summary}
+            </p>
+            <Metrics items={lead.metrics} big />
+            <ul className="space-y-2 text-[14.5px] leading-snug text-muted">
+              {lead.points.map((p) => (
+                <li key={p} className="flex gap-2.5">
+                  <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-accent" />
+                  {p}
+                </li>
+              ))}
+            </ul>
+            <div className="mt-auto flex flex-wrap items-center gap-1">
+              <SiteButton link={lead.site!} />
+              {lead.links?.map((l) => (
+                <TextLink key={l.href} link={l} />
+              ))}
+              {lead.proof.map((l) => (
+                <TextLink key={l.href} link={l} />
+              ))}
+            </div>
+          </div>
+        </article>
+      </Tilt>
+      <Stagger className="grid gap-6 md:grid-cols-3">
         {rest.map((v) => (
-          <VentureCard key={v.id} v={v} />
+          <StaggerItem key={v.id} className="h-full min-w-0">
+            <Tilt className="h-full rounded-2xl">
+              <VentureCard v={v} />
+            </Tilt>
+          </StaggerItem>
         ))}
-      </div>
+      </Stagger>
     </div>
   );
 }
@@ -329,64 +336,75 @@ export function Ventures() {
 
 export function Experience() {
   return (
-    <ol className="space-y-4">
-      {roles.map((r) => (
-        <li
-          key={r.id}
-          className="card grid gap-6 p-6 md:grid-cols-[250px_1fr] md:gap-10 md:p-7"
-        >
-          <div className="space-y-4">
-            <Head logo={r.logo} name={r.org} sub={r.period} />
-            <p className="text-[13.5px] leading-snug text-muted">
-              {r.context ? `${r.context}, ` : ""}
-              {r.place}
-            </p>
-            {r.site && (
-              <SmartLink
-                href={r.site.href}
-                className="inline-flex items-center gap-1 text-[14px] font-semibold text-accent hover:underline"
-              >
-                {r.site.label} <Arrow />
-              </SmartLink>
-            )}
-          </div>
-          <div className="grid gap-6 lg:grid-cols-[1fr_auto]">
-            <div>
-              <p className="text-[17px] font-semibold tracking-[-0.01em]">
-                {r.role}
-              </p>
-              <ul className="mt-3 space-y-2 text-[15px] leading-relaxed text-fg/80">
-                {r.points.map((p) => (
-                  <li key={p} className="flex gap-2.5">
-                    <span className="mt-[10px] h-1 w-1 shrink-0 rounded-full bg-accent" />
-                    {p}
-                  </li>
-                ))}
-              </ul>
+    <div className="relative pl-7 md:pl-10">
+      <span
+        aria-hidden="true"
+        className="rail absolute bottom-6 left-[9px] top-6 w-[2px] rounded-full bg-gradient-to-b from-indigo-500 via-violet-400 to-sky-300 md:left-[13px]"
+      />
+      <Stagger as="ol" className="space-y-4" gap={0.1}>
+        {roles.map((r) => (
+          <StaggerItem as="li" key={r.id} className="relative">
+            <span
+              aria-hidden="true"
+              className="absolute -left-7 top-8 grid h-5 w-5 place-items-center rounded-full bg-white ring-2 ring-indigo-500 md:-left-10 md:h-7 md:w-7"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-indigo-500 md:h-2 md:w-2" />
+            </span>
+            <div className="card grid gap-6 p-6 transition-shadow duration-300 hover:shadow-[0_20px_50px_-24px_rgba(30,27,75,0.35)] md:grid-cols-[250px_1fr] md:gap-10 md:p-7">
+              <div className="space-y-4">
+                <Head logo={r.logo} name={r.org} sub={r.period} />
+                <p className="text-[13.5px] leading-snug text-muted">
+                  {r.context ? `${r.context}, ` : ""}
+                  {r.place}
+                </p>
+                {r.site && (
+                  <SmartLink
+                    href={r.site.href}
+                    className="inline-flex items-center gap-1 text-[14px] font-semibold text-accent hover:underline"
+                  >
+                    {r.site.label} <Arrow />
+                  </SmartLink>
+                )}
+              </div>
+              <div className="grid gap-6 lg:grid-cols-[1fr_auto]">
+                <div>
+                  <p className="text-[17px] font-semibold tracking-[-0.01em]">
+                    {r.role}
+                  </p>
+                  <ul className="mt-3 space-y-2 text-[15px] leading-relaxed text-fg/80">
+                    {r.points.map((p) => (
+                      <li key={p} className="flex gap-2.5">
+                        <span className="mt-[10px] h-1 w-1 shrink-0 rounded-full bg-accent" />
+                        {p}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="flex flex-wrap items-start gap-4 lg:w-[300px] lg:flex-col">
+                  {r.photo && (
+                    <figure className="w-full max-w-[300px]">
+                      <div className="relative aspect-[16/10] overflow-hidden rounded-xl ring-1 ring-line">
+                        <Image
+                          src={r.photo.src}
+                          alt={r.photo.alt}
+                          fill
+                          sizes="300px"
+                          className="object-cover object-[50%_30%]"
+                        />
+                      </div>
+                      <figcaption className="mt-1.5 text-[12.5px] text-muted">
+                        {r.photo.caption}
+                      </figcaption>
+                    </figure>
+                  )}
+                  <ProofDocs items={r.proof} compact />
+                </div>
+              </div>
             </div>
-            <div className="flex flex-wrap items-start gap-4 lg:w-[300px] lg:flex-col">
-              {r.photo && (
-                <figure className="w-full max-w-[300px]">
-                  <div className="relative aspect-[16/10] overflow-hidden rounded-xl ring-1 ring-line">
-                    <Image
-                      src={r.photo.src}
-                      alt={r.photo.alt}
-                      fill
-                      sizes="300px"
-                      className="object-cover object-[50%_30%]"
-                    />
-                  </div>
-                  <figcaption className="mt-1.5 text-[12.5px] text-muted">
-                    {r.photo.caption}
-                  </figcaption>
-                </figure>
-              )}
-              <ProofDocs items={r.proof} compact />
-            </div>
-          </div>
-        </li>
-      ))}
-    </ol>
+          </StaggerItem>
+        ))}
+      </Stagger>
+    </div>
   );
 }
 
@@ -395,48 +413,52 @@ export function Experience() {
 export function Research() {
   return (
     <div className="space-y-6">
-      <div className="grid gap-6 md:grid-cols-2">
+      <Stagger className="grid gap-6 md:grid-cols-2">
         {labs.map((l) => (
-          <article key={l.id} className="card flex flex-col overflow-hidden">
-            <SmartLink
-              href={l.site.href}
-              className="group block overflow-hidden bg-[#eef0fb] px-6 pt-6"
-              aria-label={`${l.name} website`}
-            >
-              <span className="block h-[170px] overflow-hidden">
-                <span className="block transition-transform duration-500 group-hover:-translate-y-2">
-                  <Screen
-                    shot={l.shot}
-                    label={l.name}
-                    className="shadow-[0_18px_40px_-20px_rgba(30,27,75,0.5)]"
+          <StaggerItem key={l.id} className="h-full min-w-0">
+            <Tilt className="h-full rounded-2xl">
+              <article className="card flex h-full flex-col overflow-hidden">
+                <SmartLink
+                  href={l.site.href}
+                  className="group block overflow-hidden bg-[#eef0fb] px-6 pt-6"
+                  aria-label={`${l.name} website`}
+                >
+                  <span className="block h-[170px] overflow-hidden">
+                    <span className="block transition-transform duration-[1800ms] ease-in-out group-hover:-translate-y-[38%]">
+                      <Screen
+                        shot={l.shot}
+                        label={l.name}
+                        className="shadow-[0_18px_40px_-20px_rgba(30,27,75,0.5)]"
+                      />
+                    </span>
+                  </span>
+                </SmartLink>
+                <div className="flex flex-1 flex-col gap-4 p-6">
+                  <Head
+                    logo={l.logo}
+                    name={l.name}
+                    sub={`${l.role}, ${l.period}`}
                   />
-                </span>
-              </span>
-            </SmartLink>
-            <div className="flex flex-1 flex-col gap-4 p-6">
-              <Head
-                logo={l.logo}
-                name={l.name}
-                sub={`${l.role}, ${l.period}`}
-              />
-              {l.lead && (
-                <p className="text-[13.5px] font-medium text-accent">
-                  With {l.lead}
-                </p>
-              )}
-              <p className="text-[15px] leading-relaxed text-fg/80">
-                {l.summary}
-              </p>
-              <SmartLink
-                href={l.site.href}
-                className="mt-auto inline-flex items-center gap-1 text-[14px] font-semibold text-accent hover:underline"
-              >
-                {l.site.label} <Arrow />
-              </SmartLink>
-            </div>
-          </article>
+                  {l.lead && (
+                    <p className="text-[13.5px] font-medium text-accent">
+                      With {l.lead}
+                    </p>
+                  )}
+                  <p className="text-[15px] leading-relaxed text-fg/80">
+                    {l.summary}
+                  </p>
+                  <SmartLink
+                    href={l.site.href}
+                    className="mt-auto inline-flex items-center gap-1 text-[14px] font-semibold text-accent hover:underline"
+                  >
+                    {l.site.label} <Arrow />
+                  </SmartLink>
+                </div>
+              </article>
+            </Tilt>
+          </StaggerItem>
         ))}
-      </div>
+      </Stagger>
       <div className="card p-6">
         <p className="mb-3 text-[12px] font-semibold uppercase tracking-[0.1em] text-faint">
           Also
@@ -472,9 +494,12 @@ export function Writing() {
   const hits = resolved.filter((c) => c.result === "HIT").length;
   return (
     <div className="space-y-6">
-      <ul className="grid grid-cols-2 gap-x-5 gap-y-10 rounded-2xl bg-[#eef0fb] p-6 sm:grid-cols-3 sm:p-10 lg:grid-cols-6">
+      <Stagger
+        as="ul"
+        className="bg-dots grid grid-cols-2 gap-x-5 gap-y-10 rounded-2xl bg-[#eef0fb] p-6 sm:grid-cols-3 sm:p-10 lg:grid-cols-6"
+      >
         {writing.map((w, i) => (
-          <li key={w.href}>
+          <StaggerItem as="li" key={w.href}>
             <SmartLink href={w.href} className="group block">
               <span
                 className="paper-shadow relative block aspect-[900/1273] overflow-hidden rounded-[3px] bg-white transition-transform duration-500 ease-out [transform:rotate(var(--r))] group-hover:[transform:translateY(-10px)_rotate(0deg)_scale(1.04)]"
@@ -507,9 +532,9 @@ export function Writing() {
                 {w.extra.label} <Arrow />
               </SmartLink>
             )}
-          </li>
+          </StaggerItem>
         ))}
-      </ul>
+      </Stagger>
       <SmartLink
         href="/ledger"
         className="bg-indigo-deep group flex flex-col gap-6 overflow-hidden rounded-2xl p-6 text-white sm:p-8 md:flex-row md:items-center md:justify-between"
