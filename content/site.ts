@@ -272,7 +272,7 @@ export const roles: Role[] = [
   },
   {
     id: "hdfc-bank",
-    question: "Where should a wealthy family put its money?",
+    question: "What makes a stock worth putting in a client's portfolio?",
     org: "HDFC Bank",
     role: "Wealth Management Intern, HNI Division",
     period: "May to Aug 2025",

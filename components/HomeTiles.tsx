@@ -4,8 +4,7 @@ import Image from "next/image";
 import { Link } from "next-view-transitions";
 import { useEffect, useState } from "react";
 import data from "@/content/straypaw-map.json";
-import { ledgerStats } from "@/content/ledger";
-import { builds, labs, roles, writing } from "@/content/site";
+import { builds, labs, roles } from "@/content/site";
 import { Arrow } from "./Arrow";
 import { COS, K, outline, px, py } from "./DogMap";
 
@@ -185,46 +184,6 @@ function Places() {
   );
 }
 
-/** The memos as a small fanned stack that spreads on hover. */
-function Fan() {
-  const covers = writing.slice(0, 4);
-  return (
-    <div className="flex h-full items-end justify-between gap-4">
-      <div>
-        <p className="text-[clamp(40px,4vw,60px)] font-semibold leading-none tracking-[-0.06em]">
-          {ledgerStats.brier}
-        </p>
-        <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
-          Brier score, {ledgerStats.calls} calls
-        </p>
-      </div>
-      <div className="relative h-[130px] w-[150px] shrink-0">
-        {covers.map((w, i) => (
-          <span
-            key={w.href}
-            className="paper-shadow absolute bottom-0 left-1/2 block aspect-[900/1273] w-[78px] origin-bottom overflow-hidden bg-white transition-transform duration-500 ease-out [transform:translateX(-50%)_rotate(var(--r0))] group-hover:[transform:translateX(calc(-50%+var(--x)))_rotate(var(--r1))]"
-            style={
-              {
-                "--r0": `${(i - 1.5) * 3}deg`,
-                "--r1": `${(i - 1.5) * 14}deg`,
-                "--x": `${(i - 1.5) * 16}px`,
-              } as React.CSSProperties
-            }
-          >
-            <Image
-              src={w.cover}
-              alt=""
-              fill
-              sizes="80px"
-              className="object-cover object-top"
-            />
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 /** Screens from the builds, dealt like cards. */
 function Deck() {
   const shots = builds.filter((b) => b.image && !b.phone);
@@ -296,7 +255,7 @@ function Now() {
   );
 }
 
-/** The six sections of the site, each shown doing something. */
+/** The five sections of the site, each shown doing something. */
 export function HomeTiles() {
   return (
     <ul className="grid gap-3 md:grid-cols-12 md:gap-4">
@@ -325,38 +284,28 @@ export function HomeTiles() {
         href="/research"
         no="03"
         title="Research"
-        note={`${labs.length} labs at Pitt and UPMC.`}
+        note={`${labs.length} labs, plus my own memos and scored forecasts.`}
         className="md:col-span-5"
         delay={0.92}
       >
         <QuestionTicker />
       </Tile>
       <Tile
-        href="/writing"
-        no="04"
-        title="Writing"
-        note="Memos, theses, a paper and a scored forecast ledger."
-        className="md:col-span-4"
-        delay={0.98}
-      >
-        <Fan />
-      </Tile>
-      <Tile
         href="/projects"
-        no="05"
+        no="04"
         title="Projects"
         note={`${builds.length} tools and games that run in your browser.`}
-        className="md:col-span-4"
+        className="md:col-span-6"
         delay={1.04}
       >
         <Deck />
       </Tile>
       <Tile
         href="/about"
-        no="06"
+        no="05"
         title="About"
         note="Bangalore to Pittsburgh, and a lot of football."
-        className="md:col-span-4"
+        className="md:col-span-6"
         delay={1.1}
       >
         <Now />

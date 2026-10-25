@@ -173,7 +173,7 @@ export default function AboutPage() {
                 <>
                   Away from work I play football, make small browser games, and{" "}
                   <Link
-                    href="/writing"
+                    href="/research"
                     className="underline decoration-line underline-offset-4 hover:decoration-fg"
                   >
                     write down predictions

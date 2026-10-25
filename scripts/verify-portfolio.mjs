@@ -133,7 +133,7 @@ try {
     );
 
     // Bet against me: lock in odds and see mine.
-    await page.goto(base + "/writing/", { waitUntil: "networkidle" });
+    await page.goto(base + "/research/", { waitUntil: "networkidle" });
     const lock = page.getByRole("button", { name: "Lock it in" });
     await lock.scrollIntoViewIfNeeded();
     await lock.click();

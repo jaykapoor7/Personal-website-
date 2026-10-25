@@ -11,7 +11,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/ventures",
     "/experience",
     "/research",
-    "/writing",
     "/projects",
     "/about",
     "/ledger",

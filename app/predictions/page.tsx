@@ -1,7 +1,7 @@
 import { Redirect } from "@/components/Redirect";
 
-export const metadata = { title: "Writing" };
+export const metadata = { title: "Research" };
 
 export default function Page() {
-  return <Redirect to="/writing" label="Writing" />;
+  return <Redirect to="/research" label="Research" />;
 }
