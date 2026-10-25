@@ -8,14 +8,14 @@ import {
 import { useEffect, useMemo, useRef, useState } from "react";
 import data from "@/content/straypaw-map.json";
 
-const K = 10;
-const COS = Math.cos((22 * Math.PI) / 180);
-const px = (lng: number) => (lng - 68) * K * COS;
-const py = (lat: number) => (37.6 - lat) * K;
+export const K = 10;
+export const COS = Math.cos((22 * Math.PI) / 180);
+export const px = (lng: number) => (lng - 68) * K * COS;
+export const py = (lat: number) => (37.6 - lat) * K;
 const DELHI = { x: px(77.21), y: py(28.61) };
 const dist = (x: number, y: number) => Math.hypot(x - DELHI.x, y - DELHI.y);
 
-const outline = (data.outline as number[][][])
+export const outline = (data.outline as number[][][])
   .map(
     (r) =>
       "M" +

@@ -243,3 +243,27 @@
 .no-bar::-webkit-scrollbar {
   display: none;
 }
+
+/* City dots on the home map */
+.ping {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ping 4s ease-out infinite;
+}
+@keyframes ping {
+  0%,
+  70%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(2.6);
+    opacity: 0.4;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ping {
+    animation: none;
+  }
+}

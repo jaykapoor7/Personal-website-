@@ -11,27 +11,6 @@ const links = [
   { href: "/about", label: "About" },
 ];
 
-/** Local time in Pittsburgh, so visitors know if it is 3am here. */
-function Clock() {
-  const [t, setT] = useState("");
-  useEffect(() => {
-    const f = new Intl.DateTimeFormat("en-US", {
-      hour: "numeric",
-      minute: "2-digit",
-      timeZone: "America/New_York",
-    });
-    const tick = () => setT(f.format(new Date()));
-    tick();
-    const id = setInterval(tick, 20000);
-    return () => clearInterval(id);
-  }, []);
-  return (
-    <span className="hidden font-mono text-[11px] uppercase tracking-[0.14em] text-muted md:inline">
-      Pittsburgh {t}
-    </span>
-  );
-}
-
 export function Nav() {
   const path = usePathname();
   const [open, setOpen] = useState(false);
@@ -69,7 +48,6 @@ export function Nav() {
           >
             Jay Kapoor
           </Link>
-          <Clock />
         </div>
         <div className="hidden items-center gap-1 md:flex">
           {links.map((l) => (

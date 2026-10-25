@@ -3,7 +3,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { portrait } from "@/content/site";
-import { Doors } from "./Doors";
+import { HomeTiles } from "./HomeTiles";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -109,7 +109,7 @@ export function Opening() {
         </span>
       </h1>
 
-      <Doors />
+      <HomeTiles />
     </section>
   );
 }
