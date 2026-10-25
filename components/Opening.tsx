@@ -1,6 +1,7 @@
 "use client";
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
+import { Link } from "next-view-transitions";
 import { useEffect, useRef } from "react";
 import { portrait } from "@/content/site";
 import { HomeTiles } from "./HomeTiles";
@@ -108,6 +109,23 @@ export function Opening() {
         </span>
       </h1>
 
+      <Link
+        href="/about#thread"
+        className="group -mt-4 mb-8 inline-flex items-center gap-2 text-[16px] font-medium md:-mt-6 md:mb-10"
+      >
+        <span className="text-muted transition-colors group-hover:text-fg">
+          A health app, a dog database, a bank, eight preschools.
+        </span>
+        <span className="underline decoration-line underline-offset-4 group-hover:decoration-fg">
+          How it all fits
+        </span>
+        <span
+          aria-hidden="true"
+          className="transition-transform group-hover:translate-x-1"
+        >
+          →
+        </span>
+      </Link>
       <HomeTiles />
     </section>
   );

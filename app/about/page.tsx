@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Link } from "next-view-transitions";
 import { Intro, Mark, SectionMenu } from "@/components/About";
+import { Thread } from "@/components/Thread";
 import { Arrow } from "@/components/Arrow";
 import { Reveal } from "@/components/motion";
 import { SmartLink } from "@/components/ui";
@@ -66,6 +67,7 @@ const experience = [
 
 const sections = [
   { id: "intro", label: "Intro" },
+  { id: "thread", label: "The thread" },
   { id: "experience", label: "Experience" },
   { id: "education", label: "Education" },
   { id: "leadership", label: "Leadership" },
@@ -185,6 +187,17 @@ export default function AboutPage() {
                 </>,
               ]}
             />
+          </div>
+        </section>
+
+        <section
+          id="thread"
+          aria-labelledby="thread-h"
+          className="mt-24 scroll-mt-28"
+        >
+          <H2 id="thread">Why so many different things</H2>
+          <div className="mt-6">
+            <Thread />
           </div>
         </section>
 
