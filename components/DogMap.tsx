@@ -86,7 +86,7 @@ export function DogMap() {
       >
         <div className="shell flex h-full flex-col justify-center gap-2 pb-4 pt-20 md:grid md:grid-cols-[1fr_1.1fr] md:items-center md:gap-6 md:py-20">
           <div className="relative z-10">
-            <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-white/60">
+            <p className="text-[13px] font-medium text-white/60">
               StrayPaw, live map
             </p>
             <h2
@@ -106,10 +106,10 @@ export function DogMap() {
                 <>Then it spread.</>
               )}
             </h2>
-            <p className="mt-4 text-[clamp(56px,9vw,140px)] md:mt-8 font-semibold leading-none tracking-[-0.06em] tabular-nums">
+            <p className="mt-4 text-[clamp(56px,9vw,140px)] md:mt-8 font-semibold leading-none tracking-[-0.06em]">
               {p < 0.15 ? "50" : total.toLocaleString("en-US")}
             </p>
-            <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-white/60">
+            <p className="text-[13px] font-medium text-white/60">
               animals on record
             </p>
             <motion.dl
@@ -126,9 +126,7 @@ export function DogMap() {
                   <dd className="text-[32px] font-semibold tracking-[-0.04em]">
                     {n}
                   </dd>
-                  <dt className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-white/60">
-                    {l}
-                  </dt>
+                  <dt className="text-[13px] font-medium text-white/60">{l}</dt>
                 </div>
               ))}
             </motion.dl>
@@ -201,7 +199,7 @@ export function DogMap() {
                       y={c.y + 2}
                       fontSize="7"
                       fill="#fff"
-                      fontFamily="var(--font-mono)"
+                      fontFamily="var(--)"
                     >
                       {c.name}
                     </text>

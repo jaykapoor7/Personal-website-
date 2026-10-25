@@ -142,7 +142,7 @@ export function Counter({
   }, [inView]);
 
   return (
-    <span ref={ref} className={`tabular-nums ${className ?? ""}`}>
+    <span ref={ref} className={`${className ?? ""}`}>
       {value}
     </span>
   );

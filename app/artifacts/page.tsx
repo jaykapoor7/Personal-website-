@@ -88,7 +88,7 @@ export default function Artifacts() {
                               className="object-cover object-top"
                             />
                           ) : (
-                            <span className="bg-indigo-deep absolute inset-0 grid place-items-center font-mono text-[13px] text-white">
+                            <span className="bg-indigo-deep absolute inset-0 grid place-items-center text-[13px] text-white">
                               {kind(a.href)}
                             </span>
                           )}

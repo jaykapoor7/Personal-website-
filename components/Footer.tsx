@@ -11,9 +11,7 @@ export function Footer() {
       className="mt-24 scroll-mt-16 bg-fg text-white md:mt-32"
     >
       <div className="shell pb-8 pt-16 md:pt-24">
-        <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-white/60">
-          Say hello
-        </p>
+        <p className="text-[13px] font-medium text-white/60">Say hello</p>
         <a
           href={`mailto:${person.email}`}
           className="group mt-4 block text-[clamp(44px,11vw,170px)] font-semibold leading-[0.85] tracking-[-0.06em]"
@@ -51,10 +49,10 @@ export function Footer() {
             ),
           )}
         </div>
-        <div className="mt-20 flex flex-wrap items-end justify-between gap-4 border-t border-white/15 pt-5 font-mono text-[11px] uppercase tracking-[0.14em] text-white/60">
-          <p>Made by hand in {person.place}. Try typing &ldquo;woof&rdquo;.</p>
+        <div className="mt-20 flex flex-wrap items-end justify-between gap-4 border-t border-white/15 pt-5 text-[13px] font-medium text-white/60">
+          <p>Jay Kapoor, {person.place}</p>
           <a href="/artifacts/" className="hover:text-white">
-            Every file and link
+            All documents and links
           </a>
         </div>
       </div>

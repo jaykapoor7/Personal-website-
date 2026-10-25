@@ -59,7 +59,7 @@ export function Bet() {
                 setI(n);
                 setGuess(mine[n] ?? 50);
               }}
-              className={`h-9 w-9 rounded-full font-mono text-[12px] transition-colors ${
+              className={`h-9 w-9 rounded-full text-[13px] transition-colors ${
                 i === n
                   ? "bg-white text-fg"
                   : "ring-1 ring-white/30 hover:bg-white/10"
@@ -81,19 +81,16 @@ export function Bet() {
             {call.prediction}
           </motion.p>
         </AnimatePresence>
-        <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.14em] text-white/60">
+        <p className="mt-4 text-[13px] font-medium text-white/60">
           Resolves {call.due}
         </p>
       </div>
 
       <div className="flex flex-col justify-end">
-        <label
-          htmlFor="bet"
-          className="font-mono text-[11px] uppercase tracking-[0.14em] text-white/60"
-        >
+        <label htmlFor="bet" className="text-[13px] font-medium text-white/60">
           Your odds
         </label>
-        <p className="text-[clamp(64px,8vw,112px)] font-semibold leading-none tracking-[-0.06em] tabular-nums">
+        <p className="text-[clamp(64px,8vw,112px)] font-semibold leading-none tracking-[-0.06em]">
           {locked ? mine[i] : guess}%
         </p>
         <input

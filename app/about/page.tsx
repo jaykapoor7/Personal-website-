@@ -85,7 +85,7 @@ function Logo({ src, name }: { src?: string; name: string }) {
   ) : (
     <span
       aria-hidden="true"
-      className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-card font-mono text-[11px] font-semibold ring-1 ring-line"
+      className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-card text-[13px] font-semibold ring-1 ring-line"
     >
       {name[0]}
     </span>
@@ -94,7 +94,10 @@ function Logo({ src, name }: { src?: string; name: string }) {
 
 function H2({ id, children }: { id: string; children: React.ReactNode }) {
   return (
-    <h2 id={`${id}-h`} className="serif text-[30px] leading-none text-muted">
+    <h2
+      id={`${id}-h`}
+      className="text-[28px] font-semibold leading-none tracking-[-0.03em]"
+    >
       {children}
     </h2>
   );
@@ -190,7 +193,7 @@ export default function AboutPage() {
           aria-labelledby="experience-h"
           className="mt-24 scroll-mt-28"
         >
-          <H2 id="experience">experience</H2>
+          <H2 id="experience">Experience</H2>
           <ul className="mt-6">
             {experience.map((e) => (
               <li key={e.href}>
@@ -242,7 +245,7 @@ export default function AboutPage() {
           aria-labelledby="education-h"
           className="mt-24 scroll-mt-28"
         >
-          <H2 id="education">education</H2>
+          <H2 id="education">Education</H2>
           <ul className="mt-6 space-y-4">
             {education.map((e) => (
               <li key={e.school} className="flex items-start gap-3.5">
@@ -278,7 +281,7 @@ export default function AboutPage() {
           aria-labelledby="leadership-h"
           className="mt-24 scroll-mt-28"
         >
-          <H2 id="leadership">leadership</H2>
+          <H2 id="leadership">Leadership</H2>
           <ul className="mt-4">
             {leadership.map((l) => (
               <li
@@ -286,7 +289,9 @@ export default function AboutPage() {
                 className="-mx-4 rounded-2xl px-4 py-4 transition-colors hover:bg-accent/[0.07]"
               >
                 <p className="text-[16px] leading-snug">
-                  <span className="serif text-[21px]">{l.org}</span>
+                  <span className="text-[18px] font-semibold tracking-[-0.02em]">
+                    {l.org}
+                  </span>
                   <span className="text-muted">: {l.title}</span>
                 </p>
                 <p className="mt-1 text-[14.5px] leading-relaxed text-fg/80">
@@ -310,27 +315,19 @@ export default function AboutPage() {
           aria-labelledby="life-h"
           className="mt-24 scroll-mt-28"
         >
-          <H2 id="life">off the clock</H2>
-          <ul className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
+          <H2 id="life">Off the clock</H2>
+          <ul className="mt-6 grid grid-cols-3 gap-3">
             {[
               ...life.map((p) => ({
                 src: `/photos/${p.name}-640.webp`,
                 alt: p.alt,
                 caption: p.caption,
               })),
-              {
-                src: "/work/crowwd/arthavaad-audience-800.webp",
-                alt: "Jay in the audience at an Arthavaad talk in New Delhi",
-                caption: "Arthavaad, New Delhi",
-              },
             ].map((p, i) => (
-              <li
-                key={p.src}
-                className={i === 0 ? "col-span-2 row-span-2" : ""}
-              >
+              <li key={p.src} className={i === 0 ? "col-span-3" : ""}>
                 <figure className="group relative h-full overflow-hidden rounded-2xl bg-card">
                   <div
-                    className={`relative h-full ${i === 0 ? "min-h-[260px]" : "aspect-square"}`}
+                    className={`relative h-full ${i === 0 ? "aspect-[16/9]" : "aspect-square"}`}
                   >
                     <Image
                       src={p.src}
@@ -354,7 +351,7 @@ export default function AboutPage() {
           aria-labelledby="resume-h"
           className="mt-24 scroll-mt-28"
         >
-          <H2 id="resume">resume</H2>
+          <H2 id="resume">Resume</H2>
           <div className="mt-5 flex gap-2">
             <a
               href={person.resume}

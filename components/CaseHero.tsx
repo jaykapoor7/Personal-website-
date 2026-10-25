@@ -78,7 +78,7 @@ export function ScrollShot({
           </BrowserFrame>
         </motion.div>
         {tall && (
-          <p className="mt-4 text-center font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+          <p className="mt-4 text-center text-[13px] font-medium text-muted">
             Keep scrolling to read the whole page
           </p>
         )}

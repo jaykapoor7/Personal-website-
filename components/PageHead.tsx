@@ -12,9 +12,7 @@ export function PageHead({
 }) {
   return (
     <header className="shell pt-24 md:pt-28">
-      <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
-        {kicker}
-      </p>
+      <p className="text-[13px] font-medium text-muted">{kicker}</p>
       <Reveal
         className="mt-4 flex flex-wrap items-end justify-between gap-6 border-t border-fg pt-4"
         y={16}

@@ -196,7 +196,7 @@ export type Role = {
   logo?: string;
   site?: Link;
   proof: Proof[];
-  photo?: { src: string; alt: string; caption: string };
+  photos?: { src: string; alt: string; caption: string }[];
 };
 
 export const roles: Role[] = [
@@ -264,11 +264,18 @@ export const roles: Role[] = [
         "/work/crowwd/Crowwd-Selected-Research-and-Strategy.pdf",
       ),
     ],
-    photo: {
-      src: "/work/crowwd/arthavaad-stage-640.webp",
-      alt: "Jay at an Arthavaad event at The Circle.Work",
-      caption: "Arthavaad",
-    },
+    photos: [
+      {
+        src: "/work/crowwd/arthavaad-stage-1280.webp",
+        alt: "Jay with a speaker at Arthavaad, Crowwd's speaker series, at The Circle.Work in New Delhi",
+        caption: "Arthavaad, The Circle.Work",
+      },
+      {
+        src: "/work/crowwd/arthavaad-audience-800.webp",
+        alt: "Jay in the audience at an Arthavaad talk",
+        caption: "In the audience",
+      },
+    ],
   },
   {
     id: "hdfc-bank",
@@ -468,6 +475,9 @@ export type Build = {
   name: string;
   kind: "Tool" | "Game";
   summary: string;
+  /** A few lines on what it does and how, for the Projects page. */
+  points: string[];
+  stack: string[];
   url?: string;
   href?: string;
   image?: string;
@@ -483,6 +493,13 @@ export const builds: Build[] = [
     kind: "Tool",
     summary:
       "Turns Fitbit and Google Health data into four daily scores, with the reasons behind each.",
+    points: [
+      "Every score explains itself: what it means, what pushed it up or down, and what it changed downstream.",
+      "Four daily scores (sleep, recovery, strain and energy), each with a signed ledger like “Sleep +9, late football −6”.",
+      "Short heart-rate spikes from a bus sprint or a hot shower are flagged for review instead of being counted as workouts.",
+      "Data comes from Google Health on demand and stays in your browser. No database and no account.",
+    ],
+    stack: ["Next.js", "TypeScript", "Google Health API"],
     url: "explain-my-whoop-stats.vercel.app",
     href: "https://explain-my-whoop-stats.vercel.app/",
     image: "/previews/health-os-d.webp",
@@ -494,6 +511,13 @@ export const builds: Build[] = [
     kind: "Tool",
     summary:
       "Scores how well ChatGPT, Claude and Perplexity can find, cite and recommend a website.",
+    points: [
+      "SEO tells you whether Google can find a site. This tells you whether ChatGPT, Claude and Perplexity can find it, understand it and recommend it.",
+      "Crawls a page, builds an entity graph, and scores discoverability, entity strength and how likely an AI is to cite it.",
+      "Simulates four real discovery prompts, such as “Would you recommend X?”, and shows the answer an AI would give.",
+      "Every score shows its working, and fixes are ranked by impact over effort. Reports can be shared or compared head to head.",
+    ],
+    stack: ["Next.js", "TypeScript", "Server Actions"],
     url: "llm-ai-search-checker.vercel.app",
     href: "https://llm-ai-search-checker.vercel.app/",
     image: "/previews/search-visibility-d.webp",
@@ -505,6 +529,13 @@ export const builds: Build[] = [
     kind: "Tool",
     summary:
       "Scores a commute from horn noise and harsh braking. Nothing leaves the phone.",
+    points: [
+      "Spotify Wrapped for your commute. Start a drive and it measures how chaotic it really was.",
+      "Uses GPS, the microphone and motion sensors to pick up horns, noise, hard braking and stop-and-go traffic.",
+      "Each drive gets a 0 to 100 score, a shareable report and a replay. Streaks and a yearly wrap build up over time.",
+      "Everything runs on the phone. There is no backend, and the app has 194 automated tests.",
+    ],
+    stack: ["Next.js", "PWA", "Web Audio", "Device sensors"],
     url: "road360.vercel.app",
     href: "https://road360.vercel.app/",
     image: "/previews/road360-m.webp",
@@ -517,6 +548,13 @@ export const builds: Build[] = [
     kind: "Game",
     summary:
       "A productivity startup where every button has walked off the job.",
+    points: [
+      "A comedy game in which a perfectly ordinary corporate website goes on strike.",
+      "The buttons walk off, the checkbox withdraws consent, the scrollbar takes a vacation and the popups become stakeholders.",
+      "20 disputes, 3 endings and 4 secrets, about 5 to 8 minutes. Negotiate terms, catch falling cookies, wind a spinner by hand and sign a settlement.",
+      "Runs entirely in the browser with synthesized sound, and works with mouse, touch and keyboard.",
+    ],
+    stack: ["React", "TypeScript", "Vite", "Web Audio"],
     url: "strike.kapoorjay.com",
     href: "https://strike.kapoorjay.com",
     image: "/previews/strike-d.webp",
@@ -527,6 +565,13 @@ export const builds: Build[] = [
     name: "The World's Worst Emergency Service",
     kind: "Game",
     summary: "Run a town's dispatch desk with the worst possible responses.",
+    points: [
+      "You run a town’s dispatch desk, badly. A cat needs rescuing, so you send a dinosaur. The dinosaur eats a house. You get promoted.",
+      "34 emergencies and 102 possible responses. Every decision leaves a permanent mark on the town and sets up the next call.",
+      "Drag vehicles, aim rescue lines, sweep cars with a giant magnet, and eventually get elected President.",
+      "The town is drawn in code on a Canvas, the sounds are synthesized, and there is no backend.",
+    ],
+    stack: ["React", "TypeScript", "Canvas", "Web Audio"],
     url: "emergency.kapoorjay.com",
     href: "https://emergency.kapoorjay.com",
     image: "/previews/emergency-d.webp",
@@ -537,6 +582,12 @@ export const builds: Build[] = [
     name: "Everything Falls",
     kind: "Game",
     summary: "A small physics toy. Pick things up and throw them.",
+    points: [
+      "A small physics toy that lives on this site.",
+      "Grab the objects, throw them around, and switch gravity off to watch them float.",
+      "Works with a mouse or a finger.",
+    ],
+    stack: ["matter-js", "React"],
     url: "kapoorjay.com/play/everything-falls",
     href: "/play/everything-falls",
     falls: true,
@@ -607,7 +658,7 @@ export const skills = [
   "Supabase",
 ];
 
-/** Personal photos. The portrait is used once, in the hero; these four only on About. */
+/** Personal photos. The portrait is the hero and About photo; these four live on About. */
 export const portrait = {
   src: "/photos/pitt_portrait-1280.webp",
   alt: "Jay Kapoor on the Cathedral of Learning lawn at the University of Pittsburgh",

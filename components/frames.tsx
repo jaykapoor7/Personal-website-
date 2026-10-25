@@ -16,7 +16,7 @@ export function BrowserFrame({
         <i className="h-2.5 w-2.5 rounded-full bg-black/15" />
         <i className="h-2.5 w-2.5 rounded-full bg-black/15" />
         <i className="h-2.5 w-2.5 rounded-full bg-black/15" />
-        <span className="mx-auto max-w-[70%] truncate rounded-md bg-black/[0.05] px-3 py-0.5 font-mono text-[10.5px] text-black/55">
+        <span className="mx-auto max-w-[70%] truncate rounded-md bg-black/[0.05] px-3 py-0.5 text-[10.5px] text-black/55">
           {url}
         </span>
         <span className="w-[42px]" />

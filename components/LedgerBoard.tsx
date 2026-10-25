@@ -74,9 +74,7 @@ export function LedgerBoard({ calls }: { calls: LedgerCall[] }) {
                   >
                     {c.result === "OPEN" ? `Due ${c.due ?? ""}` : c.result}
                   </span>
-                  <span className="font-semibold tabular-nums">
-                    {c.conviction}%
-                  </span>
+                  <span className="font-semibold">{c.conviction}%</span>
                 </div>
                 <div
                   className="mt-2 h-1.5 overflow-hidden rounded-full bg-card"

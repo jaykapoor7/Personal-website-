@@ -105,7 +105,7 @@ export function Intro({ paras }: { paras: React.ReactNode[] }) {
         </motion.p>
       ))}
       {fine && (
-        <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-faint">
+        <p className="text-[13px] font-medium text-faint">
           Psst. Drag my photo somewhere else.
         </p>
       )}

@@ -45,7 +45,7 @@ function details(e: Entry) {
       shot: v.shot,
       proof: v.proof,
       logo: v.logo,
-      photo: undefined,
+      photos: undefined,
     };
   }
   if (c.type === "role") {
@@ -60,9 +60,7 @@ function details(e: Entry) {
       shot: undefined as Shot | undefined,
       proof: r.proof,
       logo: r.logo,
-      photo: r.photo
-        ? { ...r.photo, src: r.photo.src.replace("-640.webp", "-1280.webp") }
-        : undefined,
+      photos: r.photos,
     };
   }
   const l = c.l;
@@ -76,7 +74,7 @@ function details(e: Entry) {
     shot: l.shot,
     proof: [] as Proof[],
     logo: l.logo,
-    photo: undefined,
+    photos: undefined,
   };
 }
 
@@ -101,7 +99,7 @@ function Papers({ proof }: { proof: Proof[] }) {
                 />
               </span>
             ) : (
-              <span className="grid aspect-[900/1273] place-items-center bg-fg p-4 text-center font-mono text-[12px] uppercase tracking-[0.14em] text-white transition-transform duration-500 group-hover:-translate-y-2">
+              <span className="grid aspect-[900/1273] place-items-center bg-fg p-4 text-center text-[13px] font-medium text-white transition-transform duration-500 group-hover:-translate-y-2">
                 {p.label}
               </span>
             )}
@@ -127,7 +125,7 @@ export default function CasePage({ params }: { params: { slug: string } }) {
   return (
     <article className="pt-24 md:pt-28">
       <div className="shell">
-        <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+        <div className="flex items-center justify-between text-[13px] font-medium text-muted">
           <Link
             href={
               e.verb === "Started"
@@ -169,9 +167,7 @@ export default function CasePage({ params }: { params: { slug: string } }) {
               {d.lede}
             </p>
             <div className="md:text-right">
-              <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
-                {d.kicker}
-              </p>
+              <p className="text-[13px] font-medium text-muted">{d.kicker}</p>
               <div className="mt-4 flex flex-wrap gap-2 md:justify-end">
                 {d.site && (
                   <SmartLink href={d.site.href} className="btn-primary">
@@ -192,29 +188,36 @@ export default function CasePage({ params }: { params: { slug: string } }) {
       <div className="shell mt-14 md:mt-20">
         {d.shot ? (
           <ScrollShot shot={d.shot} label={e.title} name={name} />
-        ) : d.photo ? (
-          <Reveal>
-            <figure className="mx-auto max-w-[560px]">
-              <div
-                className="bg-white p-3 pb-14 shadow-[0_30px_60px_-24px_rgba(0,0,0,0.5)] [rotate:-2deg]"
-                style={{ viewTransitionName: name }}
-              >
-                <div className="relative aspect-[4/5] overflow-hidden">
-                  <Image
-                    src={d.photo.src}
-                    alt={d.photo.alt}
-                    fill
-                    priority
-                    sizes="560px"
-                    className="object-cover"
-                  />
-                </div>
-              </div>
-              <figcaption className="serif -mt-11 text-center text-[22px]">
-                {d.photo.caption}
-              </figcaption>
-            </figure>
-          </Reveal>
+        ) : d.photos ? (
+          <ul className="mx-auto grid max-w-[880px] grid-cols-2 items-start gap-4 md:gap-8">
+            {d.photos.map((p, i) => (
+              <li key={p.src}>
+                <Reveal delay={i * 0.12}>
+                  <figure
+                    className="bg-white p-2 pb-10 shadow-[0_30px_60px_-24px_rgba(0,0,0,0.5)] md:p-3 md:pb-14"
+                    style={{
+                      rotate: i % 2 ? "2deg" : "-2deg",
+                      ...(i === 0 ? { viewTransitionName: name } : {}),
+                    }}
+                  >
+                    <div className="relative aspect-[4/5] overflow-hidden">
+                      <Image
+                        src={p.src}
+                        alt={p.alt}
+                        fill
+                        priority
+                        sizes="(max-width: 768px) 50vw, 440px"
+                        className="object-cover object-top"
+                      />
+                    </div>
+                    <figcaption className="mt-3 text-center text-[14px] font-medium text-muted md:mt-4 md:text-[16px]">
+                      {p.caption}
+                    </figcaption>
+                  </figure>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
         ) : e.image ? (
           <Reveal>
             <div
@@ -244,7 +247,7 @@ export default function CasePage({ params }: { params: { slug: string } }) {
                 <dd className="text-[clamp(52px,8vw,120px)] font-semibold leading-none tracking-[-0.06em]">
                   <Counter value={m.value} />
                 </dd>
-                <dt className="mt-2 font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+                <dt className="mt-2 text-[13px] font-medium text-muted">
                   {m.label}
                 </dt>
               </div>
@@ -259,7 +262,7 @@ export default function CasePage({ params }: { params: { slug: string } }) {
             {d.points.map((p, n) => (
               <li key={p} className="border-b border-line">
                 <Reveal className="grid grid-cols-[40px_1fr] gap-4 py-6 md:grid-cols-[120px_1fr] md:py-8">
-                  <span className="font-mono text-[12px] text-faint">
+                  <span className="text-[13px] text-faint">
                     {String(n + 1).padStart(2, "0")}
                   </span>
                   <p className="max-w-[34ch] text-[clamp(22px,2.6vw,36px)] font-medium leading-[1.12] tracking-[-0.025em]">
@@ -283,9 +286,7 @@ export default function CasePage({ params }: { params: { slug: string } }) {
 
       <div className="shell mt-28">
         <Link href={next.href} className="group block border-t border-fg pt-4">
-          <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
-            Next
-          </span>
+          <span className="text-[13px] font-medium text-muted">Next</span>
           <span className="mt-2 flex items-center justify-between gap-6">
             <span className="text-[clamp(44px,9vw,140px)] font-semibold leading-[0.9] tracking-[-0.06em] transition-transform duration-500 ease-out group-hover:translate-x-3">
               {next.title}

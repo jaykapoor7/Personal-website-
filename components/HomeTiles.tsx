@@ -58,7 +58,7 @@ function Tile({
         <div className="relative z-10 flex items-start justify-between gap-4">
           <div>
             <p
-              className={`font-mono text-[11px] uppercase tracking-[0.14em] ${dark ? "text-white/60" : "text-muted"}`}
+              className={`text-[13px] font-medium ${dark ? "text-white/60" : "text-muted"}`}
             >
               {no}
             </p>
@@ -93,10 +93,10 @@ function MiniMap() {
   return (
     <div className="grid h-full grid-cols-[1fr_1.1fr] items-end gap-4">
       <div>
-        <p className="text-[clamp(44px,5vw,76px)] font-semibold leading-none tracking-[-0.06em] tabular-nums">
+        <p className="text-[clamp(44px,5vw,76px)] font-semibold leading-none tracking-[-0.06em]">
           30,288
         </p>
-        <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.14em] text-white/60">
+        <p className="mt-1 text-[13px] font-medium text-white/60">
           animals on StrayPaw, 28 cities
         </p>
       </div>
@@ -236,10 +236,10 @@ function Now() {
   }, []);
   return (
     <div className="flex h-full flex-col justify-end">
-      <p className="text-[clamp(40px,4vw,60px)] font-semibold leading-none tracking-[-0.06em] tabular-nums">
+      <p className="text-[clamp(40px,4vw,60px)] font-semibold leading-none tracking-[-0.06em]">
         {t || " "}
       </p>
-      <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+      <p className="mt-1 text-[13px] font-medium text-muted">
         in Pittsburgh right now
       </p>
       <ul className="mt-4 flex flex-wrap gap-1.5 text-[13px]">

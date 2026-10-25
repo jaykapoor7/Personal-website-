@@ -115,7 +115,7 @@ export function BuildsBrowser() {
       <div className="border-b border-line p-3 lg:border-b-0 lg:border-r">
         {kinds.map((k) => (
           <div key={k} className="mb-2">
-            <p className="px-3 pb-1.5 pt-2 font-mono text-[11px] uppercase tracking-[0.14em] text-faint">
+            <p className="px-3 pb-1.5 pt-2 text-[13px] font-medium text-faint">
               {k}s
             </p>
             <ul
@@ -161,7 +161,7 @@ export function BuildsBrowser() {
             <i className="h-2.5 w-2.5 rounded-full bg-black/10" />
             <i className="h-2.5 w-2.5 rounded-full bg-black/10" />
           </span>
-          <span className="min-w-0 flex-1 truncate rounded-lg bg-card px-3 py-1 font-mono text-[12px] text-muted">
+          <span className="min-w-0 flex-1 truncate rounded-lg bg-card px-3 py-1 text-[13px] text-muted">
             {b.url}
           </span>
           {b.code && (
@@ -193,9 +193,67 @@ export function BuildsBrowser() {
             </motion.div>
           </AnimatePresence>
         </div>
-        <p className="border-t border-line px-4 py-3 text-[14px] text-muted lg:hidden">
-          {b.summary}
-        </p>
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={b.id}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="grid gap-6 border-t border-line p-5 md:grid-cols-[1fr_200px] md:p-7"
+          >
+            <div>
+              <h3 className="text-[24px] font-semibold leading-tight tracking-[-0.03em]">
+                {b.name}
+              </h3>
+              <p className="mt-2 text-[16px] leading-relaxed">{b.points[0]}</p>
+              <ul className="mt-4 space-y-2 text-[15px] leading-relaxed text-muted">
+                {b.points.slice(1).map((p) => (
+                  <li key={p} className="flex gap-3">
+                    <span
+                      aria-hidden="true"
+                      className="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
+                    />
+                    {p}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="md:border-l md:border-line md:pl-6">
+              <p className="label">
+                {b.kind === "Game" ? "Game" : "Tool"}, built with
+              </p>
+              <ul className="mt-2 flex flex-wrap gap-1.5">
+                {b.stack.map((t) => (
+                  <li
+                    key={t}
+                    className="rounded-full px-2.5 py-1 text-[13px] ring-1 ring-line"
+                  >
+                    {t}
+                  </li>
+                ))}
+              </ul>
+              {!b.falls && (
+                <div className="mt-5 flex flex-col gap-2 text-[14px] font-medium">
+                  <SmartLink
+                    href={b.href!}
+                    className="inline-flex items-center gap-1.5 hover:text-accent"
+                  >
+                    Open {b.url} <Arrow />
+                  </SmartLink>
+                  {b.code && (
+                    <SmartLink
+                      href={b.code}
+                      className="inline-flex items-center gap-1.5 hover:text-accent"
+                    >
+                      Source on GitHub <Arrow />
+                    </SmartLink>
+                  )}
+                </div>
+              )}
+            </div>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );

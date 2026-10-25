@@ -180,9 +180,7 @@ const stories: Story[] = [
 function Made({ venture }: { venture: Venture }) {
   return (
     <div>
-      <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
-        So I started
-      </p>
+      <p className="text-[13px] font-medium text-muted">So I started</p>
       <h3 className="mt-2 text-[clamp(40px,5.4vw,84px)] font-semibold leading-[0.9] tracking-[-0.055em]">
         {venture.name}
       </h3>
@@ -195,7 +193,7 @@ function Made({ venture }: { venture: Venture }) {
             <dd className="text-[clamp(34px,3.6vw,52px)] font-semibold leading-none tracking-[-0.05em]">
               <Counter value={m.value} />
             </dd>
-            <dt className="mt-1.5 font-mono text-[10.5px] uppercase tracking-[0.14em] text-muted">
+            <dt className="mt-1.5 text-[13px] font-medium text-muted">
               {m.label}
             </dt>
           </div>
@@ -230,7 +228,7 @@ export function Noticed() {
             key={s.id}
             className="shell overflow-x-clip border-t border-fg pb-16 pt-5 md:pb-24"
           >
-            <div className="flex justify-between font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+            <div className="flex justify-between text-[13px] font-medium text-muted">
               <span>Noticed, no. {i + 1}</span>
               <span>{s.year}</span>
             </div>

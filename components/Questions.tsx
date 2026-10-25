@@ -20,6 +20,7 @@ type Q = {
   site?: L;
   proof: Proof[];
   shot?: string;
+  photos?: { src: string; alt: string; caption: string }[];
 };
 
 const year = (p: string) => Number(p.match(/\d{4}/g)?.slice(-1)[0] ?? 0);
@@ -36,6 +37,7 @@ const qs: Q[] = [
     points: r.points,
     site: r.site,
     proof: r.proof,
+    photos: r.photos,
   })),
   ...labs.map((l) => ({
     slug: labSlug[l.id],
@@ -60,7 +62,7 @@ function Answer({ q }: { q: Q }) {
   return (
     <div className="grid gap-8 pb-10 pt-2 md:grid-cols-[1fr_auto] md:pl-[72px]">
       <div>
-        <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+        <p className="text-[13px] font-medium text-muted">
           {q.role}, {q.period}
         </p>
         <ul className="mt-4 max-w-[60ch] space-y-3 text-[18px] leading-snug">
@@ -91,7 +93,7 @@ function Answer({ q }: { q: Q }) {
           )}
         </div>
       </div>
-      <div className="flex gap-4">
+      <div className="flex flex-wrap gap-4">
         {q.proof.map((p, i) => (
           <SmartLink
             key={p.href}
@@ -116,6 +118,26 @@ function Answer({ q }: { q: Q }) {
               {p.label}
             </span>
           </SmartLink>
+        ))}
+        {q.photos?.map((p, i) => (
+          <figure
+            key={p.src}
+            className="w-[110px] bg-white p-1.5 pb-5 shadow-[0_14px_30px_-14px_rgba(0,0,0,0.45)] md:w-[130px]"
+            style={{ rotate: i % 2 ? "3deg" : "-3deg" }}
+          >
+            <span className="relative block aspect-[4/5] overflow-hidden">
+              <Image
+                src={p.src}
+                alt={p.alt}
+                fill
+                sizes="130px"
+                className="object-cover object-top"
+              />
+            </span>
+            <figcaption className="mt-1.5 text-center text-[11px] leading-tight text-muted">
+              {p.caption}
+            </figcaption>
+          </figure>
         ))}
         {q.shot && (
           <span className="block w-[260px] overflow-hidden rounded-lg ring-1 ring-line">
@@ -157,7 +179,7 @@ export function Questions({ kind }: { kind: "Job" | "Lab" }) {
                   onClick={() => setOpen(on ? null : q.slug)}
                   className="group grid w-full grid-cols-[40px_1fr_28px] items-start gap-3 py-6 text-left md:grid-cols-[72px_1fr_auto_40px] md:items-center md:py-8"
                 >
-                  <span className="pt-2 font-mono text-[11px] text-faint md:pt-0">
+                  <span className="pt-2 text-[13px] text-faint md:pt-0">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <span
@@ -177,7 +199,7 @@ export function Questions({ kind }: { kind: "Job" | "Lab" }) {
                         className="h-7 w-7 rounded-md object-contain ring-1 ring-line"
                       />
                     )}
-                    <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+                    <span className="text-[13px] font-medium text-muted">
                       {q.org}
                     </span>
                   </span>

@@ -68,9 +68,9 @@ export function Opening() {
   useWeight(ref);
   return (
     <section aria-label="Introduction" className="shell pb-4 pt-24 md:pt-28">
-      <div className="flex justify-between font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
-        <span>Jay Kapoor</span>
-        <span>Economics and Statistics, Pitt</span>
+      <div className="flex justify-between text-[13px] font-medium text-muted">
+        <span>Founder of StrayPaw</span>
+        <span>Economics and Statistics, University of Pittsburgh</span>
       </div>
 
       <h1
@@ -103,7 +103,7 @@ export function Opening() {
             />
           </motion.span>
           <Words text=". Most things I make start with something" start={0.3} />
-          <span className="serif inline-block text-[1.08em] font-normal">
+          <span className="inline-block text-accent">
             <Words text="I noticed." start={0.75} />
           </span>
         </span>

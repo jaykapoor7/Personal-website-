@@ -198,7 +198,7 @@ export function MarketMap() {
                   transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
                 />
               </span>
-              <span className="text-right tabular-nums text-muted">
+              <span className="text-right text-muted">
                 {b.total >= 1000
                   ? `$${(b.total / 1000).toFixed(1)}B`
                   : `$${Math.round(b.total)}M`}

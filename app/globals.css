@@ -90,7 +90,7 @@
     @apply mx-auto w-full max-w-shell px-5 sm:px-8;
   }
   .label {
-    @apply font-mono text-[11.5px] font-medium uppercase tracking-[0.14em] text-muted;
+    @apply text-[13px] font-medium text-muted;
   }
   .card {
     @apply rounded-2xl bg-paper ring-1 ring-line;
@@ -228,12 +228,10 @@
   background: rgb(var(--fg));
 }
 
-/* Serif accent for editorial moments */
+/* Accent lines: same family, lighter and quieter than the headlines */
 .serif {
-  font-family: var(--font-serif), Georgia, serif;
   font-weight: 400;
-  font-style: italic;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
 }
 
 /* Hide scrollbars on horizontal strips that have their own controls */

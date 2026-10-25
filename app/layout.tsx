@@ -1,32 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import {
-  Instrument_Serif,
-  Inter_Tight,
-  JetBrains_Mono,
-} from "next/font/google";
+import { Schibsted_Grotesk } from "next/font/google";
 import { ViewTransitions } from "next-view-transitions";
 import "./globals.css";
 
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
-import { Woof } from "@/components/Woof";
 import { siteUrl } from "@/lib/site";
 
-const sans = Inter_Tight({
+const sans = Schibsted_Grotesk({
   subsets: ["latin"],
   variable: "--font-sans",
-  display: "swap",
-});
-const serif = Instrument_Serif({
-  subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-  variable: "--font-serif",
-  display: "swap",
-});
-const mono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
   display: "swap",
 });
 
@@ -57,10 +40,7 @@ export default function RootLayout({
 }) {
   return (
     <ViewTransitions>
-      <html
-        lang="en"
-        className={`${sans.variable} ${serif.variable} ${mono.variable}`}
-      >
+      <html lang="en" className={sans.variable}>
         <body>
           <a
             href="#main"
@@ -74,7 +54,6 @@ export default function RootLayout({
           </noscript>
           <main id="main">{children}</main>
           <Footer />
-          <Woof />
         </body>
       </html>
     </ViewTransitions>

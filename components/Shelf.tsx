@@ -34,7 +34,7 @@ export function Shelf() {
               <span className="mt-4 block text-[15px] font-semibold leading-snug tracking-[-0.01em] group-hover:text-accent">
                 {w.title.split(":")[0]}
               </span>
-              <span className="block font-mono text-[10.5px] uppercase tracking-[0.12em] text-muted">
+              <span className="block text-[13px] font-medium text-muted">
                 {w.kind}, {w.year}
               </span>
             </SmartLink>

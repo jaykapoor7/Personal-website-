@@ -28,7 +28,7 @@ export default function PlayPage({ params }: { params: { slug: string } }) {
 
   return (
     <article className="shell pt-24 md:pt-28">
-      <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+      <div className="flex items-center justify-between text-[13px] font-medium text-muted">
         <Link
           href="/projects"
           className="inline-flex items-center gap-1.5 hover:text-fg"
@@ -81,9 +81,7 @@ export default function PlayPage({ params }: { params: { slug: string } }) {
               <i className="h-2.5 w-2.5 rounded-full bg-black/15" />
               <i className="h-2.5 w-2.5 rounded-full bg-black/15" />
               <i className="h-2.5 w-2.5 rounded-full bg-black/15" />
-              <span className="mx-auto font-mono text-[11px] text-muted">
-                {b.url}
-              </span>
+              <span className="mx-auto text-[13px] text-muted">{b.url}</span>
             </div>
             <div className="relative h-[min(78vh,760px)] bg-white">
               <Image
@@ -105,13 +103,41 @@ export default function PlayPage({ params }: { params: { slug: string } }) {
         )}
       </div>
 
+      <section
+        aria-label="About this project"
+        className="mt-14 grid gap-8 border-t border-fg pt-6 md:grid-cols-[1fr_260px]"
+      >
+        <ul className="max-w-[62ch] space-y-3 text-[17px] leading-relaxed">
+          {b.points.map((p) => (
+            <li key={p} className="flex gap-3">
+              <span
+                aria-hidden="true"
+                className="mt-[0.65em] h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
+              />
+              {p}
+            </li>
+          ))}
+        </ul>
+        <div>
+          <p className="label">Built with</p>
+          <ul className="mt-2 flex flex-wrap gap-1.5">
+            {b.stack.map((t) => (
+              <li
+                key={t}
+                className="rounded-full px-2.5 py-1 text-[13px] ring-1 ring-line"
+              >
+                {t}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       <Link
         href={next.falls ? next.href! : `/play/${next.id}`}
         className="group mt-24 block border-t border-fg pt-4"
       >
-        <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
-          Next
-        </span>
+        <span className="text-[13px] font-medium text-muted">Next</span>
         <span className="mt-2 flex items-center justify-between gap-6">
           <span className="text-[clamp(40px,8vw,120px)] font-semibold leading-[0.9] tracking-[-0.06em] transition-transform duration-500 group-hover:translate-x-3">
             {next.name}
