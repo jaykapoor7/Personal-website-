@@ -162,14 +162,14 @@ const stories: Story[] = [
           <div className="relative aspect-[1200/992] overflow-hidden">
             <Image
               src="/straypaw/street-dog.webp"
-              alt="A street dog standing outside a cafe"
+              alt="The street dog outside a cafe that started StrayPaw"
               fill
               sizes="(max-width: 768px) 100vw, 640px"
               className="object-cover"
             />
           </div>
           <figcaption className="serif absolute bottom-3 left-0 right-0 text-center text-[20px] md:bottom-4 md:text-[22px]">
-            Outside a cafe
+            The dog that started it all
           </figcaption>
         </figure>
       </Unveil>
