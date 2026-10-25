@@ -68,8 +68,7 @@ export function Opening() {
   useWeight(ref);
   return (
     <section aria-label="Introduction" className="shell pb-4 pt-24 md:pt-28">
-      <div className="flex justify-between text-[13px] font-medium text-muted">
-        <span>Founder of StrayPaw</span>
+      <div className="flex justify-end text-[13px] font-medium text-muted">
         <span>Economics and Statistics, University of Pittsburgh</span>
       </div>
 
