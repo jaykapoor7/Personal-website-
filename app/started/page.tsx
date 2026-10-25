@@ -1,26 +1,7 @@
-import type { Metadata } from "next";
-import { DogMap } from "@/components/DogMap";
-import { Noticed } from "@/components/Noticed";
-import { PageHead } from "@/components/PageHead";
+import { Redirect } from "@/components/Redirect";
 
-export const metadata: Metadata = {
-  title: "Started",
-  description:
-    "Juno-AI, The Finer Things Club, Project Nidaan and StrayPaw, and what started each one.",
-};
+export const metadata = { title: "Ventures" };
 
 export default function Page() {
-  return (
-    <>
-      <PageHead
-        kicker="Things I started"
-        title="Started"
-        aside="Each one began with something I noticed."
-      />
-      <div className="mt-14">
-        <Noticed />
-      </div>
-      <DogMap />
-    </>
-  );
+  return <Redirect to="/ventures" label="Ventures" />;
 }

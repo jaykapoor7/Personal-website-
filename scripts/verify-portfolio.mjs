@@ -21,6 +21,8 @@ const browser = await chromium.launch({
 // Old section URLs (/work, /research, ...) and old project slugs forward to their new homes.
 const routes = [
   "/",
+  "/ventures/",
+  "/projects/",
   "/started/",
   "/questions/",
   "/predictions/",
@@ -113,13 +115,13 @@ try {
       await page.getByRole("button", { name: "Open menu" }).tap();
       await page
         .locator("#mobile-menu")
-        .getByRole("link", { name: "Questions" })
+        .getByRole("link", { name: "Research" })
         .tap();
-      await page.waitForURL(/\/questions\/?$/);
+      await page.waitForURL(/\/research\/?$/);
     }
 
     // Each question opens to show the work behind it.
-    await page.goto(base + "/questions/", { waitUntil: "networkidle" });
+    await page.goto(base + "/research/", { waitUntil: "networkidle" });
     const q = page.getByRole("button", { name: /bladder cell/ });
     await q.scrollIntoViewIfNeeded();
     await q.click();
@@ -131,7 +133,7 @@ try {
     );
 
     // Bet against me: lock in odds and see mine.
-    await page.goto(base + "/predictions/", { waitUntil: "networkidle" });
+    await page.goto(base + "/writing/", { waitUntil: "networkidle" });
     const lock = page.getByRole("button", { name: "Lock it in" });
     await lock.scrollIntoViewIfNeeded();
     await lock.click();

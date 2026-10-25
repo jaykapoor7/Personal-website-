@@ -129,11 +129,21 @@ export default function CasePage({ params }: { params: { slug: string } }) {
       <div className="shell">
         <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
           <Link
-            href={e.verb === "Started" ? "/started" : "/questions"}
+            href={
+              e.verb === "Started"
+                ? "/ventures"
+                : e.verb === "Worked"
+                  ? "/experience"
+                  : "/research"
+            }
             className="inline-flex items-center gap-1.5 hover:text-fg"
           >
             <Arrow direction="left" />{" "}
-            {e.verb === "Started" ? "Started" : "Questions"}
+            {e.verb === "Started"
+              ? "Ventures"
+              : e.verb === "Worked"
+                ? "Experience"
+                : "Research"}
           </Link>
           <span>
             {e.verb}, {e.when}

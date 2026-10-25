@@ -637,8 +637,8 @@ export const life = [
 
 /** Old project URLs that are not case pages any more, so shared links still land well. */
 export const legacy: Record<string, string> = {
-  "pitt-sociology": "/questions",
-  "max-hospital": "/questions",
+  "pitt-sociology": "/research",
+  "max-hospital": "/research",
   "juno-preventive-health": "/work/juno-ai",
   "recovery-intelligence": "/play/cura",
   road360: "/play/road360",

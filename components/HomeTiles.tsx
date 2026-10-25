@@ -131,9 +131,9 @@ function MiniMap() {
   );
 }
 
-/** The questions, one at a time. */
+/** The research questions, one at a time. */
 function QuestionTicker() {
-  const qs = [...roles, ...labs].map((x) => x.question);
+  const qs = labs.map((x) => x.question);
   const i = useTick(2800, qs.length);
   return (
     <div className="flex h-full min-h-[110px] items-end">
@@ -150,6 +150,38 @@ function QuestionTicker() {
         </motion.p>
       </AnimatePresence>
     </div>
+  );
+}
+
+/** The places I worked, with the role on hover. */
+function Places() {
+  return (
+    <ul className="grid h-full grid-cols-2 content-end gap-2">
+      {roles.map((r) => (
+        <li
+          key={r.id}
+          className="flex items-center gap-2.5 rounded-xl bg-card px-2.5 py-2"
+        >
+          {r.logo && (
+            <Image
+              src={r.logo}
+              alt=""
+              width={26}
+              height={26}
+              className="h-[26px] w-[26px] rounded-md object-contain"
+            />
+          )}
+          <span className="min-w-0">
+            <span className="block truncate text-[14px] font-semibold leading-tight">
+              {r.org}
+            </span>
+            <span className="block truncate text-[12px] text-muted">
+              {r.period}
+            </span>
+          </span>
+        </li>
+      ))}
+    </ul>
   );
 }
 
@@ -264,15 +296,15 @@ function Now() {
   );
 }
 
-/** The five pages of the site, each shown doing something. */
+/** The six sections of the site, each shown doing something. */
 export function HomeTiles() {
   return (
     <ul className="grid gap-3 md:grid-cols-12 md:gap-4">
       <Tile
-        href="/started"
+        href="/ventures"
         no="01"
-        title="Started"
-        note="Four things I started, and the moment each one began."
+        title="Ventures"
+        note="StrayPaw, Juno-AI, Project Nidaan and The Finer Things Club."
         dark
         className="md:col-span-7 md:row-span-2 md:min-h-[460px]"
         delay={0.8}
@@ -280,42 +312,52 @@ export function HomeTiles() {
         <MiniMap />
       </Tile>
       <Tile
-        href="/questions"
+        href="/experience"
         no="02"
-        title="Questions"
-        note={`${roles.length} jobs and ${labs.length} labs, each as a question.`}
+        title="Experience"
+        note="Operations, growth, finance and real estate."
         className="md:col-span-5"
-        delay={0.88}
+        delay={0.86}
+      >
+        <Places />
+      </Tile>
+      <Tile
+        href="/research"
+        no="03"
+        title="Research"
+        note={`${labs.length} labs at Pitt and UPMC.`}
+        className="md:col-span-5"
+        delay={0.92}
       >
         <QuestionTicker />
       </Tile>
       <Tile
-        href="/predictions"
-        no="03"
-        title="Predictions"
-        note="Calls with odds, scored when they land."
-        className="md:col-span-5"
-        delay={0.96}
+        href="/writing"
+        no="04"
+        title="Writing"
+        note="Memos, theses, a paper and a scored forecast ledger."
+        className="md:col-span-4"
+        delay={0.98}
       >
         <Fan />
       </Tile>
       <Tile
-        href="/play"
-        no="04"
-        title="Play"
+        href="/projects"
+        no="05"
+        title="Projects"
         note={`${builds.length} tools and games that run in your browser.`}
-        className="md:col-span-6"
+        className="md:col-span-4"
         delay={1.04}
       >
         <Deck />
       </Tile>
       <Tile
         href="/about"
-        no="05"
+        no="06"
         title="About"
-        note="School, football, and Bangalore to Pittsburgh."
-        className="md:col-span-6"
-        delay={1.12}
+        note="Bangalore to Pittsburgh, and a lot of football."
+        className="md:col-span-4"
+        delay={1.1}
       >
         <Now />
       </Tile>

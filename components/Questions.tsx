@@ -136,12 +136,16 @@ function Answer({ q }: { q: Q }) {
 }
 
 /** Jobs and labs, each written as the question it was really about. */
-export function Questions() {
-  const [open, setOpen] = useState<string | null>(qs[0].slug);
+export function Questions({ kind }: { kind: "Job" | "Lab" }) {
+  const list = qs.filter((q) => q.where === kind);
+  const [open, setOpen] = useState<string | null>(list[0].slug);
   return (
-    <section aria-label="Questions" className="shell mt-12">
+    <section
+      aria-label={kind === "Job" ? "Jobs" : "Labs"}
+      className="shell mt-12"
+    >
       <ol className="border-t border-fg">
-        {qs.map((q, i) => {
+        {list.map((q, i) => {
           const on = open === q.slug;
           return (
             <li key={q.slug} className="border-b border-line">

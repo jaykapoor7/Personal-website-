@@ -4,10 +4,11 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const links = [
-  { href: "/started", label: "Started" },
-  { href: "/questions", label: "Questions" },
-  { href: "/predictions", label: "Predictions" },
-  { href: "/play", label: "Play" },
+  { href: "/ventures", label: "Ventures" },
+  { href: "/experience", label: "Experience" },
+  { href: "/research", label: "Research" },
+  { href: "/writing", label: "Writing" },
+  { href: "/projects", label: "Projects" },
   { href: "/about", label: "About" },
 ];
 
