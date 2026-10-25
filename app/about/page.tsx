@@ -22,7 +22,7 @@ import {
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Jay Kapoor: Bangalore to Pittsburgh, StrayPaw, research at Pitt, and a lot of football.",
+    "Jay Kapoor: school in Bangalore, Economics and Statistics at Pitt, StrayPaw, research and work.",
 };
 
 const months = "JanFebMarAprMayJunJulAugSepOctNovDec";
@@ -71,7 +71,7 @@ const sections = [
   { id: "experience", label: "Experience" },
   { id: "education", label: "Education" },
   { id: "leadership", label: "Leadership" },
-  { id: "life", label: "Off the clock" },
+  { id: "life", label: "Photos" },
   { id: "resume", label: "Resume" },
 ];
 
@@ -328,7 +328,7 @@ export default function AboutPage() {
           aria-labelledby="life-h"
           className="mt-24 scroll-mt-28"
         >
-          <H2 id="life">Off the clock</H2>
+          <H2 id="life">Photos</H2>
           <ul className="mt-6 grid grid-cols-3 gap-3">
             {[
               ...life.map((p) => ({
@@ -391,11 +391,6 @@ export default function AboutPage() {
               </svg>
             </a>
           </div>
-          <p className="mt-12 max-w-[52ch] text-[16px] leading-relaxed text-fg/85">
-            The best things I have worked on started with someone saying
-            &ldquo;nobody is keeping track of this.&rdquo; If that sounds like
-            your problem, write to me.
-          </p>
         </section>
       </div>
     </div>

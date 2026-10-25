@@ -72,12 +72,13 @@ export default function Page() {
             href="/ledger"
             className="inline-flex items-center gap-1.5 text-[14px] font-semibold hover:text-accent"
           >
-            Every call, scored <Arrow direction="right" />
+            All forecasts <Arrow direction="right" />
           </Link>
         </div>
         <p className="mt-3 max-w-[56ch] text-[15px] text-muted">
           The memos make calls. Each one gets a date and a probability, and is
-          scored when it lands. Bet against me.
+          scored when it lands. Pick your own odds on one of my open calls, then
+          see mine.
         </p>
         <Reveal className="mt-8">
           <Bet />

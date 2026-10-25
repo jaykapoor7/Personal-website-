@@ -180,7 +180,7 @@ const stories: Story[] = [
 function Made({ venture }: { venture: Venture }) {
   return (
     <div>
-      <p className="text-[13px] font-medium text-muted">So I started</p>
+      <p className="text-[13px] font-medium text-muted">Founded</p>
       <h3 className="mt-2 text-[clamp(40px,5.4vw,84px)] font-semibold leading-[0.9] tracking-[-0.055em]">
         {venture.name}
       </h3>
@@ -201,7 +201,7 @@ function Made({ venture }: { venture: Venture }) {
       </dl>
       <div className="mt-8 flex flex-wrap items-center gap-2">
         <Link href={`/work/${venture.id}`} className="btn-primary">
-          The full story <Arrow direction="right" />
+          Case study <Arrow direction="right" />
         </Link>
         {venture.site && (
           <SmartLink href={venture.site.href} className="btn-ghost">

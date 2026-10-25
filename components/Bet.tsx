@@ -126,7 +126,7 @@ export function Bet() {
               onClick={lock}
               className="rounded-full bg-white px-5 py-2.5 text-[15px] font-semibold text-fg transition-colors hover:bg-accent hover:text-white"
             >
-              Lock it in
+              Compare with mine
             </button>
           )}
         </div>

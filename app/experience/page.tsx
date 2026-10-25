@@ -13,7 +13,7 @@ export default function Page() {
       <PageHead
         kicker="Jobs and internships"
         title="Experience"
-        aside="Four jobs, each written as the question it was really about."
+        aside="Real estate, early education, fintech and banking, 2025 to 2026."
       />
       <Questions kind="Job" />
     </>

@@ -13,9 +13,9 @@ export default function Page() {
   return (
     <>
       <PageHead
-        kicker="Things I started"
+        kicker="Founded"
         title="Startups"
-        aside="Each one began with something I noticed."
+        aside="Four things I founded, from 2019 to now."
       />
       <div className="mt-14">
         <Noticed />

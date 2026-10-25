@@ -110,10 +110,10 @@ export function Opening() {
         className="group mb-20 inline-flex flex-wrap items-center gap-x-2 gap-y-1 text-[17px] font-medium md:mb-28"
       >
         <span className="text-muted transition-colors group-hover:text-fg">
-          A health app, a dog database, a bank, eight preschools.
+          A health app, a dog database, a bank, eight preschools:
         </span>
         <span className="underline decoration-line underline-offset-4 group-hover:decoration-fg">
-          How it all fits
+          how they connect
         </span>
         <span
           aria-hidden="true"

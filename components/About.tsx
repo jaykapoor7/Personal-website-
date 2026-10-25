@@ -106,7 +106,7 @@ export function Intro({ paras }: { paras: React.ReactNode[] }) {
       ))}
       {fine && (
         <p className="text-[13px] font-medium text-faint">
-          Psst. Drag my photo somewhere else.
+          Drag the photo into any paragraph.
         </p>
       )}
     </div>

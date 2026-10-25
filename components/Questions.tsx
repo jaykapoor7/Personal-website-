@@ -81,7 +81,7 @@ function Answer({ q }: { q: Q }) {
             href={`/work/${q.slug}`}
             className="btn-primary h-10 text-[14px]"
           >
-            Full story <Arrow direction="right" />
+            Case study <Arrow direction="right" />
           </Link>
           {q.site && (
             <SmartLink

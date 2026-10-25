@@ -241,10 +241,6 @@ export function Thread() {
           problem, since nobody kept one. And it only works through operations:
           19 NGO partners and a pilot with a municipality.
         </p>
-        <p>
-          The games are the exception. Those are the part where nothing has to
-          be useful.
-        </p>
       </div>
     </div>
   );

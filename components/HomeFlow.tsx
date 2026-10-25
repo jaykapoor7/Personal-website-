@@ -243,10 +243,7 @@ export function HomeFlow() {
         line={`${ventures
           .map((v) => v.name)
           .join(", ")
-          .replace(
-            /, ([^,]*)$/,
-            " and $1",
-          )}. Each began with something I noticed.`}
+          .replace(/, ([^,]*)$/, " and $1")}.`}
       >
         <Map />
       </Row>
@@ -254,7 +251,7 @@ export function HomeFlow() {
         href="/experience"
         no="02"
         title="Experience"
-        line="Operations, growth, finance and real estate, each written as the question it was about."
+        line="TARC, TOT Schools, Crowwd and HDFC Bank: real estate, early education, fintech and banking."
         flip
       >
         <Places />
@@ -271,7 +268,7 @@ export function HomeFlow() {
         href="/projects"
         no="04"
         title="Projects"
-        line={`${builds.length} tools and games, each explained and playable right in the browser.`}
+        line={`${builds.length} tools and games, each playable in the browser.`}
         flip
       >
         <Deck />

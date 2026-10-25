@@ -48,7 +48,7 @@ export default function Ledger() {
           <Reveal>
             <p className="label">Forecast ledger</p>
             <h1 className="mt-4 max-w-4xl text-[clamp(44px,6.5vw,88px)] font-semibold leading-[0.95] tracking-[-0.045em]">
-              Calls on the record, scored when they land.
+              Every forecast, with its probability and result.
             </h1>
             <p className="mt-5 max-w-2xl text-[18px] leading-relaxed text-fg/75">
               Each forecast gets a date and a probability when I make it. Indian

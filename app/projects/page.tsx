@@ -12,9 +12,9 @@ export default function Page() {
   return (
     <>
       <PageHead
-        kicker="Tools and games I built"
+        kicker="Tools and games"
         title="Projects"
-        aside="Tools I wanted, and games nobody asked for. They all run right here."
+        aside="Three tools and three browser games, each playable on this page."
       />
       <Reveal className="shell mt-12">
         <BuildsBrowser />

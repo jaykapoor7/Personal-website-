@@ -96,14 +96,9 @@ export function DogMap() {
               {p < 0.15 ? (
                 <>June 2026: 50 dogs in Delhi.</>
               ) : done ? (
-                <>
-                  By October:{" "}
-                  <span className="serif font-normal text-white/70">
-                    every dot is a real neighbourhood.
-                  </span>
-                </>
+                <>October 2026: 28 cities.</>
               ) : (
-                <>Then it spread.</>
+                <>Across India.</>
               )}
             </h2>
             <p className="mt-4 text-[clamp(56px,9vw,140px)] md:mt-8 font-semibold leading-none tracking-[-0.06em]">

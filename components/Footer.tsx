@@ -11,7 +11,7 @@ export function Footer() {
       className="mt-24 scroll-mt-16 bg-fg text-white md:mt-32"
     >
       <div className="shell pb-8 pt-16 md:pt-24">
-        <p className="text-[13px] font-medium text-white/60">Say hello</p>
+        <p className="text-[13px] font-medium text-white/60">Email</p>
         <a
           href={`mailto:${person.email}`}
           className="group mt-4 block text-[clamp(44px,11vw,170px)] font-semibold leading-[0.85] tracking-[-0.06em]"
