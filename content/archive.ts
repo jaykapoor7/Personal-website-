@@ -57,6 +57,8 @@ export const labSlug: Record<string, string> = {
   "3sixty": "sci-3sixty",
   upmc: "upmc-emergency-medicine",
   apodaca: "apodaca-lab",
+  sociology: "pitt-sociology",
+  max: "max-hospital",
 };
 
 const roleImage: Record<string, { src: string; look: Entry["look"] }> = {
@@ -104,7 +106,7 @@ export const entries: Entry[] = [
     year: firstYear(l.period),
     when: span(l.period),
     line: l.summary,
-    image: l.shot.src,
+    image: l.shot?.src,
     look: "screen",
     href: `/work/${labSlug[l.id]}`,
     caseOf: { type: "lab", l },

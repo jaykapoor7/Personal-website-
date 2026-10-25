@@ -47,10 +47,10 @@ const qs: Q[] = [
     role: l.lead ? `${l.role}, with ${l.lead}` : l.role,
     period: l.period,
     logo: l.logo,
-    points: [l.summary],
+    points: l.points ?? [l.summary],
     site: l.site,
     proof: [],
-    shot: l.shot.src,
+    shot: l.shot?.src,
   })),
 ].sort(
   (a, b) =>

@@ -43,7 +43,7 @@ const doc = (label: string, href: string): Proof => ({
   cover: href.endsWith(".pdf") ? cover(href) : undefined,
 });
 
-/* Ventures: things I started */
+/* Startups: things I started */
 export type Venture = {
   id: string;
   name: string;
@@ -311,9 +311,11 @@ export type Lab = {
   period: string;
   lead?: string;
   summary: string;
+  /** Extra detail for the answer and case page. */
+  points?: string[];
   logo?: string;
   site: Link;
-  shot: Shot;
+  shot?: Shot;
 };
 
 export const labs: Lab[] = [
@@ -383,26 +385,44 @@ export const labs: Lab[] = [
     },
     shot: { src: "/previews/apodaca-d.webp", url: "people.dom.pitt.edu" },
   },
+  {
+    id: "sociology",
+    question: "How do you turn a survey into evidence?",
+    name: "Pitt Sociology",
+    role: "Research Assistant",
+    period: "Pitt",
+    summary:
+      "Social-science research in Pitt's Department of Sociology: literature reviews, survey data and analysis in R and Stata.",
+    points: [
+      "Worked across the research cycle: literature review, data collection and cleaning, coding, and analysis in R and Stata.",
+      "Ran digital outreach and logistics for 10+ sociology workshops.",
+    ],
+    logo: "/logos/pitt.png",
+    site: {
+      label: "sociology.pitt.edu",
+      href: "https://www.sociology.pitt.edu",
+    },
+    shot: { src: "/previews/pitt-sociology-d.webp", url: "sociology.pitt.edu" },
+  },
+  {
+    id: "max",
+    question: "What does emergency medicine look like from the inside?",
+    name: "Max Hospital, New Delhi",
+    role: "Clinical shadowing",
+    period: "2023 to 2024",
+    summary:
+      "Clinical shadowing in emergency and internal medicine at Max Hospital in New Delhi.",
+    site: { label: "maxhealthcare.in", href: "https://www.maxhealthcare.in" },
+  },
 ];
 
-export const otherResearch = [
-  {
-    name: "Pitt Sociology",
-    detail:
-      "Research assistant: literature reviews and survey analysis in R and Stata.",
-    href: "https://www.sociology.pitt.edu",
-  },
-  {
-    name: "Economics research with Prof. Yasir Khan",
-    detail: "India's Kisan Rail.",
-  },
-  {
-    name: "Max Hospital, New Delhi",
-    detail:
-      "Clinical shadowing in emergency and internal medicine, 2023 to 2024.",
-    href: "https://www.maxhealthcare.in",
-  },
-];
+export const otherResearch: { name: string; detail: string; href?: string }[] =
+  [
+    {
+      name: "Economics research with Prof. Yasir Khan",
+      detail: "India's Kisan Rail.",
+    },
+  ];
 
 /* Writing */
 export type Writing = {
@@ -688,8 +708,6 @@ export const life = [
 
 /** Old project URLs that are not case pages any more, so shared links still land well. */
 export const legacy: Record<string, string> = {
-  "pitt-sociology": "/research",
-  "max-hospital": "/research",
   "juno-preventive-health": "/work/juno-ai",
   "recovery-intelligence": "/play/cura",
   road360: "/play/road360",

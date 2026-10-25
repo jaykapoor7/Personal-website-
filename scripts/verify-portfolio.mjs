@@ -21,7 +21,10 @@ const browser = await chromium.launch({
 // Old section URLs (/work, /research, ...) and old project slugs forward to their new homes.
 const routes = [
   "/",
+  "/startups/",
   "/ventures/",
+  "/work/pitt-sociology/",
+  "/work/max-hospital/",
   "/projects/",
   "/started/",
   "/questions/",

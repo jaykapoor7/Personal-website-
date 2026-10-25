@@ -260,9 +260,9 @@ export function HomeTiles() {
   return (
     <ul className="grid gap-3 md:grid-cols-12 md:gap-4">
       <Tile
-        href="/ventures"
+        href="/startups"
         no="01"
-        title="Ventures"
+        title="Startups"
         note="StrayPaw, Juno-AI, Project Nidaan and The Finer Things Club."
         dark
         className="md:col-span-7 md:row-span-2 md:min-h-[460px]"
@@ -284,7 +284,7 @@ export function HomeTiles() {
         href="/research"
         no="03"
         title="Research"
-        note={`${labs.length} labs, plus my own memos and scored forecasts.`}
+        note="Labs at Pitt and UPMC, plus my own memos and scored forecasts."
         className="md:col-span-5"
         delay={0.92}
       >

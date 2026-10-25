@@ -67,7 +67,7 @@ function details(e: Entry) {
   return {
     kicker: `${l.role}, ${l.period}${l.lead ? `, with ${l.lead}` : ""}`,
     lede: l.summary,
-    points: [] as string[],
+    points: l.points ?? [],
     metrics: [] as Metric[],
     site: l.site,
     links: [] as L[],
@@ -129,7 +129,7 @@ export default function CasePage({ params }: { params: { slug: string } }) {
           <Link
             href={
               e.verb === "Started"
-                ? "/ventures"
+                ? "/startups"
                 : e.verb === "Worked"
                   ? "/experience"
                   : "/research"
@@ -138,7 +138,7 @@ export default function CasePage({ params }: { params: { slug: string } }) {
           >
             <Arrow direction="left" />{" "}
             {e.verb === "Started"
-              ? "Ventures"
+              ? "Startups"
               : e.verb === "Worked"
                 ? "Experience"
                 : "Research"}

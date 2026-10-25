@@ -7,7 +7,7 @@ import { SmartLink } from "./ui";
 
 const tilt = [-3, 2, -1.5, 3, -2.5, 1.5];
 
-/** My own research, on a shelf. The Juno-AI paper sits with Juno-AI under Ventures. */
+/** My own research, on a shelf. The Juno-AI paper sits with Juno-AI under Startups. */
 export function Shelf() {
   return (
     <Stagger
