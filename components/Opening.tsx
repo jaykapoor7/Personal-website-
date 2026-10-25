@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Link } from "next-view-transitions";
 import { useEffect, useRef } from "react";
 import { portrait } from "@/content/site";
-import { HomeTiles } from "./HomeTiles";
+import { HomeFlow } from "./HomeFlow";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -68,14 +68,10 @@ export function Opening() {
   const reduce = useReducedMotion();
   useWeight(ref);
   return (
-    <section aria-label="Introduction" className="shell pb-4 pt-24 md:pt-28">
-      <div className="flex justify-end text-[13px] font-medium text-muted">
-        <span>Economics and Statistics, University of Pittsburgh</span>
-      </div>
-
+    <section aria-label="Introduction" className="shell pb-4 pt-28 md:pt-40">
       <h1
         ref={ref}
-        className="my-10 text-[clamp(44px,7.6vw,120px)] md:my-14 font-medium leading-[0.95] tracking-[-0.055em]"
+        className="mb-10 text-[clamp(44px,7.6vw,120px)] md:mb-14 font-medium leading-[0.95] tracking-[-0.055em]"
       >
         <span className="sr-only">
           I&apos;m Jay. Most things I make start with something I noticed.
@@ -111,7 +107,7 @@ export function Opening() {
 
       <Link
         href="/about#thread"
-        className="group -mt-4 mb-8 inline-flex items-center gap-2 text-[16px] font-medium md:-mt-6 md:mb-10"
+        className="group mb-20 inline-flex flex-wrap items-center gap-x-2 gap-y-1 text-[17px] font-medium md:mb-28"
       >
         <span className="text-muted transition-colors group-hover:text-fg">
           A health app, a dog database, a bank, eight preschools.
@@ -126,7 +122,7 @@ export function Opening() {
           →
         </span>
       </Link>
-      <HomeTiles />
+      <HomeFlow />
     </section>
   );
 }
