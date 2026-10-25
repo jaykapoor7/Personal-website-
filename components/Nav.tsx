@@ -4,11 +4,11 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const links = [
-  { href: "/#noticed", label: "Noticed" },
-  { href: "/#questions", label: "Questions" },
-  { href: "/#predictions", label: "Predictions" },
-  { href: "/#play", label: "Play" },
-  { href: "/#photos", label: "Photos" },
+  { href: "/started", label: "Started" },
+  { href: "/questions", label: "Questions" },
+  { href: "/predictions", label: "Predictions" },
+  { href: "/play", label: "Play" },
+  { href: "/about", label: "About" },
 ];
 
 /** Local time in Pittsburgh, so visitors know if it is 3am here. */
@@ -35,6 +35,7 @@ function Clock() {
 export function Nav() {
   const path = usePathname();
   const [open, setOpen] = useState(false);
+  const here = (href: string) => path?.startsWith(href) ?? false;
   const [solid, setSolid] = useState(false);
 
   useEffect(() => setOpen(false), [path]);
@@ -75,7 +76,10 @@ export function Nav() {
             <Link
               key={l.href}
               href={l.href}
-              className="rounded-full px-3 py-1.5 text-[14px] font-medium text-muted transition-colors hover:bg-fg hover:text-white"
+              aria-current={here(l.href) ? "page" : undefined}
+              className={`rounded-full px-3 py-1.5 text-[14px] font-medium transition-colors hover:bg-fg hover:text-white ${
+                here(l.href) ? "bg-fg text-white" : "text-muted"
+              }`}
             >
               {l.label}
             </Link>
@@ -122,6 +126,7 @@ export function Nav() {
           <Link
             key={l.href}
             href={l.href}
+            aria-current={here(l.href) ? "page" : undefined}
             onClick={() => setOpen(false)}
             className="block border-t border-line py-3 text-[40px] font-semibold leading-none tracking-[-0.05em]"
           >

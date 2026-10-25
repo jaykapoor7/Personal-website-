@@ -21,6 +21,9 @@ const browser = await chromium.launch({
 // Old section URLs (/work, /research, ...) and old project slugs forward to their new homes.
 const routes = [
   "/",
+  "/started/",
+  "/questions/",
+  "/predictions/",
   "/work/",
   "/work/straypaw/",
   "/work/juno-ai/",
@@ -112,10 +115,11 @@ try {
         .locator("#mobile-menu")
         .getByRole("link", { name: "Questions" })
         .tap();
-      await page.waitForURL(/#questions$/);
+      await page.waitForURL(/\/questions\/?$/);
     }
 
     // Each question opens to show the work behind it.
+    await page.goto(base + "/questions/", { waitUntil: "networkidle" });
     const q = page.getByRole("button", { name: /bladder cell/ });
     await q.scrollIntoViewIfNeeded();
     await q.click();
@@ -127,11 +131,12 @@ try {
     );
 
     // Bet against me: lock in odds and see mine.
+    await page.goto(base + "/predictions/", { waitUntil: "networkidle" });
     const lock = page.getByRole("button", { name: "Lock it in" });
     await lock.scrollIntoViewIfNeeded();
     await lock.click();
     assert.match(
-      await page.locator("#predictions").innerText(),
+      await page.locator("main").innerText(),
       /I said \d+%/,
       "Bet reveals my odds",
     );

@@ -99,10 +99,9 @@ export function Reel() {
 
   return (
     <section
-      id="photos"
-      aria-labelledby="photos-h"
+      aria-label="Photos"
       ref={ref}
-      className={`scroll-mt-0 bg-fg text-white ${reduce ? "py-24" : "h-[300vh]"}`}
+      className={`mt-12 bg-fg text-white ${reduce ? "py-24" : "h-[220vh]"}`}
     >
       <div
         className={
@@ -111,17 +110,6 @@ export function Reel() {
             : "sticky top-0 flex h-[100svh] flex-col justify-center overflow-hidden"
         }
       >
-        <div className="shell mb-8 flex flex-wrap items-end justify-between gap-4 md:mb-12">
-          <h2
-            id="photos-h"
-            className="text-[clamp(48px,8vw,120px)] font-semibold leading-[0.85] tracking-[-0.06em]"
-          >
-            Off the clock
-          </h2>
-          <p className="serif max-w-[24ch] text-[clamp(20px,2vw,28px)] leading-[1.05] text-white/70">
-            Bangalore, then Pittsburgh. A lot of football in between.
-          </p>
-        </div>
         {reduce ? strip : <motion.div style={{ x }}>{strip}</motion.div>}
       </div>
     </section>

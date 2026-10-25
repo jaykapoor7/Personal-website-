@@ -8,7 +8,7 @@ export function Footer() {
   return (
     <footer
       id="contact"
-      className="mt-32 scroll-mt-16 bg-fg text-white md:mt-44"
+      className="mt-24 scroll-mt-16 bg-fg text-white md:mt-32"
     >
       <div className="shell pb-8 pt-16 md:pt-24">
         <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-white/60">

@@ -228,14 +228,14 @@ export function Noticed() {
         return (
           <article
             key={s.id}
-            className="shell overflow-x-clip border-t border-fg pb-24 pt-5 md:pb-40"
+            className="shell overflow-x-clip border-t border-fg pb-16 pt-5 md:pb-24"
           >
             <div className="flex justify-between font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
               <span>Noticed, no. {i + 1}</span>
               <span>{s.year}</span>
             </div>
             <motion.p
-              className="serif mt-8 max-w-[22ch] text-[clamp(38px,6vw,96px)] leading-[0.98] tracking-[-0.02em]"
+              className="serif mt-8 max-w-[22ch] text-[clamp(34px,4.6vw,72px)] leading-[0.98] tracking-[-0.02em]"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "0px 0px -10% 0px" }}
@@ -243,7 +243,7 @@ export function Noticed() {
             >
               &ldquo;{s.noticed}&rdquo;
             </motion.p>
-            <div className="mt-14 grid items-start gap-12 md:mt-20 md:grid-cols-[0.9fr_1.1fr] md:gap-16">
+            <div className="mt-10 grid items-start gap-10 md:mt-12 md:grid-cols-[0.9fr_1.1fr] md:gap-16">
               <div className="md:sticky md:top-28">
                 <Made venture={venture} />
               </div>

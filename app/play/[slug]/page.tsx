@@ -30,7 +30,7 @@ export default function PlayPage({ params }: { params: { slug: string } }) {
     <article className="shell pt-24 md:pt-28">
       <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
         <Link
-          href="/#play"
+          href="/play"
           className="inline-flex items-center gap-1.5 hover:text-fg"
         >
           <Arrow direction="left" /> Play

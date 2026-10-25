@@ -3,6 +3,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { portrait } from "@/content/site";
+import { Doors } from "./Doors";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -66,10 +67,7 @@ export function Opening() {
   const reduce = useReducedMotion();
   useWeight(ref);
   return (
-    <section
-      aria-label="Introduction"
-      className="shell flex min-h-[100svh] flex-col justify-between pb-8 pt-24 md:pt-28"
-    >
+    <section aria-label="Introduction" className="shell pb-4 pt-24 md:pt-28">
       <div className="flex justify-between font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
         <span>Jay Kapoor</span>
         <span>Economics and Statistics, Pitt</span>
@@ -77,7 +75,7 @@ export function Opening() {
 
       <h1
         ref={ref}
-        className="my-10 text-[clamp(44px,8.4vw,132px)] font-medium leading-[0.95] tracking-[-0.055em]"
+        className="my-10 text-[clamp(44px,7.6vw,120px)] md:my-14 font-medium leading-[0.95] tracking-[-0.055em]"
       >
         <span className="sr-only">
           I&apos;m Jay. Most things I make start with something I noticed.
@@ -111,34 +109,7 @@ export function Opening() {
         </span>
       </h1>
 
-      <div className="flex flex-wrap items-end justify-between gap-6">
-        <p className="max-w-[40ch] text-[16px] leading-relaxed text-muted">
-          Four of them I started myself. Others became research, jobs, a
-          forecasting habit and a few games that should not exist.
-        </p>
-        <motion.a
-          href="#noticed"
-          className="group flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.14em]"
-          initial={reduce ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.4 }}
-        >
-          Here is what I noticed
-          <span className="grid h-10 w-10 place-items-center rounded-full ring-1 ring-fg transition-colors group-hover:bg-fg group-hover:text-white">
-            <motion.svg
-              viewBox="0 0 24 24"
-              className="h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              animate={reduce ? undefined : { y: [0, 3, 0] }}
-              transition={{ repeat: Infinity, duration: 1.6 }}
-            >
-              <path d="M12 4v16M6 14l6 6 6-6" />
-            </motion.svg>
-          </span>
-        </motion.a>
-      </div>
+      <Doors />
     </section>
   );
 }

@@ -139,24 +139,8 @@ function Answer({ q }: { q: Q }) {
 export function Questions() {
   const [open, setOpen] = useState<string | null>(qs[0].slug);
   return (
-    <section
-      id="questions"
-      aria-labelledby="questions-h"
-      className="shell scroll-mt-16 pt-28 md:pt-40"
-    >
-      <div className="flex flex-wrap items-end justify-between gap-6">
-        <h2
-          id="questions-h"
-          className="text-[clamp(56px,10vw,150px)] font-semibold leading-[0.85] tracking-[-0.06em]"
-        >
-          Questions
-        </h2>
-        <p className="serif max-w-[26ch] text-[clamp(22px,2.4vw,32px)] leading-[1.05]">
-          Other people&apos;s problems I got to work on, at four jobs and four
-          labs.
-        </p>
-      </div>
-      <ol className="mt-12 border-t border-fg">
+    <section aria-label="Questions" className="shell mt-12">
+      <ol className="border-t border-fg">
         {qs.map((q, i) => {
           const on = open === q.slug;
           return (

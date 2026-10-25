@@ -79,7 +79,7 @@ export function DogMap() {
     <section
       aria-labelledby="map-h"
       ref={ref}
-      className={reduce ? "" : "h-[340vh]"}
+      className={reduce ? "" : "h-[240vh]"}
     >
       <div
         className={`${reduce ? "" : "sticky top-0 h-[100svh]"} overflow-hidden bg-fg text-white`}
