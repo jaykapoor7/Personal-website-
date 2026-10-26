@@ -635,7 +635,7 @@ export const leadership = [
   {
     title: "Founder, Entrepreneurship Club",
     org: "The International School Bangalore",
-    period: "2021 to 2023",
+    period: "Aug 2021 to Aug 2023",
     detail: "Started and ran the school's entrepreneurship club.",
     logo: "/logos/tisb.png",
     href: "https://www.tisb.org",
@@ -643,7 +643,7 @@ export const leadership = [
   {
     title: "Head of Vendor Acquisition",
     org: "The International School Bangalore",
-    period: "2022",
+    period: "May to Sep 2022",
     detail: "Managed 25 vendors and a $10k budget for a 4,000-attendee event.",
     logo: "/logos/tisb.png",
     href: "https://www.tisb.org",

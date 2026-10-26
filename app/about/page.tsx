@@ -306,6 +306,11 @@ export default function AboutPage() {
                     {l.org}
                   </span>
                   <span className="text-muted">: {l.title}</span>
+                  {/\d/.test(l.period) && (
+                    <span className="ml-2 text-[13px] text-faint">
+                      {l.period}
+                    </span>
+                  )}
                 </p>
                 <p className="mt-1 text-[14.5px] leading-relaxed text-fg/80">
                   {l.detail}
