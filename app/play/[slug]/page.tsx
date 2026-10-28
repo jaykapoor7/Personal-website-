@@ -27,18 +27,9 @@ export default function PlayPage({ params }: { params: { slug: string } }) {
   const next = builds[(i + 1) % builds.length];
 
   return (
-    <article className="shell pt-24 md:pt-28">
-      <div className="flex items-center justify-between text-[13px] font-medium text-muted">
-        <Link
-          href="/projects"
-          className="inline-flex items-center gap-1.5 hover:text-fg"
-        >
-          <Arrow direction="left" /> Projects
-        </Link>
-        <span>{b.kind}, 2026</span>
-      </div>
-      <header className="mt-8 grid gap-6 border-t border-fg pt-4 md:grid-cols-[1.4fr_1fr] md:items-end">
-        <h1 className="text-[clamp(48px,9vw,140px)] font-semibold leading-[0.86] tracking-[-0.06em]">
+    <article className="shell pt-28 md:pt-36">
+      <header className="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
+        <h1 className="text-[clamp(48px,9vw,140px)] font-semibold leading-[0.86]">
           {b.name}
         </h1>
         <div>
@@ -76,13 +67,7 @@ export default function PlayPage({ params }: { params: { slug: string } }) {
             </div>
           </div>
         ) : (
-          <div className="deep-shadow overflow-hidden rounded-[14px] ring-1 ring-black/10">
-            <div className="flex h-9 items-center gap-1.5 border-b border-line bg-paper px-3">
-              <i className="h-2.5 w-2.5 rounded-full bg-black/15" />
-              <i className="h-2.5 w-2.5 rounded-full bg-black/15" />
-              <i className="h-2.5 w-2.5 rounded-full bg-black/15" />
-              <span className="mx-auto text-[13px] text-muted">{b.url}</span>
-            </div>
+          <div className="overflow-hidden rounded-xl">
             <div className="relative h-[min(78vh,760px)] bg-white">
               <Image
                 src={b.image!}
@@ -105,7 +90,7 @@ export default function PlayPage({ params }: { params: { slug: string } }) {
 
       <section
         aria-label="About this project"
-        className="mt-14 grid gap-8 border-t border-fg pt-6 md:grid-cols-[1fr_260px]"
+        className="mt-14 grid gap-8 md:grid-cols-[1fr_260px]"
       >
         <ul className="max-w-[62ch] space-y-3 text-[17px] leading-relaxed">
           {b.points.map((p) => (
@@ -120,26 +105,17 @@ export default function PlayPage({ params }: { params: { slug: string } }) {
         </ul>
         <div>
           <p className="label">Built with</p>
-          <ul className="mt-2 flex flex-wrap gap-1.5">
-            {b.stack.map((t) => (
-              <li
-                key={t}
-                className="rounded-full px-2.5 py-1 text-[13px] ring-1 ring-line"
-              >
-                {t}
-              </li>
-            ))}
-          </ul>
+          <p className="mt-1 text-[15px]">{b.stack.join(", ")}</p>
         </div>
       </section>
 
       <Link
         href={next.falls ? next.href! : `/play/${next.id}`}
-        className="group mt-24 block border-t border-fg pt-4"
+        className="group mt-24 block pt-4"
       >
         <span className="text-[13px] font-medium text-muted">Next</span>
         <span className="mt-2 flex items-center justify-between gap-6">
-          <span className="text-[clamp(40px,8vw,120px)] font-semibold leading-[0.9] tracking-[-0.06em] transition-transform duration-500 group-hover:translate-x-3">
+          <span className="text-[clamp(40px,8vw,120px)] font-semibold leading-[0.9] transition-transform duration-500 group-hover:translate-x-3">
             {next.name}
           </span>
           <Arrow direction="right" className="text-[clamp(32px,5vw,72px)]" />

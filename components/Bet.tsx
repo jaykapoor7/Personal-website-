@@ -46,29 +46,8 @@ export function Bet() {
   const gap = locked ? mine[i] - call.conviction : 0;
 
   return (
-    <div className="grid gap-10 rounded-[28px] bg-fg p-6 text-white md:grid-cols-[1.3fr_1fr] md:p-12">
+    <div className="grid gap-10 md:grid-cols-[1.3fr_1fr]">
       <div>
-        <div className="flex gap-1.5" role="group" aria-label="Choose a call">
-          {picks.map((_, n) => (
-            <button
-              key={n}
-              type="button"
-              aria-pressed={i === n}
-              aria-label={`Call ${n + 1}`}
-              onClick={() => {
-                setI(n);
-                setGuess(mine[n] ?? 50);
-              }}
-              className={`h-9 w-9 rounded-full text-[13px] transition-colors ${
-                i === n
-                  ? "bg-white text-fg"
-                  : "ring-1 ring-white/30 hover:bg-white/10"
-              }`}
-            >
-              {n + 1}
-            </button>
-          ))}
-        </div>
         <AnimatePresence mode="wait">
           <motion.p
             key={i}
@@ -76,21 +55,30 @@ export function Bet() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.3 }}
-            className="mt-8 text-[clamp(26px,3.2vw,46px)] font-medium leading-[1.05] tracking-[-0.035em]"
+            className="text-[clamp(26px,3.2vw,46px)] font-medium leading-[1.08]"
           >
             {call.prediction}
           </motion.p>
         </AnimatePresence>
-        <p className="mt-4 text-[13px] font-medium text-white/60">
-          Resolves {call.due}
-        </p>
+        <p className="mt-4 text-[15px] text-muted">Resolves {call.due}</p>
+        <button
+          type="button"
+          onClick={() => {
+            const n = (i + 1) % picks.length;
+            setI(n);
+            setGuess(mine[n] ?? 50);
+          }}
+          className="mt-6 text-[15px] font-medium text-accent hover:underline"
+        >
+          Another call →
+        </button>
       </div>
 
       <div className="flex flex-col justify-end">
-        <label htmlFor="bet" className="text-[13px] font-medium text-white/60">
+        <label htmlFor="bet" className="text-[15px] text-muted">
           Your odds
         </label>
-        <p className="text-[clamp(64px,8vw,112px)] font-semibold leading-none tracking-[-0.06em]">
+        <p className="text-[clamp(64px,8vw,112px)] font-semibold leading-none">
           {locked ? mine[i] : guess}%
         </p>
         <input
@@ -101,38 +89,30 @@ export function Bet() {
           value={locked ? mine[i] : guess}
           disabled={locked}
           onChange={(e) => setGuess(Number(e.target.value))}
-          className="mt-4 w-full accent-[#818cf8]"
+          className="mt-4 w-full accent-[rgb(var(--accent))]"
         />
-        <div className="mt-6 min-h-[92px]">
+        <div className="mt-6 min-h-[84px]">
           {locked ? (
-            <motion.div
+            <motion.p
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
+              className="text-[19px] leading-snug"
             >
-              <p className="text-[20px] leading-snug">
-                I said <span className="font-semibold">{call.conviction}%</span>
-                .{" "}
-                {Math.abs(gap) < 5
-                  ? "We basically agree."
-                  : `You are ${Math.abs(gap)} points ${gap > 0 ? "more" : "less"} sure than me.`}
-              </p>
-              <p className="mt-1 text-[14px] text-white/60">
-                Saved on this device. Come back in {call.due}.
-              </p>
-            </motion.div>
+              I said <span className="font-semibold">{call.conviction}%</span>.{" "}
+              {Math.abs(gap) < 5
+                ? "We basically agree."
+                : `You are ${Math.abs(gap)} points ${gap > 0 ? "more" : "less"} sure than me.`}{" "}
+              <span className="text-muted">Saved on this device.</span>
+            </motion.p>
           ) : (
-            <button
-              type="button"
-              onClick={lock}
-              className="rounded-full bg-white px-5 py-2.5 text-[15px] font-semibold text-fg transition-colors hover:bg-accent hover:text-white"
-            >
+            <button type="button" onClick={lock} className="btn-primary">
               Compare with mine
             </button>
           )}
         </div>
         <Link
           href="/ledger"
-          className="mt-6 inline-flex items-center gap-1.5 border-t border-white/15 pt-4 text-[14px] text-white/80 hover:text-white"
+          className="mt-4 text-[15px] text-muted hover:text-fg"
         >
           All {ledgerStats.calls} calls. Brier score so far: {ledgerStats.brier}{" "}
           <Arrow direction="right" />

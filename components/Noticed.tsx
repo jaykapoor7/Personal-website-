@@ -53,12 +53,9 @@ export function Unveil({
   );
 }
 
-function Paper({ src, alt, r = 0 }: { src: string; alt: string; r?: number }) {
+function Paper({ src, alt }: { src: string; alt: string }) {
   return (
-    <span
-      className="paper-shadow relative block aspect-[900/1273] overflow-hidden bg-white"
-      style={{ rotate: `${r}deg` }}
-    >
+    <span className="paper-shadow relative block aspect-[900/1273] overflow-hidden bg-white">
       <Image
         src={src}
         alt={alt}
@@ -87,10 +84,7 @@ const stories: Story[] = [
     visual: (
       <div className="relative pb-24 md:pb-32">
         <Unveil>
-          <BrowserFrame
-            url="preventive-healthcare-xi.vercel.app"
-            className="deep-shadow"
-          >
+          <BrowserFrame url="preventive-healthcare-xi.vercel.app">
             <div className="relative aspect-[16/10]">
               <Image
                 src="/previews/juno-preventive-d.webp"
@@ -110,7 +104,6 @@ const stories: Story[] = [
           <Paper
             src="/covers/Juno-AI-Research-Paper.webp"
             alt="First page of the Juno-AI paper in IJEDR"
-            r={4}
           />
         </Unveil>
       </div>
@@ -127,7 +120,6 @@ const stories: Story[] = [
           <Paper
             src="/covers/Finer-Things-Marketplace-One-Pager.webp"
             alt="The Finer Things Club marketplace one-pager"
-            r={-2}
           />
         </Unveil>
       </div>
@@ -143,7 +135,6 @@ const stories: Story[] = [
           <Paper
             src="/covers/Project-Nidaan-Field-Research-Brief.webp"
             alt="First page of the Project Nidaan field research brief"
-            r={2}
           />
         </Unveil>
       </div>
@@ -155,11 +146,8 @@ const stories: Story[] = [
     noticed: "A dog outside a cafe that nobody was keeping track of.",
     visual: (
       <Unveil>
-        <figure
-          className="bg-white p-2.5 pb-12 shadow-[0_30px_60px_-24px_rgba(0,0,0,0.5)] md:p-3 md:pb-14"
-          style={{ rotate: "-1.5deg" }}
-        >
-          <div className="relative aspect-[1200/992] overflow-hidden">
+        <figure>
+          <div className="relative aspect-[1200/992] overflow-hidden rounded-xl">
             <Image
               src="/straypaw/street-dog.webp"
               alt="The street dog outside a cafe that started StrayPaw"
@@ -168,7 +156,7 @@ const stories: Story[] = [
               className="object-cover"
             />
           </div>
-          <figcaption className="serif absolute bottom-3 left-0 right-0 text-center text-[20px] md:bottom-4 md:text-[22px]">
+          <figcaption className="mt-3 text-[15px] text-muted">
             The dog that started it all
           </figcaption>
         </figure>
@@ -180,8 +168,7 @@ const stories: Story[] = [
 function Made({ venture }: { venture: Venture }) {
   return (
     <div>
-      <p className="text-[13px] font-medium text-muted">Founded</p>
-      <h3 className="mt-2 text-[clamp(40px,5.4vw,84px)] font-semibold leading-[0.9] tracking-[-0.055em]">
+      <h3 className="text-[clamp(40px,5.4vw,84px)] font-semibold leading-[0.9]">
         {venture.name}
       </h3>
       <p className="mt-4 max-w-[36ch] text-[17px] leading-snug text-muted">
@@ -190,7 +177,7 @@ function Made({ venture }: { venture: Venture }) {
       <dl className="mt-7 flex flex-wrap gap-x-10 gap-y-5">
         {venture.metrics.map((m) => (
           <div key={m.label}>
-            <dd className="text-[clamp(34px,3.6vw,52px)] font-semibold leading-none tracking-[-0.05em]">
+            <dd className="text-[clamp(34px,3.6vw,52px)] font-semibold leading-none">
               <Counter value={m.value} />
             </dd>
             <dt className="mt-1.5 text-[13px] font-medium text-muted">
@@ -226,14 +213,11 @@ export function Noticed() {
         return (
           <article
             key={s.id}
-            className="shell overflow-x-clip border-t border-fg pb-16 pt-5 md:pb-24"
+            className="shell overflow-x-clip pb-16 pt-5 md:pb-24"
           >
-            <div className="flex justify-between text-[13px] font-medium text-muted">
-              <span>Noticed, no. {i + 1}</span>
-              <span>{s.year}</span>
-            </div>
+            <p className="text-[15px] text-muted">{s.year}</p>
             <motion.p
-              className="serif mt-8 max-w-[22ch] text-[clamp(34px,4.6vw,72px)] leading-[0.98] tracking-[-0.02em]"
+              className="mt-3 max-w-[22ch] font-medium text-[clamp(34px,4.6vw,72px)] leading-[0.98]"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "0px 0px -10% 0px" }}

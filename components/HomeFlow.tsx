@@ -29,14 +29,12 @@ function useTick(ms: number, n: number) {
 /** One full-width row: words on one side, something alive on the other, drifting as you scroll. */
 function Row({
   href,
-  no,
   title,
   line,
   flip,
   children,
 }: {
   href: string;
-  no: string;
   title: string;
   line: string;
   flip?: boolean;
@@ -50,7 +48,7 @@ function Row({
   });
   const y = useTransform(scrollYProgress, [0, 1], [60, -60]);
   return (
-    <li ref={ref} className="border-t border-line">
+    <li ref={ref} className="">
       <Link
         href={href}
         className="group grid items-center gap-8 py-14 md:grid-cols-2 md:gap-16 md:py-20"
@@ -62,12 +60,11 @@ function Row({
           viewport={{ once: true, margin: "0px 0px -15% 0px" }}
           transition={{ duration: 0.9, ease }}
         >
-          <p className="text-[13px] font-medium text-faint">{no}</p>
-          <h2 className="mt-2 flex items-center gap-4 text-[clamp(48px,7vw,104px)] font-semibold leading-[0.9] tracking-[-0.06em]">
+          <h2 className="flex items-center gap-4 text-[clamp(48px,7vw,104px)] font-semibold leading-[0.9]">
             {title}
             <span
               aria-hidden="true"
-              className="text-[0.42em] text-faint transition-all duration-500 ease-out group-hover:translate-x-2 group-hover:text-accent"
+              className="text-[0.42em] text-muted transition-all duration-500 ease-out group-hover:translate-x-2 group-hover:text-accent"
             >
               →
             </span>
@@ -93,23 +90,22 @@ function Map() {
       >
         <path
           d={outline}
-          fill="rgb(14 14 18 / 0.03)"
-          stroke="rgb(14 14 18 / 0.25)"
+          fill="none"
+          stroke="rgb(var(--line))"
           strokeWidth="0.7"
         />
         {cities.map(([name, lng, lat, n], i) => (
           <g key={name} transform={`translate(${px(lng)} ${py(lat)})`}>
-            <circle r={1.6 + Math.sqrt(n) * 0.1} fill="rgb(79 70 229 / 0.18)" />
             <circle
               r="1.7"
-              fill="rgb(79 70 229)"
+              fill="rgb(var(--accent))"
               className="ping"
               style={{ animationDelay: `${(i * 0.37) % 4}s` }}
             />
           </g>
         ))}
       </svg>
-      <p className="-mt-6 text-[clamp(36px,4vw,56px)] font-semibold leading-none tracking-[-0.05em]">
+      <p className="-mt-6 text-[clamp(36px,4vw,56px)] font-semibold leading-none">
         30,288
         <span className="mt-1 block text-[13px] font-medium tracking-normal text-muted">
           animals on StrayPaw, 28 cities
@@ -121,7 +117,7 @@ function Map() {
 
 function Places() {
   return (
-    <ul className="divide-y divide-line">
+    <ul className="">
       {roles.map((r) => (
         <li key={r.id} className="flex items-center gap-4 py-3.5">
           {r.logo && (
@@ -134,14 +130,14 @@ function Places() {
             />
           )}
           <span className="min-w-0 flex-1">
-            <span className="block text-[18px] font-semibold leading-tight tracking-[-0.02em]">
+            <span className="block text-[18px] font-semibold leading-tight">
               {r.org}
             </span>
             <span className="block truncate text-[14px] text-muted">
               {r.role}
             </span>
           </span>
-          <span className="hidden shrink-0 text-[13px] text-faint sm:block">
+          <span className="hidden shrink-0 text-[13px] text-muted sm:block">
             {r.period}
           </span>
         </li>
@@ -155,9 +151,6 @@ function Questions() {
   const i = useTick(2800, qs.length);
   return (
     <div className="flex min-h-[200px] flex-col justify-center">
-      <p className="text-[13px] font-medium text-faint">
-        Questions from the labs
-      </p>
       <AnimatePresence mode="wait">
         <motion.p
           key={i}
@@ -165,7 +158,7 @@ function Questions() {
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           exit={{ opacity: 0, y: -18, filter: "blur(8px)" }}
           transition={{ duration: 0.6, ease }}
-          className="mt-3 text-[clamp(28px,3vw,42px)] font-medium leading-[1.08] tracking-[-0.035em]"
+          className="text-[clamp(28px,3vw,42px)] font-medium leading-[1.08]"
         >
           {qs[i]}
         </motion.p>
@@ -184,7 +177,7 @@ function Deck() {
         return (
           <motion.span
             key={b.id}
-            className="absolute inset-x-0 bottom-0 block overflow-hidden rounded-xl bg-white shadow-[0_30px_60px_-30px_rgba(0,0,0,0.45)] ring-1 ring-black/10"
+            className="absolute inset-x-0 bottom-0 block overflow-hidden rounded-xl bg-white shadow-[0_30px_60px_-30px_rgba(0,0,0,0.45)]"
             animate={{
               y: -k * 16,
               scale: 1 - k * 0.05,
@@ -224,7 +217,7 @@ function Now() {
   }, []);
   return (
     <div>
-      <p className="text-[clamp(64px,8vw,120px)] font-semibold leading-none tracking-[-0.06em]">
+      <p className="text-[clamp(64px,8vw,120px)] font-semibold leading-none">
         {t || " "}
       </p>
       <p className="mt-2 text-[15px] text-muted">in Pittsburgh right now.</p>
@@ -235,10 +228,9 @@ function Now() {
 /** The rest of the site as one continuous scroll, a row per section. */
 export function HomeFlow() {
   return (
-    <ol className="border-b border-line">
+    <ol className="">
       <Row
         href="/startups"
-        no="01"
         title="Startups"
         line={`${ventures
           .map((v) => v.name)
@@ -249,7 +241,6 @@ export function HomeFlow() {
       </Row>
       <Row
         href="/experience"
-        no="02"
         title="Experience"
         line="TARC, TOT Schools, Crowwd and HDFC Bank: real estate, early education, fintech and banking."
         flip
@@ -258,7 +249,6 @@ export function HomeFlow() {
       </Row>
       <Row
         href="/research"
-        no="03"
         title="Research"
         line="Labs at Pitt and UPMC, plus my own memos on healthcare and fintech, and forecasts scored when they land."
       >
@@ -266,7 +256,6 @@ export function HomeFlow() {
       </Row>
       <Row
         href="/projects"
-        no="04"
         title="Projects"
         line={`${builds.length} tools and games, each playable in the browser.`}
         flip
@@ -275,7 +264,6 @@ export function HomeFlow() {
       </Row>
       <Row
         href="/about"
-        no="05"
         title="About"
         line="School in Bangalore, Pitt now, and why I keep doing so many different things."
       >

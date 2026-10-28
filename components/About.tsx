@@ -4,30 +4,19 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { portrait } from "@/content/site";
 
-/** A highlighter stroke that draws itself under a phrase the first time it is seen. */
+/** Kept for the intro copy; renders the phrase as plain text. */
 export function Mark({ children }: { children: React.ReactNode }) {
-  const reduce = useReducedMotion();
-  return (
-    <motion.span
-      className="bg-no-repeat [background-image:linear-gradient(rgb(129_140_248/0.28),rgb(129_140_248/0.28))] [background-position:0_88%] [box-decoration-break:clone] [-webkit-box-decoration-break:clone]"
-      initial={reduce ? false : { backgroundSize: "0% 38%" }}
-      whileInView={{ backgroundSize: "100% 38%" }}
-      viewport={{ once: true, margin: "0px 0px -15% 0px" }}
-      transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-    >
-      {children}
-    </motion.span>
-  );
+  return <>{children}</>;
 }
 
 type Spot = { p: number; side: "left" | "right" };
 
-/** The intro text, with a round photo you can drag into any paragraph. The words wrap around it. */
+/** The intro text, with a round photo the words wrap around. */
 export function Intro({ paras }: { paras: React.ReactNode[] }) {
   const [spot, setSpot] = useState<Spot>({ p: 0, side: "left" });
   const box = useRef<HTMLDivElement>(null);
-  const [fine, setFine] = useState(false);
-  useEffect(() => setFine(window.matchMedia("(pointer: fine)").matches), []);
+  // The photo stays put; dragging it around was more UI than it was worth.
+  const fine = false;
 
   const drop = (x: number, y: number) => {
     const ps = Array.from(
@@ -54,7 +43,7 @@ export function Intro({ paras }: { paras: React.ReactNode[] }) {
         drop(info.point.x - window.scrollX, info.point.y - window.scrollY)
       }
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
-      className={`group relative mt-1 block h-[112px] w-[112px] select-none rounded-full p-1 ring-1 ring-line md:h-[132px] md:w-[132px] ${
+      className={`group relative mt-1 block h-[112px] w-[112px] select-none rounded-full p-1 md:h-[132px] md:w-[132px] ${
         fine ? "cursor-grab" : ""
       } ${spot.side === "left" ? "float-left mr-5" : "float-right ml-5"}`}
       style={{ shapeOutside: "circle(50%)" }}
@@ -72,7 +61,7 @@ export function Intro({ paras }: { paras: React.ReactNode[] }) {
       {fine && (
         <span
           aria-hidden="true"
-          className={`absolute top-1/2 grid h-7 w-5 -translate-y-1/2 place-items-center rounded-md bg-paper text-faint ring-1 ring-line ${
+          className={`absolute top-1/2 grid h-7 w-5 -translate-y-1/2 place-items-center rounded-md bg-paper text-muted ${
             spot.side === "left" ? "-left-3" : "-right-3"
           }`}
         >
@@ -89,10 +78,7 @@ export function Intro({ paras }: { paras: React.ReactNode[] }) {
   );
 
   return (
-    <div
-      ref={box}
-      className="space-y-5 text-[17.5px] leading-[1.75] text-fg/85"
-    >
+    <div ref={box} className="space-y-5 text-[17.5px] leading-[1.75] text-fg">
       {paras.map((para, i) => (
         <motion.p
           key={i}
@@ -105,7 +91,7 @@ export function Intro({ paras }: { paras: React.ReactNode[] }) {
         </motion.p>
       ))}
       {fine && (
-        <p className="text-[13px] font-medium text-faint">
+        <p className="text-[13px] font-medium text-muted">
           Drag the photo into any paragraph.
         </p>
       )}
@@ -149,7 +135,7 @@ export function SectionMenu({
             <a
               href={`#${it.id}`}
               aria-current={on === it.id ? "true" : undefined}
-              className={`flex items-center gap-2 text-[15px] transition-colors ${on === it.id ? "text-fg" : "text-faint hover:text-fg"}`}
+              className={`flex items-center gap-2 text-[15px] transition-colors ${on === it.id ? "text-fg" : "text-muted hover:text-fg"}`}
             >
               {it.label}
               {on === it.id && (

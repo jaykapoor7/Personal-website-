@@ -46,7 +46,7 @@ export function SectionHeader({
   action?: { label: string; href: string };
 }) {
   return (
-    <Reveal className="mb-10 flex items-end justify-between gap-6 border-t border-line pt-6 md:mb-14">
+    <Reveal className="mb-10 flex items-end justify-between gap-6 pt-6 md:mb-14">
       <div>
         <p className="label">{index}</p>
         <h2 className="display mt-3 text-[clamp(40px,5vw,72px)]">{title}</h2>

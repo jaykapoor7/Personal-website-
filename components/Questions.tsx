@@ -100,10 +100,7 @@ function Answer({ q }: { q: Q }) {
             href={p.href}
             className="group w-[110px] md:w-[130px]"
           >
-            <span
-              className="paper-shadow relative block aspect-[900/1273] overflow-hidden bg-white transition-transform duration-500 group-hover:-translate-y-1.5 group-hover:!rotate-0"
-              style={{ rotate: `${i % 2 ? 3 : -3}deg` }}
-            >
+            <span className="paper-shadow relative block aspect-[900/1273] overflow-hidden bg-white transition-transform duration-500 group-hover:-translate-y-1.5">
               {p.cover && (
                 <Image
                   src={p.cover}
@@ -120,12 +117,8 @@ function Answer({ q }: { q: Q }) {
           </SmartLink>
         ))}
         {q.photos?.map((p, i) => (
-          <figure
-            key={p.src}
-            className="w-[110px] bg-white p-1.5 pb-5 shadow-[0_14px_30px_-14px_rgba(0,0,0,0.45)] md:w-[130px]"
-            style={{ rotate: i % 2 ? "3deg" : "-3deg" }}
-          >
-            <span className="relative block aspect-[4/5] overflow-hidden">
+          <figure key={p.src} className="w-[110px] md:w-[130px]">
+            <span className="relative block aspect-[4/5] overflow-hidden rounded-lg">
               <Image
                 src={p.src}
                 alt={p.alt}
@@ -134,13 +127,13 @@ function Answer({ q }: { q: Q }) {
                 className="object-cover object-top"
               />
             </span>
-            <figcaption className="mt-1.5 text-center text-[11px] leading-tight text-muted">
+            <figcaption className="mt-1.5 text-[12px] leading-tight text-muted">
               {p.caption}
             </figcaption>
           </figure>
         ))}
         {q.shot && (
-          <span className="block w-[260px] overflow-hidden rounded-lg ring-1 ring-line">
+          <span className="block w-[260px] overflow-hidden rounded-lg">
             <span className="relative block aspect-[16/10]">
               <Image
                 src={q.shot}
@@ -166,37 +159,34 @@ export function Questions({ kind }: { kind: "Job" | "Lab" }) {
       aria-label={kind === "Job" ? "Jobs" : "Labs"}
       className="shell mt-12"
     >
-      <ol className="border-t border-fg">
-        {list.map((q, i) => {
+      <ol className="">
+        {list.map((q) => {
           const on = open === q.slug;
           return (
-            <li key={q.slug} className="border-b border-line">
+            <li key={q.slug} className="">
               <h3>
                 <button
                   type="button"
                   aria-expanded={on}
                   aria-controls={`a-${q.slug}`}
                   onClick={() => setOpen(on ? null : q.slug)}
-                  className="group grid w-full grid-cols-[40px_1fr_28px] items-start gap-3 py-6 text-left md:grid-cols-[72px_1fr_auto_40px] md:items-center md:py-8"
+                  className="group grid w-full grid-cols-[1fr_28px] items-start gap-3 py-6 text-left md:grid-cols-[1fr_auto_40px] md:items-center md:py-8"
                 >
-                  <span className="pt-2 text-[13px] text-faint md:pt-0">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
                   <span
-                    className={`text-[clamp(24px,3.4vw,52px)] font-medium leading-[1.02] tracking-[-0.04em] transition-colors duration-300 ${
-                      on ? "text-fg" : "text-fg/55 group-hover:text-fg"
+                    className={`text-[clamp(24px,3.4vw,52px)] font-medium leading-[1.02] transition-colors duration-300 ${
+                      on ? "text-fg" : "text-muted group-hover:text-fg"
                     }`}
                   >
                     {q.question}
                   </span>
-                  <span className="col-start-2 flex items-center gap-2.5 md:col-start-auto">
+                  <span className="col-start-1 flex items-center gap-2.5 md:col-start-auto">
                     {q.logo && (
                       <Image
                         src={q.logo}
                         alt=""
                         width={28}
                         height={28}
-                        className="h-7 w-7 rounded-md object-contain ring-1 ring-line"
+                        className="h-7 w-7 rounded-md object-contain"
                       />
                     )}
                     <span className="text-[13px] font-medium text-muted">
@@ -205,7 +195,7 @@ export function Questions({ kind }: { kind: "Job" | "Lab" }) {
                   </span>
                   <span
                     aria-hidden="true"
-                    className={`col-start-3 row-start-1 mt-1 grid h-7 w-7 place-items-center rounded-full ring-1 ring-fg transition-transform duration-300 md:col-start-4 md:mt-0 md:h-9 md:w-9 ${on ? "rotate-45 bg-fg text-white" : ""}`}
+                    className={`col-start-2 row-start-1 mt-1 grid h-7 w-7 place-items-center rounded-full transition-transform duration-300 md:col-start-3 md:mt-0 md:h-9 md:w-9 ${on ? "rotate-45 text-accent" : ""}`}
                   >
                     <svg
                       viewBox="0 0 24 24"

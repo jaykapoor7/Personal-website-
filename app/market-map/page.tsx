@@ -12,35 +12,33 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <section className="relative overflow-hidden">
-        <div className="bg-mesh absolute inset-0" aria-hidden="true" />
-        <div className="shell relative pb-8 pt-28 md:pt-32">
+      <section>
+        <div className="shell pb-12 pt-28 md:pt-36">
           <Reveal>
-            <p className="label">Market map</p>
-            <h1 className="mt-4 max-w-4xl text-[clamp(40px,6vw,80px)] font-semibold leading-[0.95] tracking-[-0.045em]">
+            <h1 className="max-w-4xl text-[clamp(40px,6vw,80px)] font-semibold leading-[0.95]">
               India healthtech, mapped.
             </h1>
-            <p className="mt-5 max-w-2xl text-[18px] leading-relaxed text-fg/75">
+            <p className="mt-5 max-w-2xl text-[18px] leading-relaxed text-muted">
               36 companies across nine sectors, from telemedicine to rural care.
               Pick a sector, then a company.
             </p>
-            <div className="mt-6 flex flex-wrap gap-2">
+            <p className="mt-6 flex flex-wrap gap-6 text-[16px] font-medium">
               <a
                 href="/research/India-HealthTech-Market-Map.pdf"
                 target="_blank"
                 rel="noreferrer"
-                className="btn-primary h-10 px-4 text-[14px]"
+                className="text-accent hover:underline"
               >
                 The full map (PDF) <Arrow />
               </a>
               <a
                 href="/research/India-HealthTech-Companies.csv"
                 download
-                className="btn-ghost h-10 px-4 text-[14px]"
+                className="text-accent hover:underline"
               >
                 Dataset (CSV)
               </a>
-            </div>
+            </p>
           </Reveal>
         </div>
       </section>

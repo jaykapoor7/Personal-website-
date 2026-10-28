@@ -56,7 +56,7 @@ export default function Artifacts() {
     <>
       <PageHeader
         title="Files"
-        lede="The receipts: every paper, dataset, live site and repo behind this site."
+        lede="Every paper, dataset, live site and repository behind this site."
       />
       <div className="shell space-y-14">
         {proofGroups.map((g) => (
@@ -75,7 +75,7 @@ export default function Artifacts() {
                     <Reveal delay={(i % 5) * 0.04}>
                       <SmartLink href={a.href} className="group block">
                         <span
-                          className={`relative block overflow-hidden rounded-xl bg-white ring-1 ring-line transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-[0_18px_40px_-18px_rgba(30,27,75,0.5)] ${
+                          className={`relative block overflow-hidden rounded-xl bg-card transition-all duration-300 group-hover:-translate-y-1 ${
                             t?.doc ? "aspect-[900/1273]" : "aspect-[4/3]"
                           }`}
                         >
@@ -88,7 +88,7 @@ export default function Artifacts() {
                               className="object-cover object-top"
                             />
                           ) : (
-                            <span className="bg-indigo-deep absolute inset-0 grid place-items-center text-[13px] text-white">
+                            <span className="absolute inset-0 grid place-items-center bg-card text-[14px] text-muted">
                               {kind(a.href)}
                             </span>
                           )}
@@ -98,11 +98,11 @@ export default function Artifacts() {
                             <span className="block text-[14px] font-semibold leading-snug">
                               {a.title}
                             </span>
-                            <span className="block text-[12.5px] text-muted">
+                            <span className="block text-[13px] text-muted">
                               {kind(a.href)}
                             </span>
                           </span>
-                          <Arrow className="mt-0.5 shrink-0 text-faint group-hover:text-accent" />
+                          <Arrow className="mt-0.5 shrink-0 text-muted group-hover:text-accent" />
                         </span>
                       </SmartLink>
                     </Reveal>

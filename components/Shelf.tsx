@@ -31,7 +31,7 @@ export function Shelf() {
                   className="object-cover object-top"
                 />
               </span>
-              <span className="mt-4 block text-[15px] font-semibold leading-snug tracking-[-0.01em] group-hover:text-accent">
+              <span className="mt-4 block text-[15px] font-semibold leading-snug group-hover:text-accent">
                 {w.title.split(":")[0]}
               </span>
               <span className="block text-[13px] font-medium text-muted">

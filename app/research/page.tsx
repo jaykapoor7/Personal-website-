@@ -26,10 +26,10 @@ export default function Page() {
       <Questions kind="Lab" />
       <section aria-label="Other research" className="shell mt-16">
         <p className="label">Also</p>
-        <ul className="mt-5 grid gap-6 border-t border-line pt-5 md:grid-cols-3">
+        <ul className="mt-5 grid gap-6 pt-5 md:grid-cols-3">
           {otherResearch.map((o) => (
             <li key={o.name}>
-              <p className="text-[17px] font-semibold leading-tight tracking-[-0.02em]">
+              <p className="text-[17px] font-semibold leading-tight">
                 {o.href ? (
                   <SmartLink href={o.href} className="hover:text-accent">
                     {o.name}
@@ -44,10 +44,10 @@ export default function Page() {
         </ul>
       </section>
       <section aria-labelledby="own-h" className="shell mt-24">
-        <div className="flex flex-wrap items-end justify-between gap-4 border-t border-fg pt-4">
+        <div className="flex flex-wrap items-end justify-between gap-4 pt-4">
           <h2
             id="own-h"
-            className="text-[clamp(30px,3.6vw,48px)] font-semibold leading-none tracking-[-0.045em]"
+            className="text-[clamp(30px,3.6vw,48px)] font-semibold leading-none"
           >
             My own research
           </h2>
@@ -61,10 +61,10 @@ export default function Page() {
         </div>
       </section>
       <section aria-labelledby="calls-h" className="shell mt-24">
-        <div className="flex flex-wrap items-end justify-between gap-4 border-t border-fg pt-4">
+        <div className="flex flex-wrap items-end justify-between gap-4 pt-4">
           <h2
             id="calls-h"
-            className="text-[clamp(30px,3.6vw,48px)] font-semibold leading-none tracking-[-0.045em]"
+            className="text-[clamp(30px,3.6vw,48px)] font-semibold leading-none"
           >
             Forecasts
           </h2>

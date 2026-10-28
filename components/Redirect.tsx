@@ -9,7 +9,7 @@ export function Redirect({ to, label }: { to: string; label: string }) {
   }, [to]);
   return (
     <section className="shell pb-10 pt-40">
-      <h1 className="text-4xl font-semibold tracking-[-0.03em]">{label}</h1>
+      <h1 className="text-4xl font-semibold">{label}</h1>
       <p className="mt-4 text-muted">
         This has moved.{" "}
         <Link href={to} className="link text-fg">

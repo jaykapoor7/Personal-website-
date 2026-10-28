@@ -17,9 +17,9 @@ function Play({ onClick, label }: { onClick: () => void; label: string }) {
     <button
       type="button"
       onClick={onClick}
-      className="group absolute inset-0 grid place-items-center bg-black/0 transition-colors hover:bg-black/15"
+      className="group absolute inset-0 grid place-items-center"
     >
-      <span className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-[14px] font-semibold text-white shadow-[0_12px_30px_-8px_rgba(0,0,0,0.5)] transition-transform group-hover:scale-105">
+      <span className="btn-primary">
         <svg
           viewBox="0 0 24 24"
           className="h-4 w-4 fill-current"
@@ -112,10 +112,10 @@ export function BuildsBrowser() {
 
   return (
     <div className="card grid overflow-hidden lg:grid-cols-[300px_1fr]">
-      <div className="border-b border-line p-3 lg:border-b-0 lg:border-r">
+      <div className="p-3">
         {kinds.map((k) => (
           <div key={k} className="mb-2">
-            <p className="px-3 pb-1.5 pt-2 text-[13px] font-medium text-faint">
+            <p className="px-3 pb-1.5 pt-2 text-[13px] font-medium text-muted">
               {k}s
             </p>
             <ul
@@ -136,14 +136,14 @@ export function BuildsBrowser() {
                         setLive(null);
                       }}
                       className={`w-full rounded-xl px-3 py-2.5 text-left transition-colors ${
-                        x.id === id ? "bg-fg text-white" : "hover:bg-card"
+                        x.id === id ? "text-accent" : "hover:text-accent"
                       }`}
                     >
                       <span className="block text-[14.5px] font-semibold">
                         {x.name}
                       </span>
                       <span
-                        className={`hidden text-[13px] leading-snug lg:block ${x.id === id ? "text-white/70" : "text-muted"}`}
+                        className={`hidden text-[13px] leading-snug lg:block text-muted`}
                       >
                         {x.summary}
                       </span>
@@ -155,30 +155,6 @@ export function BuildsBrowser() {
         ))}
       </div>
       <div className="flex min-w-0 flex-col">
-        <div className="flex h-11 items-center gap-3 border-b border-line px-4">
-          <span className="flex gap-1.5" aria-hidden="true">
-            <i className="h-2.5 w-2.5 rounded-full bg-black/10" />
-            <i className="h-2.5 w-2.5 rounded-full bg-black/10" />
-            <i className="h-2.5 w-2.5 rounded-full bg-black/10" />
-          </span>
-          <span className="min-w-0 flex-1 truncate rounded-lg bg-card px-3 py-1 text-[13px] text-muted">
-            {b.url}
-          </span>
-          {b.code && (
-            <SmartLink
-              href={b.code}
-              className="shrink-0 text-[13px] font-medium text-muted hover:text-fg"
-            >
-              Code
-            </SmartLink>
-          )}
-          <SmartLink
-            href={b.href!}
-            className="inline-flex shrink-0 items-center gap-1 text-[13px] font-semibold text-accent hover:underline"
-          >
-            Open <Arrow />
-          </SmartLink>
-        </div>
         <div className="relative h-[60vh] max-h-[540px] min-h-[380px] bg-paper">
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
@@ -200,10 +176,10 @@ export function BuildsBrowser() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="grid gap-6 border-t border-line p-5 md:grid-cols-[1fr_200px] md:p-7"
+            className="grid gap-6 p-5 md:grid-cols-[1fr_200px] md:p-7"
           >
             <div>
-              <h3 className="text-[24px] font-semibold leading-tight tracking-[-0.03em]">
+              <h3 className="text-[24px] font-semibold leading-tight">
                 {b.name}
               </h3>
               <p className="mt-2 text-[16px] leading-relaxed">{b.points[0]}</p>
@@ -219,20 +195,11 @@ export function BuildsBrowser() {
                 ))}
               </ul>
             </div>
-            <div className="md:border-l md:border-line md:pl-6">
+            <div className="md:pl-6">
               <p className="label">
                 {b.kind === "Game" ? "Game" : "Tool"}, built with
               </p>
-              <ul className="mt-2 flex flex-wrap gap-1.5">
-                {b.stack.map((t) => (
-                  <li
-                    key={t}
-                    className="rounded-full px-2.5 py-1 text-[13px] ring-1 ring-line"
-                  >
-                    {t}
-                  </li>
-                ))}
-              </ul>
+              <p className="mt-1 text-[15px]">{b.stack.join(", ")}</p>
               {!b.falls && (
                 <div className="mt-5 flex flex-col gap-2 text-[14px] font-medium">
                   <SmartLink

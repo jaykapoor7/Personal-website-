@@ -99,7 +99,7 @@ function Papers({ proof }: { proof: Proof[] }) {
                 />
               </span>
             ) : (
-              <span className="grid aspect-[900/1273] place-items-center bg-fg p-4 text-center text-[13px] font-medium text-white transition-transform duration-500 group-hover:-translate-y-2">
+              <span className="grid aspect-[900/1273] place-items-center rounded-lg bg-card p-4 text-center text-[15px] font-medium transition-transform duration-500 group-hover:-translate-y-2">
                 {p.label}
               </span>
             )}
@@ -125,31 +125,9 @@ export default function CasePage({ params }: { params: { slug: string } }) {
   return (
     <article className="pt-24 md:pt-28">
       <div className="shell">
-        <div className="flex items-center justify-between text-[13px] font-medium text-muted">
-          <Link
-            href={
-              e.verb === "Started"
-                ? "/startups"
-                : e.verb === "Worked"
-                  ? "/experience"
-                  : "/research"
-            }
-            className="inline-flex items-center gap-1.5 hover:text-fg"
-          >
-            <Arrow direction="left" />{" "}
-            {e.verb === "Started"
-              ? "Startups"
-              : e.verb === "Worked"
-                ? "Experience"
-                : "Research"}
-          </Link>
-          <span>
-            {e.verb}, {e.when}
-          </span>
-        </div>
-        <header className="mt-8 border-t border-fg pt-4">
+        <header>
           <div className="flex items-start justify-between gap-6">
-            <h1 className="text-[clamp(52px,11vw,170px)] font-semibold leading-[0.85] tracking-[-0.06em]">
+            <h1 className="text-[clamp(52px,11vw,170px)] font-semibold leading-[0.85]">
               {e.title}
             </h1>
             {d.logo && (
@@ -158,7 +136,7 @@ export default function CasePage({ params }: { params: { slug: string } }) {
                 alt=""
                 width={72}
                 height={72}
-                className="mt-3 h-12 w-12 shrink-0 rounded-xl object-contain ring-1 ring-line md:h-[72px] md:w-[72px]"
+                className="mt-3 h-12 w-12 shrink-0 rounded-xl object-contain md:h-[72px] md:w-[72px]"
               />
             )}
           </div>
@@ -193,14 +171,8 @@ export default function CasePage({ params }: { params: { slug: string } }) {
             {d.photos.map((p, i) => (
               <li key={p.src}>
                 <Reveal delay={i * 0.12}>
-                  <figure
-                    className="bg-white p-2 pb-10 shadow-[0_30px_60px_-24px_rgba(0,0,0,0.5)] md:p-3 md:pb-14"
-                    style={{
-                      rotate: i % 2 ? "2deg" : "-2deg",
-                      ...(i === 0 ? { viewTransitionName: name } : {}),
-                    }}
-                  >
-                    <div className="relative aspect-[4/5] overflow-hidden">
+                  <figure style={i === 0 ? { viewTransitionName: name } : {}}>
+                    <div className="relative aspect-[4/5] overflow-hidden rounded-xl">
                       <Image
                         src={p.src}
                         alt={p.alt}
@@ -210,7 +182,7 @@ export default function CasePage({ params }: { params: { slug: string } }) {
                         className="object-cover object-top"
                       />
                     </div>
-                    <figcaption className="mt-3 text-center text-[14px] font-medium text-muted md:mt-4 md:text-[16px]">
+                    <figcaption className="mt-3 text-[15px] text-muted">
                       {p.caption}
                     </figcaption>
                   </figure>
@@ -221,7 +193,7 @@ export default function CasePage({ params }: { params: { slug: string } }) {
         ) : e.image ? (
           <Reveal>
             <div
-              className="mx-auto w-[min(70vw,380px)] [rotate:2deg]"
+              className="mx-auto w-[min(70vw,380px)]"
               style={{ viewTransitionName: name }}
             >
               <span className="paper-shadow relative block aspect-[900/1273] overflow-hidden bg-white">
@@ -241,10 +213,10 @@ export default function CasePage({ params }: { params: { slug: string } }) {
 
       {d.metrics.length > 0 && (
         <div className="shell mt-20">
-          <dl className="grid grid-cols-2 gap-y-10 border-t border-fg pt-6 md:grid-cols-3">
+          <dl className="grid grid-cols-2 gap-y-10 pt-6 md:grid-cols-3">
             {d.metrics.map((m) => (
               <div key={m.label}>
-                <dd className="text-[clamp(52px,8vw,120px)] font-semibold leading-none tracking-[-0.06em]">
+                <dd className="text-[clamp(52px,8vw,120px)] font-semibold leading-none">
                   <Counter value={m.value} />
                 </dd>
                 <dt className="mt-2 text-[13px] font-medium text-muted">
@@ -258,14 +230,11 @@ export default function CasePage({ params }: { params: { slug: string } }) {
 
       {d.points.length > 0 && (
         <div className="shell mt-20">
-          <ol className="border-t border-fg">
-            {d.points.map((p, n) => (
-              <li key={p} className="border-b border-line">
-                <Reveal className="grid grid-cols-[40px_1fr] gap-4 py-6 md:grid-cols-[120px_1fr] md:py-8">
-                  <span className="text-[13px] text-faint">
-                    {String(n + 1).padStart(2, "0")}
-                  </span>
-                  <p className="max-w-[34ch] text-[clamp(22px,2.6vw,36px)] font-medium leading-[1.12] tracking-[-0.025em]">
+          <ol className="">
+            {d.points.map((p) => (
+              <li key={p} className="">
+                <Reveal className="py-5 md:py-6">
+                  <p className="max-w-[34ch] text-[clamp(22px,2.6vw,36px)] font-medium leading-[1.12]">
                     {p}
                   </p>
                 </Reveal>
@@ -285,10 +254,10 @@ export default function CasePage({ params }: { params: { slug: string } }) {
       )}
 
       <div className="shell mt-28">
-        <Link href={next.href} className="group block border-t border-fg pt-4">
+        <Link href={next.href} className="group block pt-4">
           <span className="text-[13px] font-medium text-muted">Next</span>
           <span className="mt-2 flex items-center justify-between gap-6">
-            <span className="text-[clamp(44px,9vw,140px)] font-semibold leading-[0.9] tracking-[-0.06em] transition-transform duration-500 ease-out group-hover:translate-x-3">
+            <span className="text-[clamp(44px,9vw,140px)] font-semibold leading-[0.9] transition-transform duration-500 ease-out group-hover:translate-x-3">
               {next.title}
             </span>
             <Arrow

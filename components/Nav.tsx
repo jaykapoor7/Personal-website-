@@ -34,7 +34,7 @@ export function Nav() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        solid || open ? "bg-bg/85 backdrop-blur-xl" : ""
+        solid || open ? "bg-bg" : ""
       }`}
     >
       <nav
@@ -42,10 +42,7 @@ export function Nav() {
         aria-label="Main"
       >
         <div className="flex items-center gap-5">
-          <Link
-            href="/"
-            className="text-[15px] font-semibold tracking-[-0.02em]"
-          >
+          <Link href="/" className="text-[15px] font-semibold">
             Jay Kapoor
           </Link>
         </div>
@@ -55,8 +52,8 @@ export function Nav() {
               key={l.href}
               href={l.href}
               aria-current={here(l.href) ? "page" : undefined}
-              className={`rounded-full px-3 py-1.5 text-[14px] font-medium transition-colors hover:bg-fg hover:text-white ${
-                here(l.href) ? "bg-fg text-white" : "text-muted"
+              className={`px-3 py-1.5 text-[15px] font-medium transition-colors hover:text-fg ${
+                here(l.href) ? "text-fg" : "text-muted"
               }`}
             >
               {l.label}
@@ -66,13 +63,13 @@ export function Nav() {
             href="/jay-kapoor-resume.pdf"
             target="_blank"
             rel="noreferrer"
-            className="rounded-full px-3 py-1.5 text-[14px] font-medium text-muted transition-colors hover:bg-fg hover:text-white"
+            className="px-3 py-1.5 text-[15px] font-medium text-muted transition-colors hover:text-fg"
           >
             Resume
           </a>
           <a
             href="mailto:jak581@pitt.edu"
-            className="ml-2 rounded-full bg-fg px-4 py-1.5 text-[14px] font-medium text-white transition-colors hover:bg-accent"
+            className="ml-3 py-1.5 text-[15px] font-medium text-accent hover:underline"
           >
             Email me
           </a>
@@ -106,7 +103,7 @@ export function Nav() {
             href={l.href}
             aria-current={here(l.href) ? "page" : undefined}
             onClick={() => setOpen(false)}
-            className="block border-t border-line py-3 text-[40px] font-semibold leading-none tracking-[-0.05em]"
+            className="block py-3 text-[40px] font-semibold leading-none"
           >
             {l.label}
           </Link>
@@ -115,13 +112,13 @@ export function Nav() {
           href="/jay-kapoor-resume.pdf"
           target="_blank"
           rel="noreferrer"
-          className="block border-t border-line py-3 text-[40px] font-semibold leading-none tracking-[-0.05em]"
+          className="block py-3 text-[40px] font-semibold leading-none"
         >
           Resume
         </a>
         <a
           href="mailto:jak581@pitt.edu"
-          className="serif mt-6 block text-[26px] text-accent"
+          className="mt-6 block text-[22px] font-medium text-accent"
         >
           jak581@pitt.edu
         </a>

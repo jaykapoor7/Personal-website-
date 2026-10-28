@@ -71,7 +71,7 @@ export function Opening() {
     <section aria-label="Introduction" className="shell pb-4 pt-28 md:pt-40">
       <h1
         ref={ref}
-        className="mb-10 text-[clamp(44px,7.6vw,120px)] md:mb-14 font-medium leading-[0.95] tracking-[-0.055em]"
+        className="mb-10 text-[clamp(44px,7.6vw,120px)] md:mb-14 font-medium leading-[0.95]"
       >
         <span className="sr-only">
           I&apos;m Jay. Most things I make start with something I noticed.
