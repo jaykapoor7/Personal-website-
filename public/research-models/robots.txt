@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kapoorjay.com/research-models/sitemap.xml

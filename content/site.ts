@@ -422,6 +422,11 @@ export const otherResearch: { name: string; detail: string; href?: string }[] =
       name: "Economics research with Prof. Yasir Khan",
       detail: "India's Kisan Rail.",
     },
+    {
+      name: "StrayPaw Research Models",
+      detail: "Five interactive experiments grounded in StrayPaw’s public-health register.",
+      href: "https://kapoorjay.com/research-models/index.html",
+    },
   ];
 
 /* Writing */
