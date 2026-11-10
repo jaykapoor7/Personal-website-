@@ -3,7 +3,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { Link } from "next-view-transitions";
 import { useEffect, useRef } from "react";
-import { portrait } from "@/content/site";
+import { portrait, researchModels } from "@/content/site";
 import { HomeFlow } from "./HomeFlow";
 
 const ease = [0.16, 1, 0.3, 1] as const;
@@ -105,23 +105,28 @@ export function Opening() {
         </span>
       </h1>
 
-      <Link
-        href="/about#thread"
-        className="group mb-20 inline-flex flex-wrap items-center gap-x-2 gap-y-1 text-[17px] font-medium md:mb-28"
-      >
-        <span className="text-muted transition-colors group-hover:text-fg">
-          A health app, a dog database, a bank, eight preschools:
-        </span>
-        <span className="underline decoration-line underline-offset-4 group-hover:decoration-fg">
-          how they connect
-        </span>
-        <span
-          aria-hidden="true"
-          className="transition-transform group-hover:translate-x-1"
+      <div className="mb-14 flex flex-wrap items-center gap-x-6 gap-y-2 md:mb-20">
+        <Link
+          href="/about#thread"
+          className="group inline-flex flex-wrap items-center gap-x-2 gap-y-1 text-[17px] font-medium"
         >
-          →
-        </span>
-      </Link>
+          <span className="text-muted transition-colors group-hover:text-fg">
+            A health app, a dog database, a bank, eight preschools:
+          </span>
+          <span className="underline decoration-line underline-offset-4 group-hover:decoration-fg">
+            how they connect
+          </span>
+          <span
+            aria-hidden="true"
+            className="transition-transform group-hover:translate-x-1"
+          >
+            →
+          </span>
+        </Link>
+        <a href={researchModels.workPath} className="btn-ghost">
+          {researchModels.name} <span aria-hidden="true">↗</span>
+        </a>
+      </div>
       <HomeFlow />
     </section>
   );

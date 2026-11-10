@@ -43,6 +43,13 @@ const doc = (label: string, href: string): Proof => ({
   cover: href.endsWith(".pdf") ? cover(href) : undefined,
 });
 
+export const researchModels = {
+  name: "StrayPaw Research Models",
+  detail: "Five interactive experiments in vaccination, case reporting and other public-health decisions.",
+  href: "https://kapoorjay.com/research-models/",
+  workPath: "/work/straypaw-research-models/",
+};
+
 /* Startups: things I started */
 export type Venture = {
   id: string;
@@ -82,6 +89,7 @@ export const ventures: Venture[] = [
     site: { label: "straypaw.org", href: "https://www.straypaw.org" },
     links: [
       { label: "Live map", href: "https://www.straypaw.org/map" },
+      { label: researchModels.name, href: researchModels.href },
       {
         label: "GitHub",
         href: "https://github.com/jaykapoor7/Pok-mon-go-dog-",
@@ -422,11 +430,7 @@ export const otherResearch: { name: string; detail: string; href?: string }[] =
       name: "Economics research with Prof. Yasir Khan",
       detail: "India's Kisan Rail.",
     },
-    {
-      name: "StrayPaw Research Models",
-      detail: "Five interactive experiments grounded in StrayPaw’s public-health register.",
-      href: "https://kapoorjay.com/research-models/",
-    },
+    researchModels,
   ];
 
 /* Writing */
@@ -713,6 +717,7 @@ export const life = [
 
 /** Old project URLs that are not case pages any more, so shared links still land well. */
 export const legacy: Record<string, string> = {
+  "straypaw-research-models": researchModels.href,
   "juno-preventive-health": "/work/juno-ai",
   "recovery-intelligence": "/play/cura",
   road360: "/play/road360",

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Simpson’s Paradox · StrayPaw Research Models</title><meta name="description" content="How can both groups improve while the overall result gets worse?">
-<link rel="canonical" href="https://kapoorjay.com/research-models/models/simpsons-paradox/"><meta name="theme-color" content="#f5f2eb">
+<link rel="canonical" href="https://kapoorjay.com/research-models/models/simpsons-paradox/"><meta name="theme-color" content="#242722">
 <meta property="og:type" content="website"><meta property="og:site_name" content="StrayPaw Research Models">
 <meta property="og:title" content="Simpson’s Paradox · StrayPaw Research Models"><meta property="og:description" content="How can both groups improve while the overall result gets worse?">
 <meta property="og:url" content="https://kapoorjay.com/research-models/models/simpsons-paradox/"><meta property="og:image" content="https://kapoorjay.com/research-models/social.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="StrayPaw Research Models. Five experiments in public health.">
@@ -13,27 +13,39 @@
 </head>
 <body class="page-model">
 <a class="skip" href="#main">Skip to content</a>
-<header class="mast wrap">
-  <a class="brand" href="/research-models/" aria-label="StrayPaw Research Models home"><svg class="mark" width="25" height="25" viewBox="0 0 25 25" aria-hidden="true"><path d="M3 19 11 5m3 15 8-14M4 12h17" fill="none" stroke="currentColor" stroke-width="1.35"/><circle cx="11" cy="5" r="2.3" fill="currentColor"/><circle cx="14" cy="20" r="2.3" fill="currentColor"/></svg><span><b>STRAYPAW</b><small>RESEARCH MODELS</small></span></a>
-  <nav aria-label="Main navigation"><a href="/research-models/#experiments">Experiments</a><a href="/research-models/notes/">Research notes</a><a href="/research-models/about/">About</a></nav>
-</header>
-<main id="main"><article class="model wrap">
-    <header class="model-head">
-      <a href="/research-models/#experiments" class="back">← All experiments</a>
-      <div class="eyebrow"><i></i> Experiment 03 <b> / </b> Aggregation & causal inference</div>
-      <h1>How can both groups improve while the overall result gets worse?</h1><p>Separate the overall follow-up rate by case type to see what changed inside the average.</p>
+<header class="mast"><div class="mast-inner wrap">
+  <a class="brand" href="/research-models/" aria-label="StrayPaw Research Models home"><span class="brand-mark"><svg class="mark" width="25" height="25" viewBox="0 0 25 25" aria-hidden="true"><path d="M3 19 11 5m3 15 8-14M4 12h17" fill="none" stroke="currentColor" stroke-width="1.35"/><circle cx="11" cy="5" r="2.3" fill="currentColor"/><circle cx="14" cy="20" r="2.3" fill="currentColor"/></svg></span><span><b>StrayPaw</b><small>Research Models</small></span></a>
+  <nav aria-label="Main navigation"><a href="/research-models/#experiments">Models</a><a href="/research-models/notes/">Notes</a><a href="/research-models/about/">About</a></nav>
+  <a class="portfolio-link" href="https://kapoorjay.com">Jay Kapoor <svg class="arrow-glyph" width="13" height="13" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M5 4h7v7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+</div></header>
+<main id="main"><article class="model wrap workbench">
+    <nav class="model-selector" aria-label="Choose an experiment">
+    <a href="/research-models/models/the-70-percent-paradox/" data-study="spatial"><span>01</span>Vaccine coverage</a><a href="/research-models/models/the-surveillance-paradox/" data-study="surveillance"><span>02</span>Case reporting</a><a href="/research-models/models/simpsons-paradox/" data-study="simpson" aria-current="page"><span>03</span>Case mix</a><a href="/research-models/models/the-sterilization-paradox/" data-study="population"><span>04</span>Sterilization</a><a href="/research-models/models/the-prevention-paradox/" data-study="prevention"><span>05</span>Prevention</a>
+  </nav>
+    <div class="bench" data-study="simpson">
+    <header class="study-intro">
+      <div class="study-id"><span>Model 03 / 05</span></div>
+      <div class="study-copy">
+        <h1>Can both groups improve while their average falls?</h1>
+        <p>Separate the overall follow-up rate by case type to see what changed inside the average.</p>
+      </div>
+      <div class="study-source">
+        <span class="eyebrow">From the StrayPaw register</span>
+        <strong>27% → 38%</strong><p>TVT share of the two selected case types in StrayPaw’s historical register, 2024 to 2025.</p>
+        <a href="/research-models/notes/simpsons-paradox/#data">How we use this data <svg class="arrow-glyph" width="13" height="13" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M5 4h7v7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
     </header>
     <section class="experiment-board" aria-label="Interactive model">
-      <div class="board-top"><span><i></i> Simpson’s Paradox</span><span>Simulation · StrayPaw data</span></div>
-      <div id="experiment" data-model="simpson"><noscript><p class="noscript">Enable JavaScript to run the experiment. <a href="/research-models/notes/simpsons-paradox/">Read the model and its assumptions.</a></p></noscript></div>
-    </section>
+    <div class="board-top"><span>Aggregation & causal inference</span><span>Simulated results</span></div>
+    <div id="experiment" data-model="simpson"><noscript><p class="noscript">Enable JavaScript to run the experiment. <a href="/research-models/notes/simpsons-paradox/">Read the model and its assumptions.</a></p></noscript></div>
+  </section>
+  </div>
     <div class="discovery"><span class="eyebrow">What this shows</span><p>Both simulated follow-up rates rose. Cases with the lower rate made up a bigger share of the total.</p></div>
-    <div class="data-anchor"><span class="eyebrow">From the StrayPaw register</span><p><strong>27% → 38%</strong> TVT share of the two selected case types in StrayPaw’s historical register, 2024 to 2025.</p><a href="/research-models/notes/simpsons-paradox/#data">How we use this data <svg class="arrow-glyph" width="13" height="13" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M5 4h7v7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
     <details class="method"><summary>Assumptions and methodology</summary><p>Road-accident records number 278 in 2024 and 133 in 2025. TVT records number 105 and 83. Apply illustrative completion probabilities of 90% and 92% to road accidents and 40% and 42% to TVT. Round the completed counts to whole cases before aggregating. The overall simulated rates are 292/383 and 157/216.</p><div class="equation"><span class="eyebrow">Overall rate</span><p>Rₜ = Σg completed(g,t) / Σg cases(g,t)</p><small>A weighted average of the two case types. Each weight is the type’s share of the combined number of cases that year.</small></div><div class="equation"><span class="eyebrow">Changing weights</span><p>TVT share = 105 / 383 → 83 / 216</p><small>TVT gets more weight in 2025, even as its illustrative follow-up rate improves.</small></div><p>Case type is a descriptive grouping here. For a causal question, stratifying on a variable can reduce confounding or introduce bias, depending on the causal structure. Rates from a few cases can also vary substantially by chance. This example is arithmetic and makes no claim about sampling precision.</p><a href="/research-models/notes/simpsons-paradox/">Read the full research note <svg class="arrow-glyph" width="13" height="13" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M5 4h7v7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></details>
     <nav class="model-nav" aria-label="Experiment navigation">
       <a href="/research-models/models/the-surveillance-paradox/"><span class="eyebrow">← Previous experiment</span><strong>The Surveillance Paradox</strong></a>
       <a href="/research-models/models/the-sterilization-paradox/"><span class="eyebrow">Next experiment →</span><strong>The Sterilization Paradox</strong></a>
     </nav>
   </article></main>
-<footer class="site-foot wrap"><a class="brand" href="/research-models/"><svg class="mark" width="25" height="25" viewBox="0 0 25 25" aria-hidden="true"><path d="M3 19 11 5m3 15 8-14M4 12h17" fill="none" stroke="currentColor" stroke-width="1.35"/><circle cx="11" cy="5" r="2.3" fill="currentColor"/><circle cx="14" cy="20" r="2.3" fill="currentColor"/></svg><span><b>STRAYPAW</b><small>RESEARCH MODELS</small></span></a><span>Public health experiments grounded in StrayPaw data.</span><nav aria-label="More from Jay Kapoor"><a href="https://kapoorjay.com">Jay’s portfolio <svg class="arrow-glyph" width="13" height="13" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M5 4h7v7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a href="https://www.straypaw.org">StrayPaw.org <svg class="arrow-glyph" width="13" height="13" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M5 4h7v7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></nav></footer>
+<footer class="site-foot wrap"><span>StrayPaw Research Models</span><nav aria-label="More from Jay Kapoor"><a href="https://kapoorjay.com">Jay’s portfolio <svg class="arrow-glyph" width="13" height="13" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M5 4h7v7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a href="https://www.straypaw.org">StrayPaw.org <svg class="arrow-glyph" width="13" height="13" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M5 4h7v7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></nav></footer>
 </body></html>
