@@ -425,7 +425,7 @@ export const otherResearch: { name: string; detail: string; href?: string }[] =
     {
       name: "StrayPaw Research Models",
       detail: "Five interactive experiments grounded in StrayPaw’s public-health register.",
-      href: "https://kapoorjay.com/research-models/index.html",
+      href: "https://kapoorjay.com/research-models/",
     },
   ];
 
