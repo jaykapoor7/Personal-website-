@@ -1,252 +1,287 @@
 "use client";
-import { motion, useReducedMotion, useTransform } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
-import { useRef, useState } from "react";
-import { person, portrait } from "@/content/site";
-import { Arrow } from "../Arrow";
+import { useEffect, useRef } from "react";
+import { builds, person, portrait, roles, ventures } from "@/content/site";
 import { jumpTo } from "@/lib/jump";
-import { Magnetic, RiseWords, ease, useMedia, useProgress } from "../motion";
+import { Arrow } from "../Arrow";
+import { ease } from "../motion";
 
-const prints = [
-  {
-    id: "team",
-    src: "/photos/01_trojans_team-640.webp",
-    alt: "Jay with the Trojans football team",
-    caption: "The Trojans",
-    box: "right-[-5%] top-[0%] w-[41%]",
-    ratio: "aspect-[10/11]",
-    fit: "object-cover object-top",
-    rotate: 6,
-    drift: -70,
-    from: { x: 160, y: -120, rotate: 30 },
-  },
-  {
-    id: "me",
-    src: portrait.src,
-    alt: portrait.alt,
-    caption: "Cathedral of Learning, Pitt",
-    box: "left-[17%] top-[7%] w-[58%]",
-    ratio: "aspect-[3/4]",
-    fit: "object-cover",
-    rotate: -3,
-    drift: -30,
-    from: { x: 0, y: 220, rotate: -18 },
-  },
-  {
-    id: "dog",
-    src: "/straypaw/street-dog.webp",
-    alt: "The street dog outside a cafe that started StrayPaw",
-    caption: "The dog that started StrayPaw",
-    box: "left-[-10%] bottom-[-7%] w-[44%]",
-    ratio: "aspect-[6/5]",
-    fit: "object-cover object-[50%_18%]",
-    rotate: -8,
-    drift: -110,
-    from: { x: -180, y: 120, rotate: -34 },
-  },
-];
+/** A field of dots behind the intro. They swell where the mouse is. */
+function DotField() {
+  const ref = useRef<HTMLCanvasElement>(null);
+  useEffect(() => {
+    const c = ref.current;
+    const ctx = c?.getContext("2d");
+    if (!c || !ctx) return;
+    const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const GAP = 28;
+    let w = 0;
+    let h = 0;
+    let raf = 0;
+    let live = false;
+    const p = { x: -999, y: -999, tx: -999, ty: -999 };
 
-const places = [
-  { name: "University of Pittsburgh", logo: "/logos/pitt.png" },
-  { name: "UPMC", logo: "/logos/upmc.png" },
-  { name: "HDFC Bank", logo: "/logos/hdfc.png" },
-  { name: "Crowwd", logo: "/logos/crowwd.png" },
-  { name: "TARC", logo: "/logos/tarc.png" },
-  { name: "TOT Schools", logo: "/logos/tot.png" },
-  { name: "AmeriCorps JumpStart", logo: "/logos/jumpstart.png" },
-  { name: "TISB", logo: "/logos/tisb.png" },
-];
-
-/** Three photo prints you can pick up and move. */
-function Prints({ area }: { area: React.RefObject<HTMLElement> }) {
-  const reduce = useReducedMotion();
-  const fine = useMedia("(pointer: fine)");
-  const [top, setTop] = useState("");
-  const p = useProgress(area, ["start start", "end start"]);
-  const drifts = [
-    useTransform(p, [0, 1], [0, prints[0].drift]),
-    useTransform(p, [0, 1], [0, prints[1].drift]),
-    useTransform(p, [0, 1], [0, prints[2].drift]),
-  ];
+    const draw = (t: number) => {
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = "rgb(29 74 245)";
+      p.x += (p.tx - p.x) * 0.14;
+      p.y += (p.ty - p.y) * 0.14;
+      for (let y = GAP / 2; y < h; y += GAP)
+        for (let x = GAP / 2; x < w; x += GAP) {
+          const near = Math.max(0, 1 - Math.hypot(x - p.x, y - p.y) / 180);
+          const k = near * near;
+          const wave = calm
+            ? 0.4
+            : (Math.sin((x + y * 1.4) * 0.011 - t * 0.0011) + 1) / 2;
+          ctx.globalAlpha = 0.1 + wave * 0.12 + k * 0.6;
+          ctx.beginPath();
+          ctx.arc(x, y, 1 + wave * 0.5 + k * 3.4, 0, 6.2832);
+          ctx.fill();
+        }
+    };
+    const loop = (t: number) => {
+      draw(t);
+      if (live && !calm) raf = requestAnimationFrame(loop);
+    };
+    const size = () => {
+      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      w = c.clientWidth;
+      h = c.clientHeight;
+      c.width = w * dpr;
+      c.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      draw(performance.now());
+    };
+    const move = (e: PointerEvent) => {
+      if (e.pointerType !== "mouse") return;
+      const r = c.getBoundingClientRect();
+      p.tx = e.clientX - r.left;
+      p.ty = e.clientY - r.top;
+    };
+    const io = new IntersectionObserver(([e]) => {
+      const was = live;
+      live = e.isIntersecting;
+      if (live && !was && !calm) raf = requestAnimationFrame(loop);
+    });
+    size();
+    io.observe(c);
+    window.addEventListener("resize", size);
+    window.addEventListener("pointermove", move, { passive: true });
+    return () => {
+      live = false;
+      cancelAnimationFrame(raf);
+      io.disconnect();
+      window.removeEventListener("resize", size);
+      window.removeEventListener("pointermove", move);
+    };
+  }, []);
   return (
-    <div className="relative mx-auto aspect-[1/1.02] w-full max-w-[420px] lg:max-w-[540px]">
-      {prints.map((ph, i) => (
-        <motion.div
-          key={ph.id}
-          className={`absolute ${ph.box}`}
-          style={{
-            y: reduce ? 0 : drifts[i],
-            zIndex: top === ph.id ? 30 : ph.id === "me" ? 10 : 20,
-          }}
-        >
-          <motion.figure
-            className={`print ${fine ? "cursor-grab active:cursor-grabbing" : ""}`}
-            initial={
-              reduce ? { rotate: ph.rotate } : { opacity: 0, ...ph.from }
-            }
-            animate={{ opacity: 1, x: 0, y: 0, rotate: ph.rotate }}
-            transition={{
-              type: "spring",
-              stiffness: 70,
-              damping: 14,
-              delay: 0.35 + i * 0.12,
-            }}
-            drag={fine && !reduce}
-            dragConstraints={area}
-            dragElastic={0.25}
-            dragTransition={{ power: 0.12, timeConstant: 180 }}
-            whileDrag={{ scale: 1.06, rotate: 0 }}
-            whileHover={fine ? { scale: 1.03 } : undefined}
-            onPointerDown={() => setTop(ph.id)}
-          >
-            <div className={`relative overflow-hidden ${ph.ratio}`}>
-              <Image
-                src={ph.src}
-                alt={ph.alt}
-                fill
-                priority
-                draggable={false}
-                sizes="(max-width: 1024px) 60vw, 340px"
-                className={`pointer-events-none select-none ${ph.fit}`}
-              />
-            </div>
-            <figcaption>{ph.caption}</figcaption>
-          </motion.figure>
-        </motion.div>
-      ))}
-      {fine && (
-        <motion.p
-          className="absolute -bottom-9 right-0 text-[13px] font-medium text-muted"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.6, duration: 0.8 }}
-        >
-          Go on, move them.
-        </motion.p>
-      )}
-    </div>
+    <canvas
+      ref={ref}
+      aria-hidden="true"
+      className="absolute inset-0 h-full w-full [mask-image:linear-gradient(#000_55%,transparent)]"
+    />
   );
 }
 
-/** Who I am, in one screen. */
-export function Hero({ cover }: { cover?: React.RefObject<HTMLElement> }) {
-  const ref = useRef<HTMLElement>(null);
+type Tile = { src?: string; letter?: string; wide?: boolean };
+
+/** Small logos set into the line of text. They fan out when their phrase is hovered. */
+function Stack({ tiles, at }: { tiles: Tile[]; at: number }) {
   const reduce = useReducedMotion();
-  // Only where the hero is pinned (see .curtain) does it sink back as it is covered.
-  const pinned = useMedia("(min-width: 1024px) and (min-height: 700px)");
-  const glide = (e: React.MouseEvent) => {
-    e.preventDefault();
-    jumpTo("straypaw", { glide: true });
+  return (
+    <span className="ml-[0.16em] inline-flex align-[-0.1em]">
+      {tiles.map((t, n) => (
+        <motion.span
+          key={n}
+          className={`relative inline-block h-[0.76em] overflow-hidden rounded-[0.2em] bg-white ring-[0.045em] ring-white transition-[margin,transform] duration-300 ease-out [box-shadow:0_0_0_0.045em_#fff,0_0.06em_0.16em_rgb(var(--fg)/0.35)] group-hover:-translate-y-[0.07em] ${
+            t.wide ? "w-[1.2em]" : "w-[0.76em]"
+          } ${n ? "-ml-[0.1em] group-hover:ml-[0.08em]" : ""}`}
+          style={{ zIndex: 9 - n, transitionDelay: `${n * 35}ms` }}
+          initial={reduce ? false : { scale: 0, rotate: -25 }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{
+            type: "spring",
+            stiffness: 260,
+            damping: 18,
+            delay: at + n * 0.06,
+          }}
+        >
+          {t.src ? (
+            <Image
+              src={t.src}
+              alt=""
+              fill
+              sizes="120px"
+              className={
+                t.wide ? "object-cover object-top" : "object-contain p-[10%]"
+              }
+            />
+          ) : (
+            <span className="grid h-full w-full place-items-center bg-accent text-[0.42em] font-bold leading-none text-white">
+              {t.letter}
+            </span>
+          )}
+        </motion.span>
+      ))}
+    </span>
+  );
+}
+
+const logoOf = (name: string, src?: string): Tile =>
+  src ? { src } : { letter: name.replace(/^The /, "")[0] };
+
+const stacks = {
+  startups: ventures.map((v) => logoOf(v.name, v.logo)),
+  experience: roles.map((r) => logoOf(r.org, r.logo)),
+  research: [
+    { src: "/logos/pitt.png" },
+    { src: "/logos/upmc.png" },
+    { letter: "M" },
+  ],
+  projects: ["emergency", "strike", "cura"].map((id) => ({
+    src: builds.find((b) => b.id === id)!.image,
+    wide: true,
+  })),
+};
+
+/** One sentence about me, with my photo and the logos set into the text. */
+export function Hero() {
+  const reduce = useReducedMotion();
+  let n = 0;
+  const step = 0.035;
+  /** Each word rises out of a mask, one after another. */
+  const say = (text: string) =>
+    text.split(" ").map((w) => {
+      const i = n++;
+      return (
+        <span key={`${w}${i}`}>
+          <span className="-mb-[0.16em] inline-block overflow-hidden pb-[0.16em] align-top">
+            <motion.span
+              className="inline-block"
+              initial={reduce ? false : { y: "115%" }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.9, ease, delay: 0.1 + i * step }}
+            >
+              {w}
+            </motion.span>
+          </span>{" "}
+        </span>
+      );
+    });
+  /** A word that leads to a section, with that section's logos after it. */
+  const go = (id: keyof typeof stacks, word: string, tail = "") => {
+    const i = n++;
+    n += 2;
+    return (
+      <>
+        <a
+          href={`#${id}`}
+          onClick={(e) => {
+            e.preventDefault();
+            jumpTo(id, { glide: true });
+          }}
+          className="group whitespace-nowrap"
+        >
+          <span className="-mx-[0.06em] -mb-[0.16em] inline-block overflow-hidden px-[0.06em] pb-[0.16em] align-top">
+            <motion.span
+              className="-mx-[0.05em] inline-block rounded-[0.1em] px-[0.05em] underline decoration-line decoration-[0.06em] underline-offset-[0.1em] transition-colors duration-200 group-hover:bg-accent group-hover:text-white group-hover:decoration-transparent"
+              initial={reduce ? false : { y: "115%" }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.9, ease, delay: 0.1 + i * step }}
+            >
+              {word}
+            </motion.span>
+          </span>
+          <Stack tiles={stacks[id]} at={0.25 + i * step} />
+          {tail}
+        </a>{" "}
+      </>
+    );
   };
-  // As the next section slides over, the hero sinks back a little.
-  const p = useProgress(cover ?? ref, ["start end", "start start"]);
-  const scale = useTransform(p, [0, 1], [1, 0.94]);
-  const fade = useTransform(p, [0, 0.9], [1, 0.35]);
 
   return (
     <section
-      ref={ref}
       id="top"
       data-tone="light"
       aria-label="Introduction"
-      className="curtain overflow-x-clip lg:h-[100svh] lg:min-h-[700px]"
+      className="relative flex min-h-[100svh] flex-col overflow-hidden lg:min-h-[max(88svh,640px)]"
     >
-      <motion.div
-        className="flex h-full flex-col"
-        style={
-          reduce || !cover || !pinned ? undefined : { scale, opacity: fade }
-        }
-      >
-        <div className="shell grid flex-1 items-center gap-9 pb-14 pt-24 sm:pt-28 lg:grid-cols-[1.18fr_0.82fr] lg:gap-10 lg:pb-6 lg:pt-24">
-          <div>
-            <h1 className="display text-[clamp(52px,8.4vw,124px)] !leading-[0.94]">
-              <RiseWords text="I'm Jay. I notice" delay={0.05} />{" "}
-              <motion.span
-                className="my-[0.05em] inline-block origin-left rounded-[0.12em] bg-accent px-[0.12em] pb-[0.1em] pt-[0.03em] leading-[0.86] text-white"
-                initial={reduce ? false : { scaleX: 0 }}
-                animate={{ scaleX: 1, rotate: -1.5 }}
-                transition={{ duration: 0.9, ease, delay: 0.2 }}
-              >
-                <RiseWords text="what's missing," delay={0.4} />
-              </motion.span>{" "}
-              <RiseWords text="then I build it." delay={0.55} />
-            </h1>
-            <motion.div
-              initial={reduce ? false : { opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease, delay: 0.75 }}
-            >
-              <p className="mt-7 max-w-[35ch] text-[clamp(19px,1.65vw,24px)] font-medium leading-[1.3] md:mt-9">
-                Right now that is{" "}
-                <a
-                  href="#straypaw"
-                  onClick={glide}
-                  className="underline decoration-accent decoration-2 underline-offset-[5px] hover:text-accent"
-                >
-                  StrayPaw
-                </a>
-                : one shared record for every street animal in India.
-              </p>
-              <p className="mt-4 max-w-[46ch] text-[16px] leading-relaxed text-muted md:text-[17px]">
-                30,288 animals, 28 cities and 19 NGO partners in four months.
-                Economics and Statistics at Pitt. Building since I was 14.
-              </p>
-              <div className="mt-8 flex flex-wrap items-center gap-3">
-                <Magnetic>
-                  <a href="#straypaw" onClick={glide} className="btn-primary">
-                    See the work
-                    <Arrow direction="right" className="rotate-90" />
-                  </a>
-                </Magnetic>
-                <a
-                  href={person.resume}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn-ghost"
-                >
-                  Resume <Arrow />
-                </a>
-              </div>
-            </motion.div>
-          </div>
-          <Prints area={ref} />
-        </div>
+      <DotField />
+      <div className="shell relative flex flex-1 flex-col justify-center pb-12 pt-28 md:pb-16 md:pt-32">
+        <h1 className="display text-[clamp(36px,min(5.3vw,9vh),80px)] !leading-[1.1]">
+          {say("I'm Jay")}
+          <motion.span
+            className="relative mx-[0.06em] inline-block h-[0.8em] overflow-hidden rounded-full align-[-0.1em] [box-shadow:0_0_0_0.05em_rgb(var(--accent))]"
+            initial={
+              reduce
+                ? { width: "1.4em" }
+                : { width: "1.4em", scale: 0, rotate: -30 }
+            }
+            animate={{ scale: 1, rotate: -4 }}
+            whileHover={{ width: "2.6em", rotate: 0 }}
+            transition={{
+              type: "spring",
+              stiffness: 220,
+              damping: 18,
+              delay: 0.2,
+            }}
+          >
+            <Image
+              src={portrait.src}
+              alt=""
+              fill
+              priority
+              sizes="260px"
+              className="object-cover object-[50%_61%]"
+            />
+          </motion.span>
+          {say(", an economics and statistics student at")}
+          <span className="whitespace-nowrap">
+            <Stack tiles={[{ src: "/logos/pitt.png" }]} at={0.45} />{" "}
+            {say("Pitt.")}
+          </span>
+          {say("Here is what I've")}
+          {go("startups", "started", ",")}
+          {say("where I've")}
+          {go("experience", "worked", ",")}
+          {say("the")}
+          {go("research", "research")}
+          {say("I've done, and things I've")}
+          {go("projects", "made", ".")}
+        </h1>
 
         <motion.div
-          className="pb-7"
-          initial={reduce ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.1 }}
+          className="mt-9 flex flex-wrap items-center gap-2.5 md:mt-12"
+          initial={reduce ? false : { opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease, delay: 1.25 }}
         >
-          <div className="marquee-wrap overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]">
-            <ul
-              className="marquee items-center"
-              style={{ ["--speed" as string]: "46s" }}
+          <a
+            href={person.resume}
+            target="_blank"
+            rel="noreferrer"
+            className="btn-primary"
+          >
+            Resume <Arrow />
+          </a>
+          <a href={`mailto:${person.email}`} className="btn-ghost">
+            {person.email}
+          </a>
+          {person.links.slice(0, 2).map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              target="_blank"
+              rel="noreferrer"
+              className="btn-ghost"
             >
-              {[0, 1].map((copy) =>
-                places.map((pl) => (
-                  <li
-                    key={pl.name + copy}
-                    aria-hidden={copy === 1 ? "true" : undefined}
-                    className="flex shrink-0 items-center gap-3 pr-12 text-[15px] font-medium text-muted"
-                  >
-                    <span className="grid h-8 w-8 place-items-center overflow-hidden rounded-lg bg-white ring-1 ring-line">
-                      <Image
-                        src={pl.logo}
-                        alt=""
-                        width={28}
-                        height={28}
-                        className="h-7 w-7 object-contain"
-                      />
-                    </span>
-                    {pl.name}
-                  </li>
-                )),
-              )}
-            </ul>
-          </div>
+              {l.label} <Arrow />
+            </a>
+          ))}
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }

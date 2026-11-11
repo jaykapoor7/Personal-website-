@@ -12,7 +12,7 @@ import { person } from "@/content/site";
 import { jumpTo } from "@/lib/jump";
 
 const links = [
-  { id: "straypaw", label: "Work" },
+  { id: "startups", label: "Startups" },
   { id: "experience", label: "Experience" },
   { id: "research", label: "Research" },
   { id: "projects", label: "Projects" },
@@ -70,13 +70,13 @@ function useSection(path: string | null) {
       },
       { rootMargin: "-45% 0px -50% 0px" },
     );
-    ["top", "startups", ...links.map((l) => l.id)].forEach((s) => {
+    ["top", ...links.map((l) => l.id)].forEach((s) => {
       const el = document.getElementById(s);
       if (el) io.observe(el);
     });
     return () => io.disconnect();
   }, [path]);
-  return id === "startups" ? "straypaw" : id;
+  return id;
 }
 
 export function Nav() {

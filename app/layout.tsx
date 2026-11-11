@@ -3,6 +3,7 @@ import { Bricolage_Grotesque } from "next/font/google";
 import { ViewTransitions } from "next-view-transitions";
 import "./globals.css";
 
+import { Cursor } from "@/components/Cursor";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { siteUrl } from "@/lib/site";
@@ -50,6 +51,7 @@ export default function RootLayout({
             Skip to content
           </a>
           <Nav />
+          <Cursor />
           <noscript>
             <style>{`[data-reveal]{opacity:1!important;transform:none!important;clip-path:none!important}`}</style>
           </noscript>

@@ -36,7 +36,7 @@ function details(e: Entry) {
   if (c.type === "venture") {
     const v = c.v;
     return {
-      back: v.id === "straypaw" ? "/#straypaw" : "/#startups",
+      back: "/#startups",
       backLabel: "Startups",
       kicker: `${v.role}, ${v.period}`,
       lede: v.summary,

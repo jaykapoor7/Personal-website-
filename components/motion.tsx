@@ -3,32 +3,12 @@ import {
   animate,
   motion,
   useInView,
-  useMotionValue,
   useReducedMotion,
-  useScroll,
   useSpring,
-  useTransform,
-  type MotionValue,
 } from "framer-motion";
 import { Fragment, useEffect, useRef, useState } from "react";
 
 export const ease = [0.16, 1, 0.3, 1] as const;
-
-/**
- * True when scroll scenes may run. Server HTML assumes motion; visitors who ask
- * for reduced motion get the still layout right after mount.
- */
-export function useMotionOK() {
-  const [ok, setOk] = useState(true);
-  useEffect(() => {
-    const q = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const on = () => setOk(!q.matches);
-    on();
-    q.addEventListener("change", on);
-    return () => q.removeEventListener("change", on);
-  }, []);
-  return ok;
-}
 
 /** Matches a media query after mount (false on the server). */
 export function useMedia(query: string) {
@@ -41,26 +21,6 @@ export function useMedia(query: string) {
     return () => q.removeEventListener("change", f);
   }, [query]);
   return on;
-}
-
-/** Scroll progress through an element, eased with a spring so wheel steps feel smooth. */
-export function useProgress(
-  ref: React.RefObject<HTMLElement>,
-  offset: [string, string] = ["start end", "end start"],
-): MotionValue<number> {
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    // framer's offset type is a long union of string literals
-    offset: offset as never,
-    // Wait for every ref to exist: the target may be a later sibling's element.
-    layoutEffect: false,
-  });
-  return useSpring(scrollYProgress, {
-    stiffness: 140,
-    damping: 26,
-    mass: 0.3,
-    restDelta: 0.0005,
-  });
 }
 
 /** Fades content up the first time it enters the viewport. */
@@ -133,96 +93,6 @@ export function RiseWords({
   );
 }
 
-/** A picture that wipes up into view and settles from a slight zoom. */
-export function Wipe({
-  children,
-  className = "",
-  delay = 0,
-  from = "bottom",
-}: {
-  children: React.ReactNode;
-  className?: string;
-  delay?: number;
-  from?: "bottom" | "left";
-}) {
-  const reduce = useReducedMotion();
-  const hidden =
-    from === "left" ? "inset(0% 100% 0% 0%)" : "inset(100% 0% 0% 0%)";
-  return (
-    <motion.div
-      data-reveal
-      className={`overflow-hidden ${className}`}
-      initial={reduce ? false : { clipPath: hidden }}
-      whileInView={{ clipPath: "inset(0% 0% 0% 0%)" }}
-      viewport={{ once: true, margin: "0px 0px -12% 0px" }}
-      transition={{ duration: 1.1, ease, delay }}
-    >
-      <motion.div
-        className="h-full w-full"
-        initial={reduce ? false : { scale: 1.18 }}
-        whileInView={{ scale: 1 }}
-        viewport={{ once: true, margin: "0px 0px -12% 0px" }}
-        transition={{ duration: 1.5, ease, delay }}
-      >
-        {children}
-      </motion.div>
-    </motion.div>
-  );
-}
-
-/** Drifts its children against the scroll. Positive `by` moves slower than the page. */
-export function Parallax({
-  children,
-  className,
-  by = 40,
-  rotate = 0,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  by?: number;
-  rotate?: number;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
-  const p = useProgress(ref);
-  const y = useTransform(p, [0, 1], [by, -by]);
-  const r = useTransform(p, [0, 1], [-rotate, rotate]);
-  return (
-    <motion.div
-      ref={ref}
-      className={className}
-      style={reduce ? undefined : { y, rotate: r }}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
-/** A frame that grows to full size as it scrolls in. */
-export function ScrollScale({
-  children,
-  className,
-  from = 0.84,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  from?: number;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
-  const p = useProgress(ref, ["start end", "start 0.25"]);
-  const scale = useTransform(p, [0, 1], [from, 1]);
-  return (
-    <motion.div
-      ref={ref}
-      className={className}
-      style={reduce ? undefined : { scale }}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
 /** Counts a figure such as "30,288" or "$8k+" up from zero once it is on screen. */
 export function Counter({
   value,
@@ -260,41 +130,6 @@ export function Counter({
   return (
     <span ref={ref} className={`tabular-nums ${className ?? ""}`}>
       {value}
-    </span>
-  );
-}
-
-/** A whole number that glides to each new value instead of jumping. */
-export function Glide({
-  value,
-  className,
-}: {
-  value: number;
-  className?: string;
-}) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const reduce = useReducedMotion();
-  const mv = useMotionValue(value);
-  const spring = useSpring(mv, {
-    stiffness: 110,
-    damping: 15,
-    mass: 0.5,
-    restDelta: 0.5,
-  });
-  useEffect(() => {
-    mv.set(value);
-  }, [mv, value]);
-  useEffect(
-    () =>
-      spring.on("change", (v) => {
-        if (ref.current && !reduce)
-          ref.current.textContent = Math.round(v).toLocaleString("en-US");
-      }),
-    [spring, reduce],
-  );
-  return (
-    <span ref={ref} className={`tabular-nums ${className ?? ""}`}>
-      {value.toLocaleString("en-US")}
     </span>
   );
 }

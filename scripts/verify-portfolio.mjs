@@ -126,7 +126,6 @@ try {
 
     // Every section of the home page is present and reachable by its anchor.
     for (const id of [
-      "straypaw",
       "startups",
       "experience",
       "research",
@@ -136,25 +135,40 @@ try {
     ])
       assert.equal(await page.locator(`#${id}`).count(), 1, `Section #${id}`);
 
-    // The StrayPaw scene ends on the full count, however it is reached.
-    await page.goto(base + "/", { waitUntil: "networkidle" });
-    await page.evaluate(() => {
-      const el = document.getElementById("startups");
-      window.scrollTo(
-        0,
-        el.getBoundingClientRect().top + scrollY - innerHeight,
-      );
-    });
-    await page.waitForTimeout(2500);
-    assert.match(
-      await page.locator("#straypaw").innerText(),
-      /30,288/,
-      "StrayPaw count reaches the total",
+    // The home page stays short: the whole portfolio in a few screens.
+    const screens = await page.evaluate(
+      () => document.documentElement.scrollHeight / innerHeight,
+    );
+    assert.ok(
+      screens < (name === "mobile" ? 12 : 8),
+      `Home page is ${screens.toFixed(1)} screens long`,
+    );
+
+    // A startup opens in place.
+    const juno = page
+      .locator("#startups")
+      .getByRole("button", { name: /Juno-AI/ });
+    await juno.scrollIntoViewIfNeeded();
+    await juno.click();
+    assert.equal(
+      await juno.getAttribute("aria-expanded"),
+      "true",
+      "Startup panel opens",
+    );
+
+    // A photo opens in place.
+    const photo = page.getByRole("button", { name: "The Trojans" });
+    await photo.scrollIntoViewIfNeeded();
+    await photo.click();
+    assert.equal(
+      await photo.getAttribute("aria-pressed"),
+      "true",
+      "Photo slat opens",
     );
 
     // A lab on the home page opens its case page.
     await page.goto(base + "/", { waitUntil: "networkidle" });
-    const lab = page.getByRole("link", { name: /bladder cell/ });
+    const lab = page.getByRole("link", { name: /Apodaca Lab/ });
     await lab.scrollIntoViewIfNeeded();
     await lab.click();
     await page.waitForURL(/\/work\/apodaca-lab\/?$/);

@@ -149,14 +149,6 @@
     0 40px 80px -28px rgb(var(--fg) / 0.5);
 }
 
-/* The hero stays put while the next section slides over it. */
-@media (min-width: 1024px) and (min-height: 700px) {
-  .curtain {
-    position: sticky;
-    top: 0;
-  }
-}
-
 /* Infinite marquee; the second copy is aria-hidden */
 .marquee {
   display: flex;
@@ -301,17 +293,6 @@
     position: sticky;
     bottom: 0;
     z-index: 0;
-    min-height: 100svh;
-  }
-}
-
-/* Cards that pile up as you scroll: each one sticks, the next slides over it. */
-@media (min-width: 1024px) and (min-height: 760px) {
-  .stack-card {
-    position: sticky;
-    top: var(--stack-top, 88px);
-  }
-  .stack-body {
-    height: min(calc(100svh - 150px), 700px);
+    min-height: min(68svh, 640px);
   }
 }
