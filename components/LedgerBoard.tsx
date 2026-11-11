@@ -10,12 +10,27 @@ const status = (c: LedgerCall) =>
       ? "Wrong"
       : `Due ${c.due ?? ""}`;
 
-/** Every call, filterable, with the probability I gave and how it turned out. */
+/** When each open call resolves, soonest first. */
+const due = [
+  "Dec 2026",
+  "FY26 results",
+  "Mar 2027",
+  "Jun 2027",
+  "Jul 2027",
+  "Dec 2027",
+  "Open-ended",
+];
+const when = (c: LedgerCall) =>
+  c.result === "OPEN" ? due.indexOf(c.due ?? "Open-ended") : due.length;
+
+/** Every call in one list: open ones by when they resolve, then the resolved ones. */
 export function LedgerBoard({ calls }: { calls: LedgerCall[] }) {
   const [f, setF] = useState<(typeof filters)[number]>("All");
   const match = (c: LedgerCall, x: (typeof filters)[number]) =>
     x === "All" || (x === "Open" ? c.result === "OPEN" : c.result !== "OPEN");
-  const shown = calls.filter((c) => match(c, f));
+  const shown = calls
+    .filter((c) => match(c, f))
+    .sort((a, b) => when(a) - when(b));
   return (
     <div>
       <div

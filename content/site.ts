@@ -45,9 +45,10 @@ const doc = (label: string, href: string): Proof => ({
 
 export const researchModels = {
   name: "StrayPaw Research Models",
-  detail: "Five interactive experiments in vaccination, case reporting and other public-health decisions.",
+  detail:
+    "Five interactive experiments in vaccination, case reporting and other public-health decisions.",
   href: "https://kapoorjay.com/research-models/",
-  workPath: "/work/straypaw-research-models/",
+  workPath: "/research-models/",
 };
 
 /* Startups: things I started */
@@ -56,6 +57,8 @@ export type Venture = {
   name: string;
   role: string;
   period: string;
+  /** A few words, for the landing page. */
+  short: string;
   summary: string;
   points: string[];
   metrics: Metric[];
@@ -72,6 +75,7 @@ export const ventures: Venture[] = [
     name: "StrayPaw",
     role: "Founder",
     period: "Jun 2026 to present",
+    short: "A shared record of India's street animals.",
     summary:
       "A shared record for every street animal in India, used by feeders, rescue groups and city programmes.",
     points: [
@@ -113,6 +117,7 @@ export const ventures: Venture[] = [
     name: "Juno-AI",
     role: "Founder",
     period: "Jun 2019 to Aug 2023",
+    short: "Health information for rural India.",
     summary:
       "Health information and care navigation for rural India. Started at 14.",
     points: [
@@ -124,6 +129,7 @@ export const ventures: Venture[] = [
       { value: "10,000+", label: "rural users" },
       { value: "180%", label: "growth in 12 months" },
     ],
+    logo: "/logos/juno.svg",
     site: {
       label: "Visit Juno",
       href: "https://preventive-healthcare-xi.vercel.app/",
@@ -149,6 +155,7 @@ export const ventures: Venture[] = [
     name: "Project Nidaan",
     role: "Co-founder",
     period: "May 2022 to Aug 2024",
+    short: "Medication access for delivery riders.",
     summary: "Medication access for gig-economy delivery riders in Bengaluru.",
     points: [
       "Ran 55 field interviews with riders and owned the coding and analysis.",
@@ -158,6 +165,7 @@ export const ventures: Venture[] = [
       { value: "55", label: "rider interviews" },
       { value: "2", label: "platform partners" },
     ],
+    logo: "/logos/nidaan.svg",
     proof: [
       doc(
         "Field research brief",
@@ -174,6 +182,7 @@ export const ventures: Venture[] = [
     name: "The Finer Things Club",
     role: "Founder",
     period: "Jul 2021 to Aug 2024",
+    short: "A marketplace for rural artisans.",
     summary:
       "An online marketplace that brought rural artisans to buyers through NGO and marketplace partners.",
     points: ["Onboarded 300+ rural artisans and generated $8k+ in revenue."],
@@ -181,6 +190,7 @@ export const ventures: Venture[] = [
       { value: "300+", label: "artisans" },
       { value: "$8k+", label: "revenue" },
     ],
+    logo: "/logos/finer-things.svg",
     proof: [
       doc(
         "Marketplace one-pager",
@@ -420,6 +430,7 @@ export const labs: Lab[] = [
     period: "2023 to 2024",
     summary:
       "Clinical shadowing in emergency and internal medicine at Max Hospital in New Delhi.",
+    logo: "/logos/max.png",
     site: { label: "maxhealthcare.in", href: "https://www.maxhealthcare.in" },
   },
 ];
@@ -687,12 +698,23 @@ export const skills = [
   "Supabase",
 ];
 
-/** Personal photos. The portrait is the hero and About photo; these four live on About. */
+/** Personal photos. The portrait opens the home page and closes the photo strip. */
 export const portrait = {
   src: "/photos/pitt_portrait-1280.webp",
   alt: "Jay Kapoor on the Cathedral of Learning lawn at the University of Pittsburgh",
 };
+/** The photo strip on the home page, oldest first. */
 export const life = [
+  {
+    name: "02_childhood_running",
+    alt: "Jay running at a childhood sports day",
+    caption: "Sports day, Bangalore",
+  },
+  {
+    name: "04_childhood_football_team",
+    alt: "Jay's childhood football team with their coach",
+    caption: "First team",
+  },
   {
     name: "01_trojans_team",
     alt: "Jay with the Trojans football team",
@@ -704,25 +726,8 @@ export const life = [
     caption: "Graduation, Bangalore",
   },
   {
-    name: "02_childhood_running",
-    alt: "Jay running at a childhood sports day",
-    caption: "Sports day",
-  },
-  {
-    name: "04_childhood_football_team",
-    alt: "Jay's childhood football team with their coach",
-    caption: "First team",
+    name: "pitt_portrait",
+    alt: portrait.alt,
+    caption: "Pittsburgh, now",
   },
 ];
-
-/** Old project URLs that are not case pages any more, so shared links still land well. */
-export const legacy: Record<string, string> = {
-  "straypaw-research-models": researchModels.href,
-  "juno-preventive-health": "/work/juno-ai",
-  "recovery-intelligence": "/play/cura",
-  road360: "/play/road360",
-  "seo-geo-optimiser": "/play/llm-lab",
-  "everybodys-on-strike": "/play/strike",
-  "worst-emergency-service": "/play/emergency",
-  "everything-falls": "/play/everything-falls",
-};

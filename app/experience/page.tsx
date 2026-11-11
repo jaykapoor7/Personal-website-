@@ -1,21 +1,16 @@
 import type { Metadata } from "next";
-import { PageHead } from "@/components/PageHead";
-import { Questions } from "@/components/Questions";
+import { Experience } from "@/components/home/Experience";
 
 export const metadata: Metadata = {
   title: "Experience",
-  description: "Jay Kapoor's work at TARC, TOT Schools, Crowwd and HDFC Bank.",
+  description:
+    "Where Jay Kapoor has worked: TARC, TOT Schools, Crowwd and HDFC Bank.",
 };
 
 export default function Page() {
   return (
-    <>
-      <PageHead
-        kicker="Jobs and internships"
-        title="Experience"
-        aside="Real estate, early education, fintech and banking, 2025 to 2026."
-      />
-      <Questions kind="Job" />
-    </>
+    <div className="pt-[84px] md:pt-24">
+      <Experience />
+    </div>
   );
 }

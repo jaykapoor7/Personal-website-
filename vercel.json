@@ -2,8 +2,78 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
     {
+      "source": "/:old(startups|ventures|started|work)/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/questions/",
+      "destination": "/experience/",
+      "permanent": true
+    },
+    {
+      "source": "/:old(predictions|thesis|writing)/",
+      "destination": "/research/",
+      "permanent": true
+    },
+    {
+      "source": "/play/",
+      "destination": "/projects/",
+      "permanent": true
+    },
+    {
+      "source": "/contact/",
+      "destination": "/#contact",
+      "permanent": true
+    },
+    {
+      "source": "/work/:old(tarc|hdfc-bank)/",
+      "destination": "/experience/",
+      "permanent": true
+    },
+    {
+      "source": "/work/:old(accessible-smarttech|sci-3sixty|upmc-emergency-medicine|apodaca-lab|pitt-sociology|max-hospital)/",
+      "destination": "/research/",
+      "permanent": true
+    },
+    {
       "source": "/work/straypaw-research-models/",
       "destination": "/research-models/",
+      "permanent": true
+    },
+    {
+      "source": "/work/juno-preventive-health/",
+      "destination": "/work/juno-ai/",
+      "permanent": true
+    },
+    {
+      "source": "/work/recovery-intelligence/",
+      "destination": "/play/cura/",
+      "permanent": true
+    },
+    {
+      "source": "/work/road360/",
+      "destination": "/play/road360/",
+      "permanent": true
+    },
+    {
+      "source": "/work/seo-geo-optimiser/",
+      "destination": "/play/llm-lab/",
+      "permanent": true
+    },
+    {
+      "source": "/work/everybodys-on-strike/",
+      "destination": "/play/strike/",
+      "permanent": true
+    },
+    {
+      "source": "/work/worst-emergency-service/",
+      "destination": "/play/emergency/",
+      "permanent": true
+    },
+    {
+      "source": "/work/everything-falls/",
+      "destination": "/play/everything-falls/",
       "permanent": true
     }
   ]

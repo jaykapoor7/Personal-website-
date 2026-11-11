@@ -3,7 +3,7 @@ import { ImageResponse } from "next/og";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const alt =
-  "Jay Kapoor. Founder of StrayPaw. Economics and Statistics at Pitt.";
+  "Jay Kapoor. I notice what's missing, then I build it. Founder of StrayPaw.";
 
 export default function OpengraphImage() {
   return new ImageResponse(
@@ -14,31 +14,51 @@ export default function OpengraphImage() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        background: "#f2f0eb",
-        color: "#0f0f0e",
-        padding: "72px 80px",
+        background: "#ffffff",
+        color: "#1638c8",
+        padding: "64px 76px",
         fontFamily: "Arial, sans-serif",
       }}
     >
-      <div style={{ fontSize: 28, color: "#62605a" }}>kapoorjay.com</div>
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <div
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          fontSize: 28,
+          color: "#4259c2",
+        }}
+      >
+        <span>Jay Kapoor</span>
+        <span>kapoorjay.com</span>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          fontSize: 112,
+          fontWeight: 700,
+          letterSpacing: "-0.04em",
+          lineHeight: 0.95,
+        }}
+      >
+        <span>I notice</span>
+        <span
           style={{
-            fontSize: 150,
-            fontWeight: 700,
-            letterSpacing: "-0.05em",
-            lineHeight: 0.9,
+            background: "#1d4af5",
+            color: "#ffffff",
+            padding: "0 14px",
+            borderRadius: 12,
+            alignSelf: "flex-start",
           }}
         >
-          Jay Kapoor
-        </div>
-        <div style={{ fontSize: 40, color: "#62605a", marginTop: 28 }}>
-          Founder of StrayPaw. Economics and Statistics at Pitt.
-        </div>
+          what&apos;s missing,
+        </span>
+        <span>then I build it.</span>
       </div>
-      <div style={{ display: "flex", gap: 48, fontSize: 28, color: "#d64226" }}>
-        <span>30,288 animal records</span>
-        <span>10,000+ Juno-AI users</span>
+      <div style={{ display: "flex", gap: 44, fontSize: 28, color: "#4259c2" }}>
+        <span>Founder of StrayPaw</span>
+        <span>30,288 animals on record</span>
+        <span>Economics and Statistics at Pitt</span>
       </div>
     </div>,
     { ...size },

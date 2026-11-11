@@ -1,47 +1,89 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { person } from "@/content/site";
+import { Arrow } from "./Arrow";
+import { Magnetic } from "./motion";
 
+/** The time in Pittsburgh, so you know whether to expect a quick reply. */
+function Clock() {
+  const [t, setT] = useState("");
+  useEffect(() => {
+    const f = new Intl.DateTimeFormat("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      timeZone: "America/New_York",
+    });
+    const tick = () => setT(f.format(new Date()));
+    tick();
+    const id = setInterval(tick, 20000);
+    return () => clearInterval(id);
+  }, []);
+  return <span className="tabular-nums">{t || " "}</span>;
+}
+
+/** Contact. It waits underneath the page and is uncovered as the page ends. */
 export function Footer() {
   const [copied, setCopied] = useState(false);
   return (
-    <footer id="contact" className="shell mt-32 scroll-mt-16 pb-10 md:mt-44">
-      <a
-        href={`mailto:${person.email}`}
-        className="block break-all text-[clamp(40px,9vw,140px)] font-semibold leading-[0.9] transition-colors hover:text-accent"
-      >
-        {person.email}
-      </a>
-      <p className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-[16px] font-medium">
-        <button
-          type="button"
-          onClick={() => {
-            navigator.clipboard?.writeText(person.email);
-            setCopied(true);
-            setTimeout(() => setCopied(false), 1800);
-          }}
-          className="text-accent hover:underline"
-        >
-          {copied ? "Copied" : "Copy email"}
-        </button>
-        {[{ label: "Resume", href: person.resume }, ...person.links].map(
-          (l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              target="_blank"
-              rel="noreferrer"
-              className="text-accent hover:underline"
-            >
-              {l.label}
-            </a>
-          ),
-        )}
-        <a href="/artifacts/" className="text-accent hover:underline">
-          All documents
-        </a>
-      </p>
-      <p className="mt-16 text-[14px] text-muted">Jay Kapoor, {person.place}</p>
+    <footer
+      data-tone="accent"
+      aria-labelledby="contact-h"
+      className="reveal-footer bg-accent text-white"
+    >
+      <div className="shell flex min-h-[inherit] flex-col justify-between gap-12 pb-8 pt-24 md:pt-28">
+        <div>
+          <h2 id="contact-h" className="text-[17px] font-medium text-white/85">
+            Contact
+          </h2>
+          <a
+            href={`mailto:${person.email}`}
+            className="display group mt-3 block break-all text-[13.2vw] md:text-[clamp(96px,15.2vw,220px)]"
+          >
+            <span className="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_0.06em] bg-[position:0_96%] bg-no-repeat transition-[background-size] duration-700 ease-out group-hover:bg-[length:100%_0.06em]">
+              {person.email}
+            </span>
+          </a>
+          <div className="mt-8 flex flex-wrap items-center gap-2.5">
+            <Magnetic>
+              <button
+                type="button"
+                onClick={() => {
+                  navigator.clipboard?.writeText(person.email);
+                  setCopied(true);
+                  setTimeout(() => setCopied(false), 1800);
+                }}
+                className="btn-light"
+              >
+                {copied ? "Copied" : "Copy email"}
+              </button>
+            </Magnetic>
+            {[{ label: "Resume", href: person.resume }, ...person.links].map(
+              (l) => (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-glass"
+                >
+                  {l.label} <Arrow />
+                </a>
+              ),
+            )}
+          </div>
+        </div>
+        <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-3 text-[15px] font-medium">
+          <p>
+            {person.place}, <Clock />
+          </p>
+          <a
+            href="/artifacts/"
+            className="underline decoration-white/50 underline-offset-4 hover:decoration-white"
+          >
+            All documents and links
+          </a>
+        </div>
+      </div>
     </footer>
   );
 }

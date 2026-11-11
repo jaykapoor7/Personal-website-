@@ -23,11 +23,6 @@ export const proofGroups = [
         href: "https://emergency.kapoorjay.com",
       },
       {
-        title: "StrayPaw map",
-        detail: "Live map of India",
-        href: "https://www.straypaw.org/map",
-      },
-      {
         title: "Juno",
         detail: "Live site",
         href: "https://preventive-healthcare-xi.vercel.app/",
@@ -152,51 +147,6 @@ export const proofGroups = [
         title: "HNI portfolio allocation",
         detail: "HDFC portfolio-review work sample, PDF",
         href: "/work/hdfc-bank/HNI-Portfolio-Allocation-Review.pdf",
-      },
-    ],
-  },
-  {
-    title: "Code",
-    items: [
-      {
-        title: "StrayPaw",
-        detail: "GitHub",
-        href: "https://github.com/jaykapoor7/Pok-mon-go-dog-",
-      },
-      {
-        title: "Everybody's on Strike",
-        detail: "GitHub",
-        href: "https://github.com/jaykapoor7/everybodys-on-strike",
-      },
-      {
-        title: "The World's Worst Emergency Service",
-        detail: "GitHub",
-        href: "https://github.com/jaykapoor7/worst-emergency-service",
-      },
-      {
-        title: "Juno",
-        detail: "GitHub",
-        href: "https://github.com/jaykapoor7/Preventive-healthcare-",
-      },
-      {
-        title: "CURA",
-        detail: "GitHub",
-        href: "https://github.com/jaykapoor7/Explain-my-whoop-stats-",
-      },
-      {
-        title: "Road360",
-        detail: "GitHub",
-        href: "https://github.com/jaykapoor7/Road360",
-      },
-      {
-        title: "LLM Visibility Lab",
-        detail: "GitHub",
-        href: "https://github.com/jaykapoor7/LLM-AI-search-checker",
-      },
-      {
-        title: "This website",
-        detail: "GitHub",
-        href: "https://github.com/jaykapoor7/Personal-website-",
       },
     ],
   },
