@@ -1,10 +1,11 @@
 import { ImageResponse } from "next/og";
+import { ventures } from "@/content/site";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-export const alt =
-  "Jay Kapoor. I notice what's missing, then I build it. Founder of StrayPaw.";
+export const alt = "Jay Kapoor, an economics and statistics student at Pitt.";
 
+/** The card shown when the site is shared: the same sentence as the landing page. */
 export default function OpengraphImage() {
   return new ImageResponse(
     <div
@@ -28,37 +29,27 @@ export default function OpengraphImage() {
           color: "#4259c2",
         }}
       >
-        <span>Jay Kapoor</span>
         <span>kapoorjay.com</span>
       </div>
       <div
         style={{
           display: "flex",
           flexDirection: "column",
-          fontSize: 112,
+          fontSize: 104,
           fontWeight: 700,
           letterSpacing: "-0.04em",
-          lineHeight: 0.95,
+          lineHeight: 1,
         }}
       >
-        <span>I notice</span>
-        <span
-          style={{
-            background: "#1d4af5",
-            color: "#ffffff",
-            padding: "0 14px",
-            borderRadius: 12,
-            alignSelf: "flex-start",
-          }}
-        >
-          what&apos;s missing,
+        <span>Jay Kapoor</span>
+        <span style={{ fontSize: 50, letterSpacing: "-0.02em", marginTop: 22 }}>
+          Economics and statistics at Pitt
         </span>
-        <span>then I build it.</span>
       </div>
-      <div style={{ display: "flex", gap: 44, fontSize: 28, color: "#4259c2" }}>
-        <span>Founder of StrayPaw</span>
-        <span>30,288 animals on record</span>
-        <span>Economics and Statistics at Pitt</span>
+      <div style={{ display: "flex", gap: 40, fontSize: 28, color: "#4259c2" }}>
+        {ventures.map((v) => (
+          <span key={v.id}>{v.name}</span>
+        ))}
       </div>
     </div>,
     { ...size },
