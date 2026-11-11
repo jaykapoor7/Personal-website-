@@ -107,7 +107,7 @@ try {
     await page.goto(base + "/", { waitUntil: "networkidle" });
     assert.match(await page.locator("h1").innerText(), /Jay/);
 
-    // The landing page stays short: who I am and the four startups.
+    // The landing page is one scroll through who I am and the four startups.
     assert.equal(
       await page.locator('main a[href^="/work/"]').count(),
       4,
@@ -117,9 +117,28 @@ try {
       () => document.documentElement.scrollHeight / innerHeight,
     );
     assert.ok(
-      screens < (name === "mobile" ? 4 : 3),
+      screens < 8,
       `Landing page is ${screens.toFixed(1)} screens long`,
     );
+
+    // With motion, scrolling to the end of the scene lands on the last startup.
+    if (name === "motion" || name === "mobile") {
+      await page.evaluate(() => {
+        const el = document.getElementById("top");
+        window.scrollTo(0, el.offsetTop + el.offsetHeight - innerHeight);
+      });
+      await page.waitForTimeout(1500);
+      assert.equal(
+        await page
+          .locator("#top h2")
+          .last()
+          .evaluate((el) => getComputedStyle(el.parentElement).opacity),
+        "1",
+        "The scene ends on the last startup",
+      );
+      await page.evaluate(() => window.scrollTo(0, 0));
+      await page.waitForTimeout(600);
+    }
 
     // The menu is one button on every screen size, and leads to every page.
     await page.getByRole("button", { name: "Open menu" }).click();

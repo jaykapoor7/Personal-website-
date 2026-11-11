@@ -61,12 +61,6 @@ export function MiniMap({ className = "" }: { className?: string }) {
       role="img"
       aria-label="Map of India with StrayPaw's 28 cities"
     >
-      <defs>
-        <radialGradient id="mm-glow">
-          <stop offset="0" stopColor="#fff" stopOpacity="0.5" />
-          <stop offset="1" stopColor="#fff" stopOpacity="0" />
-        </radialGradient>
-      </defs>
       <path
         d={outline}
         fill="rgba(255,255,255,0.1)"
@@ -90,7 +84,6 @@ export function MiniMap({ className = "" }: { className?: string }) {
             key={c.name}
             style={{ opacity: c.d <= reach ? 1 : 0, transition: "opacity .5s" }}
           >
-            <circle cx={c.x} cy={c.y} r={r * 2.8} fill="url(#mm-glow)" />
             <circle cx={c.x} cy={c.y} r={r} fill="#fff" />
           </g>
         );

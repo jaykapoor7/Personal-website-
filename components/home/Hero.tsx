@@ -17,34 +17,37 @@ export function Hero() {
     >
       <h1 className="display text-[clamp(40px,5.6vw,84px)] !leading-[1.06]">
         <RiseWords text="I'm Jay" delay={0.05} />
-        <motion.span
-          className="relative mx-[0.08em] inline-block h-[0.84em] overflow-hidden rounded-full align-[-0.11em]"
-          initial={
-            reduce
-              ? { width: "1.7em" }
-              : { width: "1.7em", scale: 0, rotate: -30 }
-          }
-          animate={{ scale: 1, rotate: -4 }}
-          whileHover={{ width: "3em", rotate: 0 }}
-          transition={{
-            type: "spring",
-            stiffness: 220,
-            damping: 18,
-            delay: 0.2,
-          }}
-        >
-          <Image
-            src={portrait.src}
-            alt=""
-            fill
-            priority
-            sizes="300px"
-            className="object-cover object-[50%_61%]"
-          />
-        </motion.span>
+        <span className="whitespace-nowrap">
+          <motion.span
+            className="relative mx-[0.08em] inline-block h-[0.84em] overflow-hidden rounded-full align-[-0.11em]"
+            initial={
+              reduce
+                ? { width: "1.7em" }
+                : { width: "1.7em", scale: 0, rotate: -30 }
+            }
+            animate={{ scale: 1, rotate: -4 }}
+            whileHover={{ width: "3em", rotate: 0 }}
+            transition={{
+              type: "spring",
+              stiffness: 220,
+              damping: 18,
+              delay: 0.2,
+            }}
+          >
+            <Image
+              src={portrait.src}
+              alt=""
+              fill
+              priority
+              sizes="300px"
+              className="object-cover object-[50%_61%]"
+            />
+          </motion.span>
+          <RiseWords text="," delay={0.15} />
+        </span>
         <RiseWords
-          text=", an economics and statistics student at Pitt."
-          delay={0.15}
+          text="an economics and statistics student at Pitt."
+          delay={0.2}
         />
       </h1>
 

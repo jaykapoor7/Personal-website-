@@ -126,10 +126,7 @@
 .print {
   background: #fff;
   padding: 7px 7px 0;
-  box-shadow:
-    0 0 0 1px rgb(var(--fg) / 0.08),
-    0 1px 2px rgb(var(--fg) / 0.12),
-    0 24px 48px -18px rgb(var(--fg) / 0.42);
+  box-shadow: 0 0 0 1px rgb(var(--fg) / 0.14);
 }
 .print figcaption {
   font-size: 12.5px;
@@ -140,13 +137,13 @@
 }
 .paper-shadow {
   box-shadow:
-    0 0 0 1px rgb(var(--fg) / 0.06),
-    0 14px 34px -12px rgb(var(--fg) / 0.36);
+    0 0 0 1px rgb(var(--fg) / 0.12),
+    0 6px 12px -8px rgb(var(--fg) / 0.3);
 }
 .deep-shadow {
   box-shadow:
-    0 2px 4px rgb(var(--fg) / 0.1),
-    0 40px 80px -28px rgb(var(--fg) / 0.5);
+    0 0 0 1px rgb(var(--fg) / 0.12),
+    0 10px 20px -14px rgb(var(--fg) / 0.35);
 }
 
 /* Infinite marquee; the second copy is aria-hidden */

@@ -9,7 +9,7 @@ import { MiniMap } from "./MiniMap";
 const year = (v: Venture) => v.period.match(/\d{4}/)?.[0] ?? "";
 
 /** One picture per venture: its map, its site, or its document. */
-function Visual({ v }: { v: Venture }) {
+export function Visual({ v }: { v: Venture }) {
   if (v.id === "straypaw")
     return (
       <span className="absolute inset-0 grid place-items-center bg-accent">
@@ -22,7 +22,7 @@ function Visual({ v }: { v: Venture }) {
         src={v.id === "juno-ai" ? "/previews/juno-light-d.webp" : v.shot.src}
         alt={`${v.name} home page`}
         fill
-        sizes="(max-width: 1024px) 46vw, 300px"
+        sizes="(max-width: 1024px) 92vw, 760px"
         className="object-cover object-top"
       />
     );
