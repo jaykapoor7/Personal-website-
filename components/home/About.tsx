@@ -109,7 +109,14 @@ export function About() {
       <SectionHead
         id="about-h"
         title="About"
-        note="Bangalore, Delhi, Pittsburgh"
+        note={
+          <>
+            <span className="hidden [@media(hover:hover)]:inline">
+              Point at a photo
+            </span>
+            <span className="[@media(hover:hover)]:hidden">Tap a photo</span>
+          </>
+        }
       />
       <Reveal className="mt-7 md:mt-9">
         <Slats />

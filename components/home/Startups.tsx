@@ -1,19 +1,16 @@
 "use client";
 import Image from "next/image";
 import { Link } from "next-view-transitions";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ventures, type Venture } from "@/content/site";
+import { hoverCounts, useShown } from "@/lib/show";
 import { Arrow } from "../Arrow";
 import { Counter, Reveal } from "../motion";
 import { SmartLink } from "../ui";
-import { LogoTile, Paper, SectionHead } from "./bits";
+import { LogoTile, Paper, SectionHead, inertIf } from "./bits";
 import { MiniMap } from "./MiniMap";
 
 const year = (v: Venture) => v.period.match(/\d{4}/)?.[0] ?? "";
-/** Hidden panels stay out of the tab order and the accessibility tree. */
-const hide = (hidden: boolean) =>
-  hidden ? ({ inert: "", "aria-hidden": true } as object) : {};
-
 /** What each venture shows beside its numbers. */
 function Visual({ v }: { v: Venture }) {
   const name = { viewTransitionName: `shot-${v.id}` };
@@ -107,6 +104,11 @@ function Deck() {
   const ref = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(ventures[0].id);
   const [wide, setWide] = useState(780);
+  useShown(
+    useCallback((id) => {
+      if (ventures.some((v) => v.id === id)) setOpen(id);
+    }, []),
+  );
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -130,7 +132,7 @@ function Deck() {
           <article
             key={v.id}
             aria-label={v.name}
-            onMouseEnter={() => setOpen(v.id)}
+            onMouseEnter={() => hoverCounts() && setOpen(v.id)}
             className={`relative min-w-0 overflow-hidden rounded-[32px] transition-[flex-grow,background-color,color] duration-700 ease-out ${
               on ? "flex-[6] bg-accent text-white" : "flex-[1] bg-card text-fg"
             }`}
@@ -162,7 +164,7 @@ function Deck() {
                 on ? "opacity-100 delay-200" : "pointer-events-none opacity-0"
               }`}
               style={{ width: wide }}
-              {...hide(!on)}
+              {...inertIf(!on)}
             >
               {/* Remounting replays the map and the counters each time a panel opens. */}
               <Body key={on ? "on" : "off"} v={v} />
@@ -177,6 +179,11 @@ function Deck() {
 /** The same four on a phone: a stack that opens one at a time. */
 function Fold() {
   const [open, setOpen] = useState<string | null>(ventures[0].id);
+  useShown(
+    useCallback((id) => {
+      if (ventures.some((v) => v.id === id)) setOpen(id);
+    }, []),
+  );
   return (
     <ul className="space-y-2.5 lg:hidden">
       {ventures.map((v) => {
@@ -210,7 +217,7 @@ function Fold() {
               className={`grid transition-[grid-template-rows] duration-500 ease-out ${
                 on ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
               }`}
-              {...hide(!on)}
+              {...inertIf(!on)}
             >
               <div className="min-h-0 overflow-hidden">
                 <div className="px-5 pb-6">

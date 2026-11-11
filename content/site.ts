@@ -48,7 +48,7 @@ export const researchModels = {
   detail:
     "Five interactive experiments in vaccination, case reporting and other public-health decisions.",
   href: "https://kapoorjay.com/research-models/",
-  workPath: "/work/straypaw-research-models/",
+  workPath: "/research-models/",
 };
 
 /* Startups: things I started */
@@ -725,15 +725,3 @@ export const life = [
     caption: "Pittsburgh, now",
   },
 ];
-
-/** Old project URLs that are not case pages any more, so shared links still land well. */
-export const legacy: Record<string, string> = {
-  "straypaw-research-models": researchModels.href,
-  "juno-preventive-health": "/work/juno-ai",
-  "recovery-intelligence": "/play/cura",
-  road360: "/play/road360",
-  "seo-geo-optimiser": "/play/llm-lab",
-  "everybodys-on-strike": "/play/strike",
-  "worst-emergency-service": "/play/emergency",
-  "everything-falls": "/play/everything-falls",
-};

@@ -12,23 +12,7 @@ export const metadata: Metadata = {
     "Dated forecasts on Indian healthtech, fintech and health AI, with stated probabilities and outcomes.",
 };
 
-const order = [
-  "Dec 2026",
-  "FY26 results",
-  "Mar 2027",
-  "Jun 2027",
-  "Jul 2027",
-  "Dec 2027",
-  "Open-ended",
-];
-
 export default function Ledger() {
-  const upcoming = order
-    .map((d) => ({
-      d,
-      calls: ledger.calls.filter((c) => c.result === "OPEN" && c.due === d),
-    }))
-    .filter((g) => g.calls.length);
   return (
     <>
       <section className="shell pt-28 md:pt-36">
@@ -86,29 +70,6 @@ export default function Ledger() {
             <Bet />
           </div>
         </div>
-      </section>
-
-      <section className="shell pt-20">
-        <h2 className="display text-[clamp(34px,4.4vw,68px)]">
-          Resolving next
-        </h2>
-        <ul className="mt-6 space-y-5">
-          {upcoming.map((g) => (
-            <li
-              key={g.d}
-              className="grid gap-1 sm:grid-cols-[140px_1fr] sm:gap-6"
-            >
-              <span className="text-[15px] font-medium text-accent">{g.d}</span>
-              <span className="space-y-1 text-[16px] leading-snug">
-                {g.calls.map((c) => (
-                  <span key={c.prediction} className="block">
-                    {c.prediction}
-                  </span>
-                ))}
-              </span>
-            </li>
-          ))}
-        </ul>
       </section>
 
       <section className="shell pt-20">

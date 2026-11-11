@@ -2,6 +2,10 @@
 import Image from "next/image";
 import { Reveal } from "../motion";
 
+/** Keeps a hidden panel out of the tab order and the accessibility tree. */
+export const inertIf = (hidden: boolean) =>
+  hidden ? ({ inert: "", "aria-hidden": true } as object) : {};
+
 /** A square logo on a white tile. Ventures without a logo get their initial. */
 export function LogoTile({
   src,
@@ -112,17 +116,24 @@ export function SectionHead({
   id,
   title,
   note,
+  onBlue = false,
 }: {
   id: string;
   title: string;
-  note: string;
+  note: React.ReactNode;
+  /** The section sits on a blue band, so the note is white. */
+  onBlue?: boolean;
 }) {
   return (
     <Reveal className="flex items-end justify-between gap-6" y={18}>
       <h2 id={id} className="display text-[clamp(40px,5.6vw,84px)]">
         {title}
       </h2>
-      <p className="pb-1 text-right text-[15px] font-medium text-muted md:pb-2 md:text-[17px]">
+      <p
+        className={`pb-1 text-right text-[15px] font-medium md:pb-2 md:text-[17px] ${
+          onBlue ? "text-white/85" : "text-muted"
+        }`}
+      >
         {note}
       </p>
     </Reveal>

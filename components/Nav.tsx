@@ -17,6 +17,7 @@ const links = [
   { id: "research", label: "Research" },
   { id: "projects", label: "Projects" },
   { id: "about", label: "About" },
+  { id: "contact", label: "Contact" },
 ];
 
 type Tone = "light" | "dark" | "accent";
@@ -29,7 +30,7 @@ function useTone(path: string | null) {
     const read = () => {
       raf = 0;
       const hit = document
-        .elementsFromPoint(window.innerWidth / 2, 36)
+        .elementsFromPoint(window.innerWidth - 80, 36)
         .find((el) => !el.closest("header"));
       // Mid page-transition nothing real can be hit; keep the tone until it ends.
       if (!hit || hit === document.documentElement || hit === document.body)
@@ -54,7 +55,7 @@ function useTone(path: string | null) {
   return tone;
 }
 
-/** Which home section is on screen, for the highlighted link. */
+/** Which home section is on screen, so the menu button can name it. */
 function useSection(path: string | null) {
   const [id, setId] = useState<string | null>(null);
   useEffect(() => {
@@ -70,8 +71,8 @@ function useSection(path: string | null) {
       },
       { rootMargin: "-45% 0px -50% 0px" },
     );
-    ["top", ...links.map((l) => l.id)].forEach((s) => {
-      const el = document.getElementById(s);
+    links.forEach((l) => {
+      const el = l.id === "contact" ? null : document.getElementById(l.id);
       if (el) io.observe(el);
     });
     return () => io.disconnect();
@@ -79,6 +80,7 @@ function useSection(path: string | null) {
   return id;
 }
 
+/** Two things only: my name, and one button that opens everything else. */
 export function Nav() {
   const path = usePathname();
   const home = path === "/";
@@ -102,30 +104,22 @@ export function Nav() {
   }, [open]);
 
   const pill = `rounded-full backdrop-blur-md transition-colors duration-500 ${
-    dark ? "bg-white/[0.16] text-white" : "bg-card/80 text-fg"
+    open
+      ? "bg-white/15 text-white"
+      : dark
+        ? "bg-white/[0.16] text-white"
+        : "bg-card/80 text-fg"
   }`;
-  const item = (active: boolean) =>
-    `rounded-full px-3.5 py-2 text-[14px] font-medium transition-colors duration-300 ${
-      active
-        ? dark
-          ? "bg-white/25"
-          : "bg-white"
-        : dark
-          ? "hover:bg-white/15"
-          : "hover:bg-white/70"
-    }`;
 
   /** On the home page these jump within the page; elsewhere they go home first. */
   const Jump = ({
     id,
     className,
     children,
-    onClick,
   }: {
     id: string;
     className: string;
     children: React.ReactNode;
-    onClick?: () => void;
   }) =>
     home ? (
       <a
@@ -134,7 +128,7 @@ export function Nav() {
         onClick={(e) => {
           if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
           e.preventDefault();
-          onClick?.();
+          setOpen(false);
           jumpTo(id);
         }}
         aria-current={here === id ? "true" : undefined}
@@ -145,11 +139,14 @@ export function Nav() {
       <Link
         href={id === "top" ? "/" : `/#${id}`}
         className={className}
-        onClick={onClick}
+        onClick={() => setOpen(false)}
       >
         {children}
       </Link>
     );
+
+  const circle = (r: string) => `circle(${r} at calc(100% - 64px) 34px)`;
+  const label = links.find((l) => l.id === here)?.label ?? "Menu";
 
   return (
     <header
@@ -159,59 +156,29 @@ export function Nav() {
       <motion.span
         aria-hidden="true"
         className={`absolute inset-x-0 top-0 h-[3px] origin-left transition-colors duration-500 ${
-          dark ? "bg-white" : "bg-accent"
+          dark || open ? "bg-white" : "bg-accent"
         }`}
         style={{ scaleX: scrollYProgress }}
       />
       <nav
-        className="shell flex h-[68px] items-center justify-between gap-4"
+        className="shell relative z-[60] flex h-[68px] items-center justify-between gap-4"
         aria-label="Main"
       >
         <Jump
           id="top"
-          className={`${pill} relative z-[60] px-4 py-2 text-[15px] font-semibold ${
-            open ? "!bg-transparent !text-white" : ""
-          }`}
+          className={`${pill} px-4 py-2 text-[15px] font-semibold`}
         >
           Jay Kapoor
         </Jump>
-
-        <div className={`${pill} hidden items-center gap-0.5 p-1 md:flex`}>
-          {links.map((l) => (
-            <Jump key={l.id} id={l.id} className={item(here === l.id)}>
-              {l.label}
-            </Jump>
-          ))}
-          <a
-            href={person.resume}
-            target="_blank"
-            rel="noreferrer"
-            className={item(false)}
-          >
-            Resume
-          </a>
-          <Jump
-            id="contact"
-            className={`ml-1 rounded-full px-4 py-2 text-[14px] font-semibold transition-colors duration-300 ${
-              dark
-                ? "bg-white text-[rgb(var(--fg))] hover:bg-accent2"
-                : "bg-fg text-white hover:bg-accent"
-            }`}
-          >
-            Contact
-          </Jump>
-        </div>
-
         <button
           type="button"
-          className={`${pill} relative z-[60] grid h-11 w-11 place-items-center md:hidden ${
-            open ? "!bg-white/15 !text-white" : ""
-          }`}
+          className={`${pill} flex h-11 items-center gap-3 pl-4 pr-3.5 text-[15px] font-semibold`}
           aria-expanded={open}
-          aria-controls="mobile-menu"
+          aria-controls="menu"
           aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen((v) => !v)}
         >
+          <span aria-hidden="true">{open ? "Close" : label}</span>
           <span className="relative block h-3 w-5" aria-hidden="true">
             <span
               className={`absolute left-0 top-0 h-[2px] w-5 bg-current transition-transform duration-300 ${open ? "translate-y-[5px] rotate-45" : ""}`}
@@ -226,66 +193,64 @@ export function Nav() {
       <AnimatePresence>
         {open && (
           <motion.div
-            id="mobile-menu"
-            className="fixed inset-0 z-50 flex flex-col justify-between bg-[rgb(var(--fg))] px-5 pb-8 pt-24 text-white md:hidden"
-            initial={
-              reduce
-                ? { opacity: 0 }
-                : { clipPath: "circle(0% at calc(100% - 42px) 34px)" }
-            }
-            animate={
-              reduce
-                ? { opacity: 1 }
-                : { clipPath: "circle(150% at calc(100% - 42px) 34px)" }
-            }
-            exit={
-              reduce
-                ? { opacity: 0 }
-                : { clipPath: "circle(0% at calc(100% - 42px) 34px)" }
-            }
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            id="menu"
+            className="fixed inset-0 z-50 overflow-y-auto bg-accent text-white"
+            initial={reduce ? { opacity: 0 } : { clipPath: circle("0%") }}
+            animate={reduce ? { opacity: 1 } : { clipPath: circle("160%") }}
+            exit={reduce ? { opacity: 0 } : { clipPath: circle("0%") }}
+            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
           >
-            <ul>
-              {[...links, { id: "contact", label: "Contact" }].map((l, i) => (
-                <motion.li
-                  key={l.id}
-                  initial={reduce ? false : { opacity: 0, y: 28 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.6,
-                    delay: 0.12 + i * 0.05,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                >
-                  <Jump
-                    id={l.id}
-                    onClick={() => setOpen(false)}
-                    className="display block py-2 text-[52px]"
+            <div className="shell flex min-h-full flex-col justify-between gap-10 pb-9 pt-24 md:pt-28">
+              <ul className="grid gap-x-16 md:grid-cols-2">
+                {links.map((l, i) => (
+                  <motion.li
+                    key={l.id}
+                    initial={reduce ? false : { opacity: 0, y: 34 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.6,
+                      delay: 0.12 + i * 0.05,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
                   >
-                    {l.label}
-                  </Jump>
-                </motion.li>
-              ))}
-            </ul>
-            <div className="space-y-3 text-[17px] font-medium">
-              <a href={`mailto:${person.email}`} className="block text-[22px]">
-                {person.email}
-              </a>
-              <p className="flex flex-wrap gap-x-6 gap-y-2 text-white/85">
-                <a href={person.resume} target="_blank" rel="noreferrer">
-                  Resume
-                </a>
-                {person.links.map((l) => (
-                  <a
-                    key={l.href}
-                    href={l.href}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {l.label}
-                  </a>
+                    <Jump
+                      id={l.id}
+                      className="display group flex items-baseline gap-4 py-1.5 text-[clamp(48px,7.4vw,104px)]"
+                    >
+                      <span className="text-[0.26em] font-medium tabular-nums text-white/85 [font-stretch:100%]">
+                        0{i + 1}
+                      </span>
+                      <span className="transition-transform duration-500 ease-out group-hover:translate-x-3">
+                        {l.label}
+                      </span>
+                    </Jump>
+                  </motion.li>
                 ))}
-              </p>
+              </ul>
+              <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-4 text-[17px] font-medium">
+                <a
+                  href={`mailto:${person.email}`}
+                  className="text-[clamp(20px,2.2vw,28px)] underline decoration-white/50 underline-offset-[6px] hover:decoration-white"
+                >
+                  {person.email}
+                </a>
+                <p className="flex flex-wrap gap-x-7 gap-y-2">
+                  {[
+                    { label: "Resume", href: person.resume },
+                    ...person.links,
+                  ].map((l) => (
+                    <a
+                      key={l.href}
+                      href={l.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="underline decoration-white/50 underline-offset-[6px] hover:decoration-white"
+                    >
+                      {l.label}
+                    </a>
+                  ))}
+                </p>
+              </div>
             </div>
           </motion.div>
         )}

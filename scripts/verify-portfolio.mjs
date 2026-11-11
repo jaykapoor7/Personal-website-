@@ -2,7 +2,7 @@
 //   python -m http.server 3000 --directory out && npm run test:browser
 // Set BASE_URL to test another origin, PLAYWRIGHT_CHROMIUM_PATH for a browser binary.
 import assert from "node:assert/strict";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { chromium, devices } from "playwright";
 import AxeBuilder from "@axe-core/playwright";
 
@@ -18,44 +18,31 @@ const browser = await chromium.launch({
   args: ["--no-sandbox"],
 });
 
-// The home page is the whole portfolio. Old section URLs (/work, /research, ...) and
-// old project slugs forward to the matching part of it.
+// The home page is the whole portfolio. Old section URLs (/work, /research, ...)
+// and retired pages are redirected by vercel.json, checked further down.
 const routes = [
   "/",
-  "/startups/",
-  "/ventures/",
-  "/work/pitt-sociology/",
-  "/work/max-hospital/",
-  "/projects/",
-  "/started/",
-  "/questions/",
-  "/predictions/",
-  "/work/",
   "/work/straypaw/",
   "/work/juno-ai/",
-  "/work/crowwd/",
-  "/work/tot-schools/",
   "/work/project-nidaan/",
   "/work/finer-things-club/",
-  "/work/hdfc-bank/",
-  "/work/upmc-emergency-medicine/",
-  "/work/tarc/",
-  "/work/accessible-smarttech/",
-  "/work/apodaca-lab/",
-  "/work/road360/",
+  "/work/tot-schools/",
+  "/work/crowwd/",
   "/play/strike/",
   "/play/road360/",
-  "/research/",
+  "/play/everything-falls/",
   "/ledger/",
   "/market-map/",
-  "/about/",
-  "/experience/",
-  "/writing/",
-  "/thesis/",
-  "/play/",
-  "/play/everything-falls/",
-  "/contact/",
   "/artifacts/",
+];
+// The Research Models pages are plain HTML with their own links; they get the
+// same layout and accessibility checks but are left out of the link crawl.
+const miniSite = [
+  "/research-models/index.html",
+  "/research-models/models/the-sterilization-paradox.html",
+  "/research-models/notes.html",
+  "/research-models/notes/the-70-percent-paradox.html",
+  "/research-models/about.html",
 ];
 const errors = [];
 
@@ -85,7 +72,7 @@ try {
       (m) => m.type() === "error" && errors.push(`${name}: ${m.text()}`),
     );
 
-    for (const route of routes) {
+    for (const route of [...routes, ...miniSite]) {
       const res = await page.goto(base + route, { waitUntil: "networkidle" });
       assert.equal(res.status(), 200, route);
       assert.equal(
@@ -115,14 +102,13 @@ try {
 
     await page.goto(base + "/", { waitUntil: "networkidle" });
     assert.match(await page.locator("h1").innerText(), /Jay/);
-    if (name === "mobile") {
-      await page.getByRole("button", { name: "Open menu" }).tap();
-      await page
-        .locator("#mobile-menu")
-        .getByRole("link", { name: "Research" })
-        .tap();
-      await page.waitForURL(/#research$/);
-    }
+    // The menu is one button on every screen size.
+    await page.getByRole("button", { name: "Open menu" }).click();
+    await page
+      .locator("#menu")
+      .getByRole("link", { name: /Research/ })
+      .click();
+    await page.waitForURL(/#research$/);
 
     // Every section of the home page is present and reachable by its anchor.
     for (const id of [
@@ -166,16 +152,40 @@ try {
       "Photo slat opens",
     );
 
-    // A lab on the home page opens its case page.
-    await page.goto(base + "/", { waitUntil: "networkidle" });
-    const lab = page.getByRole("link", { name: /Apodaca Lab/ });
+    // A job card turns over to show what the work was.
+    // (By keyboard: with a mouse the card has already turned by the time you click.)
+    const job = page.getByRole("button", { name: /^TARC India/ });
+    await job.scrollIntoViewIfNeeded();
+    await job.focus();
+    await page.keyboard.press("Enter");
+    assert.equal(
+      await job.getAttribute("aria-expanded"),
+      "true",
+      "Experience card turns over",
+    );
+
+    // A lab opens in place.
+    const lab = page.getByRole("button", { name: /Apodaca Lab/ });
     await lab.scrollIntoViewIfNeeded();
     await lab.click();
-    await page.waitForURL(/\/work\/apodaca-lab\/?$/);
+    await page.waitForTimeout(600);
     assert.match(
-      await page.locator("main").innerText(),
+      await page.locator("#lab-apodaca").innerText(),
       /PIEZO/,
-      "Lab opens its case page",
+      "Lab row opens in place",
+    );
+
+    // A bar on the timeline jumps to its entry and opens it.
+    await page.goto(base + "/", { waitUntil: "networkidle" });
+    await page.getByRole("link", { name: /^Juno-AI, Founder/ }).click();
+    await page.waitForTimeout(1500);
+    assert.equal(
+      await page
+        .locator("#startups")
+        .getByRole("button", { name: /Juno-AI/ })
+        .getAttribute("aria-expanded"),
+      "true",
+      "Timeline bar opens its entry",
     );
 
     // Bet against me: lock in odds and see mine.
@@ -229,8 +239,16 @@ try {
     const res = await page.request.get(base + href);
     assert.equal(res.status(), 200, `Broken local link ${href}`);
   }
+  // Every redirect in vercel.json lands on something that exists.
+  const { redirects } = JSON.parse(
+    readFileSync(new URL("../vercel.json", import.meta.url), "utf8"),
+  );
+  for (const r of redirects) {
+    const res = await page.request.get(base + r.destination.split("#")[0]);
+    assert.equal(res.status(), 200, `Redirect target ${r.destination}`);
+  }
   console.log(
-    `Checked ${routes.length} routes × 4 contexts and ${links.size} local links.`,
+    `Checked ${routes.length + miniSite.length} routes × 4 contexts, ${links.size} local links and ${redirects.length} redirects.`,
   );
   assert.deepEqual(errors, [], "Browser errors");
   console.log("All portfolio checks passed.");

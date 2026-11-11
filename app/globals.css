@@ -296,3 +296,13 @@
     min-height: min(68svh, 640px);
   }
 }
+
+/* Timeline bars drop their name when they are too short to hold it. */
+.tl-bar {
+  container-type: inline-size;
+}
+@container (max-width: 92px) {
+  .tl-name {
+    display: none;
+  }
+}

@@ -7,54 +7,13 @@ import {
 } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import {
-  builds,
-  labs,
-  person,
-  portrait,
-  roles,
-  ventures,
-} from "@/content/site";
+import { person, portrait } from "@/content/site";
 import { jumpTo } from "@/lib/jump";
 import { Arrow } from "../Arrow";
 import { ease } from "../motion";
-import { LogoTile } from "./bits";
+import { Timeline } from "./Timeline";
 
 type Group = "startups" | "experience" | "research" | "projects";
-
-/** What is on the page, as one quiet row: the logos behind each word in the sentence. */
-const index: {
-  id: Group;
-  label: string;
-  logos?: { name: string; src?: string }[];
-  shots?: string[];
-}[] = [
-  {
-    id: "startups",
-    label: "Startups",
-    logos: ventures.map((v) => ({ name: v.name, src: v.logo })),
-  },
-  {
-    id: "experience",
-    label: "Experience",
-    logos: roles.map((r) => ({ name: r.org, src: r.logo })),
-  },
-  {
-    id: "research",
-    label: "Research",
-    // One tile per institution, not per lab.
-    logos: labs
-      .filter((l, i) => labs.findIndex((x) => x.logo === l.logo) === i)
-      .map((l) => ({ name: l.name, src: l.logo })),
-  },
-  {
-    id: "projects",
-    label: "Projects",
-    shots: ["emergency", "strike", "cura"].map(
-      (id) => builds.find((b) => b.id === id)!.image!,
-    ),
-  },
-];
 
 /** One soft wash of blue that drifts after the mouse. */
 function Glow({ area }: { area: React.RefObject<HTMLElement> }) {
@@ -165,7 +124,7 @@ export function Hero() {
       className="relative flex min-h-[100svh] flex-col overflow-hidden lg:min-h-[max(92svh,660px)]"
     >
       <Glow area={ref} />
-      <div className="shell relative flex flex-1 flex-col justify-center pb-10 pt-28 md:pt-32">
+      <div className="shell relative flex flex-1 flex-col justify-center pb-10 pt-24 md:pb-12 md:pt-28">
         <h1 className="display text-[clamp(38px,min(5.6vw,9.4vh),86px)] !leading-[1.08]">
           {say("I'm Jay")}
           <motion.span
@@ -237,60 +196,14 @@ export function Hero() {
         </motion.p>
       </div>
 
-      <motion.ul
-        className="shell relative grid grid-cols-2 gap-x-8 gap-y-6 pb-9 sm:flex sm:flex-wrap sm:gap-x-12 lg:gap-x-16"
+      <motion.div
+        className="relative"
         initial={reduce ? false : { opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease, delay: 1.3 }}
       >
-        {index.map((g) => (
-          <li
-            key={g.id}
-            className={`transition-opacity duration-300 ${
-              hot && hot !== g.id ? "opacity-30" : ""
-            }`}
-          >
-            <a
-              href={`#${g.id}`}
-              onClick={go(g.id)}
-              {...watch(g.id)}
-              className="group block"
-            >
-              <span
-                className={`block text-[13px] font-medium transition-colors duration-300 ${
-                  hot === g.id ? "text-accent" : "text-muted"
-                }`}
-              >
-                {g.label}
-              </span>
-              <span className="mt-2 flex gap-1.5 transition-transform duration-300 ease-out group-hover:-translate-y-0.5">
-                {g.logos?.map((l) => (
-                  <LogoTile
-                    key={l.name}
-                    src={l.src}
-                    name={l.name}
-                    className="h-9 w-9 rounded-[10px] text-[14px]"
-                  />
-                ))}
-                {g.shots?.map((src) => (
-                  <span
-                    key={src}
-                    className="relative block h-9 w-[58px] overflow-hidden rounded-[10px] ring-1 ring-line"
-                  >
-                    <Image
-                      src={src}
-                      alt=""
-                      fill
-                      sizes="60px"
-                      className="object-cover object-top"
-                    />
-                  </span>
-                ))}
-              </span>
-            </a>
-          </li>
-        ))}
-      </motion.ul>
+        <Timeline hot={hot} onHot={setHot} />
+      </motion.div>
     </section>
   );
 }

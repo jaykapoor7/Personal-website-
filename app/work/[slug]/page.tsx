@@ -1,24 +1,16 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import { Link } from "next-view-transitions";
 import { Arrow } from "@/components/Arrow";
 import { ScrollShot } from "@/components/CaseHero";
 import { Counter, Reveal, RiseWords } from "@/components/motion";
-import { Redirect } from "@/components/Redirect";
 import { SmartLink } from "@/components/ui";
-import { cases, type Entry } from "@/content/archive";
-import {
-  legacy,
-  type Link as L,
-  type Metric,
-  type Proof,
-  type Shot,
-} from "@/content/site";
+import { cases, type Case } from "@/content/archive";
+import type { Link as L, Metric, Proof, Shot } from "@/content/site";
 
 export function generateStaticParams() {
-  return [...cases.map((c) => c.slug), ...Object.keys(legacy)].map((slug) => ({
-    slug,
-  }));
+  return cases.map((c) => ({ slug: c.slug }));
 }
 
 export function generateMetadata({
@@ -27,12 +19,12 @@ export function generateMetadata({
   params: { slug: string };
 }): Metadata {
   const e = cases.find((c) => c.slug === params.slug);
-  return e ? { title: e.title, description: e.line } : { title: "Moved" };
+  return e ? { title: e.title, description: e.line } : {};
 }
 
 /** Everything a case page needs, whichever list the entry came from. */
-function details(e: Entry) {
-  const c = e.caseOf!;
+function details(e: Case) {
+  const c = e.caseOf;
   if (c.type === "venture") {
     const v = c.v;
     return {
@@ -50,37 +42,20 @@ function details(e: Entry) {
       photos: undefined,
     };
   }
-  if (c.type === "role") {
-    const r = c.r;
-    return {
-      back: "/#experience",
-      backLabel: "Experience",
-      kicker: `${r.role}, ${r.period}, ${r.place}`,
-      lede: r.question,
-      points: r.points,
-      metrics: [] as Metric[],
-      site: r.site,
-      links: [] as L[],
-      shot: undefined as Shot | undefined,
-      proof: r.proof,
-      logo: r.logo,
-      photos: r.photos,
-    };
-  }
-  const l = c.l;
+  const r = c.r;
   return {
-    back: "/#research",
-    backLabel: "Research",
-    kicker: `${l.role}, ${l.period}${l.lead ? `, with ${l.lead}` : ""}`,
-    lede: l.question,
-    points: l.points ?? [l.summary],
+    back: "/#experience",
+    backLabel: "Experience",
+    kicker: `${r.role}, ${r.period}, ${r.place}`,
+    lede: r.question,
+    points: r.points,
     metrics: [] as Metric[],
-    site: l.site,
+    site: r.site,
     links: [] as L[],
-    shot: l.shot,
-    proof: [] as Proof[],
-    logo: l.logo,
-    photos: undefined,
+    shot: undefined as Shot | undefined,
+    proof: r.proof,
+    logo: r.logo,
+    photos: r.photos,
   };
 }
 
@@ -121,8 +96,7 @@ function Papers({ proof }: { proof: Proof[] }) {
 
 export default function CasePage({ params }: { params: { slug: string } }) {
   const i = cases.findIndex((c) => c.slug === params.slug);
-  if (i < 0)
-    return <Redirect to={legacy[params.slug] ?? "/"} label="Jay Kapoor" />;
+  if (i < 0) notFound();
   const e = cases[i];
   const next = cases[(i + 1) % cases.length];
   const d = details(e);
