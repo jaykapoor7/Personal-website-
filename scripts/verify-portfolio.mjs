@@ -41,13 +41,17 @@ const routes = [
 ];
 // The Research Models pages are plain HTML with their own links; they get the
 // same layout and accessibility checks but are left out of the link crawl.
+// Vercel serves them at clean URLs; a plain static server needs the file name.
+const local = /127\.0\.0\.1|localhost/.test(base);
 const miniSite = [
   "/research-models/index.html",
   "/research-models/models/the-sterilization-paradox.html",
   "/research-models/notes.html",
   "/research-models/notes/the-70-percent-paradox.html",
   "/research-models/about.html",
-];
+].map((p) =>
+  local ? p : p.replace(/index\.html$/, "").replace(/\.html$/, "/"),
+);
 const errors = [];
 
 try {
