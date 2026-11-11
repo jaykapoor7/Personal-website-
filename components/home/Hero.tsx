@@ -1,156 +1,118 @@
 "use client";
-import { motion, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+} from "framer-motion";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
-import { builds, person, portrait, roles, ventures } from "@/content/site";
+import { useEffect, useRef, useState } from "react";
+import {
+  builds,
+  labs,
+  person,
+  portrait,
+  roles,
+  ventures,
+} from "@/content/site";
 import { jumpTo } from "@/lib/jump";
 import { Arrow } from "../Arrow";
 import { ease } from "../motion";
+import { LogoTile } from "./bits";
 
-/** A field of dots behind the intro. They swell where the mouse is. */
-function DotField() {
-  const ref = useRef<HTMLCanvasElement>(null);
+type Group = "startups" | "experience" | "research" | "projects";
+
+/** What is on the page, as one quiet row: the logos behind each word in the sentence. */
+const index: {
+  id: Group;
+  label: string;
+  logos?: { name: string; src?: string }[];
+  shots?: string[];
+}[] = [
+  {
+    id: "startups",
+    label: "Startups",
+    logos: ventures.map((v) => ({ name: v.name, src: v.logo })),
+  },
+  {
+    id: "experience",
+    label: "Experience",
+    logos: roles.map((r) => ({ name: r.org, src: r.logo })),
+  },
+  {
+    id: "research",
+    label: "Research",
+    // One tile per institution, not per lab.
+    logos: labs
+      .filter((l, i) => labs.findIndex((x) => x.logo === l.logo) === i)
+      .map((l) => ({ name: l.name, src: l.logo })),
+  },
+  {
+    id: "projects",
+    label: "Projects",
+    shots: ["emergency", "strike", "cura"].map(
+      (id) => builds.find((b) => b.id === id)!.image!,
+    ),
+  },
+];
+
+/** One soft wash of blue that drifts after the mouse. */
+function Glow({ area }: { area: React.RefObject<HTMLElement> }) {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const sx = useSpring(x, { stiffness: 30, damping: 20, mass: 1.2 });
+  const sy = useSpring(y, { stiffness: 30, damping: 20, mass: 1.2 });
   useEffect(() => {
-    const c = ref.current;
-    const ctx = c?.getContext("2d");
-    if (!c || !ctx) return;
-    const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const GAP = 28;
-    let w = 0;
-    let h = 0;
-    let raf = 0;
-    let live = false;
-    const p = { x: -999, y: -999, tx: -999, ty: -999 };
-
-    const draw = (t: number) => {
-      ctx.clearRect(0, 0, w, h);
-      ctx.fillStyle = "rgb(29 74 245)";
-      p.x += (p.tx - p.x) * 0.14;
-      p.y += (p.ty - p.y) * 0.14;
-      for (let y = GAP / 2; y < h; y += GAP)
-        for (let x = GAP / 2; x < w; x += GAP) {
-          const near = Math.max(0, 1 - Math.hypot(x - p.x, y - p.y) / 180);
-          const k = near * near;
-          const wave = calm
-            ? 0.4
-            : (Math.sin((x + y * 1.4) * 0.011 - t * 0.0011) + 1) / 2;
-          ctx.globalAlpha = 0.1 + wave * 0.12 + k * 0.6;
-          ctx.beginPath();
-          ctx.arc(x, y, 1 + wave * 0.5 + k * 3.4, 0, 6.2832);
-          ctx.fill();
-        }
-    };
-    const loop = (t: number) => {
-      draw(t);
-      if (live && !calm) raf = requestAnimationFrame(loop);
-    };
-    const size = () => {
-      const dpr = Math.min(2, window.devicePixelRatio || 1);
-      w = c.clientWidth;
-      h = c.clientHeight;
-      c.width = w * dpr;
-      c.height = h * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      draw(performance.now());
-    };
+    const el = area.current;
+    if (!el) return;
+    x.jump(el.clientWidth * 0.82);
+    y.jump(el.clientHeight * 0.22);
+    sx.jump(el.clientWidth * 0.82);
+    sy.jump(el.clientHeight * 0.22);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const move = (e: PointerEvent) => {
       if (e.pointerType !== "mouse") return;
-      const r = c.getBoundingClientRect();
-      p.tx = e.clientX - r.left;
-      p.ty = e.clientY - r.top;
+      const r = el.getBoundingClientRect();
+      x.set(e.clientX - r.left);
+      y.set(e.clientY - r.top);
     };
-    const io = new IntersectionObserver(([e]) => {
-      const was = live;
-      live = e.isIntersecting;
-      if (live && !was && !calm) raf = requestAnimationFrame(loop);
-    });
-    size();
-    io.observe(c);
-    window.addEventListener("resize", size);
-    window.addEventListener("pointermove", move, { passive: true });
-    return () => {
-      live = false;
-      cancelAnimationFrame(raf);
-      io.disconnect();
-      window.removeEventListener("resize", size);
-      window.removeEventListener("pointermove", move);
-    };
-  }, []);
+    el.addEventListener("pointermove", move, { passive: true });
+    return () => el.removeEventListener("pointermove", move);
+  }, [area, x, y, sx, sy]);
   return (
-    <canvas
-      ref={ref}
+    <motion.div
       aria-hidden="true"
-      className="absolute inset-0 h-full w-full [mask-image:linear-gradient(#000_55%,transparent)]"
-    />
+      className="pointer-events-none absolute left-0 top-0"
+      style={{ x: sx, y: sy }}
+    >
+      <div className="h-[760px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(var(--accent)/0.15),transparent)]" />
+    </motion.div>
   );
 }
 
-type Tile = { src?: string; letter?: string; wide?: boolean };
-
-/** Small logos set into the line of text. They fan out when their phrase is hovered. */
-function Stack({ tiles, at }: { tiles: Tile[]; at: number }) {
-  const reduce = useReducedMotion();
-  return (
-    <span className="ml-[0.16em] inline-flex align-[-0.1em]">
-      {tiles.map((t, n) => (
-        <motion.span
-          key={n}
-          className={`relative inline-block h-[0.76em] overflow-hidden rounded-[0.2em] bg-white ring-[0.045em] ring-white transition-[margin,transform] duration-300 ease-out [box-shadow:0_0_0_0.045em_#fff,0_0.06em_0.16em_rgb(var(--fg)/0.35)] group-hover:-translate-y-[0.07em] ${
-            t.wide ? "w-[1.2em]" : "w-[0.76em]"
-          } ${n ? "-ml-[0.1em] group-hover:ml-[0.08em]" : ""}`}
-          style={{ zIndex: 9 - n, transitionDelay: `${n * 35}ms` }}
-          initial={reduce ? false : { scale: 0, rotate: -25 }}
-          animate={{ scale: 1, rotate: 0 }}
-          transition={{
-            type: "spring",
-            stiffness: 260,
-            damping: 18,
-            delay: at + n * 0.06,
-          }}
-        >
-          {t.src ? (
-            <Image
-              src={t.src}
-              alt=""
-              fill
-              sizes="120px"
-              className={
-                t.wide ? "object-cover object-top" : "object-contain p-[10%]"
-              }
-            />
-          ) : (
-            <span className="grid h-full w-full place-items-center bg-accent text-[0.42em] font-bold leading-none text-white">
-              {t.letter}
-            </span>
-          )}
-        </motion.span>
-      ))}
-    </span>
-  );
-}
-
-const logoOf = (name: string, src?: string): Tile =>
-  src ? { src } : { letter: name.replace(/^The /, "")[0] };
-
-const stacks = {
-  startups: ventures.map((v) => logoOf(v.name, v.logo)),
-  experience: roles.map((r) => logoOf(r.org, r.logo)),
-  research: [
-    { src: "/logos/pitt.png" },
-    { src: "/logos/upmc.png" },
-    { letter: "M" },
-  ],
-  projects: ["emergency", "strike", "cura"].map((id) => ({
-    src: builds.find((b) => b.id === id)!.image,
-    wide: true,
-  })),
-};
-
-/** One sentence about me, with my photo and the logos set into the text. */
+/** One plain sentence about me. The underlined words lead to each part of the page. */
 export function Hero() {
+  const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
+  const [hot, setHot] = useState<Group | null>(null);
+  const go = (id: Group) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    jumpTo(id, { glide: true });
+  };
+  const watch = (id: Group) => ({
+    onMouseEnter: () => setHot(id),
+    onMouseLeave: () => setHot(null),
+    onFocus: () => setHot(id),
+    onBlur: () => setHot(null),
+  });
+
   let n = 0;
   const step = 0.035;
+  const rise = (i: number) => ({
+    initial: reduce ? false : { y: "115%" },
+    animate: { y: 0 },
+    transition: { duration: 0.9, ease, delay: 0.1 + i * step },
+  });
   /** Each word rises out of a mask, one after another. */
   const say = (text: string) =>
     text.split(" ").map((w) => {
@@ -158,43 +120,36 @@ export function Hero() {
       return (
         <span key={`${w}${i}`}>
           <span className="-mb-[0.16em] inline-block overflow-hidden pb-[0.16em] align-top">
-            <motion.span
-              className="inline-block"
-              initial={reduce ? false : { y: "115%" }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.9, ease, delay: 0.1 + i * step }}
-            >
+            <motion.span className="inline-block" {...rise(i)}>
               {w}
             </motion.span>
           </span>{" "}
         </span>
       );
     });
-  /** A word that leads to a section, with that section's logos after it. */
-  const go = (id: keyof typeof stacks, word: string, tail = "") => {
+  /** A word that leads to a section. */
+  const link = (id: Group, word: string, tail = "") => {
     const i = n++;
-    n += 2;
     return (
       <>
         <a
           href={`#${id}`}
-          onClick={(e) => {
-            e.preventDefault();
-            jumpTo(id, { glide: true });
-          }}
-          className="group whitespace-nowrap"
+          onClick={go(id)}
+          {...watch(id)}
+          className="whitespace-nowrap"
         >
           <span className="-mx-[0.06em] -mb-[0.16em] inline-block overflow-hidden px-[0.06em] pb-[0.16em] align-top">
             <motion.span
-              className="-mx-[0.05em] inline-block rounded-[0.1em] px-[0.05em] underline decoration-line decoration-[0.06em] underline-offset-[0.1em] transition-colors duration-200 group-hover:bg-accent group-hover:text-white group-hover:decoration-transparent"
-              initial={reduce ? false : { y: "115%" }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.9, ease, delay: 0.1 + i * step }}
+              className={`-mx-[0.05em] inline-block rounded-[0.1em] px-[0.05em] underline decoration-[0.06em] underline-offset-[0.1em] transition-colors duration-200 ${
+                hot === id
+                  ? "bg-accent text-white decoration-transparent"
+                  : "decoration-accent"
+              }`}
+              {...rise(i)}
             >
               {word}
             </motion.span>
           </span>
-          <Stack tiles={stacks[id]} at={0.25 + i * step} />
           {tail}
         </a>{" "}
       </>
@@ -203,24 +158,25 @@ export function Hero() {
 
   return (
     <section
+      ref={ref}
       id="top"
       data-tone="light"
       aria-label="Introduction"
-      className="relative flex min-h-[100svh] flex-col overflow-hidden lg:min-h-[max(88svh,640px)]"
+      className="relative flex min-h-[100svh] flex-col overflow-hidden lg:min-h-[max(92svh,660px)]"
     >
-      <DotField />
-      <div className="shell relative flex flex-1 flex-col justify-center pb-12 pt-28 md:pb-16 md:pt-32">
-        <h1 className="display text-[clamp(36px,min(5.3vw,9vh),80px)] !leading-[1.1]">
+      <Glow area={ref} />
+      <div className="shell relative flex flex-1 flex-col justify-center pb-10 pt-28 md:pt-32">
+        <h1 className="display text-[clamp(38px,min(5.6vw,9.4vh),86px)] !leading-[1.08]">
           {say("I'm Jay")}
           <motion.span
-            className="relative mx-[0.06em] inline-block h-[0.8em] overflow-hidden rounded-full align-[-0.1em] [box-shadow:0_0_0_0.05em_rgb(var(--accent))]"
+            className="relative mx-[0.08em] inline-block h-[0.84em] overflow-hidden rounded-full align-[-0.11em]"
             initial={
               reduce
-                ? { width: "1.4em" }
-                : { width: "1.4em", scale: 0, rotate: -30 }
+                ? { width: "1.7em" }
+                : { width: "1.7em", scale: 0, rotate: -30 }
             }
             animate={{ scale: 1, rotate: -4 }}
-            whileHover={{ width: "2.6em", rotate: 0 }}
+            whileHover={{ width: "3em", rotate: 0 }}
             transition={{
               type: "spring",
               stiffness: 220,
@@ -233,30 +189,27 @@ export function Hero() {
               alt=""
               fill
               priority
-              sizes="260px"
+              sizes="300px"
               className="object-cover object-[50%_61%]"
             />
           </motion.span>
-          {say(", an economics and statistics student at")}
-          <span className="whitespace-nowrap">
-            <Stack tiles={[{ src: "/logos/pitt.png" }]} at={0.45} />{" "}
-            {say("Pitt.")}
-          </span>
-          {say("Here is what I've")}
-          {go("startups", "started", ",")}
+          {say(
+            ", an economics and statistics student at Pitt. Here is what I've",
+          )}
+          {link("startups", "started", ",")}
           {say("where I've")}
-          {go("experience", "worked", ",")}
+          {link("experience", "worked", ",")}
           {say("the")}
-          {go("research", "research")}
+          {link("research", "research")}
           {say("I've done, and things I've")}
-          {go("projects", "made", ".")}
+          {link("projects", "made", ".")}
         </h1>
 
-        <motion.div
-          className="mt-9 flex flex-wrap items-center gap-2.5 md:mt-12"
-          initial={reduce ? false : { opacity: 0, y: 20 }}
+        <motion.p
+          className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3 text-[16px] font-semibold md:mt-10"
+          initial={reduce ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease, delay: 1.25 }}
+          transition={{ duration: 0.8, ease, delay: 1.1 }}
         >
           <a
             href={person.resume}
@@ -266,22 +219,78 @@ export function Hero() {
           >
             Resume <Arrow />
           </a>
-          <a href={`mailto:${person.email}`} className="btn-ghost">
-            {person.email}
-          </a>
-          {person.links.slice(0, 2).map((l) => (
+          {[
+            { label: person.email, href: `mailto:${person.email}` },
+            ...person.links.slice(0, 2),
+          ].map((l) => (
             <a
               key={l.href}
               href={l.href}
-              target="_blank"
+              target={l.href.startsWith("http") ? "_blank" : undefined}
               rel="noreferrer"
-              className="btn-ghost"
+              className="inline-flex items-center gap-1.5 underline decoration-line decoration-2 underline-offset-[6px] transition-colors hover:decoration-accent"
             >
-              {l.label} <Arrow />
+              {l.label}
+              {l.href.startsWith("http") && <Arrow />}
             </a>
           ))}
-        </motion.div>
+        </motion.p>
       </div>
+
+      <motion.ul
+        className="shell relative grid grid-cols-2 gap-x-8 gap-y-6 pb-9 sm:flex sm:flex-wrap sm:gap-x-12 lg:gap-x-16"
+        initial={reduce ? false : { opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease, delay: 1.3 }}
+      >
+        {index.map((g) => (
+          <li
+            key={g.id}
+            className={`transition-opacity duration-300 ${
+              hot && hot !== g.id ? "opacity-30" : ""
+            }`}
+          >
+            <a
+              href={`#${g.id}`}
+              onClick={go(g.id)}
+              {...watch(g.id)}
+              className="group block"
+            >
+              <span
+                className={`block text-[13px] font-medium transition-colors duration-300 ${
+                  hot === g.id ? "text-accent" : "text-muted"
+                }`}
+              >
+                {g.label}
+              </span>
+              <span className="mt-2 flex gap-1.5 transition-transform duration-300 ease-out group-hover:-translate-y-0.5">
+                {g.logos?.map((l) => (
+                  <LogoTile
+                    key={l.name}
+                    src={l.src}
+                    name={l.name}
+                    className="h-9 w-9 rounded-[10px] text-[14px]"
+                  />
+                ))}
+                {g.shots?.map((src) => (
+                  <span
+                    key={src}
+                    className="relative block h-9 w-[58px] overflow-hidden rounded-[10px] ring-1 ring-line"
+                  >
+                    <Image
+                      src={src}
+                      alt=""
+                      fill
+                      sizes="60px"
+                      className="object-cover object-top"
+                    />
+                  </span>
+                ))}
+              </span>
+            </a>
+          </li>
+        ))}
+      </motion.ul>
     </section>
   );
 }

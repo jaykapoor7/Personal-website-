@@ -125,6 +125,7 @@ export const ventures: Venture[] = [
       { value: "10,000+", label: "rural users" },
       { value: "180%", label: "growth in 12 months" },
     ],
+    logo: "/logos/juno.svg",
     site: {
       label: "Visit Juno",
       href: "https://preventive-healthcare-xi.vercel.app/",
@@ -159,6 +160,7 @@ export const ventures: Venture[] = [
       { value: "55", label: "rider interviews" },
       { value: "2", label: "platform partners" },
     ],
+    logo: "/logos/nidaan.svg",
     proof: [
       doc(
         "Field research brief",
@@ -182,6 +184,7 @@ export const ventures: Venture[] = [
       { value: "300+", label: "artisans" },
       { value: "$8k+", label: "revenue" },
     ],
+    logo: "/logos/finer-things.svg",
     proof: [
       doc(
         "Marketplace one-pager",
@@ -421,6 +424,7 @@ export const labs: Lab[] = [
     period: "2023 to 2024",
     summary:
       "Clinical shadowing in emergency and internal medicine at Max Hospital in New Delhi.",
+    logo: "/logos/max.png",
     site: { label: "maxhealthcare.in", href: "https://www.maxhealthcare.in" },
   },
 ];

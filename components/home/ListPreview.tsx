@@ -95,6 +95,7 @@ function Visual({ row }: { row: Row }) {
   return (
     <div className="grid h-full place-items-center">
       <LogoTile
+        src={row.logo}
         name={row.title}
         className="h-28 w-28 rounded-[32px] text-[52px]"
       />
