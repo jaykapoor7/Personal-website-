@@ -57,6 +57,8 @@ export type Venture = {
   name: string;
   role: string;
   period: string;
+  /** A few words, for the landing page. */
+  short: string;
   summary: string;
   points: string[];
   metrics: Metric[];
@@ -73,6 +75,7 @@ export const ventures: Venture[] = [
     name: "StrayPaw",
     role: "Founder",
     period: "Jun 2026 to present",
+    short: "A shared record of India's street animals.",
     summary:
       "A shared record for every street animal in India, used by feeders, rescue groups and city programmes.",
     points: [
@@ -114,6 +117,7 @@ export const ventures: Venture[] = [
     name: "Juno-AI",
     role: "Founder",
     period: "Jun 2019 to Aug 2023",
+    short: "Health information for rural India.",
     summary:
       "Health information and care navigation for rural India. Started at 14.",
     points: [
@@ -151,6 +155,7 @@ export const ventures: Venture[] = [
     name: "Project Nidaan",
     role: "Co-founder",
     period: "May 2022 to Aug 2024",
+    short: "Medication access for delivery riders.",
     summary: "Medication access for gig-economy delivery riders in Bengaluru.",
     points: [
       "Ran 55 field interviews with riders and owned the coding and analysis.",
@@ -177,6 +182,7 @@ export const ventures: Venture[] = [
     name: "The Finer Things Club",
     role: "Founder",
     period: "Jul 2021 to Aug 2024",
+    short: "A marketplace for rural artisans.",
     summary:
       "An online marketplace that brought rural artisans to buyers through NGO and marketplace partners.",
     points: ["Onboarded 300+ rural artisans and generated $8k+ in revenue."],

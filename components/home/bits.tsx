@@ -111,31 +111,13 @@ export function Duo({
   );
 }
 
-/** A section's title and the short note beside it. */
-export function SectionHead({
-  id,
-  title,
-  note,
-  onBlue = false,
-}: {
-  id: string;
-  title: string;
-  note: React.ReactNode;
-  /** The section sits on a blue band, so the note is white. */
-  onBlue?: boolean;
-}) {
+/** The title of a page. */
+export function PageTitle({ id, title }: { id: string; title: string }) {
   return (
-    <Reveal className="flex items-end justify-between gap-6" y={18}>
-      <h2 id={id} className="display text-[clamp(40px,5.6vw,84px)]">
+    <Reveal y={18}>
+      <h1 id={id} className="display text-[clamp(52px,8.4vw,128px)]">
         {title}
-      </h2>
-      <p
-        className={`pb-1 text-right text-[15px] font-medium md:pb-2 md:text-[17px] ${
-          onBlue ? "text-white/85" : "text-muted"
-        }`}
-      >
-        {note}
-      </p>
+      </h1>
     </Reveal>
   );
 }

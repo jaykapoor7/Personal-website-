@@ -7,7 +7,7 @@ import { useRef } from "react";
 import { builds, type Build } from "@/content/site";
 import { Arrow } from "../Arrow";
 import { Stagger, StaggerItem } from "../motion";
-import { SectionHead } from "./bits";
+import { PageTitle } from "./bits";
 
 const EverythingFalls = dynamic(
   () => import("../EverythingFalls").then((m) => m.EverythingFalls),
@@ -76,7 +76,6 @@ function Tile({ b, image }: { b: Build; image?: string }) {
   return (
     <Link
       href={hrefOf(b)}
-      data-cursor={b.kind === "Game" ? "Play" : "Try"}
       className="group relative block h-full overflow-hidden rounded-[24px] bg-white"
     >
       <span className="absolute inset-x-0 bottom-[46px] top-0 overflow-hidden">
@@ -112,14 +111,10 @@ export function Projects() {
       id="projects"
       data-tone="light"
       aria-labelledby="projects-h"
-      className="mx-2 scroll-mt-3 rounded-[32px] bg-card py-14 md:mx-4 md:rounded-[44px] md:py-20"
+      className="mx-2 rounded-[32px] bg-card pb-14 pt-10 md:mx-4 md:rounded-[44px] md:pb-20 md:pt-14"
     >
       <div className="shell">
-        <SectionHead
-          id="projects-h"
-          title="Projects"
-          note="Tools and games, all playable"
-        />
+        <PageTitle id="projects-h" title="Projects" />
         <Stagger
           as="ul"
           gap={0.05}

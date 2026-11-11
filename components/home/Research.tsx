@@ -1,23 +1,17 @@
 "use client";
 import Image from "next/image";
 import { Link } from "next-view-transitions";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { ledgerStats } from "@/content/ledger";
 import { labs, otherResearch, researchModels, writing } from "@/content/site";
-import { useShown } from "@/lib/show";
 import { Arrow } from "../Arrow";
 import { Counter, Reveal, Stagger, StaggerItem } from "../motion";
 import { SmartLink } from "../ui";
-import { LogoTile, SectionHead, inertIf } from "./bits";
+import { LogoTile, PageTitle, inertIf } from "./bits";
 
 /** The labs as a short index. A row opens in place to say what the work was. */
 function Labs() {
   const [open, setOpen] = useState<string | null>(labs[0].id);
-  useShown(
-    useCallback((id) => {
-      if (labs.some((l) => l.id === id)) setOpen(id);
-    }, []),
-  );
   return (
     <ul className="border-t border-line">
       {labs.map((l) => {
@@ -120,7 +114,6 @@ function Memos() {
             >
               <span
                 className="paper-shadow relative block aspect-[900/1273] overflow-hidden bg-white"
-                data-cursor="PDF"
                 onMouseEnter={() => setHover(i)}
               >
                 <Image
@@ -152,7 +145,6 @@ function Tiles() {
       <StaggerItem className="col-span-2 sm:col-span-1">
         <Link
           href="/ledger"
-          data-cursor="Open"
           className="group flex h-full min-h-[212px] flex-col justify-between gap-5 rounded-[28px] bg-accent p-5 text-white sm:p-6"
         >
           <span className="flex items-start justify-between text-[19px] font-semibold leading-tight">
@@ -181,7 +173,6 @@ function Tiles() {
       <StaggerItem>
         <a
           href={researchModels.workPath}
-          data-cursor="Open"
           className="group flex h-full min-h-[212px] flex-col overflow-hidden rounded-[28px] bg-card"
         >
           <span className="relative block min-h-[110px] flex-1 overflow-hidden">
@@ -207,7 +198,6 @@ function Tiles() {
       <StaggerItem>
         <Link
           href="/market-map"
-          data-cursor="Open"
           className="group relative flex h-full min-h-[212px] flex-col justify-end overflow-hidden rounded-[28px] bg-card p-5"
         >
           <span
@@ -245,13 +235,9 @@ export function Research() {
       id="research"
       data-tone="light"
       aria-labelledby="research-h"
-      className="shell scroll-mt-20"
+      className="shell"
     >
-      <SectionHead
-        id="research-h"
-        title="Research"
-        note="Pitt, UPMC and my own"
-      />
+      <PageTitle id="research-h" title="Research" />
       <div className="mt-7 grid gap-10 md:mt-9 lg:grid-cols-[0.92fr_1.08fr] lg:gap-12">
         <Reveal>
           <Labs />

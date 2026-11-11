@@ -1,8 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { labs, roles, ventures } from "@/content/site";
-import { jumpTo } from "@/lib/jump";
-import { showItem } from "@/lib/show";
+import { Link } from "next-view-transitions";
 import { LogoTile } from "./bits";
 
 export type Group = "startups" | "experience" | "research";
@@ -119,15 +118,9 @@ const look: Record<Group, { bar: string; key: string; label: string }> = {
 
 /**
  * Everything with dates on one band, 2019 to now. Solid bars are startups,
- * tinted ones jobs, outlined ones research. A bar jumps to its entry.
+ * tinted ones jobs, outlined ones research. A bar links to its page.
  */
-export function Timeline({
-  hot,
-  onHot,
-}: {
-  hot: string | null;
-  onHot: (g: Group | null) => void;
-}) {
+export function Timeline() {
   const scroller = useRef<HTMLDivElement>(null);
   // Server and first paint agree on "now"; the real date takes over after mount.
   const [now, setNow] = useState(LATEST + 0.25);
@@ -146,31 +139,16 @@ export function Timeline({
   );
 
   return (
-    <div className="shell relative pb-8">
+    <div className="relative">
       <div className="mb-3 flex flex-wrap items-center justify-between gap-x-6 gap-y-1 text-[13px] font-medium">
-        <ul className="flex gap-5">
+        <ul className="flex gap-5 text-muted">
           {(Object.keys(look) as Group[]).map((g) => (
-            <li key={g}>
-              <a
-                href={`#${g}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  jumpTo(g, { glide: true });
-                }}
-                onMouseEnter={() => onHot(g)}
-                onMouseLeave={() => onHot(null)}
-                onFocus={() => onHot(g)}
-                onBlur={() => onHot(null)}
-                className={`flex items-center gap-2 transition-colors ${
-                  hot === g ? "text-accent" : "text-muted hover:text-fg"
-                }`}
-              >
-                <span
-                  aria-hidden="true"
-                  className={`h-3 w-5 rounded-[4px] ${look[g].key}`}
-                />
-                {look[g].label}
-              </a>
+            <li key={g} className="flex items-center gap-2">
+              <span
+                aria-hidden="true"
+                className={`h-3 w-5 rounded-[4px] ${look[g].key}`}
+              />
+              {look[g].label}
             </li>
           ))}
         </ul>
@@ -195,10 +173,7 @@ export function Timeline({
           <ul
             className="relative"
             style={{ height: ROWS * 34 - 6 }}
-            onMouseLeave={() => {
-              setTip(null);
-              onHot(null);
-            }}
+            onMouseLeave={() => setTip(null)}
           >
             {[...years, now].map((y) => (
               <li
@@ -212,7 +187,6 @@ export function Timeline({
               const left = at(it.start);
               const right = it.end === null ? 100 : Math.min(100, at(it.end));
               const live = it.end === null;
-              const dim = hot && hot !== it.group && hot !== "projects";
               return (
                 <li
                   key={it.id}
@@ -223,29 +197,17 @@ export function Timeline({
                     top: it.row * 34,
                   }}
                 >
-                  <a
-                    href={`#${it.group}`}
+                  <Link
+                    href={
+                      it.group === "startups"
+                        ? `/work/${it.id}`
+                        : `/${it.group}/`
+                    }
                     aria-label={`${it.name}, ${it.role}, ${it.period}`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      jumpTo(it.group, { glide: true });
-                      showItem(it.id);
-                    }}
-                    onMouseEnter={() => {
-                      setTip(it);
-                      onHot(it.group);
-                    }}
-                    onFocus={() => {
-                      setTip(it);
-                      onHot(it.group);
-                    }}
-                    onBlur={() => {
-                      setTip(null);
-                      onHot(null);
-                    }}
-                    className={`group relative block text-[12.5px] font-semibold transition-opacity duration-300 ${
-                      dim ? "opacity-25" : ""
-                    }`}
+                    onMouseEnter={() => setTip(it)}
+                    onFocus={() => setTip(it)}
+                    onBlur={() => setTip(null)}
+                    className="group relative block text-[12.5px] font-semibold"
                   >
                     <span
                       className={`flex h-7 items-center gap-1.5 overflow-hidden rounded-lg pl-1 transition-transform duration-300 ease-out group-hover:-translate-y-0.5 ${
@@ -266,7 +228,7 @@ export function Timeline({
                         {it.name}
                       </span>
                     )}
-                  </a>
+                  </Link>
                 </li>
               );
             })}

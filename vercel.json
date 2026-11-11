@@ -3,27 +3,22 @@
   "redirects": [
     {
       "source": "/:old(startups|ventures|started|work)/",
-      "destination": "/#startups",
+      "destination": "/",
       "permanent": true
     },
     {
-      "source": "/:old(experience|questions)/",
-      "destination": "/#experience",
+      "source": "/questions/",
+      "destination": "/experience/",
       "permanent": true
     },
     {
-      "source": "/:old(research|predictions|thesis|writing)/",
-      "destination": "/#research",
+      "source": "/:old(predictions|thesis|writing)/",
+      "destination": "/research/",
       "permanent": true
     },
     {
-      "source": "/:old(projects|play)/",
-      "destination": "/#projects",
-      "permanent": true
-    },
-    {
-      "source": "/about/",
-      "destination": "/#about",
+      "source": "/play/",
+      "destination": "/projects/",
       "permanent": true
     },
     {
@@ -33,12 +28,12 @@
     },
     {
       "source": "/work/:old(tarc|hdfc-bank)/",
-      "destination": "/#experience",
+      "destination": "/experience/",
       "permanent": true
     },
     {
       "source": "/work/:old(accessible-smarttech|sci-3sixty|upmc-emergency-medicine|apodaca-lab|pitt-sociology|max-hospital)/",
-      "destination": "/#research",
+      "destination": "/research/",
       "permanent": true
     },
     {

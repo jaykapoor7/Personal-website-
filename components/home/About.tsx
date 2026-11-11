@@ -3,7 +3,8 @@ import { useState } from "react";
 import { education, leadership, life, skills } from "@/content/site";
 import { Reveal } from "../motion";
 import { SmartLink } from "../ui";
-import { Duo, LogoTile, SectionHead } from "./bits";
+import { Duo, LogoTile, PageTitle } from "./bits";
+import { Timeline } from "./Timeline";
 
 /** Where the subject sits in each photo, so a narrow slice still shows them. */
 const focus: Record<string, string> = {
@@ -104,20 +105,9 @@ export function About() {
       id="about"
       data-tone="light"
       aria-labelledby="about-h"
-      className="shell scroll-mt-20"
+      className="shell"
     >
-      <SectionHead
-        id="about-h"
-        title="About"
-        note={
-          <>
-            <span className="hidden [@media(hover:hover)]:inline">
-              Point at a photo
-            </span>
-            <span className="[@media(hover:hover)]:hidden">Tap a photo</span>
-          </>
-        }
-      />
+      <PageTitle id="about-h" title="About" />
       <Reveal className="mt-7 md:mt-9">
         <Slats />
       </Reveal>
@@ -179,6 +169,11 @@ export function About() {
             </li>
           ))}
         </ul>
+      </Reveal>
+
+      <Reveal className="mt-12 md:mt-16">
+        <h2 className="mb-4 text-[15px] font-medium text-muted">2019 to now</h2>
+        <Timeline />
       </Reveal>
     </section>
   );

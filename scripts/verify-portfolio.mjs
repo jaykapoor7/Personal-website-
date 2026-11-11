@@ -18,10 +18,14 @@ const browser = await chromium.launch({
   args: ["--no-sandbox"],
 });
 
-// The home page is the whole portfolio. Old section URLs (/work, /research, ...)
-// and retired pages are redirected by vercel.json, checked further down.
+// The landing page says who I am and shows the startups; the rest are their own
+// pages. Old and retired URLs are redirected by vercel.json, checked further down.
 const routes = [
   "/",
+  "/experience/",
+  "/research/",
+  "/projects/",
+  "/about/",
   "/work/straypaw/",
   "/work/juno-ai/",
   "/work/project-nidaan/",
@@ -102,67 +106,28 @@ try {
 
     await page.goto(base + "/", { waitUntil: "networkidle" });
     assert.match(await page.locator("h1").innerText(), /Jay/);
-    // The menu is one button on every screen size.
+
+    // The landing page stays short: who I am and the four startups.
+    assert.equal(
+      await page.locator('main a[href^="/work/"]').count(),
+      4,
+      "Four startups on the landing page",
+    );
+    const screens = await page.evaluate(
+      () => document.documentElement.scrollHeight / innerHeight,
+    );
+    assert.ok(
+      screens < (name === "mobile" ? 4 : 3),
+      `Landing page is ${screens.toFixed(1)} screens long`,
+    );
+
+    // The menu is one button on every screen size, and leads to every page.
     await page.getByRole("button", { name: "Open menu" }).click();
     await page
       .locator("#menu")
       .getByRole("link", { name: /Research/ })
       .click();
-    await page.waitForURL(/#research$/);
-
-    // Every section of the home page is present and reachable by its anchor.
-    for (const id of [
-      "startups",
-      "experience",
-      "research",
-      "projects",
-      "about",
-      "contact",
-    ])
-      assert.equal(await page.locator(`#${id}`).count(), 1, `Section #${id}`);
-
-    // The home page stays short: the whole portfolio in a few screens.
-    const screens = await page.evaluate(
-      () => document.documentElement.scrollHeight / innerHeight,
-    );
-    assert.ok(
-      screens < (name === "mobile" ? 12 : 8),
-      `Home page is ${screens.toFixed(1)} screens long`,
-    );
-
-    // A startup opens in place.
-    const juno = page
-      .locator("#startups")
-      .getByRole("button", { name: /Juno-AI/ });
-    await juno.scrollIntoViewIfNeeded();
-    await juno.click();
-    assert.equal(
-      await juno.getAttribute("aria-expanded"),
-      "true",
-      "Startup panel opens",
-    );
-
-    // A photo opens in place.
-    const photo = page.getByRole("button", { name: "The Trojans" });
-    await photo.scrollIntoViewIfNeeded();
-    await photo.click();
-    assert.equal(
-      await photo.getAttribute("aria-pressed"),
-      "true",
-      "Photo slat opens",
-    );
-
-    // A job card turns over to show what the work was.
-    // (By keyboard: with a mouse the card has already turned by the time you click.)
-    const job = page.getByRole("button", { name: /^TARC India/ });
-    await job.scrollIntoViewIfNeeded();
-    await job.focus();
-    await page.keyboard.press("Enter");
-    assert.equal(
-      await job.getAttribute("aria-expanded"),
-      "true",
-      "Experience card turns over",
-    );
+    await page.waitForURL(/\/research\/?$/);
 
     // A lab opens in place.
     const lab = page.getByRole("button", { name: /Apodaca Lab/ });
@@ -175,18 +140,31 @@ try {
       "Lab row opens in place",
     );
 
-    // A bar on the timeline jumps to its entry and opens it.
-    await page.goto(base + "/", { waitUntil: "networkidle" });
-    await page.getByRole("link", { name: /^Juno-AI, Founder/ }).click();
-    await page.waitForTimeout(1500);
+    // A job card turns over to show what the work was.
+    // (By keyboard: with a mouse the card has already turned by the time you click.)
+    await page.goto(base + "/experience/", { waitUntil: "networkidle" });
+    const job = page.getByRole("button", { name: /^TARC India/ });
+    await job.scrollIntoViewIfNeeded();
+    await job.focus();
+    await page.keyboard.press("Enter");
     assert.equal(
-      await page
-        .locator("#startups")
-        .getByRole("button", { name: /Juno-AI/ })
-        .getAttribute("aria-expanded"),
+      await job.getAttribute("aria-expanded"),
       "true",
-      "Timeline bar opens its entry",
+      "Experience card turns over",
     );
+
+    // A photo opens in place, and a bar on the timeline leads to its page.
+    await page.goto(base + "/about/", { waitUntil: "networkidle" });
+    const photo = page.getByRole("button", { name: "The Trojans" });
+    await photo.scrollIntoViewIfNeeded();
+    await photo.click();
+    assert.equal(
+      await photo.getAttribute("aria-pressed"),
+      "true",
+      "Photo slat opens",
+    );
+    await page.getByRole("link", { name: /^Juno-AI, Founder/ }).click();
+    await page.waitForURL(/\/work\/juno-ai\/?$/);
 
     // Bet against me: lock in odds and see mine.
     await page.goto(base + "/ledger/", { waitUntil: "networkidle" });

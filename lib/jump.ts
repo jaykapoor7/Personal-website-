@@ -38,9 +38,3 @@ export function jumpTo(id: string, { glide = false } = {}) {
     doc.startViewTransition(() => place(id)).finished.then(after, after);
   } else place(id);
 }
-
-/** After the page has laid itself out, land on the anchor in the address bar. */
-export function settleOnHash() {
-  const id = window.location.hash.slice(1);
-  if (id) place(id);
-}

@@ -1,14 +1,13 @@
 "use client";
 import Image from "next/image";
 import { Link } from "next-view-transitions";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { hasPage } from "@/content/archive";
 import { roles, type Role } from "@/content/site";
-import { hoverCounts, useShown } from "@/lib/show";
 import { Arrow } from "../Arrow";
 import { Stagger, StaggerItem } from "../motion";
 import { SmartLink } from "../ui";
-import { LogoTile, Paper, SectionHead, inertIf } from "./bits";
+import { LogoTile, Paper, PageTitle, inertIf } from "./bits";
 
 /** The front of a card: who, when, and the thing I made there. */
 function Front({ r }: { r: Role }) {
@@ -159,13 +158,12 @@ function Flip({ r }: { r: Role }) {
   const [hover, setHover] = useState(false);
   const [pin, setPin] = useState(false);
   const on = hover || pin;
-  useShown(useCallback((id) => setPin(id === r.id), [r.id]));
   const face =
     "absolute inset-0 overflow-hidden rounded-[28px] bg-white text-fg [backface-visibility:hidden]";
   return (
     <div
       className="h-[430px] [perspective:1600px]"
-      onMouseEnter={() => hoverCounts() && setHover(true)}
+      onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
       <div
@@ -206,15 +204,10 @@ export function Experience() {
       id="experience"
       data-tone="accent"
       aria-labelledby="experience-h"
-      className="mx-2 scroll-mt-3 rounded-[32px] bg-accent py-14 text-white md:mx-4 md:rounded-[44px] md:py-20"
+      className="mx-2 rounded-[32px] bg-accent pb-14 pt-10 text-white md:mx-4 md:rounded-[44px] md:pb-20 md:pt-14"
     >
       <div className="shell">
-        <SectionHead
-          id="experience-h"
-          title="Experience"
-          note="2025 to 2026"
-          onBlue
-        />
+        <PageTitle id="experience-h" title="Experience" />
       </div>
       <Stagger
         as="ul"

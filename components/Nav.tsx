@@ -12,12 +12,11 @@ import { person } from "@/content/site";
 import { jumpTo } from "@/lib/jump";
 
 const links = [
-  { id: "startups", label: "Startups" },
-  { id: "experience", label: "Experience" },
-  { id: "research", label: "Research" },
-  { id: "projects", label: "Projects" },
-  { id: "about", label: "About" },
-  { id: "contact", label: "Contact" },
+  { href: "/", label: "Home" },
+  { href: "/experience/", label: "Experience" },
+  { href: "/research/", label: "Research" },
+  { href: "/projects/", label: "Projects" },
+  { href: "/about/", label: "About" },
 ];
 
 type Tone = "light" | "dark" | "accent";
@@ -55,37 +54,14 @@ function useTone(path: string | null) {
   return tone;
 }
 
-/** Which home section is on screen, so the menu button can name it. */
-function useSection(path: string | null) {
-  const [id, setId] = useState<string | null>(null);
-  useEffect(() => {
-    setId(null);
-    if (path !== "/") return;
-    const on = new Set<string>();
-    const io = new IntersectionObserver(
-      (es) => {
-        for (const e of es)
-          if (e.isIntersecting) on.add(e.target.id);
-          else on.delete(e.target.id);
-        setId(on.size ? [...on][on.size - 1] : null);
-      },
-      { rootMargin: "-45% 0px -50% 0px" },
-    );
-    links.forEach((l) => {
-      const el = l.id === "contact" ? null : document.getElementById(l.id);
-      if (el) io.observe(el);
-    });
-    return () => io.disconnect();
-  }, [path]);
-  return id;
-}
-
 /** Two things only: my name, and one button that opens everything else. */
 export function Nav() {
   const path = usePathname();
-  const home = path === "/";
   const tone = useTone(path);
-  const here = useSection(path);
+  // The button names the page you are on; on the landing page it just says Menu.
+  const here = links.find(
+    (l) => l.href !== "/" && path?.startsWith(l.href.replace(/\/$/, "")),
+  );
   const reduce = useReducedMotion();
   const [open, setOpen] = useState(false);
   const { scrollYProgress } = useScroll();
@@ -111,42 +87,7 @@ export function Nav() {
         : "bg-card/80 text-fg"
   }`;
 
-  /** On the home page these jump within the page; elsewhere they go home first. */
-  const Jump = ({
-    id,
-    className,
-    children,
-  }: {
-    id: string;
-    className: string;
-    children: React.ReactNode;
-  }) =>
-    home ? (
-      <a
-        href={id === "top" ? "/" : `#${id}`}
-        className={className}
-        onClick={(e) => {
-          if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-          e.preventDefault();
-          setOpen(false);
-          jumpTo(id);
-        }}
-        aria-current={here === id ? "true" : undefined}
-      >
-        {children}
-      </a>
-    ) : (
-      <Link
-        href={id === "top" ? "/" : `/#${id}`}
-        className={className}
-        onClick={() => setOpen(false)}
-      >
-        {children}
-      </Link>
-    );
-
   const circle = (r: string) => `circle(${r} at calc(100% - 64px) 34px)`;
-  const label = links.find((l) => l.id === here)?.label ?? "Menu";
 
   return (
     <header
@@ -164,12 +105,13 @@ export function Nav() {
         className="shell relative z-[60] flex h-[68px] items-center justify-between gap-4"
         aria-label="Main"
       >
-        <Jump
-          id="top"
+        <Link
+          href="/"
           className={`${pill} px-4 py-2 text-[15px] font-semibold`}
+          onClick={() => setOpen(false)}
         >
           Jay Kapoor
-        </Jump>
+        </Link>
         <button
           type="button"
           className={`${pill} flex h-11 items-center gap-3 pl-4 pr-3.5 text-[15px] font-semibold`}
@@ -178,7 +120,9 @@ export function Nav() {
           aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen((v) => !v)}
         >
-          <span aria-hidden="true">{open ? "Close" : label}</span>
+          <span aria-hidden="true">
+            {open ? "Close" : (here?.label ?? "Menu")}
+          </span>
           <span className="relative block h-3 w-5" aria-hidden="true">
             <span
               className={`absolute left-0 top-0 h-[2px] w-5 bg-current transition-transform duration-300 ${open ? "translate-y-[5px] rotate-45" : ""}`}
@@ -202,30 +146,62 @@ export function Nav() {
           >
             <div className="shell flex min-h-full flex-col justify-between gap-10 pb-9 pt-24 md:pt-28">
               <ul className="grid gap-x-16 md:grid-cols-2">
-                {links.map((l, i) => (
-                  <motion.li
-                    key={l.id}
-                    initial={reduce ? false : { opacity: 0, y: 34 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      duration: 0.6,
-                      delay: 0.12 + i * 0.05,
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
-                  >
-                    <Jump
-                      id={l.id}
-                      className="display group flex items-baseline gap-4 py-1.5 text-[clamp(48px,7.4vw,104px)]"
-                    >
-                      <span className="text-[0.26em] font-medium tabular-nums text-white/85 [font-stretch:100%]">
-                        0{i + 1}
-                      </span>
-                      <span className="transition-transform duration-500 ease-out group-hover:translate-x-3">
-                        {l.label}
-                      </span>
-                    </Jump>
-                  </motion.li>
-                ))}
+                {[...links, { href: "#contact", label: "Contact" }].map(
+                  (l, i) => {
+                    const cls =
+                      "display group flex items-baseline gap-4 py-1.5 text-[clamp(48px,7.4vw,104px)]";
+                    const inner = (
+                      <>
+                        <span className="text-[0.26em] font-medium tabular-nums text-white/85 [font-stretch:100%]">
+                          0{i + 1}
+                        </span>
+                        <span className="transition-transform duration-500 ease-out group-hover:translate-x-3">
+                          {l.label}
+                        </span>
+                      </>
+                    );
+                    return (
+                      <motion.li
+                        key={l.href}
+                        initial={reduce ? false : { opacity: 0, y: 34 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{
+                          duration: 0.6,
+                          delay: 0.12 + i * 0.05,
+                          ease: [0.16, 1, 0.3, 1],
+                        }}
+                      >
+                        {l.href.startsWith("#") ? (
+                          // Contact is the panel at the end of every page.
+                          <a
+                            href={l.href}
+                            className={cls}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setOpen(false);
+                              jumpTo("contact");
+                            }}
+                          >
+                            {inner}
+                          </a>
+                        ) : (
+                          <Link
+                            href={l.href}
+                            className={cls}
+                            aria-current={
+                              (here ?? links[0]).href === l.href
+                                ? "page"
+                                : undefined
+                            }
+                            onClick={() => setOpen(false)}
+                          >
+                            {inner}
+                          </Link>
+                        )}
+                      </motion.li>
+                    );
+                  },
+                )}
               </ul>
               <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-4 text-[17px] font-medium">
                 <a
