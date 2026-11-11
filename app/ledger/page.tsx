@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Arrow } from "@/components/Arrow";
+import { Bet } from "@/components/Bet";
 import { LedgerBoard } from "@/components/LedgerBoard";
+import { Link } from "next-view-transitions";
 import { Reveal } from "@/components/motion";
 import { ledger, ledgerStats as s } from "@/content/ledger";
 
@@ -31,10 +33,20 @@ export default function Ledger() {
     <>
       <section className="shell pt-28 md:pt-36">
         <Reveal>
-          <h1 className="max-w-4xl text-[clamp(44px,6.5vw,88px)] font-semibold leading-[0.95]">
+          <Link
+            href="/#research"
+            className="group inline-flex h-11 items-center gap-2 rounded-full bg-card px-4 text-[14px] font-semibold transition-colors hover:bg-fg hover:text-white"
+          >
+            <Arrow
+              direction="left"
+              className="transition-transform duration-300 group-hover:-translate-x-0.5"
+            />
+            Research
+          </Link>
+          <h1 className="display mt-8 max-w-5xl text-[clamp(60px,10.5vw,170px)]">
             Forecast ledger
           </h1>
-          <p className="mt-5 max-w-2xl text-[18px] leading-relaxed text-muted">
+          <p className="mt-6 max-w-2xl text-[clamp(19px,1.7vw,24px)] font-medium leading-[1.3] text-muted">
             Each forecast gets a date and a probability when I make it, and is
             scored when it resolves. Indian healthtech, fintech and health AI,
             mostly from the memo library.
@@ -47,7 +59,9 @@ export default function Ledger() {
               [s.brier, "Brier score"],
             ].map(([v, l]) => (
               <div key={l}>
-                <dd className="text-[40px] font-semibold leading-none">{v}</dd>
+                <dd className="display text-[clamp(48px,6vw,88px)] text-accent">
+                  {v}
+                </dd>
                 <dt className="mt-2 text-[15px] text-muted">{l}</dt>
               </div>
             ))}
@@ -60,8 +74,22 @@ export default function Ledger() {
         </Reveal>
       </section>
 
+      <section aria-labelledby="bet-h" className="shell mt-16 md:mt-24">
+        <div className="rounded-[28px] bg-paper p-6 sm:p-10 md:rounded-[40px] md:p-14">
+          <h2 id="bet-h" className="display text-[clamp(34px,4.4vw,68px)]">
+            Bet against me
+          </h2>
+          <p className="mt-4 max-w-[52ch] text-[17px] leading-relaxed text-muted">
+            Pick your own odds on one of my open calls, then see mine.
+          </p>
+          <div className="mt-10">
+            <Bet />
+          </div>
+        </div>
+      </section>
+
       <section className="shell pt-20">
-        <h2 className="text-[clamp(28px,3vw,40px)] font-semibold">
+        <h2 className="display text-[clamp(34px,4.4vw,68px)]">
           Resolving next
         </h2>
         <ul className="mt-6 space-y-5">
@@ -84,14 +112,14 @@ export default function Ledger() {
       </section>
 
       <section className="shell pt-20">
-        <h2 className="mb-6 text-[clamp(28px,3vw,40px)] font-semibold">
+        <h2 className="display mb-6 text-[clamp(34px,4.4vw,68px)]">
           Every call
         </h2>
         <LedgerBoard calls={ledger.calls} />
       </section>
 
       <section className="shell pt-20">
-        <h2 className="text-[clamp(28px,3vw,40px)] font-semibold">Coverage</h2>
+        <h2 className="display text-[clamp(34px,4.4vw,68px)]">Coverage</h2>
         <ul className="mt-6 grid gap-x-10 gap-y-5 sm:grid-cols-2 lg:grid-cols-3">
           {ledger.coverage.map((m) => (
             <li key={m.id}>

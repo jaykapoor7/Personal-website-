@@ -45,7 +45,8 @@ const doc = (label: string, href: string): Proof => ({
 
 export const researchModels = {
   name: "StrayPaw Research Models",
-  detail: "Five interactive experiments in vaccination, case reporting and other public-health decisions.",
+  detail:
+    "Five interactive experiments in vaccination, case reporting and other public-health decisions.",
   href: "https://kapoorjay.com/research-models/",
   workPath: "/work/straypaw-research-models/",
 };
@@ -687,12 +688,23 @@ export const skills = [
   "Supabase",
 ];
 
-/** Personal photos. The portrait is the hero and About photo; these four live on About. */
+/** Personal photos. The portrait opens the home page and closes the photo strip. */
 export const portrait = {
   src: "/photos/pitt_portrait-1280.webp",
   alt: "Jay Kapoor on the Cathedral of Learning lawn at the University of Pittsburgh",
 };
+/** The photo strip on the home page, oldest first. */
 export const life = [
+  {
+    name: "02_childhood_running",
+    alt: "Jay running at a childhood sports day",
+    caption: "Sports day, Bangalore",
+  },
+  {
+    name: "04_childhood_football_team",
+    alt: "Jay's childhood football team with their coach",
+    caption: "First team",
+  },
   {
     name: "01_trojans_team",
     alt: "Jay with the Trojans football team",
@@ -704,14 +716,9 @@ export const life = [
     caption: "Graduation, Bangalore",
   },
   {
-    name: "02_childhood_running",
-    alt: "Jay running at a childhood sports day",
-    caption: "Sports day",
-  },
-  {
-    name: "04_childhood_football_team",
-    alt: "Jay's childhood football team with their coach",
-    caption: "First team",
+    name: "pitt_portrait",
+    alt: portrait.alt,
+    caption: "Pittsburgh, now",
   },
 ];
 

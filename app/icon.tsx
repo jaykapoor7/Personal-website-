@@ -12,16 +12,16 @@ export default function Icon() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        borderRadius: 32,
-        background: "#0c0c0c",
-        color: "#fafaf9",
-        fontFamily: "Georgia, serif",
-        fontStyle: "italic",
-        fontSize: 42,
-        paddingBottom: 6,
+        borderRadius: 18,
+        background: "#1d4af5",
+        color: "#ffffff",
+        fontFamily: "Arial, sans-serif",
+        fontWeight: 700,
+        fontSize: 44,
+        paddingBottom: 2,
       }}
     >
-      j
+      J
     </div>,
     { ...size },
   );

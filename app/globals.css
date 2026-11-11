@@ -3,15 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --bg: 246 246 243;
-  --fg: 14 14 18;
-  --muted: 84 84 92;
-  --faint: 104 104 112;
-  --line: 222 222 216;
-  --card: 238 238 233;
-  --paper: 251 251 249;
-  --accent: 79 70 229;
-  --accent-2: 255 122 89;
+  /* Two tones only: one blue and white. Everything else is a tint of that blue. */
+  --bg: 255 255 255;
+  --fg: 22 56 200;
+  --muted: 66 89 194;
+  --faint: 66 89 194;
+  --line: 197 209 255;
+  --card: 228 234 255;
+  --paper: 242 245 255;
+  --accent: 29 74 245;
+  --accent-2: 219 228 255;
   color-scheme: light;
 }
 
@@ -22,16 +23,7 @@
   body {
     @apply bg-bg font-sans text-fg antialiased;
     text-rendering: optimizeLegibility;
-  }
-  /* Paper grain over everything; photos and screens sit on top of it. */
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: 100;
-    pointer-events: none;
-    opacity: 0.05;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    font-optical-sizing: auto;
   }
   ::selection {
     background: rgb(var(--accent));
@@ -41,6 +33,10 @@
     outline: 2px solid rgb(var(--accent));
     outline-offset: 3px;
     border-radius: 4px;
+  }
+  [data-tone="dark"] :focus-visible,
+  [data-tone="accent"] :focus-visible {
+    outline-color: white;
   }
   @media (prefers-reduced-motion: reduce) {
     *,
@@ -87,19 +83,19 @@
 
 @layer components {
   .shell {
-    @apply mx-auto w-full max-w-shell px-5 sm:px-8;
+    @apply mx-auto w-full max-w-shell px-5 sm:px-8 lg:px-10;
   }
   .label {
     @apply text-[13px] font-medium text-muted;
   }
   .card {
-    @apply rounded-2xl bg-paper;
+    @apply rounded-3xl bg-paper;
   }
   .link {
     @apply underline decoration-line decoration-1 underline-offset-[5px] transition-colors hover:decoration-fg;
   }
   .btn {
-    @apply inline-flex h-11 items-center gap-2 rounded-full px-5 text-[15px] font-medium transition-all duration-200 active:scale-[0.97];
+    @apply inline-flex h-12 items-center gap-2 rounded-full px-6 text-[15px] font-semibold transition-all duration-300 ease-out active:scale-[0.97];
   }
   .btn-primary {
     @apply btn bg-fg text-white hover:bg-accent;
@@ -107,21 +103,58 @@
   .btn-ghost {
     @apply btn bg-card text-fg hover:bg-fg hover:text-white;
   }
-  .display {
-    @apply font-semibold leading-[0.95];
+  /* On blue sections */
+  .btn-light {
+    @apply btn bg-white text-[rgb(var(--fg))] hover:bg-accent2;
+  }
+  .btn-glass {
+    @apply btn bg-white/[0.16] text-white hover:bg-white hover:text-[rgb(var(--fg))];
   }
 }
 
-/* Paper texture for documents on the shelf */
+/* Headlines: the same family, narrower and heavier, set tight. */
+.display {
+  font-stretch: 80%;
+  font-weight: 700;
+  line-height: 0.9;
+}
+.display-wide {
+  font-stretch: 100%;
+}
+
+/* Photo prints and documents */
+.print {
+  background: #fff;
+  padding: 7px 7px 0;
+  box-shadow:
+    0 0 0 1px rgb(var(--fg) / 0.08),
+    0 1px 2px rgb(var(--fg) / 0.12),
+    0 24px 48px -18px rgb(var(--fg) / 0.42);
+}
+.print figcaption {
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: rgb(var(--fg));
+  padding: 9px 2px 10px;
+}
 .paper-shadow {
   box-shadow:
-    0 1px 1px rgb(0 0 0 / 0.06),
-    0 10px 30px -10px rgb(0 0 0 / 0.25);
+    0 0 0 1px rgb(var(--fg) / 0.06),
+    0 14px 34px -12px rgb(var(--fg) / 0.36);
 }
 .deep-shadow {
   box-shadow:
-    0 2px 4px rgb(0 0 0 / 0.06),
-    0 30px 60px -20px rgb(0 0 0 / 0.35);
+    0 2px 4px rgb(var(--fg) / 0.1),
+    0 40px 80px -28px rgb(var(--fg) / 0.5);
+}
+
+/* The hero stays put while the next section slides over it. */
+@media (min-width: 1024px) and (min-height: 700px) {
+  .curtain {
+    position: sticky;
+    top: 0;
+  }
 }
 
 /* Infinite marquee; the second copy is aria-hidden */
@@ -138,10 +171,39 @@
     transform: translateX(-50%);
   }
 }
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    animation: none !important;
+  }
+}
+
+/* A dot that says "this one is live" */
+.live {
+  position: relative;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: currentColor;
+}
+.live::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: inherit;
+  animation: live 2.4s ease-out infinite;
+}
+@keyframes live {
+  to {
+    transform: scale(3.2);
+    opacity: 0;
+  }
+}
 
 /* Everything Falls (physics toy) */
 .falls {
-  @apply overflow-hidden rounded-2xl bg-paper;
+  @apply overflow-hidden rounded-3xl bg-paper;
 }
 .falls-toolbar {
   @apply flex items-center justify-between gap-3 px-4 py-2 text-[13px] text-muted;
@@ -176,7 +238,12 @@
   border-radius: 14px;
   touch-action: none;
   cursor: grab;
-  box-shadow: 0 2px 0 rgb(0 0 0 / 0.18);
+  box-shadow:
+    0 0 0 1.5px rgb(var(--fg) / 0.28),
+    0 3px 0 rgb(var(--fg) / 0.28);
+}
+.falls-object[data-solid] svg {
+  stroke: #fff;
 }
 .falls-object:active {
   cursor: grabbing;
@@ -184,7 +251,7 @@
 .falls-object svg {
   width: 62%;
   height: 62%;
-  stroke: #1c1c1c;
+  stroke: rgb(var(--fg));
   stroke-width: 2.4;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -198,33 +265,18 @@
     height: 400px;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .marquee {
-    animation: none !important;
-  }
-}
 
 /* Backgrounds */
-.bg-mesh {
-  background-color: rgb(var(--paper));
-  background-image: radial-gradient(rgb(14 14 18 / 0.09) 1px, transparent 1px);
-  background-size: 22px 22px;
-}
-.bg-grid {
-  background-image:
-    linear-gradient(rgb(14 14 18 / 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(14 14 18 / 0.06) 1px, transparent 1px);
-  background-size: 44px 44px;
-}
 .bg-dots {
-  background-image: radial-gradient(rgb(14 14 18 / 0.12) 1px, transparent 1px);
+  background-image: radial-gradient(rgb(var(--fg) / 0.18) 1px, transparent 1px);
   background-size: 18px 18px;
 }
-.fade-mask {
-  mask-image: radial-gradient(ellipse at center, #000 40%, transparent 78%);
-}
-.bg-indigo-deep {
-  background: rgb(var(--fg));
+.bg-stars {
+  background-image: radial-gradient(
+    rgb(255 255 255 / 0.16) 1px,
+    transparent 1px
+  );
+  background-size: 26px 26px;
 }
 
 /* Accent lines: same family, lighter and quieter than the headlines */
@@ -240,26 +292,26 @@
   display: none;
 }
 
-/* City dots on the home map */
-.ping {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: ping 4s ease-out infinite;
+/* Contact waits under the page and is uncovered as the page ends. */
+.reveal-footer {
+  position: relative;
 }
-@keyframes ping {
-  0%,
-  70%,
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  80% {
-    transform: scale(2.6);
-    opacity: 0.4;
+@media (min-height: 620px) {
+  .reveal-footer {
+    position: sticky;
+    bottom: 0;
+    z-index: 0;
+    min-height: 100svh;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .ping {
-    animation: none;
+
+/* Cards that pile up as you scroll: each one sticks, the next slides over it. */
+@media (min-width: 1024px) and (min-height: 760px) {
+  .stack-card {
+    position: sticky;
+    top: var(--stack-top, 88px);
+  }
+  .stack-body {
+    height: min(calc(100svh - 150px), 700px);
   }
 }

@@ -58,10 +58,10 @@ export default function Artifacts() {
         title="Files"
         lede="Every paper, dataset, live site and repository behind this site."
       />
-      <div className="shell space-y-14">
+      <div className="shell space-y-16 md:space-y-24">
         {proofGroups.map((g) => (
           <section key={g.title} aria-label={g.title}>
-            <h2 className="display mb-5 text-[clamp(28px,3vw,40px)]">
+            <h2 className="display mb-6 text-[clamp(34px,4.4vw,68px)]">
               {g.title}
             </h2>
             <ul className="-mx-5 flex snap-x gap-4 overflow-x-auto px-5 pb-2 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-3 sm:overflow-visible sm:px-0 lg:grid-cols-5 [&::-webkit-scrollbar]:hidden">
@@ -69,13 +69,13 @@ export default function Artifacts() {
                 const t = thumb(a.href);
                 return (
                   <li
-                    key={a.href}
+                    key={a.title + a.href}
                     className="w-[42vw] shrink-0 snap-start sm:w-auto"
                   >
                     <Reveal delay={(i % 5) * 0.04}>
                       <SmartLink href={a.href} className="group block">
                         <span
-                          className={`relative block overflow-hidden rounded-xl bg-card transition-all duration-300 group-hover:-translate-y-1 ${
+                          className={`relative block overflow-hidden rounded-2xl bg-card transition-all duration-300 group-hover:-translate-y-1 ${
                             t?.doc ? "aspect-[900/1273]" : "aspect-[4/3]"
                           }`}
                         >

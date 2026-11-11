@@ -1,9 +1,7 @@
 "use client";
 import { AnimatePresence, motion } from "framer-motion";
-import { Link } from "next-view-transitions";
 import { useEffect, useState } from "react";
 import { ledger, ledgerStats } from "@/content/ledger";
-import { Arrow } from "./Arrow";
 
 const picks = [
   "Zepto lists",
@@ -78,7 +76,7 @@ export function Bet() {
         <label htmlFor="bet" className="text-[15px] text-muted">
           Your odds
         </label>
-        <p className="text-[clamp(64px,8vw,112px)] font-semibold leading-none">
+        <p className="display text-[clamp(64px,8vw,120px)] tabular-nums text-accent">
           {locked ? mine[i] : guess}%
         </p>
         <input
@@ -110,13 +108,9 @@ export function Bet() {
             </button>
           )}
         </div>
-        <Link
-          href="/ledger"
-          className="mt-4 text-[15px] text-muted hover:text-fg"
-        >
-          All {ledgerStats.calls} calls. Brier score so far: {ledgerStats.brier}{" "}
-          <Arrow direction="right" />
-        </Link>
+        <p className="mt-4 text-[15px] text-muted">
+          {ledgerStats.calls} calls so far. Brier score: {ledgerStats.brier}.
+        </p>
       </div>
     </div>
   );

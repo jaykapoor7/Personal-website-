@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Link } from "next-view-transitions";
 import { Arrow } from "@/components/Arrow";
 import { MarketMap } from "@/components/MarketMap";
 import { Reveal } from "@/components/motion";
@@ -15,10 +16,20 @@ export default function Page() {
       <section>
         <div className="shell pb-12 pt-28 md:pt-36">
           <Reveal>
-            <h1 className="max-w-4xl text-[clamp(40px,6vw,80px)] font-semibold leading-[0.95]">
+            <Link
+              href="/#research"
+              className="group inline-flex h-11 items-center gap-2 rounded-full bg-card px-4 text-[14px] font-semibold transition-colors hover:bg-fg hover:text-white"
+            >
+              <Arrow
+                direction="left"
+                className="transition-transform duration-300 group-hover:-translate-x-0.5"
+              />
+              Research
+            </Link>
+            <h1 className="display mt-8 max-w-5xl text-[clamp(56px,9.6vw,156px)]">
               India healthtech, mapped.
             </h1>
-            <p className="mt-5 max-w-2xl text-[18px] leading-relaxed text-muted">
+            <p className="mt-6 max-w-2xl text-[clamp(19px,1.7vw,24px)] font-medium leading-[1.3] text-muted">
               36 companies across nine sectors, from telemedicine to rural care.
               Pick a sector, then a company.
             </p>

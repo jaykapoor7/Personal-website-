@@ -18,7 +18,8 @@ const browser = await chromium.launch({
   args: ["--no-sandbox"],
 });
 
-// Old section URLs (/work, /research, ...) and old project slugs forward to their new homes.
+// The home page is the whole portfolio. Old section URLs (/work, /research, ...) and
+// old project slugs forward to the matching part of it.
 const routes = [
   "/",
   "/startups/",
@@ -120,23 +121,51 @@ try {
         .locator("#mobile-menu")
         .getByRole("link", { name: "Research" })
         .tap();
-      await page.waitForURL(/\/research\/?$/);
+      await page.waitForURL(/#research$/);
     }
 
-    // Each question opens to show the work behind it.
-    await page.goto(base + "/research/", { waitUntil: "networkidle" });
-    const q = page.getByRole("button", { name: /bladder cell/ });
-    await q.scrollIntoViewIfNeeded();
-    await q.click();
-    await page.waitForTimeout(600);
+    // Every section of the home page is present and reachable by its anchor.
+    for (const id of [
+      "straypaw",
+      "startups",
+      "experience",
+      "research",
+      "projects",
+      "about",
+      "contact",
+    ])
+      assert.equal(await page.locator(`#${id}`).count(), 1, `Section #${id}`);
+
+    // The StrayPaw scene ends on the full count, however it is reached.
+    await page.goto(base + "/", { waitUntil: "networkidle" });
+    await page.evaluate(() => {
+      const el = document.getElementById("startups");
+      window.scrollTo(
+        0,
+        el.getBoundingClientRect().top + scrollY - innerHeight,
+      );
+    });
+    await page.waitForTimeout(2500);
     assert.match(
-      await page.locator("#a-apodaca-lab").innerText(),
+      await page.locator("#straypaw").innerText(),
+      /30,288/,
+      "StrayPaw count reaches the total",
+    );
+
+    // A lab on the home page opens its case page.
+    await page.goto(base + "/", { waitUntil: "networkidle" });
+    const lab = page.getByRole("link", { name: /bladder cell/ });
+    await lab.scrollIntoViewIfNeeded();
+    await lab.click();
+    await page.waitForURL(/\/work\/apodaca-lab\/?$/);
+    assert.match(
+      await page.locator("main").innerText(),
       /PIEZO/,
-      "Question opens its answer",
+      "Lab opens its case page",
     );
 
     // Bet against me: lock in odds and see mine.
-    await page.goto(base + "/research/", { waitUntil: "networkidle" });
+    await page.goto(base + "/ledger/", { waitUntil: "networkidle" });
     const lock = page.getByRole("button", { name: "Compare with mine" });
     await lock.scrollIntoViewIfNeeded();
     await lock.click();

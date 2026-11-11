@@ -2,15 +2,15 @@
 import Link from "next/link";
 import { useEffect } from "react";
 
-/** Old URLs land on the right section of the home page. */
+/** Old URLs land on the matching part of the home page. */
 export function Redirect({ to, label }: { to: string; label: string }) {
   useEffect(() => {
     window.location.replace(to);
   }, [to]);
   return (
     <section className="shell pb-10 pt-40">
-      <h1 className="text-4xl font-semibold">{label}</h1>
-      <p className="mt-4 text-muted">
+      <h1 className="display text-[clamp(56px,9vw,140px)]">{label}</h1>
+      <p className="mt-6 text-[18px] text-muted">
         This has moved.{" "}
         <Link href={to} className="link text-fg">
           Go to {label}

@@ -79,13 +79,13 @@ export function PageHeader({
     <header className="shell pb-10 pt-28 md:pb-14 md:pt-36">
       <Reveal>
         {eyebrow && <p className="label">{eyebrow}</p>}
-        <h1 className="display mt-3 max-w-5xl text-[clamp(56px,8vw,120px)]">
+        <h1 className="display mt-3 max-w-5xl text-[clamp(60px,10.5vw,170px)]">
           {title}
         </h1>
       </Reveal>
       {lede && (
         <Reveal delay={0.12}>
-          <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted md:text-xl">
+          <p className="mt-6 max-w-xl text-[clamp(19px,1.7vw,24px)] font-medium leading-[1.3] text-muted">
             {lede}
           </p>
         </Reveal>

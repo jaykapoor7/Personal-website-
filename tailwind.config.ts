@@ -3,7 +3,7 @@ import type { Config } from "tailwindcss";
 const token = (name: string) => `rgb(var(--${name}) / <alpha-value>)`;
 
 const config: Config = {
-  // The site is light only; dark: variants never apply.
+  // The site sets its own tones per section; dark: variants never apply.
   darkMode: "class",
   content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
   theme: {
@@ -24,7 +24,7 @@ const config: Config = {
         display: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
         mono: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
       },
-      maxWidth: { shell: "1240px" },
+      maxWidth: { shell: "1320px" },
       transitionTimingFunction: { out: "cubic-bezier(0.16, 1, 0.3, 1)" },
     },
   },
