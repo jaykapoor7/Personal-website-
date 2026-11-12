@@ -43,10 +43,10 @@ export function Hero() {
               className="object-cover object-[50%_61%]"
             />
           </motion.span>
-          <RiseWords text="," delay={0.15} />
+          <RiseWords text="." delay={0.15} />
         </span>
         <RiseWords
-          text="an economics and statistics student at Pitt."
+          text="I find broken systems and try to find solutions."
           delay={0.2}
         />
       </h1>
