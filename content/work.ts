@@ -20,8 +20,10 @@ export type Item = {
   id: string;
   group: Group;
   name: string;
-  /** One short line: role or kind, then the strongest fact. */
+  /** The role or kind, said quietly. */
   line: string;
+  /** The strongest fact, said first and loudest. */
+  fact?: string;
   /** "Now", a year, or "" when there is none. */
   year: string;
   image?: string;
@@ -36,8 +38,6 @@ const startYear = (period: string) =>
   /present/.test(period) ? "Now" : (period.match(/\d{4}/)?.[0] ?? "");
 const lastYear = (period: string) =>
   /present/.test(period) ? "Now" : (period.match(/\d{4}/g)?.slice(-1)[0] ?? "");
-const join = (...parts: (string | undefined)[]) =>
-  parts.filter(Boolean).join(" · ");
 
 const ventureImage: Record<string, { image: string; look: Look }> = {
   straypaw: { image: "/previews/straypaw-map-d.webp", look: "shot" },
@@ -46,8 +46,23 @@ const ventureImage: Record<string, { image: string; look: Look }> = {
 
 /** Facts already stated in each role's points, short enough for one line. */
 const roleFact: Record<string, string> = {
-  "tot-schools": "8 centres",
+  tarc: "Feasibility for a Gurugram housing site",
+  "tot-schools": "Ran 8 centres",
   crowwd: "200+ users from organic channels",
+  "hdfc-bank": "Equity research for HNI portfolios",
+};
+const roleName: Record<string, string> = {
+  "hdfc-bank": "Wealth Management Intern",
+};
+
+/** What each lab works on, from its summary on the site. */
+const labFact: Record<string, string> = {
+  smarttech: "Accessible human-machine interaction",
+  "3sixty": "How nonprofits adopt AI",
+  upmc: "Prehospital care and EMS outcomes",
+  apodaca: "Bladder cell mechanosensing",
+  sociology: "Survey analysis in R and Stata",
+  max: "Emergency and internal medicine",
 };
 
 const buildFact: Record<string, string> = {
@@ -70,7 +85,8 @@ export const items: Item[] = [
       id: v.id,
       group: "Startups",
       name: v.name,
-      line: join(v.role, `${v.metrics[0].value} ${v.metrics[0].label}`),
+      line: v.role,
+      fact: `${v.metrics[0].value} ${v.metrics[0].label}`,
       year: startYear(v.period),
       ...(ventureImage[v.id] ?? { image: doc?.cover, look: "doc" as Look }),
       href: `/work/${v.id}`,
@@ -83,7 +99,8 @@ export const items: Item[] = [
       id: r.id,
       group: "Experience",
       name: r.org.replace(/ India$/, ""),
-      line: join(r.role, roleFact[r.id]),
+      line: roleName[r.id] ?? r.role,
+      fact: roleFact[r.id],
       year: lastYear(r.period),
       image: photo?.src ?? doc?.cover,
       look: photo ? "photo" : "doc",
@@ -95,7 +112,8 @@ export const items: Item[] = [
     id: l.id,
     group: "Research",
     name: l.name.replace(/, New Delhi$/, ""),
-    line: join(l.role, l.lead ? `with ${l.lead}` : undefined),
+    line: l.role,
+    fact: labFact[l.id],
     year: startYear(l.period),
     image: l.shot?.src,
     logo: l.logo,
@@ -107,7 +125,8 @@ export const items: Item[] = [
     id: "research-models",
     group: "Writing",
     name: "StrayPaw Research Models",
-    line: "Five interactive public-health models",
+    line: "Interactive models",
+    fact: "5 public-health models",
     year: "2026",
     image: "/research-models/social.png",
     look: "shot",
@@ -129,12 +148,19 @@ export const items: Item[] = [
             ? "Juno-AI research paper"
             : w.title.split(":")[0],
       line: ledger
-        ? `Investment memos, ${ledgerStats.calls} dated forecasts`
+        ? "Investment memos"
         : map
-          ? "36 companies across nine sectors"
+          ? "Market map"
+          : paper
+            ? "Paper"
+            : w.kind,
+      fact: ledger
+        ? `${ledgerStats.calls} dated forecasts`
+        : map
+          ? "36 companies, nine sectors"
           : paper
             ? "Published in IJEDR"
-            : w.kind,
+            : undefined,
       year: w.year,
       image: w.cover,
       look: "doc",
@@ -149,7 +175,8 @@ export const items: Item[] = [
       id: b.id,
       group: "Projects",
       name: b.name,
-      line: join(b.kind, buildFact[b.id]),
+      line: b.kind,
+      fact: buildFact[b.id],
       year: "2026",
       ...(buildImage[b.id] ?? { image: b.image, look: "shot" as Look }),
       href: b.falls ? b.href! : `/play/${b.id}`,

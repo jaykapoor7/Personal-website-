@@ -110,7 +110,8 @@ try {
 
     // The landing page: who I am, a short introduction, and every piece of work.
     const rows = () => page.locator("#work .work-row").count();
-    assert.equal(await rows(), 27, "Every piece of work is in the index");
+    // The full view shows every startup and the top three of each other kind.
+    assert.equal(await rows(), 16, "The index shows the best of each kind");
     assert.match(
       await page.locator("main").innerText(),
       /grew up in Bangalore/,
@@ -134,6 +135,14 @@ try {
     await filters.getByRole("button", { name: /^All/ }).click();
     await page.waitForTimeout(700);
 
+    // "See all" opens the rest of one kind.
+    await page.getByRole("button", { name: "See all 6 research" }).click();
+    await page.waitForTimeout(700);
+    assert.equal(await rows(), 6, "See all shows every lab");
+    await filters.getByRole("button", { name: /^All/ }).click();
+    await page.waitForTimeout(700);
+    assert.equal(await rows(), 16, "All returns to the short view");
+
     // With a mouse, the picture for the row you point at follows the cursor.
     if (name === "motion") {
       const row = page.locator("#work .work-row").first();
@@ -153,15 +162,22 @@ try {
       await page.mouse.move(5, 5);
     }
 
-    // A photo opens in place.
-    const photo = page.getByRole("button", { name: "The Trojans" });
-    await photo.scrollIntoViewIfNeeded();
-    await photo.click();
-    assert.equal(
-      await photo.getAttribute("aria-pressed"),
-      "true",
-      "Photo slat opens",
-    );
+    // On a wide screen a photo opens in place; on a phone they swipe.
+    if ((await page.evaluate(() => innerWidth)) >= 1024) {
+      const photo = page.getByRole("button", { name: "The Trojans" });
+      await photo.scrollIntoViewIfNeeded();
+      await photo.click();
+      assert.equal(
+        await photo.getAttribute("aria-pressed"),
+        "true",
+        "Photo slat opens",
+      );
+    } else {
+      assert.ok(
+        await page.getByRole("list", { name: "Photos" }).isVisible(),
+        "Photos swipe on a phone",
+      );
+    }
 
     // The menu is one button on every screen size; Research opens the index
     // on research.

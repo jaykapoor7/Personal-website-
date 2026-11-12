@@ -155,6 +155,23 @@ export default function CasePage({ params }: { params: { slug: string } }) {
         </header>
       </div>
 
+      {d.metrics.length > 0 && (
+        <div className="shell mt-12 md:mt-16">
+          <dl className="grid grid-cols-2 gap-x-8 gap-y-8 border-t border-line pt-8 md:grid-cols-3 md:pt-10">
+            {d.metrics.map((m) => (
+              <div key={m.label}>
+                <dd className="display text-[clamp(48px,7.4vw,116px)] text-accent">
+                  <Counter value={m.value} />
+                </dd>
+                <dt className="mt-3 text-[15px] font-medium text-muted">
+                  {m.label}
+                </dt>
+              </div>
+            ))}
+          </dl>
+        </div>
+      )}
+
       <div className="shell mt-14 md:mt-24">
         {d.shot ? (
           <ScrollShot shot={d.shot} label={e.title} name={name} />
@@ -206,23 +223,6 @@ export default function CasePage({ params }: { params: { slug: string } }) {
           </Reveal>
         ) : null}
       </div>
-
-      {d.metrics.length > 0 && (
-        <div className="shell mt-20 md:mt-28">
-          <dl className="grid grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-3">
-            {d.metrics.map((m) => (
-              <div key={m.label}>
-                <dd className="display text-[clamp(52px,9vw,144px)] text-accent">
-                  <Counter value={m.value} />
-                </dd>
-                <dt className="mt-3 text-[15px] font-medium text-muted">
-                  {m.label}
-                </dt>
-              </div>
-            ))}
-          </dl>
-        </div>
-      )}
 
       {d.points.length > 0 && (
         <div className="shell mt-20 md:mt-28">
