@@ -3,7 +3,8 @@ import { ventures } from "@/content/site";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-export const alt = "Jay Kapoor, an economics and statistics student at Pitt.";
+export const alt =
+  "Jay Kapoor. I find broken systems and try to find solutions.";
 
 /** The card shown when the site is shared: the same sentence as the landing page. */
 export default function OpengraphImage() {
@@ -42,8 +43,8 @@ export default function OpengraphImage() {
         }}
       >
         <span>Jay Kapoor</span>
-        <span style={{ fontSize: 50, letterSpacing: "-0.02em", marginTop: 22 }}>
-          Economics and statistics at Pitt
+        <span style={{ fontSize: 44, letterSpacing: "-0.02em", marginTop: 22 }}>
+          I find broken systems and try to find solutions.
         </span>
       </div>
       <div style={{ display: "flex", gap: 40, fontSize: 28, color: "#4259c2" }}>

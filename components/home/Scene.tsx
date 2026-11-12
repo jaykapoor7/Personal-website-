@@ -249,10 +249,10 @@ export function Scene() {
                   {/* Until the page has measured itself, the photo sits here. */}
                   {!g && face}
                 </span>
-                <RiseWords text="," delay={0.15} />
+                <RiseWords text="." delay={0.15} />
               </span>
               <RiseWords
-                text="an economics and statistics student at Pitt."
+                text="I find broken systems and try to find solutions."
                 delay={0.2}
               />
             </h1>
