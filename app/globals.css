@@ -122,6 +122,16 @@
   font-stretch: 100%;
 }
 
+/* The hero sentence: the same family at its normal width, a little lighter,
+   and with the calmer text-size letterforms rather than the quirky display ones. */
+.hero-title {
+  font-stretch: 100%;
+  font-weight: 600;
+  font-variation-settings: "opsz" 32;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+}
+
 /* Photo prints and documents */
 .print {
   background: #fff;
