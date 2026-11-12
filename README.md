@@ -11,7 +11,7 @@ npm run build   # exports to out/
 ## How it is put together
 
 - `content/site.ts` holds everything, each item once: ventures, roles, labs, writing, builds, leadership, education and personal photos. Every item links to the real organisation or product first; PDFs are listed as supporting documents.
-- `app/page.tsx` is the landing page, and it is one scroll (`components/home/Scene.tsx`). It opens on one sentence about who I am, with my photo set into it. Scrolling grows that photo into a single frame, and the frame steps through the four things I started, each with its name, one line and one number. After it, four links lead to the rest. Visitors who ask for reduced motion get the same content laid out still (`Hero` and `Featured`).
+- `app/page.tsx` is the landing page (`components/home/Home.tsx`). The hero (`Hero`) is one sentence about what I do, with my photo set into it; it stays put while one white sheet slides up over it. On the sheet: a three-sentence introduction that fills in word by word as you scroll (`Intro`), then what I started, oldest first, each as what was broken and what I built (`Work`), with one picture beside the list that follows the row at the middle of the screen. Four rows at the end lead to the rest.
 - `/experience`, `/research`, `/projects` and `/about` are their own pages. Each has its own form, in `components/home/`:
   - `Experience`: four cards on a blue band. Each turns over to show what the work was, its documents and links.
   - `Research`: the labs as a short index that opens in place, beside four tiles of my own research (ledger, research models, market map, memos).
@@ -25,9 +25,13 @@ npm run build   # exports to out/
 
 ## Design
 
-Two tones only: one blue and white. Cards and bands are tints of that blue (tokens in `app/globals.css`); photos and product screenshots are the only other colour. One typeface, Bricolage Grotesque, set narrow and heavy for headlines (`.display`).
+Two tones only: one calm blue and white. Cards and bands are tints of that blue (tokens in `app/globals.css`; the Research Models site repeats them in its `style.css`); photos and product screenshots are the only other colour. One typeface, Bricolage Grotesque, set narrow and heavy for headlines (`.display`). No glows or soft halos: edges are a thin line and a tight shadow.
 
-The landing page is driven by scroll; the other pages move when you point or tap (`components/motion.tsx` holds the shared pieces). Every animation is skipped for visitors who ask for reduced motion. No glows or soft halos: edges are a thin line and a tight shadow.
+Scrolling is the main motion, so it has to be smooth:
+
+- `components/SmoothScroll.tsx` eases mouse-wheel scrolling with Lenis, so the whole page moves as one. Touch screens scroll natively, and visitors who ask for reduced motion are left alone.
+- Anything tied to scroll changes only `opacity` or `transform`, and follows the scroll position directly. Nothing animates size or position in layout, and nothing re-renders while scrolling.
+- The landing page pins nothing except with `position: sticky`, which the browser handles itself.
 
 Copy rule: as few words as possible. Names, roles, dates and numbers; the work is shown, not described. No taglines, no section captions.
 
@@ -38,6 +42,6 @@ python -m http.server 3000 --directory out
 npm run test:browser
 ```
 
-Loads every route on desktop, mobile, dark mode and full motion; checks overflow, browser errors and WCAG 2.1 AA (axe); checks the landing scene reaches its last startup; exercises the menu, a lab row, an experience card, a photo slat, a timeline bar, the forecast bet, the dataset filter and the physics toy; and confirms every local link and every redirect target resolves. `npm run test:production` runs the same checks against kapoorjay.com.
+Loads every route on desktop, mobile, dark mode and full motion; checks overflow, browser errors and WCAG 2.1 AA (axe); checks the landing page has the introduction and the four startups, and that its picture follows the list; exercises the menu, a lab row, an experience card, a photo slat, a timeline bar, the forecast bet, the dataset filter and the physics toy; and confirms every local link and every redirect target resolves. `npm run test:production` runs the same checks against kapoorjay.com.
 
 Check against the exported build, not only `npm run dev`: development mode runs effects twice and can hide ordering bugs.

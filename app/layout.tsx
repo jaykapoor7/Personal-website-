@@ -4,6 +4,7 @@ import { ViewTransitions } from "next-view-transitions";
 import "./globals.css";
 
 import { Nav } from "@/components/Nav";
+import { SmoothScroll } from "@/components/SmoothScroll";
 import { Footer } from "@/components/Footer";
 import { siteUrl } from "@/lib/site";
 
@@ -49,6 +50,7 @@ export default function RootLayout({
           >
             Skip to content
           </a>
+          <SmoothScroll />
           <Nav />
           <noscript>
             <style>{`[data-reveal]{opacity:1!important;transform:none!important;clip-path:none!important}`}</style>
