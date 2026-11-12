@@ -28,6 +28,9 @@ import { LogoTile } from "./bits";
 
 type Filter = "All" | Group;
 
+/** How many of each kind the full view shows: every startup, the top three of the rest. */
+const top = (g: Group) => (g === "Startups" ? 4 : 3);
+
 /** The preview's size for each kind of picture. */
 const size: Record<Look, { w: number; h: number }> = {
   shot: { w: 420, h: 262 },
@@ -60,6 +63,17 @@ function Picture({ it, sizes }: { it: Item; sizes: string }) {
   );
 }
 
+/** The strongest fact first and dark, then the role or kind, quiet. */
+function Line({ it, className }: { it: Item; className: string }) {
+  return (
+    <span className={className}>
+      {it.fact && <span className="font-medium text-fg">{it.fact}</span>}
+      {it.fact && it.line && <span className="text-muted"> · </span>}
+      <span className="text-muted">{it.line}</span>
+    </span>
+  );
+}
+
 /** A link to an item: in-app pages move without a reload; files and other sites open plainly. */
 function Go({
   it,
@@ -72,6 +86,7 @@ function Go({
   children: React.ReactNode;
   onPointerMove?: (e: React.PointerEvent) => void;
   onFocus?: () => void;
+  onClick?: () => void;
 }) {
   if (!it.plain)
     return (
@@ -101,29 +116,44 @@ const Row = memo(function Row({
   onShow: (it: Item) => void;
   fine: boolean;
 }) {
+  const thumb = useRef<HTMLSpanElement>(null);
+  // Opening a case page, the picture you were looking at grows into the
+  // page's own picture: both carry the same view-transition name for a moment.
+  const fly = () => {
+    if (!it.href.startsWith("/work/")) return;
+    const el =
+      (fine && document.querySelector<HTMLElement>("[data-fly]")) ||
+      (thumb.current?.offsetParent ? thumb.current : null);
+    if (!el) return;
+    el.style.viewTransitionName = `shot-${it.href.split("/").filter(Boolean).pop()}`;
+    setTimeout(() => (el.style.viewTransitionName = ""), 1500);
+  };
   return (
     <Go
       it={it}
+      onClick={fly}
       onPointerMove={
         fine ? (e) => e.pointerType === "mouse" && onShow(it) : undefined
       }
       onFocus={fine ? () => onShow(it) : undefined}
       className="work-row group grid grid-cols-[52px_minmax(0,1fr)_auto] items-center gap-x-4 border-b border-line py-3.5 md:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)_64px_28px] md:gap-x-8 md:py-[18px]"
     >
-      <span className="relative block h-[52px] w-[52px] self-start overflow-hidden rounded-xl bg-card ring-1 ring-line md:hidden">
+      <span
+        ref={thumb}
+        className="relative block h-[52px] w-[52px] self-start overflow-hidden rounded-xl bg-card ring-1 ring-line md:hidden"
+      >
         <Picture it={it} sizes="52px" />
       </span>
       <span className="min-w-0">
         <span className="block text-[clamp(20px,2.2vw,32px)] md:truncate font-semibold leading-tight tracking-[-0.025em] transition-[transform,color] duration-500 ease-out group-hover:translate-x-1.5 group-hover:text-accent">
           {it.name}
         </span>
-        <span className="mt-0.5 block text-[14.5px] leading-snug text-muted md:hidden">
-          {it.line}
-        </span>
+        <Line
+          it={it}
+          className="mt-0.5 block text-[14.5px] leading-snug md:hidden"
+        />
       </span>
-      <span className="hidden truncate text-[16px] text-muted md:block">
-        {it.line}
-      </span>
+      <Line it={it} className="hidden truncate text-[16px] md:block" />
       <span className="self-start pt-1 text-right text-[14px] font-medium tabular-nums text-muted md:self-auto md:pt-0">
         {it.year}
       </span>
@@ -181,6 +211,7 @@ function Preview({ bind }: { bind: React.MutableRefObject<Show> }) {
       style={{ x: sx, y: sy, rotate }}
     >
       <motion.div
+        data-fly
         className="deep-shadow relative overflow-hidden rounded-2xl bg-card"
         initial={false}
         animate={{
@@ -211,8 +242,9 @@ function Preview({ bind }: { bind: React.MutableRefObject<Show> }) {
 }
 
 /**
- * Everything I have done, as one short list. Filters narrow it to one kind;
- * with a mouse, the picture for the row you point at follows the cursor.
+ * Everything I have done, as one short list: the best of each kind first, the
+ * rest a click away. Filters narrow it to one kind; with a mouse, the picture
+ * for the row you point at follows the cursor.
  */
 export function WorkIndex() {
   const reduce = useReducedMotion();
@@ -250,6 +282,9 @@ export function WorkIndex() {
       "",
       f === "All" ? window.location.pathname : `#${slug(f)}`,
     );
+    // From further down the list, go back to its top so the new view starts there.
+    const el = section.current;
+    if (el && el.getBoundingClientRect().top < 0) scrollToEl(el);
   };
 
   const visible = byGroup.filter((g) => filter === "All" || g.group === filter);
@@ -263,15 +298,16 @@ export function WorkIndex() {
       aria-labelledby="work-h"
       className="shell mt-20 md:mt-28"
     >
-      <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-5">
-        <h2 id="work-h" className="hero-title text-[clamp(40px,5.4vw,80px)]">
-          Work
-        </h2>
+      <h2 id="work-h" className="hero-title text-[clamp(40px,5.4vw,80px)]">
+        Work
+      </h2>
+      {/* The filters stay under the bar at the top while you are in the list. */}
+      <div className="sticky top-[72px] z-30 -mx-5 mt-5 px-5 sm:mx-0 sm:px-0 md:mt-7">
         <LayoutGroup>
           <div
             role="group"
             aria-label="Show"
-            className="no-bar -mx-5 flex gap-1 overflow-x-auto px-5 pb-1 sm:mx-0 sm:px-0"
+            className="no-bar flex w-fit max-w-full gap-1 overflow-x-auto rounded-full bg-bg/95 p-1 shadow-[0_6px_20px_-12px_rgb(var(--fg)/0.35)] ring-1 ring-line"
           >
             {(["All", ...groups] as Filter[]).map((f) => {
               const on = filter === f;
@@ -311,43 +347,60 @@ export function WorkIndex() {
         </LayoutGroup>
       </div>
 
-      <div className="mt-6 md:mt-10" onPointerLeave={() => show.current(null)}>
+      <div className="mt-6 md:mt-8" onPointerLeave={() => show.current(null)}>
         <AnimatePresence mode="popLayout" initial={false}>
-          {visible.map(({ group, items: list }) => (
-            <motion.div
-              key={group}
-              layout={!reduce}
-              initial={reduce ? false : { opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={reduce ? undefined : { opacity: 0, y: -12 }}
-              transition={{ duration: 0.45, ease }}
-              className="mb-9 last:mb-0 md:mb-11"
-            >
-              {filter === "All" && (
-                <h3 className="flex items-baseline gap-2 border-b border-fg pb-2.5 text-[15px] font-semibold">
-                  {group}
-                  <span className="text-[12px] font-medium tabular-nums text-muted">
-                    {list.length}
-                  </span>
-                </h3>
-              )}
-              <ul
-                className={`work-list ${filter === "All" ? "" : "border-t border-fg"}`}
+          {visible.map(({ group, items: list }) => {
+            const all = filter !== "All";
+            const rows = all ? list : list.slice(0, top(group));
+            return (
+              <motion.div
+                key={group}
+                layout={!reduce}
+                initial={reduce ? false : { opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={reduce ? undefined : { opacity: 0, y: -12 }}
+                transition={{ duration: 0.45, ease }}
+                className="mb-9 last:mb-0 md:mb-11"
               >
-                {list.map((it, n) => (
-                  <motion.li
-                    key={it.id}
-                    initial={reduce ? false : { opacity: 0, y: 14 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "0px 0px -6% 0px" }}
-                    transition={{ duration: 0.5, ease, delay: n * 0.03 }}
+                {filter === "All" && (
+                  <h3 className="flex items-baseline gap-2 border-b border-fg pb-2.5 text-[15px] font-semibold">
+                    {group}
+                    <span className="text-[12px] font-medium tabular-nums text-muted">
+                      {list.length}
+                    </span>
+                  </h3>
+                )}
+                <ul
+                  className={`work-list ${filter === "All" ? "" : "border-t border-fg"}`}
+                >
+                  {rows.map((it, n) => (
+                    <motion.li
+                      key={it.id}
+                      initial={reduce ? false : { opacity: 0, y: 14 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "0px 0px -6% 0px" }}
+                      transition={{ duration: 0.5, ease, delay: n * 0.03 }}
+                    >
+                      <Row it={it} onShow={onShow} fine={preview} />
+                    </motion.li>
+                  ))}
+                </ul>
+                {rows.length < list.length && (
+                  <button
+                    type="button"
+                    onClick={() => pick(group)}
+                    className="group mt-3 inline-flex items-center gap-1.5 py-1.5 text-[14.5px] font-semibold text-accent"
                   >
-                    <Row it={it} onShow={onShow} fine={preview} />
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
+                    See all {list.length} {group.toLowerCase()}
+                    <Arrow
+                      direction="right"
+                      className="transition-transform duration-300 group-hover:translate-x-1"
+                    />
+                  </button>
+                )}
+              </motion.div>
+            );
+          })}
         </AnimatePresence>
       </div>
 

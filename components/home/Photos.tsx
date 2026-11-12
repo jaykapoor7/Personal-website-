@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useState } from "react";
 import { education, leadership, life } from "@/content/site";
 import { Reveal } from "../motion";
@@ -57,13 +58,13 @@ const photos = [
 function Slats() {
   const [open, setOpen] = useState(photos.length - 1);
   return (
-    <ul className="flex h-[480px] flex-col gap-1.5 lg:h-[min(400px,calc(100svh-240px))] lg:min-h-[340px] lg:flex-row lg:gap-2">
+    <ul className="hidden h-[min(400px,calc(100svh-240px))] min-h-[340px] flex-row gap-2 lg:flex">
       {photos.map((p, i) => {
         const on = open === i;
         return (
           <li
             key={p.src}
-            className={`relative min-h-0 min-w-0 overflow-hidden rounded-[16px] transition-[flex-grow] duration-700 ease-out lg:rounded-[24px] ${
+            className={`relative min-h-0 min-w-0 overflow-hidden rounded-[24px] transition-[flex-grow] duration-700 ease-out ${
               on ? "flex-[8]" : "flex-[1]"
             }`}
           >
@@ -86,10 +87,10 @@ function Slats() {
                 alt={p.alt}
                 on={on}
                 fit={p.fit}
-                sizes="(max-width: 1024px) 92vw, 760px"
+                sizes="760px"
               />
               <span
-                className={`absolute bottom-3 left-3 rounded-full bg-white px-3.5 py-1.5 text-[13px] font-semibold text-[rgb(var(--fg))] transition-all duration-500 lg:bottom-4 lg:left-4 ${
+                className={`absolute bottom-4 left-4 rounded-full bg-white px-3.5 py-1.5 text-[13px] font-semibold text-[rgb(var(--fg))] transition-all duration-500 ${
                   on
                     ? "translate-y-0 opacity-100 delay-300"
                     : "translate-y-2 opacity-0"
@@ -105,23 +106,71 @@ function Slats() {
   );
 }
 
+/** What I did at school, said once under the school itself. */
+const atSchool: Record<string, string> = {
+  "Founder, Entrepreneurship Club": "founded the entrepreneurship club",
+  "Head of Vendor Acquisition": "ran a 4,000-guest event",
+};
+const school = (org: string) => /Bangalore/.test(org);
+
 /** Schools first, then the teams I have led, each in one line. */
 const people = [
   ...education.map((e) => ({
     key: e.school,
     logo: e.logo,
     name: e.school,
-    line: e.short,
+    line: [
+      e.short,
+      leadership
+        .filter((l) => school(e.school) && school(l.org))
+        .map((l) => atSchool[l.title] ?? l.title)
+        .join(" and ")
+        .replace(/^./, (c) => c.toUpperCase()),
+    ]
+      .filter(Boolean)
+      .join(". "),
     href: undefined as string | undefined,
   })),
-  ...leadership.map((l) => ({
-    key: l.title + l.org,
-    logo: l.logo,
-    name: l.title,
-    line: l.short,
-    href: l.href,
-  })),
+  ...leadership
+    .filter((l) => !school(l.org))
+    .map((l) => ({
+      key: l.title + l.org,
+      logo: l.logo,
+      name: l.title,
+      line: l.short,
+      href: l.href,
+    })),
 ];
+
+/** On phones: the photos in their own colours, newest first, to swipe through. */
+function Strip() {
+  return (
+    <ul
+      tabIndex={0}
+      aria-label="Photos"
+      className="no-bar -mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-px-5 px-5 pb-1 lg:hidden"
+    >
+      {[...photos].reverse().map((p, i) => (
+        <li
+          key={p.src}
+          className="relative aspect-[4/5] w-[72vw] max-w-[340px] shrink-0 snap-start overflow-hidden rounded-[18px] bg-accent"
+        >
+          <Image
+            src={p.src}
+            alt={p.alt}
+            fill
+            sizes="72vw"
+            priority={i === 0}
+            className={`object-cover ${p.fit ?? ""}`}
+          />
+          <span className="absolute bottom-3 left-3 rounded-full bg-white px-3.5 py-1.5 text-[13px] font-semibold text-[rgb(var(--fg))]">
+            {p.caption}
+          </span>
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 /** The close of the landing page: photos, then school and leadership. */
 export function Photos() {
@@ -142,9 +191,10 @@ export function Photos() {
       </div>
       <Reveal className="mt-6 md:mt-10">
         <Slats />
+        <Strip />
       </Reveal>
 
-      <ul className="mt-10 grid gap-x-10 gap-y-5 border-t border-line pt-8 sm:grid-cols-2 md:mt-12 lg:grid-cols-3">
+      <ul className="mt-10 grid gap-x-10 gap-y-5 border-t border-line pt-8 sm:grid-cols-2 md:mt-12 lg:grid-cols-4">
         {people.map((p) => (
           <li key={p.key} className="flex gap-3.5">
             <LogoTile src={p.logo} name={p.name} />

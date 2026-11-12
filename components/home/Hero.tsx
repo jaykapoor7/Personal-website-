@@ -6,8 +6,9 @@ import {
   useTransform,
 } from "framer-motion";
 import Image from "next/image";
+import { Link } from "next-view-transitions";
 import { useEffect, useState } from "react";
-import { person, portrait } from "@/content/site";
+import { person, portrait, ventures } from "@/content/site";
 import { Arrow } from "../Arrow";
 import { RiseWords, ease } from "../motion";
 
@@ -27,6 +28,9 @@ export function Hero() {
   const { scrollY } = useScroll();
   const opacity = useTransform(scrollY, [0, h * 0.85], [1, 0.12]);
   const y = useTransform(scrollY, [0, h], [0, -h * 0.08]);
+  // What I am doing now, with its two strongest numbers.
+  const now = ventures.find((v) => /present/.test(v.period)) ?? ventures[0];
+  const [first, , third] = now.metrics;
 
   return (
     <section
@@ -105,6 +109,38 @@ export function Hero() {
             </a>
           ))}
         </motion.p>
+
+        <motion.div
+          className="mt-12 md:mt-16"
+          initial={reduce ? false : { opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease, delay: 0.85 }}
+        >
+          <Link
+            href={`/work/${now.id}`}
+            className="group inline-flex max-w-full flex-wrap items-baseline gap-x-2.5 gap-y-1 border-t border-line pt-4 text-[15.5px] md:text-[17px]"
+          >
+            <span className="live -translate-y-px self-center text-accent" />
+            <span className="font-semibold">Now</span>
+            <span className="font-semibold text-accent">{now.name}</span>
+            <span className="text-muted">
+              {now.short[0].toLowerCase() + now.short.slice(1, -1)},
+            </span>
+            <span className="whitespace-nowrap font-semibold tabular-nums">
+              {first.value} {first.label}
+              {third && (
+                <span className="text-muted">
+                  {" · "}
+                  {third.value} {third.label}
+                </span>
+              )}
+            </span>
+            <Arrow
+              direction="right"
+              className="self-center transition-transform duration-300 group-hover:translate-x-1"
+            />
+          </Link>
+        </motion.div>
       </motion.div>
     </section>
   );
