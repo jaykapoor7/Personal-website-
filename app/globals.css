@@ -122,6 +122,16 @@
   font-stretch: 100%;
 }
 
+/* The hero sentence: the same family at its normal width, a little lighter,
+   and with the calmer text-size letterforms rather than the quirky display ones. */
+.hero-title {
+  font-stretch: 100%;
+  font-weight: 600;
+  font-variation-settings: "opsz" 32;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+}
+
 /* Photo prints and documents */
 .print {
   background: #fff;
@@ -294,16 +304,6 @@
   }
 }
 
-/* Timeline bars drop their name when they are too short to hold it. */
-.tl-bar {
-  container-type: inline-size;
-}
-@container (max-width: 92px) {
-  .tl-name {
-    display: none;
-  }
-}
-
 /* The hero stays put while the rest of the landing page slides up over it. */
 @media (min-height: 560px) {
   .hero-pin {
@@ -312,26 +312,12 @@
   }
 }
 
-/* StrayPaw's map: one ring spreads out from Delhi. Transform and opacity only. */
-.minimap .mm-ring {
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(0.01);
-}
-.minimap.is-on .mm-ring {
-  animation: mm-ring 2.4s cubic-bezier(0.3, 0, 0.2, 1) 0.15s both;
-}
-@keyframes mm-ring {
-  from {
-    opacity: 0.85;
-    transform: translate(-50%, -50%) scale(0.01);
+/* In the work index, pointing at one row quiets the others. */
+@media (hover: hover) and (pointer: fine) {
+  .work-row {
+    transition: opacity 0.4s ease-out;
   }
-  to {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(1);
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .minimap .mm-ring {
-    display: none;
+  .work-list:hover .work-row:not(:hover) {
+    opacity: 0.38;
   }
 }

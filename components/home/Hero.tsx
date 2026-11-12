@@ -39,11 +39,11 @@ export function Hero() {
         className="shell flex min-h-[100svh] flex-col justify-center pb-28 pt-24 will-change-transform"
         style={reduce ? undefined : { opacity, y }}
       >
-        <h1 className="display text-[clamp(44px,7.4vw,116px)] !leading-[1.04] [text-wrap:balance]">
+        <h1 className="hero-title text-[clamp(40px,7vw,108px)] [text-wrap:balance] max-[360px]:text-[33px]">
           <RiseWords text="I'm Jay" delay={0.05} />
           <span className="whitespace-nowrap">
             <motion.span
-              className="relative mx-[0.08em] inline-block h-[0.84em] overflow-hidden rounded-full align-[-0.11em]"
+              className="relative mr-[0.06em] inline-block h-[0.84em] overflow-hidden rounded-full align-[-0.11em]"
               initial={
                 reduce
                   ? { width: "1.7em" }
@@ -70,7 +70,7 @@ export function Hero() {
             <RiseWords text="." delay={0.15} />
           </span>
           <RiseWords
-            text="I find broken systems and try to find solutions."
+            text={"I\u00a0find broken systems and try to find solutions."}
             delay={0.2}
           />
         </h1>

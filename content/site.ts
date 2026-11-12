@@ -650,6 +650,7 @@ export const leadership = [
     period: "Pittsburgh",
     detail:
       "Led 8 corps members delivering early-childhood literacy programmes in Pittsburgh schools.",
+    short: "JumpStart / AmeriCorps, 8 corps members",
     logo: "/logos/jumpstart.png",
     href: "https://www.jstart.org",
   },
@@ -659,12 +660,14 @@ export const leadership = [
     period: "2023",
     detail:
       "Led a team of six to Best Contingent out of 500+ colleges with macroeconomic models and policy proposals.",
+    short: "National Economics Fest, best of 500+ colleges",
   },
   {
     title: "Founder, Entrepreneurship Club",
     org: "The International School Bangalore",
     period: "Aug 2021 to Aug 2023",
     detail: "Started and ran the school's entrepreneurship club.",
+    short: "The International School Bangalore",
     logo: "/logos/tisb.png",
     href: "https://www.tisb.org",
   },
@@ -673,6 +676,7 @@ export const leadership = [
     org: "The International School Bangalore",
     period: "May to Sep 2022",
     detail: "Managed 25 vendors and a $10k budget for a 4,000-attendee event.",
+    short: "25 vendors and a $10k budget for 4,000 guests",
     logo: "/logos/tisb.png",
     href: "https://www.tisb.org",
   },
@@ -683,12 +687,14 @@ export const education = [
     school: "University of Pittsburgh",
     detail: "B.S. Economics & Statistics, minor in Information Sciences",
     period: "Expected May 2028",
+    short: "B.S. Economics & Statistics, 2028",
     logo: "/logos/pitt.png",
   },
   {
     school: "The International School Bangalore",
     detail: "International Baccalaureate Diploma",
     period: "2021 to 2023",
+    short: "IB Diploma, 2023",
     logo: "/logos/tisb.png",
   },
 ];
