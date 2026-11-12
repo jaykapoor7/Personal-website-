@@ -2,23 +2,43 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
     {
+      "source": "/experience/",
+      "destination": "/#experience",
+      "permanent": true
+    },
+    {
+      "source": "/research/",
+      "destination": "/#research",
+      "permanent": true
+    },
+    {
+      "source": "/projects/",
+      "destination": "/#projects",
+      "permanent": true
+    },
+    {
+      "source": "/about/",
+      "destination": "/#about",
+      "permanent": true
+    },
+    {
       "source": "/:old(startups|ventures|started|work)/",
-      "destination": "/",
+      "destination": "/#startups",
       "permanent": true
     },
     {
       "source": "/questions/",
-      "destination": "/experience/",
+      "destination": "/#experience",
       "permanent": true
     },
     {
       "source": "/:old(predictions|thesis|writing)/",
-      "destination": "/research/",
+      "destination": "/#writing",
       "permanent": true
     },
     {
       "source": "/play/",
-      "destination": "/projects/",
+      "destination": "/#projects",
       "permanent": true
     },
     {
@@ -28,12 +48,12 @@
     },
     {
       "source": "/work/:old(tarc|hdfc-bank)/",
-      "destination": "/experience/",
+      "destination": "/#experience",
       "permanent": true
     },
     {
       "source": "/work/:old(accessible-smarttech|sci-3sixty|upmc-emergency-medicine|apodaca-lab|pitt-sociology|max-hospital)/",
-      "destination": "/research/",
+      "destination": "/#research",
       "permanent": true
     },
     {

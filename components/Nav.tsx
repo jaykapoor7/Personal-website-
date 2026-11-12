@@ -9,14 +9,14 @@ import { Link } from "next-view-transitions";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { person } from "@/content/site";
-import { goToContact } from "@/lib/jump";
+import { groups, slug } from "@/content/work";
+import { goToContact, goToSection } from "@/lib/jump";
 
+/** Each part of the landing page; the work ones open the index on that kind. */
 const links = [
-  { href: "/", label: "Home" },
-  { href: "/experience/", label: "Experience" },
-  { href: "/research/", label: "Research" },
-  { href: "/projects/", label: "Projects" },
-  { href: "/about/", label: "About" },
+  ...groups.map((g) => ({ id: slug(g), label: g as string })),
+  { id: "about", label: "About" },
+  { id: "contact", label: "Contact" },
 ];
 
 type Tone = "light" | "dark" | "accent";
@@ -59,10 +59,6 @@ function useTone(path: string | null) {
 export function Nav() {
   const path = usePathname();
   const tone = useTone(path);
-  // The button names the page you are on; on the landing page it just says Menu.
-  const here = links.find(
-    (l) => l.href !== "/" && path?.startsWith(l.href.replace(/\/$/, "")),
-  );
   const reduce = useReducedMotion();
   const [open, setOpen] = useState(false);
   const { scrollYProgress } = useScroll();
@@ -124,7 +120,7 @@ export function Nav() {
           onClick={() => setOpen((v) => !v)}
         >
           <span aria-hidden="true">
-            {open ? "Close" : (here?.label ?? "Menu")}
+            {open ? "Close" : "Menu"}
           </span>
           <span className="relative block h-3 w-5" aria-hidden="true">
             <span
@@ -150,65 +146,63 @@ export function Nav() {
           >
             <div className="shell flex min-h-full flex-col justify-between gap-10 pb-9 pt-24 md:pt-28">
               <ul className="grid gap-x-16 md:grid-cols-2">
-                {[...links, { href: "#contact", label: "Contact" }].map(
-                  (l, i) => {
-                    const cls =
-                      "display group flex items-baseline gap-4 py-1.5 text-[clamp(48px,7.4vw,104px)]";
-                    const inner = (
-                      <>
-                        <span className="text-[0.26em] font-medium tabular-nums text-white/85 [font-stretch:100%]">
-                          0{i + 1}
-                        </span>
-                        <span className="transition-transform duration-500 ease-out group-hover:translate-x-3">
-                          {l.label}
-                        </span>
-                      </>
-                    );
-                    return (
-                      <motion.li
-                        key={l.href}
-                        initial={reduce ? false : { opacity: 0, y: 34 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{
-                          duration: 0.6,
-                          delay: 0.12 + i * 0.05,
-                          ease: [0.16, 1, 0.3, 1],
-                        }}
-                      >
-                        {l.href.startsWith("#") ? (
-                          // Contact is the panel at the end of every page.
-                          <a
-                            href={l.href}
-                            className={cls}
-                            onClick={(e) => {
-                              e.preventDefault();
-                              setOpen(false);
-                              // Wait for the menu to unlock the page first.
+                {links.map((l, i) => {
+                  const cls =
+                    "display group flex items-baseline gap-4 py-1.5 text-[clamp(44px,6.6vw,96px)]";
+                  const inner = (
+                    <>
+                      <span className="text-[0.26em] font-medium tabular-nums text-white/85 [font-stretch:100%]">
+                        0{i + 1}
+                      </span>
+                      <span className="transition-transform duration-500 ease-out group-hover:translate-x-3">
+                        {l.label}
+                      </span>
+                    </>
+                  );
+                  // On the landing page, move to the part; elsewhere, go there.
+                  const here = path === "/" || l.id === "contact";
+                  return (
+                    <motion.li
+                      key={l.id}
+                      initial={reduce ? false : { opacity: 0, y: 34 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        duration: 0.6,
+                        delay: 0.12 + i * 0.045,
+                        ease: [0.16, 1, 0.3, 1],
+                      }}
+                    >
+                      {here ? (
+                        <a
+                          href={`#${l.id}`}
+                          className={cls}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setOpen(false);
+                            // Wait for the menu to unlock the page first.
+                            requestAnimationFrame(() =>
                               requestAnimationFrame(() =>
-                                requestAnimationFrame(goToContact),
-                              );
-                            }}
-                          >
-                            {inner}
-                          </a>
-                        ) : (
-                          <Link
-                            href={l.href}
-                            className={cls}
-                            aria-current={
-                              (here ?? links[0]).href === l.href
-                                ? "page"
-                                : undefined
-                            }
-                            onClick={() => setOpen(false)}
-                          >
-                            {inner}
-                          </Link>
-                        )}
-                      </motion.li>
-                    );
-                  },
-                )}
+                                l.id === "contact"
+                                  ? goToContact()
+                                  : goToSection(l.id),
+                              ),
+                            );
+                          }}
+                        >
+                          {inner}
+                        </a>
+                      ) : (
+                        <Link
+                          href={`/#${l.id}`}
+                          className={cls}
+                          onClick={() => setOpen(false)}
+                        >
+                          {inner}
+                        </Link>
+                      )}
+                    </motion.li>
+                  );
+                })}
               </ul>
               <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-4 text-[17px] font-medium">
                 <a

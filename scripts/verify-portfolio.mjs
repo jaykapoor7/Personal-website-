@@ -18,14 +18,11 @@ const browser = await chromium.launch({
   args: ["--no-sandbox"],
 });
 
-// The landing page says who I am and shows the startups; the rest are their own
-// pages. Old and retired URLs are redirected by vercel.json, checked further down.
+// The landing page holds everything: who I am, an index of all the work, and
+// photos. Case pages, the games and the research tools are their own pages. Old
+// and retired URLs are redirected by vercel.json, checked further down.
 const routes = [
   "/",
-  "/experience/",
-  "/research/",
-  "/projects/",
-  "/about/",
   "/work/straypaw/",
   "/work/juno-ai/",
   "/work/project-nidaan/",
@@ -111,12 +108,9 @@ try {
     await page.goto(base + "/", { waitUntil: "networkidle" });
     assert.match(await page.locator("h1").innerText(), /Jay/);
 
-    // The landing page: who I am, a short introduction, and the four startups.
-    assert.equal(
-      await page.locator('main a[href^="/work/"]').count(),
-      4,
-      "Four startups on the landing page",
-    );
+    // The landing page: who I am, a short introduction, and every piece of work.
+    const rows = () => page.locator("#work .work-row").count();
+    assert.equal(await rows(), 27, "Every piece of work is in the index");
     assert.match(
       await page.locator("main").innerText(),
       /grew up in Bangalore/,
@@ -126,65 +120,40 @@ try {
       () => document.documentElement.scrollHeight / innerHeight,
     );
     assert.ok(
-      screens < 8,
+      screens < (name === "mobile" ? 11 : 8),
       `Landing page is ${screens.toFixed(1)} screens long`,
     );
 
-    // On a wide screen the picture beside the list follows the row at the
-    // middle of the screen: by the last row it shows the last startup.
+    // A filter narrows the index to one kind, and the address says which.
+    const filters = page.getByRole("group", { name: "Show" });
+    await filters.scrollIntoViewIfNeeded();
+    await filters.getByRole("button", { name: /^Projects/ }).click();
+    await page.waitForTimeout(700);
+    assert.equal(await rows(), 6, "Projects filter shows six");
+    assert.match(page.url(), /#projects$/, "The filter is in the address");
+    await filters.getByRole("button", { name: /^All/ }).click();
+    await page.waitForTimeout(700);
+
+    // With a mouse, the picture for the row you point at follows the cursor.
     if (name === "motion") {
-      await page.evaluate(() => {
-        const rows = document.querySelectorAll("main ol > li");
-        const r = rows[rows.length - 1].getBoundingClientRect();
-        window.scrollTo(0, r.top + scrollY + r.height / 2 - innerHeight / 2);
-      });
-      await page.waitForTimeout(1200);
+      const row = page.locator("#work .work-row").first();
+      await row.scrollIntoViewIfNeeded();
+      await row.hover();
+      await page.waitForTimeout(700);
+      const card = page.locator("#work > [aria-hidden='true'] > div");
       assert.equal(
-        await page
-          .locator('main [aria-hidden="true"] .sticky > div')
-          .last()
-          .evaluate((el) => getComputedStyle(el).opacity),
+        await card.evaluate((el) => getComputedStyle(el).opacity),
         "1",
-        "The picture follows the list to the last startup",
+        "The preview shows beside the cursor",
       );
-      await page.evaluate(() => window.scrollTo(0, 0));
-      await page.waitForTimeout(600);
+      assert.ok(
+        (await card.locator("img").count()) > 0,
+        "The preview holds a picture",
+      );
+      await page.mouse.move(5, 5);
     }
 
-    // The menu is one button on every screen size, and leads to every page.
-    await page.getByRole("button", { name: "Open menu" }).click();
-    await page
-      .locator("#menu")
-      .getByRole("link", { name: /Research/ })
-      .click();
-    await page.waitForURL(/\/research\/?$/);
-
-    // A lab opens in place.
-    const lab = page.getByRole("button", { name: /Apodaca Lab/ });
-    await lab.scrollIntoViewIfNeeded();
-    await lab.click();
-    await page.waitForTimeout(600);
-    assert.match(
-      await page.locator("#lab-apodaca").innerText(),
-      /PIEZO/,
-      "Lab row opens in place",
-    );
-
-    // A job card turns over to show what the work was.
-    // (By keyboard: with a mouse the card has already turned by the time you click.)
-    await page.goto(base + "/experience/", { waitUntil: "networkidle" });
-    const job = page.getByRole("button", { name: /^TARC India/ });
-    await job.scrollIntoViewIfNeeded();
-    await job.focus();
-    await page.keyboard.press("Enter");
-    assert.equal(
-      await job.getAttribute("aria-expanded"),
-      "true",
-      "Experience card turns over",
-    );
-
-    // A photo opens in place, and a bar on the timeline leads to its page.
-    await page.goto(base + "/about/", { waitUntil: "networkidle" });
+    // A photo opens in place.
     const photo = page.getByRole("button", { name: "The Trojans" });
     await photo.scrollIntoViewIfNeeded();
     await photo.click();
@@ -193,8 +162,30 @@ try {
       "true",
       "Photo slat opens",
     );
-    await page.getByRole("link", { name: /^Juno-AI, Founder/ }).click();
-    await page.waitForURL(/\/work\/juno-ai\/?$/);
+
+    // The menu is one button on every screen size; Research opens the index
+    // on research.
+    await page.getByRole("button", { name: "Open menu" }).click();
+    await page
+      .locator("#menu")
+      .getByRole("link", { name: /Research/ })
+      .click();
+    await page.waitForTimeout(1600);
+    assert.match(page.url(), /#research$/, "Menu leads to research");
+    assert.equal(
+      await filters
+        .getByRole("button", { name: /^Research/ })
+        .getAttribute("aria-pressed"),
+      "true",
+      "Menu opens the index on research",
+    );
+
+    // A case page leads back to its part of the index.
+    await page.goto(base + "/work/juno-ai/", { waitUntil: "networkidle" });
+    await page.locator('article header a[href="/#startups"]').click();
+    await page.waitForURL(/\/#startups$/);
+    await page.waitForTimeout(900);
+    assert.equal(await rows(), 4, "Back lands on the startups");
 
     // Bet against me: lock in odds and see mine.
     await page.goto(base + "/ledger/", { waitUntil: "networkidle" });

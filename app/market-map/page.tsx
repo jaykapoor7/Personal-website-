@@ -17,7 +17,7 @@ export default function Page() {
         <div className="shell pb-12 pt-28 md:pt-36">
           <Reveal>
             <Link
-              href="/#research"
+              href="/#writing"
               className="group inline-flex h-11 items-center gap-2 rounded-full bg-card px-4 text-[14px] font-semibold transition-colors hover:bg-fg hover:text-white"
             >
               <Arrow
