@@ -11,10 +11,11 @@ export const person = {
   place: "Pittsburgh, PA",
   intro:
     "Founder of StrayPaw. I work where public health, data and operations meet, from healthcare access in rural India to emergency medicine research at Pitt.",
+  /** The landing page's introduction. Short, first person, facts only. */
   about: [
-    "I went to school in Bangalore, spent my summers working in Delhi, and now study Economics and Statistics at the University of Pittsburgh.",
-    "Most of what I build starts with something I noticed: a dog outside a cafe that nobody was keeping track of, a delivery rider carrying medicine he could not get for himself, families hours away from the nearest doctor.",
-    "Away from work I play football, make small browser games, and write down predictions so I can check how wrong I was.",
+    "I grew up in Bangalore and study economics and statistics at Pitt.",
+    "I started my first company at 14 and three more since.",
+    "I've also done research at Pitt and UPMC, and worked in banking, fintech, early education and real estate.",
   ],
   links: [
     { label: "LinkedIn", href: "https://www.linkedin.com/in/jay-kapoor7" },
@@ -57,7 +58,9 @@ export type Venture = {
   name: string;
   role: string;
   period: string;
-  /** A few words, for the landing page. */
+  /** What was broken, in one line. */
+  broken: string;
+  /** What I built, in a few words. */
   short: string;
   summary: string;
   points: string[];
@@ -75,6 +78,7 @@ export const ventures: Venture[] = [
     name: "StrayPaw",
     role: "Founder",
     period: "Jun 2026 to present",
+    broken: "Nobody kept a record of India's street animals.",
     short: "A shared record of India's street animals.",
     summary:
       "A shared record for every street animal in India, used by feeders, rescue groups and city programmes.",
@@ -117,6 +121,7 @@ export const ventures: Venture[] = [
     name: "Juno-AI",
     role: "Founder",
     period: "Jun 2019 to Aug 2023",
+    broken: "Families in rural India lived hours from the nearest doctor.",
     short: "Health information for rural India.",
     summary:
       "Health information and care navigation for rural India. Started at 14.",
@@ -155,6 +160,8 @@ export const ventures: Venture[] = [
     name: "Project Nidaan",
     role: "Co-founder",
     period: "May 2022 to Aug 2024",
+    broken:
+      "Delivery riders carried medicine they could not get for themselves.",
     short: "Medication access for delivery riders.",
     summary: "Medication access for gig-economy delivery riders in Bengaluru.",
     points: [
@@ -182,6 +189,7 @@ export const ventures: Venture[] = [
     name: "The Finer Things Club",
     role: "Founder",
     period: "Jul 2021 to Aug 2024",
+    broken: "Rural artisans had work to sell and no way to reach buyers.",
     short: "A marketplace for rural artisans.",
     summary:
       "An online marketplace that brought rural artisans to buyers through NGO and marketplace partners.",

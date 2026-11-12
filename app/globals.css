@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 :root {
-  /* Two tones only: one blue and white. Everything else is a tint of that blue. */
+  /* Two tones only: one calm blue and white. Everything else is a tint of that blue. */
   --bg: 255 255 255;
-  --fg: 22 56 200;
-  --muted: 66 89 194;
-  --faint: 66 89 194;
-  --line: 197 209 255;
-  --card: 228 234 255;
-  --paper: 242 245 255;
-  --accent: 29 74 245;
-  --accent-2: 219 228 255;
+  --fg: 30 58 138;
+  --muted: 82 102 159;
+  --faint: 82 102 159;
+  --line: 204 212 234;
+  --card: 232 236 246;
+  --paper: 244 246 251;
+  --accent: 35 70 168;
+  --accent-2: 222 228 243;
   color-scheme: light;
 }
 
@@ -300,6 +300,38 @@
 }
 @container (max-width: 92px) {
   .tl-name {
+    display: none;
+  }
+}
+
+/* The hero stays put while the rest of the landing page slides up over it. */
+@media (min-height: 560px) {
+  .hero-pin {
+    position: sticky;
+    top: 0;
+  }
+}
+
+/* StrayPaw's map: one ring spreads out from Delhi. Transform and opacity only. */
+.minimap .mm-ring {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.01);
+}
+.minimap.is-on .mm-ring {
+  animation: mm-ring 2.4s cubic-bezier(0.3, 0, 0.2, 1) 0.15s both;
+}
+@keyframes mm-ring {
+  from {
+    opacity: 0.85;
+    transform: translate(-50%, -50%) scale(0.01);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .minimap .mm-ring {
     display: none;
   }
 }

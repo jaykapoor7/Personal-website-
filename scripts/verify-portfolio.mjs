@@ -111,11 +111,16 @@ try {
     await page.goto(base + "/", { waitUntil: "networkidle" });
     assert.match(await page.locator("h1").innerText(), /Jay/);
 
-    // The landing page is one scroll through who I am and the four startups.
+    // The landing page: who I am, a short introduction, and the four startups.
     assert.equal(
       await page.locator('main a[href^="/work/"]').count(),
       4,
       "Four startups on the landing page",
+    );
+    assert.match(
+      await page.locator("main").innerText(),
+      /grew up in Bangalore/,
+      "The introduction is on the landing page",
     );
     const screens = await page.evaluate(
       () => document.documentElement.scrollHeight / innerHeight,
@@ -125,20 +130,22 @@ try {
       `Landing page is ${screens.toFixed(1)} screens long`,
     );
 
-    // With motion, scrolling to the end of the scene lands on the last startup.
-    if (name === "motion" || name === "mobile") {
+    // On a wide screen the picture beside the list follows the row at the
+    // middle of the screen: by the last row it shows the last startup.
+    if (name === "motion") {
       await page.evaluate(() => {
-        const el = document.getElementById("top");
-        window.scrollTo(0, el.offsetTop + el.offsetHeight - innerHeight);
+        const rows = document.querySelectorAll("main ol > li");
+        const r = rows[rows.length - 1].getBoundingClientRect();
+        window.scrollTo(0, r.top + scrollY + r.height / 2 - innerHeight / 2);
       });
-      await page.waitForTimeout(1500);
+      await page.waitForTimeout(1200);
       assert.equal(
         await page
-          .locator("#top h2")
+          .locator('main [aria-hidden="true"] .sticky > div')
           .last()
-          .evaluate((el) => getComputedStyle(el.parentElement).opacity),
+          .evaluate((el) => getComputedStyle(el).opacity),
         "1",
-        "The scene ends on the last startup",
+        "The picture follows the list to the last startup",
       );
       await page.evaluate(() => window.scrollTo(0, 0));
       await page.waitForTimeout(600);

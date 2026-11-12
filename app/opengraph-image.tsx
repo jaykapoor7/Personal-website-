@@ -17,7 +17,7 @@ export default function OpengraphImage() {
         flexDirection: "column",
         justifyContent: "space-between",
         background: "#ffffff",
-        color: "#1638c8",
+        color: "#1e3a8a",
         padding: "64px 76px",
         fontFamily: "Arial, sans-serif",
       }}
@@ -27,7 +27,7 @@ export default function OpengraphImage() {
           display: "flex",
           justifyContent: "space-between",
           fontSize: 28,
-          color: "#4259c2",
+          color: "#52669f",
         }}
       >
         <span>kapoorjay.com</span>
@@ -47,7 +47,7 @@ export default function OpengraphImage() {
           I find broken systems and try to find solutions.
         </span>
       </div>
-      <div style={{ display: "flex", gap: 40, fontSize: 28, color: "#4259c2" }}>
+      <div style={{ display: "flex", gap: 40, fontSize: 28, color: "#52669f" }}>
         {ventures.map((v) => (
           <span key={v.id}>{v.name}</span>
         ))}

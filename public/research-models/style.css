@@ -5,9 +5,9 @@
 @font-face{font-family:Bricolage Grotesque;src:url("./bricolage-grotesque.woff2") format("woff2");font-weight:200 800;font-stretch:75% 100%;font-display:swap}
 
 :root {
-  --paper:#fff; --surface:#f2f5ff; --tint:#e4eaff; --ink:#1638c8; --muted:#4259c2; --line:#c5d1ff;
-  --rule:#dbe4ff; --accent:#e4eaff; --link:#1d4af5;
-  --gray:#93a8f5; --periwinkle:#5677f2; --signal:#1d4af5; --orange:#0c2388;
+  --paper:#fff; --surface:#f4f6fb; --tint:#e8ecf6; --ink:#1e3a8a; --muted:#52669f; --line:#ccd4ea;
+  --rule:#dee4f3; --accent:#e8ecf6; --link:#2346a8;
+  --gray:#97a8da; --periwinkle:#5d7ac8; --signal:#2346a8; --orange:#132762;
   --sans:"Bricolage Grotesque",system-ui,sans-serif; --display:var(--sans);
   --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 }

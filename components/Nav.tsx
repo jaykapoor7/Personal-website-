@@ -9,7 +9,7 @@ import { Link } from "next-view-transitions";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { person } from "@/content/site";
-import { jumpTo } from "@/lib/jump";
+import { goToContact } from "@/lib/jump";
 
 const links = [
   { href: "/", label: "Home" },
@@ -25,9 +25,9 @@ type Tone = "light" | "dark" | "accent";
 function useTone(path: string | null) {
   const [tone, setTone] = useState<Tone>("light");
   useEffect(() => {
-    let raf = 0;
+    let timer: ReturnType<typeof setTimeout> | undefined;
     const read = () => {
-      raf = 0;
+      timer = undefined;
       const hit = document
         .elementsFromPoint(window.innerWidth - 80, 36)
         .find((el) => !el.closest("header"));
@@ -37,8 +37,9 @@ function useTone(path: string | null) {
       const t = hit.closest<HTMLElement>("[data-tone]")?.dataset.tone;
       setTone(t === "dark" || t === "accent" ? t : "light");
     };
+    // A few times a second is plenty, and keeps scrolling free of extra work.
     const on = () => {
-      if (!raf) raf = requestAnimationFrame(read);
+      timer ??= setTimeout(read, 120);
     };
     read();
     const settle = setTimeout(read, 400);
@@ -46,7 +47,7 @@ function useTone(path: string | null) {
     window.addEventListener("resize", on);
     return () => {
       clearTimeout(settle);
-      cancelAnimationFrame(raf);
+      clearTimeout(timer);
       window.removeEventListener("scroll", on);
       window.removeEventListener("resize", on);
     };
@@ -73,9 +74,11 @@ export function Nav() {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
     document.addEventListener("keydown", onKey);
     document.documentElement.style.overflow = "hidden";
+    window.__lenis?.stop();
     return () => {
       document.removeEventListener("keydown", onKey);
       document.documentElement.style.overflow = "";
+      window.__lenis?.start();
     };
   }, [open]);
 
@@ -138,6 +141,7 @@ export function Nav() {
         {open && (
           <motion.div
             id="menu"
+            data-lenis-prevent
             className="fixed inset-0 z-50 overflow-y-auto bg-accent text-white"
             initial={reduce ? { opacity: 0 } : { clipPath: circle("0%") }}
             animate={reduce ? { opacity: 1 } : { clipPath: circle("160%") }}
@@ -179,7 +183,10 @@ export function Nav() {
                             onClick={(e) => {
                               e.preventDefault();
                               setOpen(false);
-                              jumpTo("contact");
+                              // Wait for the menu to unlock the page first.
+                              requestAnimationFrame(() =>
+                                requestAnimationFrame(goToContact),
+                              );
                             }}
                           >
                             {inner}

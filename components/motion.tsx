@@ -10,6 +10,14 @@ import { Fragment, useEffect, useRef, useState } from "react";
 
 export const ease = [0.16, 1, 0.3, 1] as const;
 
+/**
+ * True once the page knows the visitor asked for reduced motion. It starts
+ * false, like the server's HTML, so the first render in the browser matches.
+ */
+export function useCalm() {
+  return useMedia("(prefers-reduced-motion: reduce)");
+}
+
 /** Matches a media query after mount (false on the server). */
 export function useMedia(query: string) {
   const [on, setOn] = useState(false);

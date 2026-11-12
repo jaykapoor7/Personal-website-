@@ -3,20 +3,20 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Matter from "matter-js";
 
 const things = [
-  { name: "Coffee cup", icon: "☕", color: "#DBE4FF", x: 0.13, y: 0.2, r: -12 },
-  { name: "Tennis ball", icon: "●", color: "#1D4AF5", x: 0.28, y: 0.14, r: 7 },
+  { name: "Coffee cup", icon: "☕", color: "#DEE4F3", x: 0.13, y: 0.2, r: -12 },
+  { name: "Tennis ball", icon: "●", color: "#2346A8", x: 0.28, y: 0.14, r: 7 },
   { name: "House keys", icon: "⚿", color: "#FFFFFF", x: 0.45, y: 0.25, r: 18 },
-  { name: "Notebook", icon: "▤", color: "#C5D1FF", x: 0.63, y: 0.13, r: -8 },
-  { name: "Flower", icon: "✿", color: "#EEF2FF", x: 0.83, y: 0.22, r: 15 },
-  { name: "Orange", icon: "●", color: "#1D4AF5", x: 0.18, y: 0.47, r: 9 },
-  { name: "Envelope", icon: "✉", color: "#DBE4FF", x: 0.38, y: 0.45, r: -11 },
+  { name: "Notebook", icon: "▤", color: "#CCD4EA", x: 0.63, y: 0.13, r: -8 },
+  { name: "Flower", icon: "✿", color: "#F4F6FB", x: 0.83, y: 0.22, r: 15 },
+  { name: "Orange", icon: "●", color: "#2346A8", x: 0.18, y: 0.47, r: 9 },
+  { name: "Envelope", icon: "✉", color: "#DEE4F3", x: 0.38, y: 0.45, r: -11 },
   { name: "Music", icon: "♫", color: "#FFFFFF", x: 0.56, y: 0.39, r: 10 },
-  { name: "Camera", icon: "▣", color: "#C5D1FF", x: 0.78, y: 0.48, r: -13 },
-  { name: "Star", icon: "★", color: "#1D4AF5", x: 0.11, y: 0.75, r: 14 },
-  { name: "Book", icon: "▥", color: "#EEF2FF", x: 0.3, y: 0.69, r: -9 },
-  { name: "Heart", icon: "♥", color: "#DBE4FF", x: 0.51, y: 0.76, r: 9 },
+  { name: "Camera", icon: "▣", color: "#CCD4EA", x: 0.78, y: 0.48, r: -13 },
+  { name: "Star", icon: "★", color: "#2346A8", x: 0.11, y: 0.75, r: 14 },
+  { name: "Book", icon: "▥", color: "#F4F6FB", x: 0.3, y: 0.69, r: -9 },
+  { name: "Heart", icon: "♥", color: "#DEE4F3", x: 0.51, y: 0.76, r: 9 },
   { name: "Pencil", icon: "✎", color: "#FFFFFF", x: 0.7, y: 0.69, r: 25 },
-  { name: "Glasses", icon: "◉", color: "#C5D1FF", x: 0.89, y: 0.76, r: -12 },
+  { name: "Glasses", icon: "◉", color: "#CCD4EA", x: 0.89, y: 0.76, r: -12 },
 ];
 
 function ObjectDrawing({ index }: { index: number }) {
@@ -295,7 +295,7 @@ export function EverythingFalls({ compact = false }: { compact?: boolean }) {
               }
             }}
             onPointerDown={(e) => down(e, i)}
-            data-solid={item.color === "#1D4AF5" ? "" : undefined}
+            data-solid={item.color === "#2346A8" ? "" : undefined}
             style={{ background: item.color, width: size, height: size }}
           >
             <ObjectDrawing index={i} />
