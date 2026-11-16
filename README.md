@@ -41,7 +41,7 @@ Read `docs/design.md` before changing type, colour or copy.
   - Newsreader (serif) for names and headings.
   - Inter for reading.
   - JetBrains Mono, small and uppercase, for section numbers, dates and labels.
-- One reading column, 680px wide, with dashed hairlines down both sides on wide screens. Pictures on case pages go wider.
+- One frame, 1120px wide on desktop, with dashed hairlines down both sides. The opening statement runs across it; the bio sits beside the tiles; each section has its label in a sticky left column and its list on the right. Prose keeps its own measure (about 560–640px). Phones get one column.
 - Rows, not cards. Thin dividers, no gradients, no glows.
 - Motion is small and never needed to read anything:
   - A picture zooms slightly on hover.

@@ -51,6 +51,7 @@ function Go({
 
 const thumbBox = {
   wide: "h-[38px] w-[60px]",
+  big: "h-[44px] w-[70px] lg:h-[70px] lg:w-[112px]",
   tall: "h-[38px] w-[29px]",
   square: "h-[40px] w-[40px]",
 };
@@ -65,9 +66,12 @@ const thumbBox = {
 export function List({
   entries,
   variant = "two",
+  big = false,
 }: {
   entries: Entry[];
   variant?: "one" | "two";
+  /** Larger pictures and names, for the selected work. */
+  big?: boolean;
 }) {
   const id = useId();
   const calm = useCalm();
@@ -126,7 +130,7 @@ export function List({
             )}
             {e.pic && (
               <span
-                className={`relative shrink-0 overflow-hidden rounded-[5px] bg-card ring-1 ring-inset ring-fg/[0.08] ${thumbBox[e.pic.shape]}`}
+                className={`relative shrink-0 overflow-hidden rounded-[5px] bg-card ring-1 ring-inset ring-fg/[0.08] ${big && e.pic.shape === "wide" ? thumbBox.big : thumbBox[e.pic.shape]}`}
                 style={e.vt ? { viewTransitionName: `shot-${e.vt}` } : undefined}
               >
                 <Image
@@ -141,7 +145,7 @@ export function List({
             <span className="min-w-0 flex-1">
               <span className="flex items-center gap-2">
                 <span
-                  className="truncate font-medium text-fg"
+                  className={`truncate font-medium text-fg ${big ? "lg:text-[17px]" : ""}`}
                   style={e.vt ? { viewTransitionName: `title-${e.vt}` } : undefined}
                 >
                   {e.name}

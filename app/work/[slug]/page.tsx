@@ -34,7 +34,7 @@ function Part({
   children: React.ReactNode;
 }) {
   return (
-    <section className="grid gap-x-10 gap-y-3 border-t border-line pt-5 sm:grid-cols-[140px_minmax(0,1fr)]">
+    <section className="grid gap-x-10 gap-y-3 border-t border-line pt-5 sm:grid-cols-[140px_minmax(0,1fr)] lg:grid-cols-[220px_minmax(0,640px)] lg:gap-x-12">
       <h2 className="label pt-[5px]">{title}</h2>
       <div className="min-w-0">{children}</div>
     </section>
@@ -275,7 +275,7 @@ export default function CasePage({ params }: { params: { slug: string } }) {
         </div>
       )}
 
-      <div className="col mt-12 space-y-10 text-[15.5px] leading-[1.65] sm:text-[16px]">
+      <div className="col mt-14 space-y-10 text-[15.5px] leading-[1.65] sm:text-[16px]">
         {c.context && (
           <Part title="Context">
             <p>{c.context}</p>
