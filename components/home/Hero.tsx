@@ -39,7 +39,10 @@ export function Hero() {
         className="shell flex min-h-[100svh] flex-col justify-center pb-28 pt-24 will-change-transform"
         style={reduce ? undefined : { opacity, y }}
       >
-        <h1 className="hero-title text-[clamp(40px,7vw,108px)] [text-wrap:balance] max-[360px]:text-[33px]">
+        <h1
+          aria-label="Jay Kapoor. I find broken systems and try to find solutions."
+          className="hero-title text-[clamp(40px,7vw,108px)] [text-wrap:balance] max-[360px]:text-[33px]"
+        >
           <RiseWords text="Jay" delay={0.05} />
           <span className="whitespace-nowrap">
             <RiseWords text="Kapoor" delay={0.1} />

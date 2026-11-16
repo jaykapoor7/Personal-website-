@@ -111,7 +111,11 @@ try {
     }
 
     await page.goto(base + "/", { waitUntil: "networkidle" });
-    assert.match(await page.locator("h1").innerText(), /Jay\sKapoor/);
+    // What a screen reader hears.
+    assert.equal(
+      await page.locator("h1").getAttribute("aria-label"),
+      "Jay Kapoor. I find broken systems and try to find solutions.",
+    );
     assert.match(
       await page.locator("h1").innerText(),
       /I\sfind broken systems and try to find solutions/,
