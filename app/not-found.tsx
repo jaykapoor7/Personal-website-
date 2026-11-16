@@ -3,14 +3,23 @@ import { Arrow } from "@/components/Arrow";
 
 export default function NotFound() {
   return (
-    <section className="shell pb-10 pt-16">
-      <h1 className="display text-[clamp(38px,6.4vw,58px)]">Nothing here.</h1>
-      <p className="mt-6 max-w-xl text-[clamp(19px,1.7vw,24px)] font-medium leading-[1.3] text-muted">
-        That page may have moved. Everything now lives on one page.
+    <section className="col pb-10 pt-10 md:pt-16">
+      <p className="label">404</p>
+      <h1 className="display mt-3 text-[clamp(38px,6.4vw,58px)]">
+        Nothing here.
+      </h1>
+      <p className="mt-4 max-w-[520px] text-[17px] leading-[1.55] text-muted">
+        This page may have moved. Everything I&apos;ve worked on is listed in
+        one place.
       </p>
-      <Link href="/" className="btn-primary mt-8">
-        Home <Arrow direction="right" />
-      </Link>
+      <div className="mt-7 flex flex-wrap gap-2.5">
+        <Link href="/work/" className="btn-primary">
+          All work <Arrow direction="right" className="text-[0.9em]" />
+        </Link>
+        <Link href="/" className="btn-ghost">
+          Home
+        </Link>
+      </div>
     </section>
   );
 }
