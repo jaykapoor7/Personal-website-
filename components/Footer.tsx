@@ -1,86 +1,66 @@
 "use client";
 import { useEffect, useState } from "react";
 import { person } from "@/content/site";
-import { Arrow } from "./Arrow";
-import { Magnetic } from "./motion";
 
-/** The time in Pittsburgh, so you know whether to expect a quick reply. */
 function Clock() {
-  const [t, setT] = useState("");
+  const [time, setTime] = useState("");
   useEffect(() => {
-    const f = new Intl.DateTimeFormat("en-US", {
+    const formatter = new Intl.DateTimeFormat("en-US", {
       hour: "numeric",
       minute: "2-digit",
       timeZone: "America/New_York",
     });
-    const tick = () => setT(f.format(new Date()));
-    tick();
-    const id = setInterval(tick, 20000);
-    return () => clearInterval(id);
+    const update = () => setTime(formatter.format(new Date()));
+    update();
+    const timer = setInterval(update, 30000);
+    return () => clearInterval(timer);
   }, []);
-  return <span className="tabular-nums">{t || " "}</span>;
+  return <span className="tabular-nums">{time || "—"}</span>;
 }
 
-/** Contact. It waits underneath the page and is uncovered as the page ends. */
+/** A simple closing note rather than a second, oversized landing page. */
 export function Footer() {
   const [copied, setCopied] = useState(false);
   return (
-    <footer
-      data-tone="accent"
-      aria-labelledby="contact-h"
-      className="reveal-footer bg-accent text-white"
-    >
-      <div className="shell flex min-h-[inherit] flex-col justify-between gap-12 pb-8 pt-24 md:pt-28">
-        <div>
-          <h2 id="contact-h" className="text-[17px] font-medium text-white/85">
-            Contact
-          </h2>
-          <a
-            href={`mailto:${person.email}`}
-            className="display group mt-3 block break-all text-[13.2vw] md:text-[clamp(96px,15.2vw,220px)]"
-          >
-            <span className="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_0.06em] bg-[position:0_96%] bg-no-repeat transition-[background-size] duration-700 ease-out group-hover:bg-[length:100%_0.06em]">
-              {person.email}
-            </span>
+    <footer data-tone="light" aria-labelledby="contact-h" className="border-t border-line bg-bg">
+      <div className="mx-auto w-full max-w-[780px] px-5 pb-8 pt-10 sm:px-8 sm:pt-12">
+        <h2 id="contact-h" className="text-[20px] font-semibold tracking-[-0.035em]">
+          Have something in mind? Say hello.
+        </h2>
+        <p className="mt-2 max-w-[52ch] text-[14px] leading-relaxed text-muted">
+          I’m always interested in hearing about thoughtful projects, research
+          questions or people building something useful.
+        </p>
+        <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-3 text-[14px] font-medium">
+          <a href={`mailto:${person.email}`} className="underline decoration-line underline-offset-4 hover:text-accent">
+            {person.email} ↗
           </a>
-          <div className="mt-8 flex flex-wrap items-center gap-2.5">
-            <Magnetic>
-              <button
-                type="button"
-                onClick={() => {
-                  navigator.clipboard?.writeText(person.email);
-                  setCopied(true);
-                  setTimeout(() => setCopied(false), 1800);
-                }}
-                className="btn-light"
-              >
-                {copied ? "Copied" : "Copy email"}
-              </button>
-            </Magnetic>
-            {[{ label: "Resume", href: person.resume }, ...person.links].map(
-              (l) => (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn-glass"
-                >
-                  {l.label} <Arrow />
-                </a>
-              ),
-            )}
-          </div>
-        </div>
-        <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-3 text-[15px] font-medium">
-          <p>
-            {person.place}, <Clock />
-          </p>
-          <a
-            href="/artifacts/"
-            className="underline decoration-white/50 underline-offset-4 hover:decoration-white"
+          <button
+            type="button"
+            onClick={async () => {
+              try {
+                await navigator.clipboard.writeText(person.email);
+                setCopied(true);
+                setTimeout(() => setCopied(false), 1800);
+              } catch {
+                setCopied(false);
+              }
+            }}
+            className="underline decoration-line underline-offset-4 hover:text-accent"
           >
-            All documents and links
+            {copied ? "Copied" : "Copy email"}
+          </button>
+          {person.links.map((link) => (
+            <a key={link.href} href={link.href} target="_blank" rel="noreferrer" className="underline decoration-line underline-offset-4 hover:text-accent">
+              {link.label} ↗
+            </a>
+          ))}
+        </div>
+        <div className="mt-10 flex flex-wrap items-center justify-between gap-2 border-t border-line pt-4 text-[12px] text-muted">
+          <span>© {new Date().getFullYear()} Jay Kapoor</span>
+          <span>Pittsburgh · <Clock /></span>
+          <a href="/artifacts/" className="underline decoration-line underline-offset-4 hover:text-fg">
+            All documents
           </a>
         </div>
       </div>
