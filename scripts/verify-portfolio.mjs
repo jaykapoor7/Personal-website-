@@ -108,14 +108,22 @@ try {
     await page.goto(base + "/", { waitUntil: "networkidle" });
     assert.match(await page.locator("h1").innerText(), /Jay/);
 
-    // The landing page: who I am, a short introduction, and every piece of work.
-    const rows = () => page.locator("#work .work-row").count();
-    // The full view shows every startup and the top three of each other kind.
-    assert.equal(await rows(), 16, "The index shows the best of each kind");
+    // The redesigned landing page is a concise introduction and a visible
+    // numbered set of case studies, followed by a browsable work archive.
+    assert.equal(
+      await page.locator("#work ol > li").count(),
+      4,
+      "Four selected projects are visible without a filter",
+    );
     assert.match(
       await page.locator("main").innerText(),
       /grew up in Bangalore/,
-      "The introduction is on the landing page",
+      "The personal introduction is on the landing page",
+    );
+    assert.equal(
+      await page.locator("#writing li").count(),
+      4,
+      "Research and writing links are directly available",
     );
     const screens = await page.evaluate(
       () => document.documentElement.scrollHeight / innerHeight,
@@ -125,83 +133,31 @@ try {
       `Landing page is ${screens.toFixed(1)} screens long`,
     );
 
-    // A filter narrows the index to one kind, and the address says which.
-    const filters = page.getByRole("group", { name: "Show" });
-    await filters.scrollIntoViewIfNeeded();
-    await filters.getByRole("button", { name: /^Projects/ }).click();
-    await page.waitForTimeout(700);
-    assert.equal(await rows(), 6, "Projects filter shows six");
-    assert.match(page.url(), /#projects$/, "The filter is in the address");
-    await filters.getByRole("button", { name: /^All/ }).click();
-    await page.waitForTimeout(700);
-
-    // "See all" opens the rest of one kind.
-    await page.getByRole("button", { name: "See all 6 research" }).click();
-    await page.waitForTimeout(700);
-    assert.equal(await rows(), 6, "See all shows every lab");
-    await filters.getByRole("button", { name: /^All/ }).click();
-    await page.waitForTimeout(700);
-    assert.equal(await rows(), 16, "All returns to the short view");
-
-    // With a mouse, the picture for the row you point at follows the cursor.
-    if (name === "motion") {
-      const row = page.locator("#work .work-row").first();
-      await row.scrollIntoViewIfNeeded();
-      await row.hover();
-      await page.waitForTimeout(700);
-      const card = page.locator("#work > [aria-hidden='true'] > div");
-      assert.equal(
-        await card.evaluate((el) => getComputedStyle(el).opacity),
-        "1",
-        "The preview shows beside the cursor",
-      );
-      assert.ok(
-        (await card.locator("img").count()) > 0,
-        "The preview holds a picture",
-      );
-      await page.mouse.move(5, 5);
-    }
-
-    // On a wide screen a photo opens in place; on a phone they swipe.
-    if ((await page.evaluate(() => innerWidth)) >= 1024) {
-      const photo = page.getByRole("button", { name: "The Trojans" });
-      await photo.scrollIntoViewIfNeeded();
-      await photo.click();
-      assert.equal(
-        await photo.getAttribute("aria-pressed"),
-        "true",
-        "Photo slat opens",
-      );
-    } else {
-      assert.ok(
-        await page.getByRole("list", { name: "Photos" }).isVisible(),
-        "Photos swipe on a phone",
-      );
-    }
-
-    // The menu is one button on every screen size; Research opens the index
-    // on research.
-    await page.getByRole("button", { name: "Open menu" }).click();
-    await page
-      .locator("#menu")
-      .getByRole("link", { name: /Research/ })
-      .click();
-    await page.waitForTimeout(1600);
-    assert.match(page.url(), /#research$/, "Menu leads to research");
-    assert.equal(
-      await filters
-        .getByRole("button", { name: /^Research/ })
-        .getAttribute("aria-pressed"),
-      "true",
-      "Menu opens the index on research",
+    const archive = page.locator("details").first();
+    await archive.locator("summary").click();
+    assert.ok(
+      (await archive.locator("a").count()) >= 20,
+      "The complete work archive stays accessible",
     );
 
-    // A case page leads back to its part of the index.
+    const nav = page.getByRole("navigation", { name: "Main navigation" });
+    await nav.getByRole("link", { name: "Work", exact: true }).click();
+    await page.waitForURL(/#work$/);
+    assert.equal(
+      await page.locator("#work ol > li").count(),
+      4,
+      "Work navigation jumps to the visible case studies",
+    );
+
+    // Case pages retain their back links into the homepage.
     await page.goto(base + "/work/juno-ai/", { waitUntil: "networkidle" });
     await page.locator('article header a[href="/#startups"]').click();
     await page.waitForURL(/\/#startups$/);
-    await page.waitForTimeout(900);
-    assert.equal(await rows(), 4, "Back lands on the startups");
+    assert.equal(
+      await page.locator("#work ol > li").count(),
+      4,
+      "Case study back link returns to selected work",
+    );
 
     // Bet against me: lock in odds and see mine.
     await page.goto(base + "/ledger/", { waitUntil: "networkidle" });
