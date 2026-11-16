@@ -118,7 +118,7 @@ export function Home() {
                 id="home-intro"
                 className="max-w-[14ch] text-[clamp(32px,5.8vw,50px)] font-semibold leading-[1.08] tracking-[-0.055em]"
               >
-                I build things and study how systems work.
+                I’m Jay. I build things and study how systems work.
               </h1>
             </div>
             <div className="relative mt-1 h-[92px] w-[92px] shrink-0 overflow-hidden rounded-[16px] border border-line bg-paper sm:h-[120px] sm:w-[120px]">
