@@ -111,7 +111,7 @@ try {
     }
 
     await page.goto(base + "/", { waitUntil: "networkidle" });
-    assert.match(await page.locator("h1").innerText(), /Jay Kapoor/);
+    assert.match(await page.locator("h1").innerText(), /Jay\sKapoor/);
     assert.match(
       await page.locator("h1").innerText(),
       /I\sfind broken systems and try to find solutions/,
@@ -158,16 +158,16 @@ try {
       "Four tiles",
     );
 
-    // On a laptop the way into the work is on the first screen, and the
-    // selected work itself starts just below it.
+    // On a laptop the hero fills the first screen; the ways in follow right
+    // after it, and the selected work within two screens.
     if (name !== "mobile") {
       const tile = page
         .getByRole("navigation", { name: "Sections" })
         .getByRole("link", { name: /Work/ });
-      assert.ok((await tile.boundingBox()).y < 900, "Work tile on the first screen");
+      assert.ok((await tile.boundingBox()).y < 1150, "Work tile right after the hero");
       assert.ok(
-        (await picks.first().boundingBox()).y < 1200,
-        "Selected work starts within a short scroll",
+        (await picks.first().boundingBox()).y < 1800,
+        "Selected work starts within two screens",
       );
     }
 
@@ -186,11 +186,9 @@ try {
       "Outcomes say what kind of evidence they are",
     );
 
-    // The dock leads to the complete index.
-    await page
-      .getByRole("navigation", { name: "Main" })
-      .getByRole("link", { name: "All work" })
-      .click();
+    // The menu leads to the complete index.
+    await page.getByRole("button", { name: "Open menu" }).click();
+    await page.locator("#menu").getByRole("link", { name: "All work" }).click();
     await page.waitForURL(/\/work\/?$/);
     assert.equal(
       await page.locator("main ol > li").count(),

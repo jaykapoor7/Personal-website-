@@ -11,7 +11,7 @@ export function Play({ games }: { games: Game[] }) {
       {games.map((g) => (
         <li key={g.id}>
           <Link href={g.href} className="group block">
-            <span className="relative block aspect-[4/3] overflow-hidden rounded-lg bg-card ring-1 ring-inset ring-fg/[0.08] transition-[transform,box-shadow] duration-300 ease-out group-hover:-translate-y-1 group-hover:shadow-[0_14px_28px_-18px_rgb(var(--fg)/0.5)] group-focus-visible:-translate-y-1">
+            <span className="relative block aspect-[4/3] overflow-hidden rounded-2xl md:aspect-[16/10] bg-card ring-1 ring-inset ring-fg/[0.08] transition-[transform,box-shadow] duration-300 ease-out group-hover:-translate-y-1 group-hover:shadow-[0_14px_28px_-18px_rgb(var(--fg)/0.5)] group-focus-visible:-translate-y-1">
               {g.image && (
                 <Image
                   src={small(g.image)!}
@@ -22,10 +22,10 @@ export function Play({ games }: { games: Game[] }) {
                 />
               )}
             </span>
-            <span className="mt-2 block text-[13.5px] font-medium leading-snug transition-colors group-hover:text-accent">
+            <span className="mt-3 block text-[14px] font-semibold leading-snug md:text-[17px] transition-colors group-hover:text-accent">
               {g.name}
             </span>
-            <span className="mt-0.5 hidden text-[12.5px] leading-snug text-muted sm:block">
+            <span className="mt-0.5 hidden text-[13px] leading-snug text-muted sm:block md:text-[15px]">
               {g.line}
             </span>
           </Link>

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function Ledger() {
   return (
     <>
-      <section className="shell pt-4 md:pt-8">
+      <section className="shell pt-28 md:pt-32">
         <Reveal>
           <Link
             href="/#writing"

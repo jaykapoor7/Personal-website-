@@ -22,7 +22,7 @@ const intro: Record<string, string> = {
 export default function WorkIndex() {
   let n = 0;
   return (
-    <div className="col pt-4 md:pt-8">
+    <div className="col pt-28 md:pt-32">
       <header>
         <h1 className="display text-[clamp(38px,6.4vw,54px)]">All work</h1>
         <p className="mt-3 max-w-[540px] text-[16px] leading-[1.6] text-muted">
