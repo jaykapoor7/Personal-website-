@@ -54,7 +54,10 @@ function Visual({ c }: { c: CaseStudy }) {
   if (c.shot)
     return (
       <figure>
-        <span className="deep-shadow relative block aspect-[16/10] overflow-hidden rounded-lg bg-card">
+        <span
+          className="deep-shadow relative block aspect-[16/10] overflow-hidden rounded-lg bg-card"
+          style={{ viewTransitionName: `shot-${c.slug}` }}
+        >
           <Image
             src={c.shot.src}
             alt={`${c.name}, ${c.shot.url}`}
@@ -92,6 +95,25 @@ function Visual({ c }: { c: CaseStudy }) {
           </li>
         ))}
       </ul>
+    );
+  // Work told in documents: its first page stands in for a screenshot.
+  if (c.image)
+    return (
+      <figure className="mx-auto w-[min(62vw,300px)]">
+        <span
+          className="paper-shadow relative block aspect-[900/1273] -rotate-2 overflow-hidden bg-white"
+          style={{ viewTransitionName: `shot-${c.slug}` }}
+        >
+          <Image
+            src={c.image}
+            alt={`First page of the ${c.name} document`}
+            fill
+            priority
+            sizes="300px"
+            className="object-cover object-top"
+          />
+        </span>
+      </figure>
     );
   return null;
 }
@@ -186,7 +208,10 @@ export default function CasePage({ params }: { params: { slug: string } }) {
             </>
           )}
         </p>
-        <h1 className="display mt-3 text-[clamp(38px,6.4vw,58px)]">
+        <h1
+          className="display mt-3 w-fit text-[clamp(38px,6.4vw,58px)]"
+          style={{ viewTransitionName: `title-${c.slug}` }}
+        >
           {c.name}
         </h1>
         <p className="mt-4 max-w-[600px] text-[18px] leading-[1.5] text-fg/90 sm:text-[19px]">
@@ -244,7 +269,7 @@ export default function CasePage({ params }: { params: { slug: string } }) {
         )}
       </header>
 
-      {(c.shot || c.photos) && (
+      {(c.shot || c.photos || c.image) && (
         <div className="shell mt-12">
           <Visual c={c} />
         </div>

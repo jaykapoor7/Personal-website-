@@ -34,6 +34,8 @@ export type CaseStudy = {
   name: string;
   /** One specific line: what it is, for whom. */
   line: string;
+  /** Shorter still, with the strongest fact: for the home page list. */
+  short?: string;
   role: string;
   /** "2019–2023", "2026–now". */
   years: string;
@@ -74,6 +76,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "straypaw",
     name: straypaw.name,
     line: "A shared record of India's street animals, used by feeders, rescue groups and city programmes.",
+    short: "A shared record of India's street animals. 30,288 records in 28 cities.",
     role: "Founder",
     years: "2026–now",
     kind: "Startup",
@@ -121,6 +124,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "juno-ai",
     name: juno.name,
     line: "An AI health assistant for families in rural India, grounded in vetted sources and linked to doctors and pharmacies.",
+    short: "AI health information for rural India. 10,000+ users, published in IJEDR.",
     role: "Founder",
     years: "2019–2023",
     kind: "Startup",
@@ -157,6 +161,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "project-nidaan",
     name: nidaan.name,
     line: "Medication access for gig-economy delivery riders in Bengaluru.",
+    short: "Medication access for delivery riders. 55 interviews, with Zomato and Swiggy.",
     role: "Co-founder",
     years: "2022–2024",
     kind: "Startup",
@@ -185,6 +190,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "straypaw-research-models",
     name: researchModels.name,
     line: "Five interactive models of public-health paradoxes, each with a research note.",
+    short: "Five interactive public-health models, each with a research note.",
     role: "Author",
     years: "2026",
     kind: "Research",
@@ -223,6 +229,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "finer-things-club",
     name: finer.name,
     line: "An online marketplace that brought rural artisans to buyers through NGO and marketplace partners.",
+    short: "A marketplace for rural artisans. 300+ artisans, $8k+ in sales.",
     role: "Founder",
     years: "2021–2024",
     kind: "Startup",

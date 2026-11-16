@@ -76,6 +76,7 @@ export default function WorkIndex() {
                       logo: it.logo,
                       href: it.href,
                       external: it.external,
+                      vt: it.href.startsWith("/work/") ? it.id : undefined,
                     }}
                   />
                 </li>

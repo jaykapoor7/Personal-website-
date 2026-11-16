@@ -25,6 +25,7 @@ const index = [
   { href: "/", label: "Home" },
   { href: "/work/", label: "All work" },
   { href: "/#writing", label: "Writing" },
+  { href: "/#photos", label: "Photos" },
   { href: "/#play", label: "Play" },
   { href: "/artifacts/", label: "Documents" },
 ];
@@ -32,17 +33,20 @@ const index = [
 /** A plain footer, the same on every page. */
 export function Footer() {
   return (
-    <footer className="col pb-12">
-      <div className="grid grid-cols-2 gap-x-8 gap-y-8 border-t border-line pt-8 text-[13.5px] sm:grid-cols-[1.2fr_1fr_1fr]">
-        <div className="col-span-2 sm:col-span-1">
+    <footer id="contact" className="col pb-32">
+      <div className="grid grid-cols-2 gap-x-8 gap-y-8 border-t border-line pt-8 text-[13px] sm:grid-cols-[1.3fr_1fr_1fr]">
+        <div className="col-span-2 flex flex-col justify-between gap-6 sm:col-span-1">
           <p className="font-medium">© 2026 {person.name}</p>
-          <p className="mt-1 text-muted">
-            {person.place} · <Clock />
+          <p className="space-y-0.5 font-mono text-[11px] uppercase tracking-[0.06em] text-faint">
+            <span className="block">
+              Pittsburgh · <Clock />
+            </span>
+            <span className="block">40.4443° N, 79.9532° W</span>
           </p>
         </div>
         <div>
           <h2 className="label">Contact</h2>
-          <ul className="mt-3 space-y-1.5 text-muted">
+          <ul className="mt-3 space-y-1.5 border-l border-line pl-3 text-muted">
             <li>
               <a href={`mailto:${person.email}`} className="hover:text-fg">
                 Email
@@ -64,7 +68,7 @@ export function Footer() {
         </div>
         <div>
           <h2 className="label">Index</h2>
-          <ul className="mt-3 space-y-1.5 text-muted">
+          <ul className="mt-3 space-y-1.5 border-l border-line pl-3 text-muted">
             {index.map((l) => (
               <li key={l.href}>
                 <Link href={l.href} className="hover:text-fg">

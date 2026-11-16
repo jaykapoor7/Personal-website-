@@ -15,16 +15,19 @@ export function Thumb({
   name,
   className = "",
   sizes = "180px",
+  vt,
 }: {
   src?: string;
   logo?: string;
   name: string;
   className?: string;
   sizes?: string;
+  vt?: string;
 }) {
   return (
     <span
       className={`relative block overflow-hidden rounded-md bg-card ring-1 ring-inset ring-fg/[0.08] ${className}`}
+      style={vt ? { viewTransitionName: `shot-${vt}` } : undefined}
     >
       {src ? (
         <Image
@@ -76,6 +79,8 @@ export type Row = {
   logo?: string;
   href: string;
   external?: boolean;
+  /** Names the picture and title for the page transition into its case. */
+  vt?: string;
   /** The strongest numbers, shown under the line on the home page. */
   facts?: { value: string; label: string }[];
 };
@@ -99,6 +104,7 @@ export function WorkRow({ row, big = false }: { row: Row; big?: boolean }) {
         logo={row.logo}
         name={row.name}
         className="aspect-[3/2] w-full sm:aspect-[16/10]"
+        vt={row.vt}
         sizes={big ? "(max-width: 640px) 96px, 168px" : "(max-width: 640px) 96px, 140px"}
       />
       <span className="min-w-0">
@@ -120,7 +126,8 @@ export function WorkRow({ row, big = false }: { row: Row; big?: boolean }) {
           )}
         </span>
         <span
-          className={`mt-1.5 flex items-baseline gap-2 font-serif leading-tight tracking-[-0.01em] transition-colors duration-200 group-hover:text-accent ${
+          style={row.vt ? { viewTransitionName: `title-${row.vt}` } : undefined}
+          className={`mt-1.5 flex w-fit items-baseline gap-2 font-serif leading-tight tracking-[-0.01em] transition-colors duration-200 group-hover:text-accent ${
             big ? "text-[22px] sm:text-[25px]" : "text-[20px] sm:text-[22px]"
           }`}
         >

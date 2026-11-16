@@ -83,7 +83,7 @@
 @layer components {
   /* The reading column: everything on the home page lives in it. */
   .col {
-    @apply mx-auto w-full max-w-[720px] px-5 sm:px-8;
+    @apply mx-auto w-full max-w-[680px] px-5 sm:px-8;
   }
   /* Wider, for pictures on case pages and the tools that need room. */
   .shell {
@@ -117,6 +117,36 @@
 /* Section numbers: a small mono box, as in a printed CV. */
 .num {
   @apply inline-grid h-[18px] min-w-[26px] place-items-center rounded-[3px] px-1 font-mono text-[10.5px] tabular-nums text-faint ring-1 ring-inset ring-line;
+}
+
+/* The little hatched square beside each section number. */
+.hatch {
+  display: inline-block;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px rgb(var(--line));
+  background: repeating-linear-gradient(
+    -45deg,
+    rgb(var(--faint) / 0.45) 0 1px,
+    transparent 1px 4px
+  );
+}
+
+/* Dashed hairlines down both sides of the reading column, wide screens only. */
+.rails {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  margin: 0 auto;
+  max-width: 680px;
+  display: none;
+  border-left: 1px dashed rgb(var(--line));
+  border-right: 1px dashed rgb(var(--line));
+}
+@media (min-width: 768px) {
+  .rails {
+    display: block;
+  }
 }
 
 /* Documents and screenshots get a hairline and the faintest lift. */

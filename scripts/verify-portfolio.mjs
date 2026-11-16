@@ -114,12 +114,12 @@ try {
     assert.match(await page.locator("h1").innerText(), /Jay Kapoor/);
     assert.match(
       await page.locator("h1").innerText(),
-      /I find broken systems and try to find solutions/,
+      /I\sfind broken systems and try to find solutions/,
     );
 
     // Every part of the home page is there, in order.
     const order = await page.evaluate(() =>
-      ["work", "experience", "writing", "about", "play", "contact"].map(
+      ["work", "experience", "research", "writing", "photos", "play", "contact"].map(
         (id) => document.getElementById(id)?.getBoundingClientRect().top ?? -1,
       ),
     );
@@ -129,7 +129,7 @@ try {
     );
 
     // Five selected projects, each a link with its picture always visible.
-    const picks = page.locator("#work ol > li > a");
+    const picks = page.locator("#work ul > li > a");
     assert.equal(await picks.count(), 5, "Five selected projects");
     assert.deepEqual(
       await picks.evaluateAll((els) => els.map((e) => e.getAttribute("href"))),
@@ -147,17 +147,29 @@ try {
       "Project pictures show without hovering",
     );
     assert.equal(
-      await page.locator("#experience li").count(),
+      await page.locator("#experience ul").first().locator("> li").count(),
       8,
       "Experience lists every place I have worked",
     );
+    // The tiles lead into the site, and the dock is on every page.
+    assert.equal(
+      await page.getByRole("navigation", { name: "Sections" }).getByRole("link").count(),
+      4,
+      "Four tiles",
+    );
 
-    // On a laptop the first project starts on the first screen.
-    if (name !== "mobile")
+    // On a laptop the way into the work is on the first screen, and the
+    // selected work itself starts just below it.
+    if (name !== "mobile") {
+      const tile = page
+        .getByRole("navigation", { name: "Sections" })
+        .getByRole("link", { name: /Work/ });
+      assert.ok((await tile.boundingBox()).y < 900, "Work tile on the first screen");
       assert.ok(
-        (await picks.first().boundingBox()).y < 900,
-        "First project is on the first screen",
+        (await picks.first().boundingBox()).y < 1200,
+        "Selected work starts within a short scroll",
       );
+    }
 
     // A row opens by keyboard.
     await picks.first().focus();
@@ -174,8 +186,11 @@ try {
       "Outcomes say what kind of evidence they are",
     );
 
-    // The bar at the top leads to the complete index.
-    await page.getByRole("navigation", { name: "Main" }).getByRole("link", { name: "Work" }).click();
+    // The dock leads to the complete index.
+    await page
+      .getByRole("navigation", { name: "Main" })
+      .getByRole("link", { name: "All work" })
+      .click();
     await page.waitForURL(/\/work\/?$/);
     assert.equal(
       await page.locator("main ol > li").count(),

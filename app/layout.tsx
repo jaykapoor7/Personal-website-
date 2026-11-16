@@ -3,7 +3,8 @@ import { Inter, JetBrains_Mono, Newsreader } from "next/font/google";
 import { ViewTransitions } from "next-view-transitions";
 import "./globals.css";
 
-import { Nav } from "@/components/Nav";
+import { Dock } from "@/components/Dock";
+import { Preview } from "@/components/Preview";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { Footer } from "@/components/Footer";
 import { siteUrl } from "@/lib/site";
@@ -68,14 +69,17 @@ export default function RootLayout({
             Skip to content
           </a>
           <SmoothScroll />
-          <Nav />
           <noscript>
             <style>{`[data-reveal]{opacity:1!important;transform:none!important;clip-path:none!important}`}</style>
           </noscript>
-          <main id="main" className="pb-20 md:pb-28">
+          {/* Hairlines down both sides of the reading column, as on a printed page. */}
+          <div aria-hidden="true" className="rails" />
+          <main id="main" className="relative pb-16 md:pb-20">
             {children}
           </main>
           <Footer />
+          <Dock />
+          <Preview />
         </body>
       </html>
     </ViewTransitions>
