@@ -2,8 +2,12 @@
 
 Run after `npm run build` with `out/` served locally, then `npm run test:browser`.
 
-Last local run (November 2026): 18 routes, including five Research Models pages, passed on desktop, iPhone 13, dark mode and full motion, with no overflow, no browser errors and no axe WCAG 2.1 AA violations. All local links and every redirect target returned 200. The landing page carries the introduction and the short index (16 of 27 pieces of work, the rest one click away), and is about 5½ screens on a laptop and 7 on a phone.
+Last local run (November 2026), after the CV-style redesign:
 
-Scrolling the whole landing page with a mouse wheel in headless Chromium, cursor resting over the content, held 60 frames a second in three runs (median frame 16.7 ms, 95th percentile 16.8 ms, at most one frame over 34 ms in a run). That says nothing about Safari or a real phone; check those by hand after changing anything tied to scroll.
+- **Routes:** 22 routes passed on desktop, iPhone 13, dark mode and full motion: the home page, the work index, nine case pages, three play pages, the ledger, the market map, the documents page and five Research Models pages. No overflow, no browser errors and no axe WCAG 2.1 AA violations.
+- **Links:** all 99 local links and documents, and all 17 redirect targets, returned 200.
+- **External links:** every external link was checked. All returned 200, except sites that refuse automated requests: LinkedIn (999); GitHub's profile page, Max Healthcare, the CDC and one DOI (403). These open normally in a browser.
+- **Home page:** the five selected projects show their pictures without hover. The first one starts on a 1440×900 laptop's first screen.
+- **Weight:** the home page loads about 1.2 MB before compression, in 35 requests. Lists use 400px thumbnails from `public/thumbs`.
 
-Redirects themselves only exist on Vercel, so check a few old URLs (`/research/`, `/writing/`, `/work/tarc/`) on a preview deployment after changing `vercel.json`.
+Redirects only exist on Vercel. After changing `vercel.json`, check a few old URLs (`/research/`, `/projects/`, `/startups/`) on a preview deployment.

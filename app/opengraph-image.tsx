@@ -6,7 +6,7 @@ export const contentType = "image/png";
 export const alt =
   "Jay Kapoor. I find broken systems and try to find solutions.";
 
-/** The card shown when the site is shared: the same sentence as the landing page. */
+/** The card shown when the site is shared: the same sentence as the home page. */
 export default function OpengraphImage() {
   return new ImageResponse(
     <div
@@ -16,8 +16,8 @@ export default function OpengraphImage() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        background: "#ffffff",
-        color: "#1e3a8a",
+        background: "#fafaf8",
+        color: "#16181d",
         padding: "64px 76px",
         fontFamily: "Arial, sans-serif",
       }}
@@ -27,18 +27,19 @@ export default function OpengraphImage() {
           display: "flex",
           justifyContent: "space-between",
           fontSize: 28,
-          color: "#52669f",
+          color: "#5b606b",
         }}
       >
         <span>kapoorjay.com</span>
+        <span style={{ color: "#2346a8" }}>Now building StrayPaw</span>
       </div>
       <div
         style={{
           display: "flex",
           flexDirection: "column",
-          fontSize: 104,
-          fontWeight: 700,
-          letterSpacing: "-0.04em",
+          fontSize: 96,
+          fontWeight: 600,
+          letterSpacing: "-0.035em",
           lineHeight: 1,
         }}
       >
@@ -47,7 +48,16 @@ export default function OpengraphImage() {
           I find broken systems and try to find solutions.
         </span>
       </div>
-      <div style={{ display: "flex", gap: 40, fontSize: 28, color: "#52669f" }}>
+      <div
+        style={{
+          display: "flex",
+          gap: 40,
+          fontSize: 26,
+          color: "#5b606b",
+          borderTop: "1px solid #e4e4df",
+          paddingTop: 24,
+        }}
+      >
         {ventures.map((v) => (
           <span key={v.id}>{v.name}</span>
         ))}

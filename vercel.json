@@ -8,12 +8,12 @@
     },
     {
       "source": "/research/",
-      "destination": "/#research",
+      "destination": "/#writing",
       "permanent": true
     },
     {
       "source": "/projects/",
-      "destination": "/#projects",
+      "destination": "/work/#projects",
       "permanent": true
     },
     {
@@ -22,8 +22,8 @@
       "permanent": true
     },
     {
-      "source": "/:old(startups|ventures|started|work)/",
-      "destination": "/#startups",
+      "source": "/:old(startups|ventures|started)/",
+      "destination": "/work/#startups",
       "permanent": true
     },
     {
@@ -38,7 +38,7 @@
     },
     {
       "source": "/play/",
-      "destination": "/#projects",
+      "destination": "/#play",
       "permanent": true
     },
     {
@@ -47,18 +47,8 @@
       "permanent": true
     },
     {
-      "source": "/work/:old(tarc|hdfc-bank)/",
-      "destination": "/#experience",
-      "permanent": true
-    },
-    {
       "source": "/work/:old(accessible-smarttech|sci-3sixty|upmc-emergency-medicine|apodaca-lab|pitt-sociology|max-hospital)/",
-      "destination": "/#research",
-      "permanent": true
-    },
-    {
-      "source": "/work/straypaw-research-models/",
-      "destination": "/research-models/",
+      "destination": "/#writing",
       "permanent": true
     },
     {

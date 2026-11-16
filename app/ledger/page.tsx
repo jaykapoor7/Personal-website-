@@ -15,11 +15,11 @@ export const metadata: Metadata = {
 export default function Ledger() {
   return (
     <>
-      <section className="shell pt-28 md:pt-36">
+      <section className="shell pt-4 md:pt-8">
         <Reveal>
           <Link
             href="/#writing"
-            className="group inline-flex h-11 items-center gap-2 rounded-full bg-card px-4 text-[14px] font-semibold transition-colors hover:bg-fg hover:text-white"
+            className="group inline-flex items-center gap-1.5 text-[13.5px] text-muted transition-colors hover:text-fg"
           >
             <Arrow
               direction="left"
@@ -27,7 +27,7 @@ export default function Ledger() {
             />
             Research
           </Link>
-          <h1 className="display mt-8 max-w-5xl text-[clamp(60px,10.5vw,170px)]">
+          <h1 className="display mt-10 max-w-3xl text-[clamp(38px,6.4vw,58px)]">
             Forecast ledger
           </h1>
           <p className="mt-6 max-w-2xl text-[clamp(19px,1.7vw,24px)] font-medium leading-[1.3] text-muted">
@@ -43,7 +43,7 @@ export default function Ledger() {
               [s.brier, "Brier score"],
             ].map(([v, l]) => (
               <div key={l}>
-                <dd className="display text-[clamp(48px,6vw,88px)] text-accent">
+                <dd className="display text-[clamp(34px,5vw,44px)] text-accent">
                   {v}
                 </dd>
                 <dt className="mt-2 text-[15px] text-muted">{l}</dt>
@@ -59,8 +59,8 @@ export default function Ledger() {
       </section>
 
       <section aria-labelledby="bet-h" className="shell mt-16 md:mt-24">
-        <div className="rounded-[28px] bg-paper p-6 sm:p-10 md:rounded-[40px] md:p-14">
-          <h2 id="bet-h" className="display text-[clamp(34px,4.4vw,68px)]">
+        <div className="rounded-xl bg-paper p-6 ring-1 ring-line sm:p-10">
+          <h2 id="bet-h" className="display text-[clamp(26px,3.4vw,34px)]">
             Bet against me
           </h2>
           <p className="mt-4 max-w-[52ch] text-[17px] leading-relaxed text-muted">
@@ -73,14 +73,14 @@ export default function Ledger() {
       </section>
 
       <section className="shell pt-20">
-        <h2 className="display mb-6 text-[clamp(34px,4.4vw,68px)]">
+        <h2 className="display mb-6 text-[clamp(26px,3.4vw,34px)]">
           Every call
         </h2>
         <LedgerBoard calls={ledger.calls} />
       </section>
 
       <section className="shell pt-20">
-        <h2 className="display text-[clamp(34px,4.4vw,68px)]">Coverage</h2>
+        <h2 className="display text-[clamp(26px,3.4vw,34px)]">Coverage</h2>
         <ul className="mt-6 grid gap-x-10 gap-y-5 sm:grid-cols-2 lg:grid-cols-3">
           {ledger.coverage.map((m) => (
             <li key={m.id}>

@@ -17,6 +17,14 @@ export function SmartLink({
   children: React.ReactNode;
   "aria-label"?: string;
 }) {
+  // The Research Models site is plain HTML, not part of the app: link to it
+  // plainly, so the app does not try to prefetch it.
+  if (href.startsWith("/research-models"))
+    return (
+      <a href={href} className={className} {...rest}>
+        {children}
+      </a>
+    );
   if (isExternal(href))
     return (
       <a

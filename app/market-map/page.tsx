@@ -14,11 +14,11 @@ export default function Page() {
   return (
     <>
       <section>
-        <div className="shell pb-12 pt-28 md:pt-36">
+        <div className="shell pb-12 pt-4 md:pt-8">
           <Reveal>
             <Link
               href="/#writing"
-              className="group inline-flex h-11 items-center gap-2 rounded-full bg-card px-4 text-[14px] font-semibold transition-colors hover:bg-fg hover:text-white"
+              className="group inline-flex items-center gap-1.5 text-[13.5px] text-muted transition-colors hover:text-fg"
             >
               <Arrow
                 direction="left"
@@ -26,7 +26,7 @@ export default function Page() {
               />
               Research
             </Link>
-            <h1 className="display mt-8 max-w-5xl text-[clamp(56px,9.6vw,156px)]">
+            <h1 className="display mt-10 max-w-3xl text-[clamp(38px,6.4vw,58px)]">
               India healthtech, mapped.
             </h1>
             <p className="mt-6 max-w-2xl text-[clamp(19px,1.7vw,24px)] font-medium leading-[1.3] text-muted">
