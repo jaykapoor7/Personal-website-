@@ -83,7 +83,7 @@
 @layer components {
   /* The reading column: everything on the home page lives in it. */
   .col {
-    @apply mx-auto w-full max-w-[680px] px-5 sm:px-8;
+    @apply mx-auto w-full max-w-[1120px] px-5 sm:px-8 lg:px-12;
   }
   /* Wider, for pictures on case pages and the tools that need room. */
   .shell {
@@ -138,7 +138,7 @@
   inset: 0;
   z-index: 0;
   margin: 0 auto;
-  max-width: 680px;
+  max-width: 1120px;
   display: none;
   border-left: 1px dashed rgb(var(--line));
   border-right: 1px dashed rgb(var(--line));

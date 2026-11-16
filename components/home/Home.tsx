@@ -58,48 +58,50 @@ const school: Entry[] = [
 export function Home() {
   return (
     <>
-      <Intro />
-
-      <Tiles
-        tiles={[
-          {
-            label: "Work",
-            count: `${items.length} entries`,
-            href: "/work/",
-            pics: [
-              "/previews/juno-light-d.webp",
-              "/previews/research-models-d.webp",
-              "/previews/straypaw-map-d.webp",
-            ],
-          },
-          {
-            label: "Writing",
-            count: `${writing.length + 1} pieces`,
-            href: "/#writing",
-            tall: true,
-            pics: writing
-              .slice(0, 3)
-              .map((w) => w.image!)
-              .reverse(),
-          },
-          {
-            label: "Photos",
-            count: "7 photos",
-            href: "/#photos",
-            tall: true,
-            pics: [
-              "/photos/01_trojans_team-640.webp",
-              "/photos/07_school_ceremony-640.webp",
-              "/photos/pitt_portrait-640.webp",
-            ],
-          },
-          {
-            label: "Play",
-            count: `${games.length} games`,
-            href: "/#play",
-            pics: games.map((g) => g.image!).reverse(),
-          },
-        ]}
+      <Intro
+        aside={
+          <Tiles
+            tiles={[
+              {
+                label: "Work",
+                count: `${items.length} entries`,
+                href: "/work/",
+                pics: [
+                  "/previews/juno-light-d.webp",
+                  "/previews/research-models-d.webp",
+                  "/previews/straypaw-map-d.webp",
+                ],
+              },
+              {
+                label: "Writing",
+                count: `${writing.length + 1} pieces`,
+                href: "/#writing",
+                tall: true,
+                pics: writing
+                  .slice(0, 3)
+                  .map((w) => w.image!)
+                  .reverse(),
+              },
+              {
+                label: "Photos",
+                count: "7 photos",
+                href: "/#photos",
+                tall: true,
+                pics: [
+                  "/photos/01_trojans_team-640.webp",
+                  "/photos/07_school_ceremony-640.webp",
+                  "/photos/pitt_portrait-640.webp",
+                ],
+              },
+              {
+                label: "Play",
+                count: `${games.length} games`,
+                href: "/#play",
+                pics: games.map((g) => g.image!).reverse(),
+              },
+            ]}
+          />
+        }
       />
 
       <Section
@@ -109,6 +111,7 @@ export function Home() {
         action={{ label: `All ${items.length}`, href: "/work/" }}
       >
         <List
+          big
           entries={selected.map((c, i) => ({
             id: c.slug,
             num: String(i + 1).padStart(2, "0"),

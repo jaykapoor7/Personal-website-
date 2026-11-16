@@ -19,9 +19,9 @@ export function Section({
     <section
       id={id}
       aria-labelledby={`${id}-h`}
-      className="col mt-12 scroll-mt-8 md:mt-14"
+      className="col mt-12 scroll-mt-8 md:mt-14 lg:mt-20 lg:grid lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-x-12"
     >
-      <div className="mb-2 flex items-center justify-between gap-4">
+      <div className="mb-2 flex items-center justify-between gap-4 lg:sticky lg:top-8 lg:mb-0 lg:flex-col lg:items-start lg:justify-start lg:gap-3 lg:self-start lg:pt-3">
         <h2 id={`${id}-h`} className="flex items-center gap-2">
           <span className="num" aria-hidden="true">
             {n}
@@ -42,7 +42,7 @@ export function Section({
           </Link>
         )}
       </div>
-      {children}
+      <div className="min-w-0">{children}</div>
     </section>
   );
 }

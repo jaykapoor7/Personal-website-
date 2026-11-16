@@ -59,14 +59,14 @@ export function Photos() {
       <div className="hidden md:block">
         <ul
           aria-label="Photos"
-          className="relative flex h-[196px] items-end justify-center overflow-x-clip border-b border-line pb-3"
+          className="relative flex h-[196px] items-end lg:h-[240px] justify-center overflow-x-clip border-b border-line pb-3"
         >
           {photos.map((p, i) => {
             const active = i === on;
             return (
               <motion.li
                 key={p.src}
-                className="relative -mx-[8px] w-[96px] shrink-0"
+                className="relative -mx-[8px] w-[96px] shrink-0 lg:-mx-[10px] lg:w-[120px]"
                 style={{ zIndex: active ? 20 : 10 - Math.abs(i - on) }}
                 initial={false}
                 animate={

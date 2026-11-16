@@ -35,12 +35,12 @@ export function Tiles({ tiles }: { tiles: Tile[] }) {
   const calm = useCalm();
   const [fan, setFan] = useState<number | null>(null);
   return (
-    <nav aria-label="Sections" className="col mt-10 md:mt-12">
-      <ul className="grid grid-cols-2 border-y border-line sm:grid-cols-4">
+    <nav aria-label="Sections">
+      <ul className="grid grid-cols-2 gap-px border-y border-line bg-line sm:grid-cols-4 lg:grid-cols-2">
         {tiles.map((t, i) => (
           <li
             key={t.label}
-            className={`border-line ${i % 2 ? "border-l" : ""} ${i > 1 ? "border-t sm:border-t-0" : ""} ${i === 2 ? "sm:border-l" : ""}`}
+            className="bg-bg"
             onPointerEnter={(e) => e.pointerType === "mouse" && setFan(i)}
             onPointerLeave={() => setFan(null)}
             onFocus={() => setFan(i)}

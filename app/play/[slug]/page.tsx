@@ -112,8 +112,8 @@ export default function PlayPage({ params }: { params: { slug: string } }) {
         </p>
       </div>
 
-      <div className="col mt-12 space-y-10 text-[15.5px] leading-[1.65] sm:text-[16px]">
-        <section className="grid gap-x-10 gap-y-3 border-t border-line pt-5 sm:grid-cols-[140px_minmax(0,1fr)]">
+      <div className="col mt-14 space-y-10 text-[15.5px] leading-[1.65] sm:text-[16px]">
+        <section className="grid gap-x-10 gap-y-3 border-t border-line pt-5 sm:grid-cols-[140px_minmax(0,1fr)] lg:grid-cols-[220px_minmax(0,640px)] lg:gap-x-12">
           <h2 className="label pt-[5px]">What it does</h2>
           <ul className="space-y-2.5">
             {b.points.map((p) => (
@@ -127,7 +127,7 @@ export default function PlayPage({ params }: { params: { slug: string } }) {
             ))}
           </ul>
         </section>
-        <section className="grid gap-x-10 gap-y-3 border-t border-line pt-5 sm:grid-cols-[140px_minmax(0,1fr)]">
+        <section className="grid gap-x-10 gap-y-3 border-t border-line pt-5 sm:grid-cols-[140px_minmax(0,1fr)] lg:grid-cols-[220px_minmax(0,640px)] lg:gap-x-12">
           <h2 className="label pt-[5px]">Built with</h2>
           <p>{b.stack.join(", ")}</p>
         </section>
