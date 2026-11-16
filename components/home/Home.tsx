@@ -86,7 +86,7 @@ function LocalOrExternalLink({
   children: React.ReactNode;
   className?: string;
 }) {
-  if (href.startsWith("/") && !/\.(pdf|xlsx|csv)$/i.test(href))
+  if (href.startsWith("/") && href !== "/research-models/" && !/\.(pdf|xlsx|csv)$/i.test(href))
     return (
       <Link href={href} className={className}>
         {children}
