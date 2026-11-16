@@ -16,7 +16,7 @@ const sans = Bricolage_Grotesque({
 });
 
 const description =
-  "Jay Kapoor. I find broken systems and try to find solutions. Founder of StrayPaw, studying economics and statistics at Pitt.";
+  "Jay Kapoor is a founder and researcher from Bengaluru, studying economics and statistics at the University of Pittsburgh. Selected projects, research, writing and experiments.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
