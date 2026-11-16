@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Link } from "next-view-transitions";
 import { Arrow } from "@/components/Arrow";
 import { EverythingFalls } from "@/components/EverythingFalls";
-import { Reveal, RiseWords } from "@/components/motion";
+import { Status } from "@/components/WorkRow";
 import { SmartLink } from "@/components/ui";
 import { builds } from "@/content/site";
 
@@ -27,49 +27,55 @@ export default function PlayPage({ params }: { params: { slug: string } }) {
   const b = builds[i];
   const next = builds[(i + 1) % builds.length];
 
+  const game = b.kind === "Game";
+  const back = game
+    ? { href: "/#play", label: "Play" }
+    : { href: "/work/#projects", label: "All work" };
+
   return (
-    <article className="shell pt-28 md:pt-32">
-      <header>
+    <article>
+      <header className="col pt-4 md:pt-8">
         <Link
-          href="/#projects"
-          className="group inline-flex h-11 items-center gap-2 rounded-full bg-card px-4 text-[14px] font-semibold transition-colors hover:bg-fg hover:text-white"
+          href={back.href}
+          className="group inline-flex items-center gap-1.5 text-[13.5px] text-muted transition-colors hover:text-fg"
         >
           <Arrow
             direction="left"
-            className="transition-transform duration-300 group-hover:-translate-x-0.5"
+            className="transition-transform duration-200 group-hover:-translate-x-0.5"
           />
-          Projects
+          {back.label}
         </Link>
-        <div className="mt-8 grid gap-6 md:mt-10 md:grid-cols-[1.4fr_1fr] md:items-end">
-          <h1 className="display text-[clamp(52px,10vw,160px)]">
-            <RiseWords text={b.name} />
-          </h1>
-          <div>
-            <p className="text-[clamp(21px,2.2vw,30px)] font-medium leading-[1.15]">
-              {b.summary}
-            </p>
-            {!b.falls && (
-              <div className="mt-5 flex flex-wrap gap-2.5">
-                <SmartLink href={b.href!} className="btn-primary">
-                  Open {b.url} <Arrow />
-                </SmartLink>
-                {b.code && (
-                  <SmartLink href={b.code} className="btn-ghost">
-                    Code
-                  </SmartLink>
-                )}
-              </div>
+        <p className="label mt-10 flex flex-wrap items-center gap-x-2">
+          <span>{b.falls ? "Toy" : b.kind}</span>
+          <span aria-hidden="true">·</span>
+          <span>2026</span>
+          <span aria-hidden="true">·</span>
+          <Status status="Live" />
+        </p>
+        <h1 className="display mt-3 text-[clamp(38px,6.4vw,58px)]">{b.name}</h1>
+        <p className="mt-4 max-w-[600px] text-[18px] leading-[1.5] text-fg/90 sm:text-[19px]">
+          {b.summary}
+        </p>
+        {!b.falls && (
+          <div className="mt-6 flex flex-wrap gap-2.5">
+            <SmartLink href={b.href!} className="btn-primary">
+              Open {b.url} <Arrow className="text-[0.85em]" />
+            </SmartLink>
+            {b.code && (
+              <SmartLink href={b.code} className="btn-ghost">
+                Code on GitHub <Arrow className="text-[0.85em]" />
+              </SmartLink>
             )}
           </div>
-        </div>
+        )}
       </header>
 
-      <div className="mt-12 md:mt-16">
+      <div className="shell mt-10 md:mt-12">
         {b.falls ? (
           <EverythingFalls />
         ) : b.phone ? (
-          <div className="bg-dots flex justify-center rounded-3xl bg-card py-10">
-            <div className="h-[min(78vh,720px)] rounded-[40px] bg-[#111] p-2 shadow-2xl">
+          <div className="bg-dots flex justify-center rounded-xl bg-paper py-10 ring-1 ring-line">
+            <div className="h-[min(78vh,720px)] rounded-[40px] bg-[#111] p-2 shadow-xl">
               <iframe
                 src={b.href}
                 title={b.name}
@@ -80,13 +86,13 @@ export default function PlayPage({ params }: { params: { slug: string } }) {
             </div>
           </div>
         ) : (
-          <div className="deep-shadow overflow-hidden rounded-2xl md:rounded-3xl">
+          <div className="deep-shadow overflow-hidden rounded-lg">
             <div className="relative h-[min(78vh,760px)] bg-white">
               <Image
                 src={b.image!}
                 alt=""
                 fill
-                sizes="100vw"
+                sizes="(max-width: 1040px) 100vw, 976px"
                 className="object-cover object-top"
               />
               <iframe
@@ -99,52 +105,54 @@ export default function PlayPage({ params }: { params: { slug: string } }) {
             </div>
           </div>
         )}
+        <p className="mt-2.5 text-[13px] text-muted">
+          {b.falls
+            ? "Running live on this page."
+            : `Running live from ${b.url}. It works best in its own tab.`}
+        </p>
       </div>
 
-      <section
-        aria-label="About this project"
-        className="mt-16 grid gap-10 md:mt-24 md:grid-cols-[1fr_260px]"
-      >
-        <ol className="grid gap-x-14 gap-y-8 sm:grid-cols-2">
-          {b.points.map((p, n) => (
-            <li key={p}>
-              <Reveal delay={(n % 2) * 0.08} className="flex gap-4">
+      <div className="col mt-12 space-y-10 text-[15.5px] leading-[1.65] sm:text-[16px]">
+        <section className="grid gap-x-10 gap-y-3 border-t border-line pt-5 sm:grid-cols-[140px_minmax(0,1fr)]">
+          <h2 className="label pt-[5px]">What it does</h2>
+          <ul className="space-y-2.5">
+            {b.points.map((p) => (
+              <li key={p} className="flex gap-3">
                 <span
                   aria-hidden="true"
-                  className="display pt-0.5 text-[20px] text-accent"
-                >
-                  {String(n + 1).padStart(2, "0")}
-                </span>
-                <p className="max-w-[40ch] text-[18px] leading-[1.4]">{p}</p>
-              </Reveal>
-            </li>
-          ))}
-        </ol>
-        <div>
-          <p className="label">Built with</p>
-          <p className="mt-2 text-[17px] font-medium leading-relaxed">
-            {b.stack.join(", ")}
-          </p>
-        </div>
-      </section>
+                  className="mt-[12px] h-px w-3 shrink-0 bg-faint"
+                />
+                <span>{p}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+        <section className="grid gap-x-10 gap-y-3 border-t border-line pt-5 sm:grid-cols-[140px_minmax(0,1fr)]">
+          <h2 className="label pt-[5px]">Built with</h2>
+          <p>{b.stack.join(", ")}</p>
+        </section>
+      </div>
 
-      <Link
-        href={next.falls ? next.href! : `/play/${next.id}`}
-        className="group mt-24 block rounded-[28px] bg-card p-7 transition-colors duration-500 hover:bg-fg hover:text-white sm:p-10 md:mt-32 md:rounded-[40px]"
-      >
-        <span className="text-[15px] font-medium text-muted transition-colors duration-500 group-hover:text-white">
-          Next
-        </span>
-        <span className="mt-3 flex items-center justify-between gap-6">
-          <span className="display text-[clamp(40px,8vw,128px)] transition-transform duration-500 group-hover:translate-x-3">
-            {next.name}
+      <nav aria-label="Next project" className="col mt-16">
+        <Link
+          href={next.falls ? next.href! : `/play/${next.id}/`}
+          className="group flex items-end justify-between gap-6 border-t border-line pt-5"
+        >
+          <span>
+            <span className="label">Next</span>
+            <span className="display mt-1.5 block text-[26px] transition-colors group-hover:text-accent">
+              {next.name}
+            </span>
+            <span className="mt-1 block text-[14px] text-muted">
+              {next.summary}
+            </span>
           </span>
           <Arrow
             direction="right"
-            className="text-[clamp(32px,5vw,72px)] transition-transform duration-500 group-hover:translate-x-2"
+            className="mb-1 text-[20px] text-muted transition-transform duration-200 group-hover:translate-x-1 group-hover:text-accent"
           />
-        </span>
-      </Link>
+        </Link>
+      </nav>
     </article>
   );
 }

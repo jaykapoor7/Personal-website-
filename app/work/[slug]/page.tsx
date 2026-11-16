@@ -3,14 +3,17 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Link } from "next-view-transitions";
 import { Arrow } from "@/components/Arrow";
-import { ScrollShot } from "@/components/CaseHero";
-import { Counter, Reveal, RiseWords } from "@/components/motion";
-import { SmartLink } from "@/components/ui";
-import { cases, type Case } from "@/content/archive";
-import type { Link as L, Metric, Proof, Shot } from "@/content/site";
+import { SmartLink, isExternal } from "@/components/ui";
+import { Status } from "@/components/WorkRow";
+import {
+  caseBySlug,
+  caseStudies,
+  type CaseStudy,
+  type OutcomeKind,
+} from "@/content/cases";
 
 export function generateStaticParams() {
-  return cases.map((c) => ({ slug: c.slug }));
+  return caseStudies.map((c) => ({ slug: c.slug }));
 }
 
 export function generateMetadata({
@@ -18,262 +21,305 @@ export function generateMetadata({
 }: {
   params: { slug: string };
 }): Metadata {
-  const e = cases.find((c) => c.slug === params.slug);
-  return e ? { title: e.title, description: e.line } : {};
+  const c = caseBySlug(params.slug);
+  return c ? { title: c.name, description: c.line } : {};
 }
 
-/** Everything a case page needs, whichever list the entry came from. */
-function details(e: Case) {
-  const c = e.caseOf;
-  if (c.type === "venture") {
-    const v = c.v;
-    return {
-      back: "/#startups",
-      backLabel: "Startups",
-      kicker: `${v.role}, ${v.period}`,
-      lede: v.summary,
-      points: v.points,
-      metrics: v.metrics,
-      site: v.site,
-      links: v.links ?? [],
-      shot: v.shot,
-      proof: v.proof,
-      logo: v.logo,
-      photos: undefined,
-    };
-  }
-  const r = c.r;
-  return {
-    back: "/#experience",
-    backLabel: "Experience",
-    kicker: `${r.role}, ${r.period}, ${r.place}`,
-    lede: r.question,
-    points: r.points,
-    metrics: [] as Metric[],
-    site: r.site,
-    links: [] as L[],
-    shot: undefined as Shot | undefined,
-    proof: r.proof,
-    logo: r.logo,
-    photos: r.photos,
-  };
-}
-
-function Papers({ proof }: { proof: Proof[] }) {
-  const tilt = [-4, 3, -2, 5];
+/** One part of the page: a small mono heading beside its text. */
+function Part({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
   return (
-    <ul className="flex flex-wrap gap-x-10 gap-y-12">
-      {proof.map((p, i) => (
-        <li key={p.href} className="w-[150px] sm:w-[210px]">
-          <SmartLink href={p.href} className="group block">
-            {p.cover ? (
-              <span
-                className="paper-shadow relative block aspect-[900/1273] overflow-hidden bg-white transition-transform duration-500 ease-out group-hover:-translate-y-2 group-hover:!rotate-0 group-hover:scale-105"
-                style={{ rotate: `${tilt[i % tilt.length]}deg` }}
-              >
+    <section className="grid gap-x-10 gap-y-3 border-t border-line pt-5 sm:grid-cols-[140px_minmax(0,1fr)]">
+      <h2 className="label pt-[5px]">{title}</h2>
+      <div className="min-w-0">{children}</div>
+    </section>
+  );
+}
+
+const kindStyle: Record<OutcomeKind, string> = {
+  Measured: "text-accent",
+  Shipped: "text-fg",
+  Partnership: "text-fg",
+  Pilot: "text-muted",
+  Published: "text-fg",
+};
+
+/** The picture for the case: a screenshot or photographs. */
+function Visual({ c }: { c: CaseStudy }) {
+  if (c.shot)
+    return (
+      <figure>
+        <span className="deep-shadow relative block aspect-[16/10] overflow-hidden rounded-lg bg-card">
+          <Image
+            src={c.shot.src}
+            alt={`${c.name}, ${c.shot.url}`}
+            fill
+            priority
+            sizes="(max-width: 1040px) 100vw, 976px"
+            className="object-cover object-top"
+          />
+        </span>
+        <figcaption className="mt-2.5 text-[13px] text-muted">
+          {c.shot.url}
+        </figcaption>
+      </figure>
+    );
+  if (c.photos)
+    return (
+      <ul className="grid grid-cols-2 gap-4 sm:gap-6">
+        {c.photos.map((p) => (
+          <li key={p.src}>
+            <figure>
+              <span className="relative block aspect-[4/5] overflow-hidden rounded-lg bg-card ring-1 ring-fg/[0.08]">
                 <Image
-                  src={p.cover}
-                  alt={`First page of ${p.label}`}
+                  src={p.src}
+                  alt={p.alt}
                   fill
-                  sizes="210px"
+                  priority
+                  sizes="(max-width: 1040px) 50vw, 480px"
                   className="object-cover object-top"
                 />
               </span>
-            ) : (
-              <span className="grid aspect-[900/1273] place-items-center rounded-2xl bg-card p-4 text-center text-[17px] font-semibold transition-transform duration-500 group-hover:-translate-y-2">
-                {p.label}
-              </span>
-            )}
-            <span className="mt-5 flex items-center gap-1.5 text-[15px] font-semibold group-hover:text-accent">
-              {p.label} <Arrow />
-            </span>
-          </SmartLink>
-        </li>
-      ))}
-    </ul>
+              <figcaption className="mt-2.5 text-[13px] text-muted">
+                {p.caption}
+              </figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+    );
+  return null;
+}
+
+const fileKind = (href: string) =>
+  /\.pdf$/.test(href)
+    ? "PDF"
+    : /\.xlsx$/.test(href)
+      ? "Spreadsheet"
+      : /github\.com/.test(href)
+        ? "GitHub"
+        : "Link";
+
+/** Documents as their first pages; anything without one is a plain link. */
+function Docs({ c }: { c: CaseStudy }) {
+  const papers = c.docs.filter((d) => d.cover);
+  const other = c.docs.filter((d) => !d.cover);
+  return (
+    <>
+      {papers.length > 0 && (
+        <ul className="grid grid-cols-2 gap-x-5 gap-y-6 sm:grid-cols-3">
+          {papers.map((d) => (
+            <li key={d.href}>
+              <SmartLink href={d.href} className="group block">
+                <span className="paper-shadow relative block aspect-[900/1273] overflow-hidden bg-white transition-transform duration-300 ease-out group-hover:-translate-y-1">
+                  <Image
+                    src={d.cover!}
+                    alt={`First page of ${d.label}`}
+                    fill
+                    sizes="(max-width: 640px) 45vw, 200px"
+                    className="object-cover object-top"
+                  />
+                </span>
+                <span className="mt-2.5 flex items-center gap-1 text-[14px] font-medium transition-colors group-hover:text-accent">
+                  {d.label}
+                  <Arrow className="text-[0.85em]" />
+                </span>
+                <span className="text-[12.5px] text-muted">{fileKind(d.href)}</span>
+              </SmartLink>
+            </li>
+          ))}
+        </ul>
+      )}
+      {other.length > 0 && (
+        <ul className={papers.length ? "mt-6 space-y-1.5" : "space-y-1.5"}>
+          {other.map((d) => (
+            <li key={d.href}>
+              <SmartLink
+                href={d.href}
+                className="group inline-flex items-center gap-1.5 transition-colors hover:text-accent"
+              >
+                {d.label}
+                <span className="text-[13px] text-muted">({fileKind(d.href)})</span>
+                <Arrow className="text-[0.8em]" />
+              </SmartLink>
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
   );
 }
 
 export default function CasePage({ params }: { params: { slug: string } }) {
-  const i = cases.findIndex((c) => c.slug === params.slug);
-  if (i < 0) notFound();
-  const e = cases[i];
-  const next = cases[(i + 1) % cases.length];
-  const d = details(e);
-  const name = `shot-${e.slug}`;
+  const c = caseBySlug(params.slug);
+  if (!c) notFound();
+  const i = caseStudies.indexOf(c);
+  const next = caseStudies[(i + 1) % caseStudies.length];
+  const links = [...(c.site ? [c.site] : []), ...c.links];
 
   return (
-    <article className="pt-28 md:pt-32">
-      <div className="shell">
-        <header>
-          <div className="flex items-center justify-between gap-6">
-            <Link
-              href={d.back}
-              className="group inline-flex h-11 items-center gap-2 rounded-full bg-card px-4 text-[14px] font-semibold transition-colors hover:bg-fg hover:text-white"
-            >
-              <Arrow
-                direction="left"
-                className="transition-transform duration-300 group-hover:-translate-x-0.5"
-              />
-              {d.backLabel}
-            </Link>
-            {d.logo && (
-              <span className="grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-2xl bg-white ring-1 ring-line md:h-14 md:w-14">
-                <Image
-                  src={d.logo}
-                  alt=""
-                  width={56}
-                  height={56}
-                  className="h-11 w-11 object-contain md:h-[52px] md:w-[52px]"
-                />
-              </span>
-            )}
+    <article>
+      <header className="col pt-4 md:pt-8">
+        <Link
+          href="/work/"
+          className="group inline-flex items-center gap-1.5 text-[13.5px] text-muted transition-colors hover:text-fg"
+        >
+          <Arrow
+            direction="left"
+            className="transition-transform duration-200 group-hover:-translate-x-0.5"
+          />
+          All work
+        </Link>
+        <p className="label mt-10 flex flex-wrap items-center gap-x-2">
+          <span>{c.kind}</span>
+          <span aria-hidden="true">·</span>
+          <span className="tabular-nums">{c.years}</span>
+          {c.status && (
+            <>
+              <span aria-hidden="true">·</span>
+              <Status status={c.status} />
+            </>
+          )}
+        </p>
+        <h1 className="display mt-3 text-[clamp(38px,6.4vw,58px)]">
+          {c.name}
+        </h1>
+        <p className="mt-4 max-w-[600px] text-[18px] leading-[1.5] text-fg/90 sm:text-[19px]">
+          {c.line}
+        </p>
+
+        <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-4 border-t border-line pt-5 text-[14px] sm:grid-cols-4">
+          <div>
+            <dt className="label">Role</dt>
+            <dd className="mt-1">{c.role}</dd>
           </div>
-          <h1 className="display mt-8 text-[clamp(56px,12.4vw,200px)] md:mt-10">
-            <RiseWords text={e.title} />
-          </h1>
-          <div className="mt-7 grid gap-7 md:mt-10 md:grid-cols-[1.3fr_1fr] md:items-end">
-            <p className="max-w-[24ch] text-[clamp(24px,2.9vw,42px)] font-medium leading-[1.1]">
-              {d.lede}
-            </p>
-            <div className="md:text-right">
-              <p className="text-[15px] font-medium text-muted">{d.kicker}</p>
-              <div className="mt-4 flex flex-wrap gap-2.5 md:justify-end">
-                {d.site && (
-                  <SmartLink href={d.site.href} className="btn-primary">
-                    {d.site.label} <Arrow />
-                  </SmartLink>
-                )}
-                {d.links.map((l) => (
-                  <SmartLink key={l.href} href={l.href} className="btn-ghost">
+          <div>
+            <dt className="label">When</dt>
+            <dd className="mt-1 tabular-nums">{c.years}</dd>
+          </div>
+          {c.place && (
+            <div>
+              <dt className="label">Where</dt>
+              <dd className="mt-1">{c.place}</dd>
+            </div>
+          )}
+          {links.length > 0 && (
+            <div className="col-span-2 sm:col-span-1">
+              <dt className="label">Links</dt>
+              <dd className="mt-1 flex flex-col items-start gap-0.5">
+                {links.map((l) => (
+                  <SmartLink
+                    key={l.href}
+                    href={l.href}
+                    className="inline-flex items-center gap-1 transition-colors hover:text-accent"
+                  >
                     {l.label}
+                    <Arrow
+                      direction={isExternal(l.href) ? "up" : "right"}
+                      className="text-[0.8em]"
+                    />
                   </SmartLink>
                 ))}
-              </div>
+              </dd>
             </div>
-          </div>
-        </header>
-      </div>
+          )}
+        </dl>
 
-      {d.metrics.length > 0 && (
-        <div className="shell mt-12 md:mt-16">
-          <dl className="grid grid-cols-2 gap-x-8 gap-y-8 border-t border-line pt-8 md:grid-cols-3 md:pt-10">
-            {d.metrics.map((m) => (
-              <div key={m.label}>
-                <dd className="display text-[clamp(48px,7.4vw,116px)] text-accent">
-                  <Counter value={m.value} />
+        {c.metrics.length > 0 && (
+          <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-3">
+            {c.metrics.map((m) => (
+              <div key={m.label} className="flex flex-col-reverse">
+                <dt className="mt-1 text-[13.5px] text-muted">{m.label}</dt>
+                <dd className="display text-[clamp(34px,5vw,44px)] tabular-nums">
+                  {m.value}
                 </dd>
-                <dt className="mt-3 text-[15px] font-medium text-muted">
-                  {m.label}
-                </dt>
               </div>
             ))}
           </dl>
+        )}
+      </header>
+
+      {(c.shot || c.photos) && (
+        <div className="shell mt-12">
+          <Visual c={c} />
         </div>
       )}
 
-      <div className="shell mt-14 md:mt-24">
-        {d.shot ? (
-          <ScrollShot shot={d.shot} label={e.title} name={name} />
-        ) : d.photos ? (
-          <ul className="mx-auto grid max-w-[820px] grid-cols-2 items-start gap-5 md:gap-10">
-            {d.photos.map((p, i) => (
-              <li key={p.src} className={i % 2 ? "mt-10 md:mt-20" : ""}>
-                <Reveal delay={i * 0.12}>
-                  <figure
-                    className="print"
-                    style={{
-                      rotate: `${i % 2 ? 3 : -3}deg`,
-                      ...(i === 0 ? { viewTransitionName: name } : {}),
-                    }}
-                  >
-                    <div className="relative aspect-[4/5] overflow-hidden">
-                      <Image
-                        src={p.src}
-                        alt={p.alt}
-                        fill
-                        priority
-                        sizes="(max-width: 768px) 50vw, 400px"
-                        className="object-cover object-top"
-                      />
-                    </div>
-                    <figcaption>{p.caption}</figcaption>
-                  </figure>
-                </Reveal>
+      <div className="col mt-12 space-y-10 text-[15.5px] leading-[1.65] sm:text-[16px]">
+        {c.context && (
+          <Part title="Context">
+            <p>{c.context}</p>
+          </Part>
+        )}
+        {c.problem && (
+          <Part title="Problem">
+            <p>{c.problem}</p>
+          </Part>
+        )}
+        <Part title="What I did">
+          <ul className="space-y-2.5">
+            {c.did.map((d) => (
+              <li key={d} className="flex gap-3">
+                <span
+                  aria-hidden="true"
+                  className="mt-[12px] h-px w-3 shrink-0 bg-faint"
+                />
+                <span>{d}</span>
               </li>
             ))}
           </ul>
-        ) : e.image ? (
-          <Reveal>
-            <div
-              className="mx-auto w-[min(70vw,400px)] -rotate-2"
-              style={{ viewTransitionName: name }}
-            >
-              <span className="deep-shadow relative block aspect-[900/1273] overflow-hidden bg-white">
-                <Image
-                  src={e.image}
-                  alt={`First page of the ${e.title} document`}
-                  fill
-                  priority
-                  sizes="400px"
-                  className="object-cover object-top"
-                />
-              </span>
-            </div>
-          </Reveal>
-        ) : null}
-      </div>
-
-      {d.points.length > 0 && (
-        <div className="shell mt-20 md:mt-28">
-          <ol className="grid gap-x-16 gap-y-8 md:grid-cols-2 md:gap-y-12">
-            {d.points.map((p, n) => (
-              <li key={p}>
-                <Reveal delay={(n % 2) * 0.08} className="flex gap-5">
+        </Part>
+        {c.outcomes.length > 0 && (
+          <Part title="Outcomes">
+            <ul className="space-y-3">
+              {c.outcomes.map((o) => (
+                <li
+                  key={o.text}
+                  className="grid gap-x-4 gap-y-0.5 sm:grid-cols-[100px_minmax(0,1fr)]"
+                >
                   <span
-                    aria-hidden="true"
-                    className="display pt-1 text-[22px] text-accent"
+                    className={`pt-[5px] font-mono text-[11px] uppercase tracking-[0.08em] ${kindStyle[o.kind]}`}
                   >
-                    {String(n + 1).padStart(2, "0")}
+                    {o.kind}
                   </span>
-                  <p className="max-w-[30ch] text-[clamp(20px,2.1vw,30px)] font-medium leading-[1.18]">
-                    {p}
-                  </p>
-                </Reveal>
-              </li>
-            ))}
-          </ol>
-        </div>
-      )}
-
-      {d.proof.length > 0 && (
-        <div className="shell mt-20 md:mt-28">
-          <h2 className="display text-[clamp(34px,4.4vw,68px)]">On paper</h2>
-          <div className="mt-10">
-            <Papers proof={d.proof} />
-          </div>
-        </div>
-      )}
-
-      <div className="shell mt-24 md:mt-36">
-        <Link
-          href={next.href}
-          className="group block rounded-[28px] bg-card p-7 transition-colors duration-500 hover:bg-fg hover:text-white sm:p-10 md:rounded-[40px]"
-        >
-          <span className="text-[15px] font-medium text-muted transition-colors duration-500 group-hover:text-white">
-            Next
-          </span>
-          <span className="mt-3 flex items-center justify-between gap-6">
-            <span className="display text-[clamp(44px,9vw,144px)] transition-transform duration-500 ease-out group-hover:translate-x-3">
-              {next.title}
-            </span>
-            <Arrow
-              direction="right"
-              className="text-[clamp(32px,5vw,72px)] transition-transform duration-500 group-hover:translate-x-2"
-            />
-          </span>
-        </Link>
+                  <span>{o.text}</span>
+                </li>
+              ))}
+            </ul>
+          </Part>
+        )}
+        {c.docs.length > 0 && (
+          <Part title="Documents">
+            <Docs c={c} />
+          </Part>
+        )}
       </div>
+
+      <nav aria-label="Next case" className="col mt-16">
+        <Link
+          href={`/work/${next.slug}/`}
+          className="group flex items-end justify-between gap-6 border-t border-line pt-5"
+        >
+          <span>
+            <span className="label">Next</span>
+            <span className="display mt-1.5 block text-[26px] transition-colors group-hover:text-accent">
+              {next.name}
+            </span>
+            <span className="mt-1 block text-[14px] text-muted">
+              {next.line}
+            </span>
+          </span>
+          <Arrow
+            direction="right"
+            className="mb-1 text-[20px] text-muted transition-transform duration-200 group-hover:translate-x-1 group-hover:text-accent"
+          />
+        </Link>
+      </nav>
     </article>
   );
 }

@@ -18,17 +18,22 @@ const browser = await chromium.launch({
   args: ["--no-sandbox"],
 });
 
-// The landing page holds everything: who I am, an index of all the work, and
-// photos. Case pages, the games and the research tools are their own pages. Old
-// and retired URLs are redirected by vercel.json, checked further down.
+// The home page is a CV that leads into the work: an introduction, five
+// selected projects, experience, research and writing, the personal section and
+// contact. /work/ indexes everything; each project has a case page. Old URLs
+// are redirected by vercel.json, checked further down.
 const routes = [
   "/",
+  "/work/",
   "/work/straypaw/",
   "/work/juno-ai/",
   "/work/project-nidaan/",
+  "/work/straypaw-research-models/",
   "/work/finer-things-club/",
   "/work/tot-schools/",
   "/work/crowwd/",
+  "/work/tarc/",
+  "/work/hdfc-bank/",
   "/play/strike/",
   "/play/road360/",
   "/play/everything-falls/",
@@ -106,102 +111,84 @@ try {
     }
 
     await page.goto(base + "/", { waitUntil: "networkidle" });
-    assert.match(await page.locator("h1").innerText(), /Jay/);
-
-    // The landing page: who I am, a short introduction, and every piece of work.
-    const rows = () => page.locator("#work .work-row").count();
-    // The full view shows every startup and the top three of each other kind.
-    assert.equal(await rows(), 16, "The index shows the best of each kind");
+    assert.match(await page.locator("h1").innerText(), /Jay Kapoor/);
     assert.match(
-      await page.locator("main").innerText(),
-      /grew up in Bangalore/,
-      "The introduction is on the landing page",
+      await page.locator("h1").innerText(),
+      /I find broken systems and try to find solutions/,
     );
-    const screens = await page.evaluate(
-      () => document.documentElement.scrollHeight / innerHeight,
+
+    // Every part of the home page is there, in order.
+    const order = await page.evaluate(() =>
+      ["work", "experience", "writing", "about", "play", "contact"].map(
+        (id) => document.getElementById(id)?.getBoundingClientRect().top ?? -1,
+      ),
     );
     assert.ok(
-      screens < (name === "mobile" ? 11 : 8),
-      `Landing page is ${screens.toFixed(1)} screens long`,
+      order.every((y, i) => y > 0 && (i === 0 || y > order[i - 1])),
+      `Home sections in order: ${order}`,
     );
 
-    // A filter narrows the index to one kind, and the address says which.
-    const filters = page.getByRole("group", { name: "Show" });
-    await filters.scrollIntoViewIfNeeded();
-    await filters.getByRole("button", { name: /^Projects/ }).click();
-    await page.waitForTimeout(700);
-    assert.equal(await rows(), 6, "Projects filter shows six");
-    assert.match(page.url(), /#projects$/, "The filter is in the address");
-    await filters.getByRole("button", { name: /^All/ }).click();
-    await page.waitForTimeout(700);
-
-    // "See all" opens the rest of one kind.
-    await page.getByRole("button", { name: "See all 6 research" }).click();
-    await page.waitForTimeout(700);
-    assert.equal(await rows(), 6, "See all shows every lab");
-    await filters.getByRole("button", { name: /^All/ }).click();
-    await page.waitForTimeout(700);
-    assert.equal(await rows(), 16, "All returns to the short view");
-
-    // With a mouse, the picture for the row you point at follows the cursor.
-    if (name === "motion") {
-      const row = page.locator("#work .work-row").first();
-      await row.scrollIntoViewIfNeeded();
-      await row.hover();
-      await page.waitForTimeout(700);
-      const card = page.locator("#work > [aria-hidden='true'] > div");
-      assert.equal(
-        await card.evaluate((el) => getComputedStyle(el).opacity),
-        "1",
-        "The preview shows beside the cursor",
-      );
-      assert.ok(
-        (await card.locator("img").count()) > 0,
-        "The preview holds a picture",
-      );
-      await page.mouse.move(5, 5);
-    }
-
-    // On a wide screen a photo opens in place; on a phone they swipe.
-    if ((await page.evaluate(() => innerWidth)) >= 1024) {
-      const photo = page.getByRole("button", { name: "The Trojans" });
-      await photo.scrollIntoViewIfNeeded();
-      await photo.click();
-      assert.equal(
-        await photo.getAttribute("aria-pressed"),
-        "true",
-        "Photo slat opens",
-      );
-    } else {
-      assert.ok(
-        await page.getByRole("list", { name: "Photos" }).isVisible(),
-        "Photos swipe on a phone",
-      );
-    }
-
-    // The menu is one button on every screen size; Research opens the index
-    // on research.
-    await page.getByRole("button", { name: "Open menu" }).click();
-    await page
-      .locator("#menu")
-      .getByRole("link", { name: /Research/ })
-      .click();
-    await page.waitForTimeout(1600);
-    assert.match(page.url(), /#research$/, "Menu leads to research");
+    // Five selected projects, each a link with its picture always visible.
+    const picks = page.locator("#work ol > li > a");
+    assert.equal(await picks.count(), 5, "Five selected projects");
+    assert.deepEqual(
+      await picks.evaluateAll((els) => els.map((e) => e.getAttribute("href"))),
+      [
+        "/work/straypaw/",
+        "/work/juno-ai/",
+        "/work/project-nidaan/",
+        "/work/straypaw-research-models/",
+        "/work/finer-things-club/",
+      ],
+      "Selected work, in order",
+    );
+    assert.ok(
+      await picks.first().locator("img").isVisible(),
+      "Project pictures show without hovering",
+    );
     assert.equal(
-      await filters
-        .getByRole("button", { name: /^Research/ })
-        .getAttribute("aria-pressed"),
-      "true",
-      "Menu opens the index on research",
+      await page.locator("#experience li").count(),
+      8,
+      "Experience lists every place I have worked",
     );
 
-    // A case page leads back to its part of the index.
-    await page.goto(base + "/work/juno-ai/", { waitUntil: "networkidle" });
-    await page.locator('article header a[href="/#startups"]').click();
-    await page.waitForURL(/\/#startups$/);
-    await page.waitForTimeout(900);
-    assert.equal(await rows(), 4, "Back lands on the startups");
+    // On a laptop the first project starts on the first screen.
+    if (name !== "mobile")
+      assert.ok(
+        (await picks.first().boundingBox()).y < 900,
+        "First project is on the first screen",
+      );
+
+    // A row opens by keyboard.
+    await picks.first().focus();
+    await page.keyboard.press("Enter");
+    await page.waitForURL(/\/work\/straypaw\/?$/);
+    for (const part of ["Context", "Problem", "What I did", "Outcomes"])
+      assert.ok(
+        await page.getByRole("heading", { name: part }).isVisible(),
+        `Case study has ${part}`,
+      );
+    assert.match(
+      await page.locator("main").innerText(),
+      /MEASURED[\s\S]*30,288 animal records/i,
+      "Outcomes say what kind of evidence they are",
+    );
+
+    // The bar at the top leads to the complete index.
+    await page.getByRole("navigation", { name: "Main" }).getByRole("link", { name: "Work" }).click();
+    await page.waitForURL(/\/work\/?$/);
+    assert.equal(
+      await page.locator("main ol > li").count(),
+      28,
+      "The index lists every entry",
+    );
+
+    // Photos: a grid on wider screens, a strip to swipe on a phone.
+    await page.goto(base + "/", { waitUntil: "networkidle" });
+    assert.ok(
+      await page.getByRole("list", { name: "Photos" }).isVisible(),
+      "Photos are on the home page",
+    );
 
     // Bet against me: lock in odds and see mine.
     await page.goto(base + "/ledger/", { waitUntil: "networkidle" });

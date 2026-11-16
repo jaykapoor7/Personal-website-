@@ -76,7 +76,7 @@ export function Bet() {
         <label htmlFor="bet" className="text-[15px] text-muted">
           Your odds
         </label>
-        <p className="display text-[clamp(64px,8vw,120px)] tabular-nums text-accent">
+        <p className="display text-[clamp(44px,6vw,64px)] tabular-nums text-accent">
           {locked ? mine[i] : guess}%
         </p>
         <input

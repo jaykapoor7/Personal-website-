@@ -10,29 +10,43 @@ npm run build   # exports to out/
 
 ## How it is put together
 
-- `content/site.ts` holds everything, each item once: ventures, roles, labs, writing, builds, leadership, education and personal photos. Every item links to the real organisation or product first; PDFs are listed as supporting documents.
-- `app/page.tsx` is the whole site on one page (`components/home/Home.tsx`). The hero (`Hero`) is one sentence about what I do, with my photo set into it, and one line on what I am doing now with its two strongest numbers; it stays put while one white sheet slides up over it. On the sheet:
-  - `Intro`: a three-sentence introduction that fills in word by word as you scroll.
-  - `WorkIndex`: everything I have done as one list (startups, experience, research, writing, projects), built in `content/work.ts`. Each row is a name, the strongest fact (dark) and the role (quiet), and a year. The full view shows every startup and the top three of each other kind, with "See all" for the rest. Filters stick under the top bar while you are in the list and live in the address (`/#research`). With a mouse, the picture for the row you point at follows the cursor and leans with its speed; on phones each row carries a thumbnail. Opening a case page, that picture grows into the page's own (a view transition, where the browser has them).
-  - `Photos`: on a wide screen every photo is a slat (folded slats are blue; the one you point at opens in full colour); on a phone they are a strip to swipe, newest first. Then school and leadership in one line each. The blue versions are baked files in `public/photos/duo` (`node scripts/make-duo.mjs`).
-- `components/Nav.tsx` is two things: my name, and one button that opens a full-screen menu of the parts of the landing page. `components/Footer.tsx` is the contact panel, uncovered as each page ends.
-- Detail pages: `/work/[slug]` for the four startups and the jobs with enough to say (`content/archive.ts` decides), numbers first, then the picture, `/play/[slug]` for each build, live, plus `/ledger`, `/market-map` and `/artifacts`. Labs link to the lab; papers and memos open as PDFs.
-- Old URLs (`/experience`, `/research`, `/projects`, `/about`, `/startups`, `/writing`, retired case pages, old project slugs) are redirected in `vercel.json` to their part of the landing page, so there are no stub pages.
-- `public/research-models` is a small static site of five interactive public-health models. It shares the main site's typeface and palette (`style.css`); its chart series are four steps of the one blue, light to dark, and lines also differ by dash.
-- `public/previews` are screenshots of live sites, `public/covers` first pages of the PDFs, `public/logos` organisation logos, `public/photos` personal photos.
+- `content/site.ts` holds the facts, each once: ventures, roles, labs, writing, builds, leadership, education and photos.
+- `content/cases.ts` is the editorial layer for each case page: one line, context, problem, what I did, and outcomes. Every outcome is labelled as Measured, Shipped, Partnership, Pilot or Published. Every sentence restates a fact from `site.ts`, a linked document or the Research Models site.
+- `content/work.ts` builds the complete index and the experience list from those two files.
+- The home page (`components/home/`) reads like a CV that opens into a portfolio:
+  - `Intro`: what I'm building now, my name and one sentence, three short paragraphs, then Resume and links.
+  - `01 Selected work`: five numbered projects, each with its picture, role, years, status, one line and its strongest numbers. Then the side tools in one sentence, and a link to the full index.
+  - `02 Experience`: a compact CV.
+  - `03 Research and writing`: labs, then papers, models and memos.
+  - `04 Outside work`: photos, a few lines about me, Play (the games and the physics toy), school and leadership.
+  - `05 Contact`.
+- `/work/` is the complete index, every entry numbered and grouped: startups, experience, research, writing, projects, play.
+- Each case page at `/work/[slug]` follows one structure: kind, years and status, name, one line, role, when and links, key numbers, the picture, then context, problem, what I did, outcomes and documents. Shorter entries simply leave parts out.
+- Each tool and game has a page at `/play/[slug]`, running live. `/ledger`, `/market-map` and `/artifacts` are unchanged.
+- `vercel.json` redirects old URLs to their part of the site, so there are no stub pages.
+- `public/research-models` is a small static site of five interactive public-health models. It keeps its own design.
+- Images:
+  - `public/previews` holds screenshots of live sites.
+  - `public/covers` holds the first pages of the PDFs.
+  - `public/thumbs` holds small copies of both, for lists. Run `node scripts/make-thumbs.mjs` after adding either.
+  - `public/photos` holds personal photos.
 
 ## Design
 
-Two tones only: one calm blue and white. Cards and bands are tints of that blue (tokens in `app/globals.css`; the Research Models site repeats them in its `style.css`); photos and product screenshots are the only other colour. One typeface, Bricolage Grotesque, set narrow and heavy for headlines (`.display`). No glows or soft halos: edges are a thin line and a tight shadow.
+Read `docs/design.md` before changing type, colour or copy.
 
-Scrolling is the main motion, so it has to be smooth:
-
-- `components/SmoothScroll.tsx` eases mouse-wheel scrolling with Lenis, so the whole page moves as one. Touch screens scroll natively, and visitors who ask for reduced motion are left alone.
-- Anything tied to scroll changes only `opacity` or `transform`, and follows the scroll position directly. Nothing animates size or position in layout, and nothing re-renders while scrolling.
-- Hover effects wait for real mouse movement, so rows and photos that slide under a still cursor while you scroll do nothing. The index's cursor picture keeps its own state, so pointing at rows never redraws the list.
-- The landing page pins nothing except with `position: sticky`, which the browser handles itself.
-
-Copy rule: as few words as possible. Names, roles, dates and numbers; the work is shown, not described. No taglines, no section captions.
+- Ink on warm paper, mostly monochrome. Blue (`--accent`) is the only accent: links on hover, focus rings, the live dot and measured outcomes.
+- Three typefaces:
+  - Newsreader (serif) for names and headings.
+  - Inter for reading.
+  - JetBrains Mono, small and uppercase, for section numbers, dates and labels.
+- One reading column, 720px wide. Pictures on case pages go wider.
+- Rows, not cards. Thin dividers, no gradients, no glows.
+- Motion is small and never needed to read anything:
+  - A picture zooms slightly on hover.
+  - An arrow appears on hover or keyboard focus.
+  - Pages fade into each other.
+  - Mouse-wheel scrolling is eased with Lenis; touch screens scroll natively, and reduced motion turns all of it off.
 
 ## Checks
 
@@ -41,6 +55,13 @@ python -m http.server 3000 --directory out
 npm run test:browser
 ```
 
-Loads every route on desktop, mobile, dark mode and full motion; checks overflow, browser errors and WCAG 2.1 AA (axe); checks the landing page has the introduction and the short index; exercises the index filters and "See all", the cursor picture, a photo slat (or the swipe strip on a phone), the menu (which opens the index on research), a case page's way back, the forecast bet, the dataset filter and the physics toy; and confirms every local link and every redirect target resolves. `npm run test:production` runs the same checks against kapoorjay.com.
+The script runs these checks:
+- It loads every route on desktop, mobile, dark mode and full motion.
+- On each route it checks for horizontal overflow, browser errors and WCAG 2.1 AA problems (with axe).
+- On the home page it checks the sentence, that the sections are in order, and the five selected projects, with pictures showing without hover. It checks that the first project is on a laptop's first screen and that the experience list is there.
+- It opens a project with the keyboard and checks the case page has context, problem, what I did and labelled outcomes.
+- It follows the top bar to the complete index.
+- It checks the photos, the forecast bet, the dataset filter and the physics toy.
+- It confirms every local link and every redirect target resolves. `npm run test:production` runs the same checks against kapoorjay.com.
 
 Check against the exported build, not only `npm run dev`: development mode runs effects twice and can hide ordering bugs.

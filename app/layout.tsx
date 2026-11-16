@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque } from "next/font/google";
+import { Inter, JetBrains_Mono, Newsreader } from "next/font/google";
 import { ViewTransitions } from "next-view-transitions";
 import "./globals.css";
 
@@ -8,15 +8,29 @@ import { SmoothScroll } from "@/components/SmoothScroll";
 import { Footer } from "@/components/Footer";
 import { siteUrl } from "@/lib/site";
 
-const sans = Bricolage_Grotesque({
+// An editorial serif for names and headings, a plain sans for reading, and a
+// mono for numbers, dates and labels.
+const serif = Newsreader({
   subsets: ["latin"],
-  axes: ["opsz", "wdth"],
+  axes: ["opsz"],
+  variable: "--font-serif",
+  display: "swap",
+  fallback: ["Georgia", "serif"],
+  adjustFontFallback: false,
+});
+const sans = Inter({
+  subsets: ["latin"],
   variable: "--font-sans",
+  display: "swap",
+});
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
   display: "swap",
 });
 
 const description =
-  "Jay Kapoor. I find broken systems and try to find solutions. Founder of StrayPaw, studying economics and statistics at Pitt.";
+  "I find broken systems and try to find solutions. Student at the University of Pittsburgh, founder of StrayPaw, and researcher in public health.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -33,7 +47,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-export const viewport: Viewport = { themeColor: "#ffffff" };
+export const viewport: Viewport = { themeColor: "#fafaf8" };
 
 export default function RootLayout({
   children,
@@ -42,11 +56,14 @@ export default function RootLayout({
 }) {
   return (
     <ViewTransitions>
-      <html lang="en" className={sans.variable}>
+      <html
+        lang="en"
+        className={`${serif.variable} ${sans.variable} ${mono.variable}`}
+      >
         <body className="relative">
           <a
             href="#main"
-            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-full focus:bg-fg focus:px-4 focus:py-2 focus:text-white"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-full focus:bg-fg focus:px-4 focus:py-2 focus:text-bg"
           >
             Skip to content
           </a>
@@ -55,19 +72,10 @@ export default function RootLayout({
           <noscript>
             <style>{`[data-reveal]{opacity:1!important;transform:none!important;clip-path:none!important}`}</style>
           </noscript>
-          <main
-            id="main"
-            className="relative z-10 overflow-clip rounded-b-[28px] bg-bg pb-24 md:rounded-b-[44px] md:pb-32"
-          >
+          <main id="main" className="pb-20 md:pb-28">
             {children}
           </main>
           <Footer />
-          {/* The contact panel is pinned, so its anchor is the end of the page. */}
-          <span
-            id="contact"
-            aria-hidden="true"
-            className="pointer-events-none absolute bottom-0 left-0 h-px w-px"
-          />
         </body>
       </html>
     </ViewTransitions>

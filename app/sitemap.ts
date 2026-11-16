@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { cases } from "@/content/archive";
+import { caseStudies } from "@/content/cases";
 import { builds } from "@/content/site";
 import { siteUrl } from "@/lib/site";
 
@@ -8,10 +8,11 @@ export const dynamic = "force-static";
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     "",
+    "/work",
     "/ledger",
     "/market-map",
     "/artifacts",
-    ...cases.map((c) => `/work/${c.slug}`),
+    ...caseStudies.map((c) => `/work/${c.slug}`),
     ...builds.map((b) =>
       b.falls ? "/play/everything-falls" : `/play/${b.id}`,
     ),
