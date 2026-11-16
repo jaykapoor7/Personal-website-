@@ -1,46 +1,41 @@
 # Jay Kapoor
 
-Personal site at https://kapoorjay.com. Next.js 14, React 18, TypeScript, Tailwind and framer-motion, exported as static files.
+Personal portfolio: [kapoorjay.com](https://kapoorjay.com). Built with Next.js 14, TypeScript, Tailwind and React. Exported as static files for Vercel.
 
-```sh
+```bash
 npm ci
 npm run dev
-npm run build   # exports to out/
+npm run build # generates out/
 ```
 
-## How it is put together
+## Homepage
 
-- `content/site.ts` holds everything, each item once: ventures, roles, labs, writing, builds, leadership, education and personal photos. Every item links to the real organisation or product first; PDFs are listed as supporting documents.
-- `app/page.tsx` is the whole site on one page (`components/home/Home.tsx`). The hero (`Hero`) is one sentence about what I do, with my photo set into it, and one line on what I am doing now with its two strongest numbers; it stays put while one white sheet slides up over it. On the sheet:
-  - `Intro`: a three-sentence introduction that fills in word by word as you scroll.
-  - `WorkIndex`: everything I have done as one list (startups, experience, research, writing, projects), built in `content/work.ts`. Each row is a name, the strongest fact (dark) and the role (quiet), and a year. The full view shows every startup and the top three of each other kind, with "See all" for the rest. Filters stick under the top bar while you are in the list and live in the address (`/#research`). With a mouse, the picture for the row you point at follows the cursor and leans with its speed; on phones each row carries a thumbnail. Opening a case page, that picture grows into the page's own (a view transition, where the browser has them).
-  - `Photos`: on a wide screen every photo is a slat (folded slats are blue; the one you point at opens in full colour); on a phone they are a strip to swipe, newest first. Then school and leadership in one line each. The blue versions are baked files in `public/photos/duo` (`node scripts/make-duo.mjs`).
-- `components/Nav.tsx` is two things: my name, and one button that opens a full-screen menu of the parts of the landing page. `components/Footer.tsx` is the contact panel, uncovered as each page ends.
-- Detail pages: `/work/[slug]` for the four startups and the jobs with enough to say (`content/archive.ts` decides), numbers first, then the picture, `/play/[slug]` for each build, live, plus `/ledger`, `/market-map` and `/artifacts`. Labs link to the lab; papers and memos open as PDFs.
-- Old URLs (`/experience`, `/research`, `/projects`, `/about`, `/startups`, `/writing`, retired case pages, old project slugs) are redirected in `vercel.json` to their part of the landing page, so there are no stub pages.
-- `public/research-models` is a small static site of five interactive public-health models. It shares the main site's typeface and palette (`style.css`); its chart series are four steps of the one blue, light to dark, and lines also differ by dash.
-- `public/previews` are screenshots of live sites, `public/covers` first pages of the PDFs, `public/logos` organisation logos, `public/photos` personal photos.
+The homepage is a calm, single-column portfolio inspired by the clarity of classic personal websites. The goal: let visitors understand who Jay is and open real work almost immediately.
 
-## Design
+- `components/home/Home.tsx` is the homepage: a personal introduction and photo, four numbered case studies with visible preview images, compact experience rows, research and writing links, small projects, a complete expandable work archive, and a personal photo/education section.
+- `components/Nav.tsx` provides direct section anchors and resume access. It does not hide the work behind a full-screen menu.
+- `components/Footer.tsx` holds a compact contact block with email, copy action, social links, and local time.
+- `app/globals.css` has neutral ink/white tokens and a restrained blue accent. Images are the source of expressive color.
+- `app/layout.tsx` provides the site shell, metadata, skip link, and smooth-scrolling preference handling.
 
-Two tones only: one calm blue and white. Cards and bands are tints of that blue (tokens in `app/globals.css`; the Research Models site repeats them in its `style.css`); photos and product screenshots are the only other colour. One typeface, Bricolage Grotesque, set narrow and heavy for headlines (`.display`). No glows or soft halos: edges are a thin line and a tight shadow.
+Existing individual pages remain intact: `/work/[slug]` for full case studies, `/play/[slug]` for interactive projects, `/ledger`, `/market-map`, `/artifacts`, and the standalone static site in `public/research-models`.
 
-Scrolling is the main motion, so it has to be smooth:
+## Content
 
-- `components/SmoothScroll.tsx` eases mouse-wheel scrolling with Lenis, so the whole page moves as one. Touch screens scroll natively, and visitors who ask for reduced motion are left alone.
-- Anything tied to scroll changes only `opacity` or `transform`, and follows the scroll position directly. Nothing animates size or position in layout, and nothing re-renders while scrolling.
-- Hover effects wait for real mouse movement, so rows and photos that slide under a still cursor while you scroll do nothing. The index's cursor picture keeps its own state, so pointing at rows never redraws the list.
-- The landing page pins nothing except with `position: sticky`, which the browser handles itself.
+`content/site.ts` is the source for ventures, roles, labs, research, writing, builds, education, and personal photos. `content/work.ts` composes the full index and links, reused by the homepage's selected work and expandable archive. Add or correct actual work there rather than duplicating claims.
 
-Copy rule: as few words as possible. Names, roles, dates and numbers; the work is shown, not described. No taglines, no section captions.
+The best project pages show a problem, what was done, artifacts or screenshots, what changed, and direct proof links. Keep numbers honest and distinguish shipped work from research, prototypes and plans.
 
 ## Checks
 
-```sh
+```bash
+npm run build
 python -m http.server 3000 --directory out
 npm run test:browser
 ```
 
-Loads every route on desktop, mobile, dark mode and full motion; checks overflow, browser errors and WCAG 2.1 AA (axe); checks the landing page has the introduction and the short index; exercises the index filters and "See all", the cursor picture, a photo slat (or the swipe strip on a phone), the menu (which opens the index on research), a case page's way back, the forecast bet, the dataset filter and the physics toy; and confirms every local link and every redirect target resolves. `npm run test:production` runs the same checks against kapoorjay.com.
+`scripts/verify-portfolio.mjs` checks desktop and mobile routes, accessibility (axe WCAG 2.1 AA), horizontal overflow, the selected case studies, the complete work archive, anchor links, back links, live experiments, local assets, and redirects. Preview builds must pass before merging to the production branch.
 
-Check against the exported build, not only `npm run dev`: development mode runs effects twice and can hide ordering bugs.
+## Design notes
+
+Short, natural first-person writing; a single readable column; work accessible without menus; numbered projects with one-line explanations; semantic headings; real links, documents, and visual proof. Keep motion subtle and honor reduced-motion preferences. Avoid decorative cards, gratuitous hover effects, or copying another portfolio's code, wording, or distinctive visual identity.

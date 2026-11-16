@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 :root {
-  /* Two tones only: one calm blue and white. Everything else is a tint of that blue. */
+  /* Quiet ink, warm white, and a single restrained blue accent. */
   --bg: 255 255 255;
-  --fg: 30 58 138;
-  --muted: 82 102 159;
-  --faint: 82 102 159;
-  --line: 204 212 234;
-  --card: 232 236 246;
-  --paper: 244 246 251;
-  --accent: 35 70 168;
-  --accent-2: 222 228 243;
+  --fg: 25 30 36;
+  --muted: 101 108 117;
+  --faint: 134 140 147;
+  --line: 225 228 230;
+  --card: 245 246 247;
+  --paper: 250 250 249;
+  --accent: 42 87 166;
+  --accent-2: 239 242 247;
   color-scheme: light;
 }
 
