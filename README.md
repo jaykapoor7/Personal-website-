@@ -13,14 +13,13 @@ npm run build   # exports to out/
 - `content/site.ts` holds the facts, each once: ventures, roles, labs, writing, builds, leadership, education and photos.
 - `content/cases.ts` is the editorial layer for each case page: one line, context, problem, what I did, and outcomes. Every outcome is labelled as Measured, Shipped, Partnership, Pilot or Published. Every sentence restates a fact from `site.ts`, a linked document or the Research Models site.
 - `content/work.ts` builds the complete index and the experience list from those two files.
-- The home page (`components/home/`) is a short CV, after cali.so:
-  - `Intro`: one statement, "Jay Kapoor [face]. I find broken systems and try to find solutions.", then four short paragraphs ending in where to find me.
-  - `Tiles`: Work, Writing, Photos and Play. Each shows a small stack of what is inside, which fans out on hover or focus.
-  - Six numbered sections, each a compact `List`: 01 Selected work, 02 Experience (with education and leadership), 03 Research, 04 Writing, 05 Photos (a shelf of prints; a strip on phones) and 06 Play.
-  - `List` slides a soft highlight to the row under the pointer or focus and reveals rows as they scroll in. Every row shows its own small picture.
-  - `components/Preview.tsx` shows a larger copy of the picture beside a mouse pointer. It keeps its own state, so lists never redraw for it.
-- `components/Dock.tsx` is the way around every page: a dock at the bottom whose icons grow as the pointer nears, with labels on hover and focus. `components/Footer.tsx` holds contact and an index.
-- Opening a project from a list, its picture and title grow into the case page's own. They share a `view-transition-name`; browsers without view transitions just change page.
+- The home page (`components/home/`) keeps the old site's look and adds a short CV after cali.so:
+  - `Hero`: "Jay Kapoor [face]. I find broken systems and try to find solutions." in the big blue type, with Resume and links. It stays put while one white sheet slides up over it.
+  - `Intro` on that sheet: four short paragraphs, with the `Tiles` (Work, Writing, Photos, Play) beside them. Each tile is a small stack of pictures that fans out on hover or focus.
+  - Six numbered sections with Cali-style number boxes: 01 Selected work (big rows with pictures), 02 Experience and education side by side, 03 Research, 04 Writing (two columns each), 05 Photos (the blue slats that open in colour; a swipe strip on phones), 06 Play.
+  - `List` slides a soft highlight to the row under the pointer or focus. With a mouse, `components/Preview.tsx` shows a larger copy of the row's picture beside the cursor.
+- `components/Nav.tsx` is my name and one Menu button that opens a full-screen menu of the sections. `components/Footer.tsx` is the blue contact panel, uncovered as each page ends.
+- Opening a project from a list, its picture and title grow into the case page's own (view transitions).
 - `/work/` is the complete index, every entry numbered and grouped: startups, experience, research, writing, projects, play.
 - Each case page at `/work/[slug]` follows one structure: kind, years and status, name, one line, role, when and links, key numbers, the picture, then context, problem, what I did, outcomes and documents. Shorter entries simply leave parts out.
 - Each tool and game has a page at `/play/[slug]`, running live. `/ledger`, `/market-map` and `/artifacts` are unchanged.
@@ -41,7 +40,7 @@ Read `docs/design.md` before changing type, colour or copy.
   - Newsreader (serif) for names and headings.
   - Inter for reading.
   - JetBrains Mono, small and uppercase, for section numbers, dates and labels.
-- One frame, 1120px wide on desktop, with dashed hairlines down both sides. The opening statement runs across it; the bio sits beside the tiles; each section has its label in a sticky left column and its list on the right. Prose keeps its own measure (about 560–640px). Phones get one column.
+- One 1320px frame on desktop. Lists run in two columns where they are short, prose keeps a readable measure, and phones get one column.
 - Rows, not cards. Thin dividers, no gradients, no glows.
 - Motion is small and never needed to read anything:
   - A picture zooms slightly on hover.

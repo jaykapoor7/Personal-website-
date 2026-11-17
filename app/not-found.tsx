@@ -3,7 +3,7 @@ import { Arrow } from "@/components/Arrow";
 
 export default function NotFound() {
   return (
-    <section className="col pb-10 pt-10 md:pt-16">
+    <section className="col pb-10 pt-32 md:pt-40">
       <p className="label">404</p>
       <h1 className="display mt-3 text-[clamp(38px,6.4vw,58px)]">
         Nothing here.

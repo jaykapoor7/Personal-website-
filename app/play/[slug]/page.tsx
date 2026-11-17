@@ -34,7 +34,7 @@ export default function PlayPage({ params }: { params: { slug: string } }) {
 
   return (
     <article>
-      <header className="col pt-4 md:pt-8">
+      <header className="col pt-28 md:pt-32">
         <Link
           href={back.href}
           className="group inline-flex items-center gap-1.5 text-[13.5px] text-muted transition-colors hover:text-fg"

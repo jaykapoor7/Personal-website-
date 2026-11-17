@@ -1,7 +1,10 @@
 import { Link } from "next-view-transitions";
 import { Arrow } from "../Arrow";
 
-/** A numbered part of the home page, headed like a printed CV. */
+/**
+ * A numbered part of the home page: a small number box and hatch, after
+ * cali.so, then the title at full size, with the content across the page.
+ */
 export function Section({
   id,
   n,
@@ -19,30 +22,32 @@ export function Section({
     <section
       id={id}
       aria-labelledby={`${id}-h`}
-      className="col mt-12 scroll-mt-8 md:mt-14 lg:mt-20 lg:grid lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-x-12"
+      className="shell mt-20 scroll-mt-20 md:mt-28"
     >
-      <div className="mb-2 flex items-center justify-between gap-4 lg:sticky lg:top-8 lg:mb-0 lg:flex-col lg:items-start lg:justify-start lg:gap-3 lg:self-start lg:pt-3">
-        <h2 id={`${id}-h`} className="flex items-center gap-2">
+      <div className="mb-4 flex items-end justify-between gap-6 border-b border-line pb-4 md:mb-6">
+        <h2 id={`${id}-h`} className="flex items-center gap-3">
           <span className="num" aria-hidden="true">
             {n}
           </span>
-          <span className="hatch h-[18px] w-[18px]" aria-hidden="true" />
-          <span className="label ml-1 text-muted">{title}</span>
+          <span className="hatch h-[20px] w-[20px]" aria-hidden="true" />
+          <span className="hero-title ml-1 text-[clamp(25px,3.4vw,46px)]">
+            {title}
+          </span>
         </h2>
         {action && (
           <Link
             href={action.href}
-            className="group inline-flex items-center gap-1 text-[13px] text-muted transition-colors hover:text-fg"
+            className="group mb-1 inline-flex shrink-0 items-center gap-1.5 text-[15px] font-semibold text-muted transition-colors hover:text-fg"
           >
             {action.label}
             <Arrow
               direction="right"
-              className="text-[0.9em] transition-transform duration-200 group-hover:translate-x-0.5"
+              className="transition-transform duration-200 group-hover:translate-x-1"
             />
           </Link>
         )}
       </div>
-      <div className="min-w-0">{children}</div>
+      {children}
     </section>
   );
 }

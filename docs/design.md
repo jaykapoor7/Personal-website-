@@ -4,29 +4,16 @@ The site should read like a well-set CV that opens into a portfolio. A recruiter
 
 ## Hierarchy
 
-1. One statement: "Jay Kapoor [face]. I find broken systems and try to find solutions." Then four short paragraphs, the last saying where to find me.
-2. Four tiles: Work, Writing, Photos, Play.
+1. The hero: "Jay Kapoor [face]. I find broken systems and try to find solutions.", then Resume and links.
+2. Four short paragraphs beside four tiles: Work, Writing, Photos, Play.
 3. Numbered sections: Selected work, Experience, Research, Writing, Photos, Play.
-4. The footer, with contact. The dock is on every page.
+4. The blue contact panel.
 
 Every entry on the site is in the index at `/work/`. The home page chooses; the index keeps everything.
 
 ## Type and colour
 
-| Use | Face | Size |
-| --- | --- | --- |
-| The opening statement, page titles | Newsreader | 36–58px |
-| Reading text | Inter | 15–16px, line height 1.65 |
-| Section numbers, dates, labels | JetBrains Mono, uppercase | 11–12px |
-
-| Token | Value | Use |
-| --- | --- | --- |
-| `--bg` | #FAFAF8 | page |
-| `--fg` | #16181D | text |
-| `--muted` | #5B606B | secondary text (6.0:1) |
-| `--faint` | #6B707A | labels, on the page colour only (4.8:1) |
-| `--line` | #E4E4DF | dividers |
-| `--accent` | #2346A8 | links on hover, focus, live, measured outcomes |
+Blue and white, as the site has always been: tokens in `app/globals.css`. Bricolage Grotesque for everything people read; JetBrains Mono, small and uppercase, only for section numbers, dates and labels.
 
 ## Writing
 

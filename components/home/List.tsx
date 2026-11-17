@@ -51,7 +51,7 @@ function Go({
 
 const thumbBox = {
   wide: "h-[38px] w-[60px]",
-  big: "h-[44px] w-[70px] lg:h-[70px] lg:w-[112px]",
+  big: "h-[48px] w-[76px] md:h-[78px] md:w-[124px]",
   tall: "h-[38px] w-[29px]",
   square: "h-[40px] w-[40px]",
 };
@@ -124,7 +124,7 @@ export function List({
             }`}
           >
             {e.num && (
-              <span className="w-5 shrink-0 pt-[3px] font-mono text-[11px] tabular-nums text-faint">
+              <span className="hidden w-5 shrink-0 pt-[3px] font-mono text-[11px] tabular-nums text-faint sm:block">
                 {e.num}
               </span>
             )}
@@ -145,7 +145,7 @@ export function List({
             <span className="min-w-0 flex-1">
               <span className="flex items-center gap-2">
                 <span
-                  className={`truncate font-medium text-fg ${big ? "lg:text-[17px]" : ""}`}
+                  className={`text-fg ${big ? "text-[19px] font-semibold leading-tight tracking-[-0.02em] md:truncate md:text-[clamp(22px,2vw,30px)]" : "truncate font-medium"}`}
                   style={e.vt ? { viewTransitionName: `title-${e.vt}` } : undefined}
                 >
                   {e.name}
@@ -164,7 +164,9 @@ export function List({
                 )}
               </span>
               {variant === "two" && e.detail && (
-                <span className="mt-0.5 block text-[13.5px] leading-snug text-muted">
+                <span
+                  className={`mt-0.5 block leading-snug text-muted ${big ? "text-[14.5px] md:text-[16px]" : "text-[13.5px]"}`}
+                >
                   {e.detail}
                 </span>
               )}

@@ -14,7 +14,7 @@ export default function Page() {
   return (
     <>
       <section>
-        <div className="shell pb-12 pt-4 md:pt-8">
+        <div className="shell pb-12 pt-28 md:pt-32">
           <Reveal>
             <Link
               href="/#writing"

@@ -1,11 +1,10 @@
 "use client";
-import { motion } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
 import { life } from "@/content/site";
-import { useCalm } from "../motion";
+import { Duo } from "./bits";
 
-/** Where the subject sits in each photo. */
+/** Where the subject sits in each photo, so a narrow slice still shows them. */
 const focus: Record<string, string> = {
   "02_childhood_running": "object-[55%_45%]",
   "04_childhood_football_team": "object-[50%_50%]",
@@ -14,128 +13,136 @@ const focus: Record<string, string> = {
   pitt_portrait: "object-[50%_62%]",
 };
 
-/** Every personal photo, oldest first. */
+const duo = (name: string) => `/photos/duo/${name}.webp`;
+const own = (p: (typeof life)[number]) => ({
+  src: `/photos/${p.name}-1280.webp`,
+  duo: duo(p.name),
+  alt: p.alt,
+  caption: p.caption,
+  fit: focus[p.name],
+});
+
+/** Every photo on the site, oldest first. */
 const photos = [
-  ...life.slice(0, 4).map((p) => ({
-    src: `/photos/${p.name}-640.webp`,
-    alt: p.alt,
-    caption: p.caption,
-    fit: focus[p.name],
-  })),
+  ...life.slice(0, 4).map(own),
   {
-    src: "/work/crowwd/arthavaad-stage-640.webp",
+    src: "/work/crowwd/arthavaad-stage-1280.webp",
+    duo: duo("arthavaad-stage"),
     alt: "Jay with a speaker at Arthavaad, Crowwd's speaker series, in New Delhi",
     caption: "Arthavaad, New Delhi",
     fit: "object-[50%_44%]",
   },
   {
+    src: "/work/crowwd/arthavaad-audience-800.webp",
+    duo: duo("arthavaad-audience"),
+    alt: "Jay in the audience at an Arthavaad talk",
+    caption: "In the audience",
+    fit: "object-[20%_45%]",
+  },
+  {
     src: "/straypaw/street-dog.webp",
+    duo: duo("street-dog"),
     alt: "The street dog outside a cafe that started StrayPaw",
     caption: "The dog that started StrayPaw",
     fit: "object-[45%_12%]",
   },
-  ...life.slice(4).map((p) => ({
-    src: `/photos/${p.name}-640.webp`,
-    alt: p.alt,
-    caption: p.caption,
-    fit: focus[p.name],
-  })),
+  ...life.slice(4).map(own),
 ];
 
-const tilt = [-5, 3, -2, 4, -3, 2, -4];
-
 /**
- * The photos as prints on a shelf. Point at one, or tab to it, and it lifts
- * and straightens while its neighbours step aside. On a phone they are a
- * strip to swipe.
+ * The photos as slats. Folded, each is a blue slice; the one you point at
+ * opens to the whole picture in colour.
  */
-export function Photos() {
-  const calm = useCalm();
-  const [on, setOn] = useState(photos.length - 1);
+function Slats() {
+  const [open, setOpen] = useState(photos.length - 1);
+  return (
+    <ul
+      aria-label="Photos"
+      className="hidden h-[min(440px,calc(100svh-220px))] min-h-[360px] flex-row gap-2 lg:flex"
+    >
+      {photos.map((p, i) => {
+        const on = open === i;
+        return (
+          <li
+            key={p.src}
+            className={`relative min-h-0 min-w-0 overflow-hidden rounded-[24px] transition-[flex-grow] duration-700 ease-out ${
+              on ? "flex-[8]" : "flex-[1]"
+            }`}
+          >
+            <button
+              type="button"
+              aria-pressed={on}
+              aria-label={p.caption}
+              onClick={() => setOpen(i)}
+              // Real mouse movement only: a slat sliding under a still
+              // cursor while you scroll should not open.
+              onPointerMove={(e) =>
+                e.pointerType === "mouse" && open !== i && setOpen(i)
+              }
+              onFocus={() => setOpen(i)}
+              className="absolute inset-0 block h-full w-full"
+            >
+              <Duo
+                src={p.src}
+                duo={p.duo}
+                alt={p.alt}
+                on={on}
+                fit={p.fit}
+                sizes="760px"
+              />
+              <span
+                className={`absolute bottom-4 left-4 rounded-full bg-white px-3.5 py-1.5 text-[13px] font-semibold text-[rgb(var(--fg))] transition-all duration-500 ${
+                  on
+                    ? "translate-y-0 opacity-100 delay-300"
+                    : "translate-y-2 opacity-0"
+                }`}
+              >
+                {p.caption}
+              </span>
+            </button>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
 
+/** On phones: the photos in their own colours, newest first, to swipe through. */
+function Strip() {
+  return (
+    <ul
+      tabIndex={0}
+      aria-label="Photos"
+      className="no-bar -mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-px-5 px-5 pb-1 lg:hidden"
+    >
+      {[...photos].reverse().map((p, i) => (
+        <li
+          key={p.src}
+          className="relative aspect-[4/5] w-[72vw] max-w-[340px] shrink-0 snap-start overflow-hidden rounded-[18px] bg-accent"
+        >
+          <Image
+            src={p.src}
+            alt={p.alt}
+            fill
+            sizes="72vw"
+            priority={i === 0}
+            className={`object-cover ${p.fit ?? ""}`}
+          />
+          <span className="absolute bottom-3 left-3 rounded-full bg-white px-3.5 py-1.5 text-[13px] font-semibold text-[rgb(var(--fg))]">
+            {p.caption}
+          </span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/** Every photo: slats on a wide screen, a strip to swipe on a phone. */
+export function Photos() {
   return (
     <>
-      {/* Wide screens: the shelf */}
-      <div className="hidden md:block">
-        <ul
-          aria-label="Photos"
-          className="relative flex h-[196px] items-end lg:h-[240px] justify-center overflow-x-clip border-b border-line pb-3"
-        >
-          {photos.map((p, i) => {
-            const active = i === on;
-            return (
-              <motion.li
-                key={p.src}
-                className="relative -mx-[8px] w-[96px] shrink-0 lg:-mx-[10px] lg:w-[120px]"
-                style={{ zIndex: active ? 20 : 10 - Math.abs(i - on) }}
-                initial={false}
-                animate={
-                  calm
-                    ? {}
-                    : {
-                        x: i < on ? -18 : i > on ? 18 : 0,
-                        y: active ? -16 : 0,
-                        rotate: active ? 0 : tilt[i % tilt.length],
-                        scale: active ? 1.1 : 1,
-                      }
-                }
-                transition={{ type: "spring", stiffness: 300, damping: 24 }}
-              >
-                <button
-                  type="button"
-                  aria-label={p.caption}
-                  aria-pressed={active}
-                  onPointerMove={(e) =>
-                    e.pointerType === "mouse" && !active && setOn(i)
-                  }
-                  onFocus={() => setOn(i)}
-                  onClick={() => setOn(i)}
-                  className="block w-full rounded-[6px] bg-white p-[5px] pb-[18px] shadow-[0_0_0_1px_rgb(var(--fg)/0.08),0_10px_24px_-14px_rgb(var(--fg)/0.45)]"
-                >
-                  <span className="relative block aspect-[4/5] overflow-hidden rounded-[3px] bg-card">
-                    <Image
-                      src={p.src}
-                      alt={p.alt}
-                      fill
-                      sizes="120px"
-                      className={`object-cover ${p.fit ?? ""}`}
-                    />
-                  </span>
-                </button>
-              </motion.li>
-            );
-          })}
-        </ul>
-        <p className="mt-3 text-center text-[13px] text-muted" aria-live="polite">
-          {photos[on].caption}
-        </p>
-      </div>
-
-      {/* Phones: a strip */}
-      <ul
-        tabIndex={0}
-        aria-label="Photos"
-        className="no-bar -mx-5 flex snap-x snap-mandatory scroll-px-5 gap-3 overflow-x-auto px-5 sm:-mx-8 sm:scroll-px-8 sm:px-8 md:hidden"
-      >
-        {[...photos].reverse().map((p) => (
-          <li key={p.src} className="w-[58vw] max-w-[240px] shrink-0 snap-start">
-            <figure>
-              <span className="relative block aspect-[4/5] overflow-hidden rounded-md bg-card ring-1 ring-fg/[0.08]">
-                <Image
-                  src={p.src}
-                  alt={p.alt}
-                  fill
-                  sizes="58vw"
-                  className={`object-cover ${p.fit ?? ""}`}
-                />
-              </span>
-              <figcaption className="mt-2 text-[12.5px] text-muted">
-                {p.caption}
-              </figcaption>
-            </figure>
-          </li>
-        ))}
-      </ul>
+      <Slats />
+      <Strip />
     </>
   );
 }
