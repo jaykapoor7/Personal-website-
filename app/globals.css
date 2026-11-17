@@ -119,22 +119,19 @@
 
 /* Headlines: the same family, narrower and heavier, set tight. */
 .display {
-  font-stretch: 80%;
+  font-family: var(--font-display), var(--font-sans), sans-serif;
   font-weight: 700;
-  line-height: 0.9;
-}
-.display-wide {
-  font-stretch: 100%;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
 }
 
 /* The hero sentence: the same family at its normal width, a little lighter,
    and with the calmer text-size letterforms rather than the quirky display ones. */
 .hero-title {
-  font-stretch: 100%;
+  font-family: var(--font-display), var(--font-sans), sans-serif;
   font-weight: 600;
-  font-variation-settings: "opsz" 32;
   letter-spacing: -0.035em;
-  line-height: 1.02;
+  line-height: 1.04;
 }
 
 /* Section numbers: a small mono box and a hatched square, after cali.so. */
@@ -205,20 +202,7 @@
   border-radius: 999px;
   background: currentColor;
 }
-.live::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: inherit;
-  animation: live 2.4s ease-out infinite;
-}
-@keyframes live {
-  to {
-    transform: scale(3.2);
-    opacity: 0;
-  }
-}
+
 
 /* Everything Falls (physics toy) */
 .falls {
@@ -340,4 +324,136 @@
   .work-list:hover .work-row:not(:hover) {
     opacity: 0.38;
   }
+}
+
+/*
+ * Moving backgrounds, in the two tones. Soft blue washes drift slowly over a
+ * faint grid. Only transform animates, so the browser moves them on the GPU
+ * and scrolling stays smooth. Reduced motion stops them (see the base layer).
+ */
+.wash {
+  position: absolute;
+  border-radius: 9999px;
+  pointer-events: none;
+  background: radial-gradient(
+    closest-side,
+    rgb(var(--wash, 35 70 168) / var(--wash-a, 0.22)),
+    rgb(var(--wash, 35 70 168) / 0) 100%
+  );
+}
+.wash-a {
+  animation: drift-a 22s ease-in-out infinite alternate;
+}
+.wash-b {
+  animation: drift-b 28s ease-in-out infinite alternate;
+}
+.wash-c {
+  animation: drift-c 34s ease-in-out infinite alternate;
+}
+@keyframes drift-a {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(14%, 10%, 0) scale(1.18);
+  }
+}
+@keyframes drift-b {
+  from {
+    transform: translate3d(0, 0, 0) scale(1.1);
+  }
+  to {
+    transform: translate3d(-16%, 8%, 0) scale(0.92);
+  }
+}
+@keyframes drift-c {
+  from {
+    transform: translate3d(0, 0, 0) scale(0.95);
+  }
+  to {
+    transform: translate3d(10%, -14%, 0) scale(1.15);
+  }
+}
+/* A fine grid, fading out towards the edges. */
+.grid-lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgb(var(--fg) / 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--fg) / 0.055) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
+}
+.grid-dots {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgb(var(--fg) / 0.09) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+
+
+
+/*
+ * The hero's washes are drawn small and scaled up: a soft blur looks the same
+ * at low resolution, and the browser composites a far smaller texture.
+ */
+.wash-lo {
+  position: absolute;
+  width: 16vmax;
+  height: 16vmax;
+  margin: -8vmax 0 0 -8vmax;
+  border-radius: 9999px;
+  pointer-events: none;
+  background: radial-gradient(
+    closest-side,
+    rgb(var(--wash, 35 70 168) / var(--wash-a, 0.22)),
+    rgb(var(--wash, 35 70 168) / 0) 100%
+  );
+}
+.wash-lo-a {
+  transform: scale(4.4);
+  animation: lo-a 22s ease-in-out infinite alternate;
+}
+.wash-lo-b {
+  transform: scale(3.9);
+  animation: lo-b 28s ease-in-out infinite alternate;
+}
+.wash-lo-c {
+  transform: scale(3.4);
+  animation: lo-c 34s ease-in-out infinite alternate;
+}
+@keyframes lo-a {
+  from { transform: translate3d(0, 0, 0) scale(4.4); }
+  to { transform: translate3d(60%, 44%, 0) scale(5.1); }
+}
+@keyframes lo-b {
+  from { transform: translate3d(0, 0, 0) scale(4.2); }
+  to { transform: translate3d(-62%, 30%, 0) scale(3.6); }
+}
+@keyframes lo-c {
+  from { transform: translate3d(0, 0, 0) scale(3.2); }
+  to { transform: translate3d(34%, -48%, 0) scale(3.9); }
+}
+/* While the page is being scrolled the washes hold still, so scrolling gets the frame. */
+.is-scrolling .wash-lo {
+  animation-play-state: paused;
+}
+
+/* Inner pages: the same blue wash at the top, over a faint grid, painted once. */
+.bg-page {
+  background-image:
+    radial-gradient(1100px 620px at 85% -8%, rgb(96 140 255 / 0.16), transparent 70%),
+    radial-gradient(900px 520px at 0% 0%, rgb(35 70 168 / 0.1), transparent 70%),
+    linear-gradient(to bottom, transparent 0, transparent 420px, rgb(var(--bg)) 820px),
+    linear-gradient(rgb(var(--fg) / 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--fg) / 0.04) 1px, transparent 1px);
+  background-size: auto, auto, auto, 56px 56px, 56px 56px;
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat, repeat;
+}
+/* The home page has its own backgrounds; don't paint this one under them. */
+.bg-page:has(#top) {
+  background-image: none;
 }

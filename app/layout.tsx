@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
+import { Inter, Inter_Tight, JetBrains_Mono } from "next/font/google";
 import { ViewTransitions } from "next-view-transitions";
 import "./globals.css";
 
@@ -9,10 +9,15 @@ import { Footer } from "@/components/Footer";
 import { Preview } from "@/components/Preview";
 import { siteUrl } from "@/lib/site";
 
-const sans = Bricolage_Grotesque({
+// Clean, plain type: Inter to read, Inter Tight for headings.
+const sans = Inter({
   subsets: ["latin"],
-  axes: ["opsz", "wdth"],
   variable: "--font-sans",
+  display: "swap",
+});
+const heading = Inter_Tight({
+  subsets: ["latin"],
+  variable: "--font-display",
   display: "swap",
 });
 // Small labels only: dates, numbers and section names.
@@ -49,7 +54,7 @@ export default function RootLayout({
 }) {
   return (
     <ViewTransitions>
-      <html lang="en" className={`${sans.variable} ${mono.variable}`}>
+      <html lang="en" className={`${sans.variable} ${heading.variable} ${mono.variable}`}>
         <body className="relative">
           <a
             href="#main"
@@ -64,7 +69,7 @@ export default function RootLayout({
           </noscript>
           <main
             id="main"
-            className="relative z-10 overflow-clip rounded-b-[28px] bg-bg pb-24 md:rounded-b-[44px] md:pb-32"
+            className="relative z-10 overflow-clip rounded-b-[28px] bg-bg bg-page pb-24 md:rounded-b-[44px] md:pb-32"
           >
             {children}
           </main>

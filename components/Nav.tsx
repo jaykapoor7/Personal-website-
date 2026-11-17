@@ -8,6 +8,7 @@ import {
 import { Link } from "next-view-transitions";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { person } from "@/content/site";
 import { goToContact, goToSection } from "@/lib/jump";
 
@@ -58,7 +59,7 @@ function useTone(path: string | null) {
   return tone;
 }
 
-/** Two things only: my name, and one button that opens everything else. */
+/** One button that opens everything else, and off the home page a way back. */
 export function Nav() {
   const path = usePathname();
   const tone = useTone(path);
@@ -107,13 +108,25 @@ export function Nav() {
         className="shell relative z-[60] flex h-[68px] items-center justify-between gap-4"
         aria-label="Main"
       >
-        <Link
-          href="/"
-          className={`${pill} px-4 py-2 text-[15px] font-semibold`}
-          onClick={() => setOpen(false)}
-        >
-          Jay Kapoor
-        </Link>
+        {/* The hero already says who I am; elsewhere a small photo leads home. */}
+        {path === "/" ? (
+          <span aria-hidden="true" />
+        ) : (
+          <Link
+            href="/"
+            aria-label="Home"
+            className="group relative block h-11 w-11 overflow-hidden rounded-full shadow-[0_0_0_2px_rgb(255_255_255),0_4px_14px_-6px_rgb(var(--fg)/0.5)] transition-transform duration-300 hover:scale-105"
+            onClick={() => setOpen(false)}
+          >
+            <Image
+              src="/photos/jay-face.webp"
+              alt=""
+              fill
+              sizes="44px"
+              className="object-cover"
+            />
+          </Link>
+        )}
         <button
           type="button"
           className={`${pill} flex h-11 items-center gap-3 pl-4 pr-3.5 text-[15px] font-semibold`}
@@ -154,7 +167,7 @@ export function Nav() {
                     "display group flex items-baseline gap-4 py-1.5 text-[clamp(44px,6.6vw,96px)]";
                   const inner = (
                     <>
-                      <span className="text-[0.26em] font-medium tabular-nums text-white/85 [font-stretch:100%]">
+                      <span className="text-[0.26em] font-medium tabular-nums text-white/85">
                         0{i + 1}
                       </span>
                       <span className="transition-transform duration-500 ease-out group-hover:translate-x-3">

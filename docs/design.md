@@ -13,7 +13,12 @@ Every entry on the site is in the index at `/work/`. The home page chooses; the 
 
 ## Type and colour
 
-Blue and white, as the site has always been: tokens in `app/globals.css`. Bricolage Grotesque for everything people read; JetBrains Mono, small and uppercase, only for section numbers, dates and labels.
+Blue and white, as the site has always been: tokens in `app/globals.css`. Inter for reading, Inter Tight for headings, and JetBrains Mono, small and uppercase, only for section numbers, dates and labels.
+
+Backgrounds are never flat:
+- The hero has soft blue washes that drift slowly over a fine grid. They are drawn small and scaled up, and the hero hides once the page covers it, so scrolling stays smooth.
+- The white sheet has a dot grid and soft washes painted once.
+- Inner pages get a wash and a grid at the top only.
 
 ## Writing
 
