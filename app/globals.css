@@ -202,20 +202,7 @@
   border-radius: 999px;
   background: currentColor;
 }
-.live::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: inherit;
-  animation: live 2.4s ease-out infinite;
-}
-@keyframes live {
-  to {
-    transform: scale(3.2);
-    opacity: 0;
-  }
-}
+
 
 /* Everything Falls (physics toy) */
 .falls {
@@ -407,22 +394,7 @@
   background-size: 22px 22px;
 }
 
-/* The labels on the hero photo bob gently, out of step with each other. */
-.float-a {
-  animation: bob 6s ease-in-out infinite;
-}
-.float-b {
-  animation: bob 7s ease-in-out -2.5s infinite;
-}
-@keyframes bob {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
+
 
 /*
  * The hero's washes are drawn small and scaled up: a soft blur looks the same
@@ -466,9 +438,7 @@
   to { transform: translate3d(34%, -48%, 0) scale(3.9); }
 }
 /* While the page is being scrolled the washes hold still, so scrolling gets the frame. */
-.is-scrolling .wash-lo,
-.is-scrolling .float-a,
-.is-scrolling .float-b {
+.is-scrolling .wash-lo {
   animation-play-state: paused;
 }
 
