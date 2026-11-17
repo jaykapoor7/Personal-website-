@@ -1,3 +1,5 @@
+"use client";
+import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "next-view-transitions";
 import { Arrow } from "../Arrow";
 
@@ -18,11 +20,16 @@ export function Section({
   action?: { label: string; href: string };
   children: React.ReactNode;
 }) {
+  const reduce = useReducedMotion();
   return (
-    <section
+    <motion.section
       id={id}
       aria-labelledby={`${id}-h`}
-      className="shell mt-20 scroll-mt-20 md:mt-28"
+      initial={false}
+      whileInView={reduce ? undefined : { y: [24, 0] }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className="folio-section shell mt-20 scroll-mt-20 md:mt-28"
     >
       <div className="mb-4 flex items-end justify-between gap-6 border-b border-line pb-4 md:mb-6">
         <h2 id={`${id}-h`} className="flex items-center gap-3">
@@ -48,6 +55,6 @@ export function Section({
         )}
       </div>
       {children}
-    </section>
+    </motion.section>
   );
 }
