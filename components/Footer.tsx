@@ -28,16 +28,17 @@ export function Footer() {
     <footer
       data-tone="accent"
       aria-labelledby="contact-h"
-      className="reveal-footer bg-accent text-white"
+      className="reveal-footer contact-panel bg-accent text-white"
     >
-      <div className="shell flex min-h-[inherit] flex-col justify-between gap-12 pb-8 pt-24 md:pt-28">
+      <svg aria-hidden="true" className="contact-postmark" viewBox="0 0 300 300" fill="none" stroke="currentColor" strokeWidth="5"><path d="M20 280L280 20M70 20H280V230" /></svg>
+      <div className="shell relative flex min-h-[inherit] flex-col justify-between gap-12 pb-8 pt-24 md:pt-28">
         <div>
           <h2 id="contact-h" className="text-[17px] font-medium text-white/85">
             Contact
           </h2>
           <a
             href={`mailto:${person.email}`}
-            className="display group mt-3 block break-all text-[13.2vw] md:text-[clamp(96px,15.2vw,220px)]"
+            className="contact-email group mt-3 block"
           >
             <span className="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_0.06em] bg-[position:0_96%] bg-no-repeat transition-[background-size] duration-700 ease-out group-hover:bg-[length:100%_0.06em]">
               {person.email}
