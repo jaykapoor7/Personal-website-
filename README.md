@@ -14,11 +14,11 @@ npm run build   # exports to out/
 - `content/cases.ts` is the editorial layer for each case page: one line, context, problem, what I did, and outcomes. Every outcome is labelled as Measured, Shipped, Partnership, Pilot or Published. Every sentence restates a fact from `site.ts`, a linked document or the Research Models site.
 - `content/work.ts` builds the complete index and the experience list from those two files.
 - The home page (`components/home/`) keeps the old site's look and adds a short CV after cali.so:
-  - `Hero`: "Jay Kapoor [face]. I find broken systems and try to find solutions." in the big blue type, with Resume and links. It stays put while one white sheet slides up over it.
+  - `Hero`: "Jay Kapoor" and "I find broken systems and try to find solutions." beside a framed photo of me (`public/photos/jay-hero.webp`). The photo leans toward the pointer and carries two small labels, studying at Pitt and building StrayPaw. Behind it, soft blue washes drift over a fine grid (`components/Backdrop.tsx`). It stays put while one white sheet slides up over it.
   - `Intro` on that sheet: four short paragraphs, with the `Tiles` (Work, Writing, Photos, Play) beside them. Each tile is a small stack of pictures that fans out on hover or focus.
   - Six numbered sections with Cali-style number boxes: 01 Selected work (big rows with pictures), 02 Experience and education side by side, 03 Research, 04 Writing (two columns each), 05 Photos (the blue slats that open in colour; a swipe strip on phones), 06 Play.
   - `List` slides a soft highlight to the row under the pointer or focus. With a mouse, `components/Preview.tsx` shows a larger copy of the row's picture beside the cursor.
-- `components/Nav.tsx` is my name and one Menu button that opens a full-screen menu of the sections. `components/Footer.tsx` is the blue contact panel, uncovered as each page ends.
+- `components/Nav.tsx` is one Menu button that opens a full-screen menu of the sections. Off the home page, a small round photo of me (`public/photos/jay-face.webp`) leads home. `components/Footer.tsx` is the blue contact panel, uncovered as each page ends.
 - Opening a project from a list, its picture and title grow into the case page's own (view transitions).
 - `/work/` is the complete index, every entry numbered and grouped: startups, experience, research, writing, projects, play.
 - Each case page at `/work/[slug]` follows one structure: kind, years and status, name, one line, role, when and links, key numbers, the picture, then context, problem, what I did, outcomes and documents. Shorter entries simply leave parts out.
