@@ -457,3 +457,88 @@
 .bg-page:has(#top) {
   background-image: none;
 }
+
+
+/* A typographic opening, a photographic panel, then six distinct chapters. */
+.studio-hero { position: relative; overflow: hidden; background: #f5f7fc; color: #1744c6; }
+.studio-meta { display: flex; justify-content: space-between; padding: 34px 100px 26px 0; font: 11px monospace; text-transform: uppercase; letter-spacing: .1em; }
+.studio-heading { border-top: 1px solid #1744c6; padding-top: 24px; padding-bottom: 28px; }
+.studio-name { display: block; white-space: nowrap; font-family: var(--font-display), sans-serif; font-size: clamp(80px, 16.1vw, 225px); letter-spacing: -.075em; line-height: .9; font-weight: 600; }
+.studio-grid { display: grid; grid-template-columns: 1fr 1.1fr; border-top: 1px solid #1744c6; }
+.studio-intro { padding: 32px 50px 30px 0; display: flex; flex-direction: column; align-items: start; }
+.studio-cross { width: 58px; height: 58px; line-height: 1; display: inline-block; animation: studio-turn 24s linear infinite; }
+@keyframes studio-turn { to { transform: rotate(180deg); } }
+.studio-statement { font-family: var(--font-display), sans-serif; font-size: clamp(28px,3.5vw,48px); letter-spacing: -.035em; line-height: 1.1; max-width: 17ch; margin: 25px 0; }
+.studio-links { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; font-size: 13px; font-weight: 600; }
+.studio-links a { display: inline-flex; align-items: center; gap: 5px; padding: 10px 0; }
+.studio-links .studio-resume { background: #1744c6; color: white; padding: 14px 20px; transition: background .3s; }
+.studio-resume:hover { background: #0c297d; }
+.studio-links a svg { transition: transform .3s; }
+.studio-links a:hover svg { transform: translate(3px,-3px); }
+.studio-explore { width: 100%; margin-top: auto; padding-top: 35px; display: flex; justify-content: space-between; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
+.studio-explore span { font-size: 25px; transition: transform .3s; }
+.studio-explore:hover span { transform: translateY(6px); }
+.studio-image-block { padding: 20px 0 0 20px; border-left: 1px solid #1744c6; }
+.studio-image-frame { position: relative; height: 430px; overflow: hidden; background: #1744c6; }
+.studio-image { position: absolute; inset: -60px 0 0; }
+.studio-image img { object-position: center 35%; }
+.studio-shutter { position: absolute; inset: 0 auto 0 0; width: 18px; background: #1744c6; mix-blend-mode: multiply; }
+.studio-photo-caption { display: flex; justify-content: space-between; padding: 14px 0; font: 10px monospace; text-transform: uppercase; letter-spacing: .06em; }
+.studio-index { display: grid; grid-template-columns: repeat(6, 1fr); border-top: 1px solid #1744c6; margin-top: 24px; }
+.studio-index a { display: flex; gap: 14px; padding: 24px 10px; font-size: 12px; transition: color .3s, background .3s; }
+.studio-index a span { font: 9px monospace; opacity: .65; }
+.studio-index a:hover { background: #1744c6; color: white; }
+.landing-sheet { padding-bottom: 0; }
+.landing-sheet > .relative > section:first-child { padding-bottom: 70px; }
+.chapter { position: relative; isolation: isolate; overflow: hidden; padding: 70px 0 85px; scroll-margin-top: 24px; border-top: 1px solid rgb(var(--fg) / .18); }
+.chapter-heading { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-bottom: 22px; margin-bottom: 30px; }
+.chapter-heading h2 { display: flex; align-items: baseline; gap: 20px; font-family: var(--font-display),sans-serif; font-size: clamp(32px, 4vw, 54px); letter-spacing: -.045em; line-height: 1.1; }
+.chapter-number { font: 11px monospace; letter-spacing: 0; }
+.chapter-action { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; white-space: nowrap; }
+.chapter-rule { position: absolute; bottom: 0; height: 1px; left: 0; right: 0; background: currentColor; transform-origin: left; }
+.chapter-art { position: absolute; inset: 0; pointer-events: none; z-index: -1; overflow: hidden; }
+.chapter-figure { position: absolute; right: 1%; top: -35px; color: rgb(var(--fg) / .035); font: 270px/1 var(--font-display),sans-serif; letter-spacing: -.08em; }
+.chapter-work { background: #fff; }
+.chapter-work .chapter-art { border-left: 12px solid #1744c6; }
+.chapter-experience { background: #edf2fc; }
+.chapter-experience .chapter-art::after { content: ''; position: absolute; left: 50%; top: 160px; bottom: 50px; border-left: 1px solid rgb(var(--fg) / .12); }
+.chapter-research { background: #f8faff; }
+.chapter-research svg { position: absolute; width: 75%; right: -5%; bottom: 0; stroke: #1744c6; opacity: .1; stroke-width: 1; }
+.chapter-research svg .research-trace { stroke-width: 3; }
+.chapter-writing { background: #fff; }
+.chapter-writing .chapter-art { background: repeating-linear-gradient(0deg, transparent 0 47px, rgb(var(--fg) / .04) 47px 48px); }
+.chapter-photos { background: #e4ebf9; }
+.chapter-photos .chapter-art::after { content: ''; position: absolute; inset: 18px; border: 1px solid rgb(var(--fg) / .12); }
+.chapter-play { background: #f7f9fe; }
+.chapter-play .chapter-art { background-image: radial-gradient(rgb(var(--fg) / .12) .8px, transparent .8px); background-size: 20px 20px; }
+.contact-panel { position: relative; overflow: hidden; background: #1744c6; }
+.contact-email { width: fit-content; max-width: 100%; white-space: nowrap; font-family: var(--font-display),sans-serif; font-size: clamp(18px, 5.5vw, 76px); line-height: 1.2; letter-spacing: -.045em; }
+.contact-postmark { position: absolute; right: 4%; bottom: -100px; width: 500px; height: 500px; opacity: .08; pointer-events: none; }
+@media (max-width: 767px) {
+  .studio-meta { padding: 28px 75px 24px 0; font-size: 9px; }
+  .studio-meta span:last-child { display: none; }
+  .studio-name { font-size: 16vw; }
+  .studio-heading { padding: 25px 0; }
+  .studio-grid { grid-template-columns: 1fr; }
+  .studio-intro { padding: 24px 0; }
+  .studio-cross { width: 35px; height: 35px; }
+  .studio-statement { font-size: 34px; max-width: 19ch; margin: 20px 0; }
+  .studio-explore { padding-top: 22px; }
+  .studio-image-block { padding: 0; border-left: 0; }
+  .studio-image-frame { height: 340px; }
+  .studio-image img { object-position: center 30%; }
+  .studio-index { grid-template-columns: repeat(3, 1fr); margin-top: 12px; }
+  .studio-index a { padding: 17px 4px; font-size: 11px; gap: 8px; }
+  .chapter { padding: 45px 0 55px; }
+  .chapter-heading { gap: 10px; }
+  .chapter-heading h2 { font-size: 30px; gap: 10px; }
+  .chapter-action { font-size: 11px; gap: 3px; }
+  .chapter-work .chapter-art { border-left-width: 3px; }
+  .chapter-experience .chapter-art::after { display: none; }
+  .chapter-figure { font-size: 180px; top: 0; }
+  .contact-email { font-size: 5.3vw; }
+  .contact-postmark { width: 320px; height: 320px; bottom: -40px; }
+}
+@media (prefers-reduced-motion: reduce) { .studio-cross { animation: none; } }
+
+#main:has(.studio-hero) { padding-bottom: 0; border-radius: 0; }
