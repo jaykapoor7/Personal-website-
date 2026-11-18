@@ -31,19 +31,9 @@ export function Band({
     >
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 origin-top overflow-hidden rounded-t-[30px] bg-bg shadow-[0_-26px_50px_-34px_rgb(35_70_168/0.4)] will-change-transform md:rounded-t-[48px]"
+        className="pointer-events-none absolute inset-0 origin-top rounded-t-[30px] bg-bg shadow-[0_-26px_50px_-34px_rgb(35_70_168/0.4)] will-change-transform md:rounded-t-[48px]"
         style={calm ? undefined : { scale }}
-      >
-        {tone === "blue" && (
-          <>
-            <div className="blueprint" />
-            <div className="absolute inset-0 bg-[radial-gradient(900px_600px_at_90%_0%,rgba(120,160,255,0.35),transparent_70%),radial-gradient(900px_600px_at_0%_100%,rgba(15,35,110,0.45),transparent_70%)]" />
-          </>
-        )}
-        {tone === "pale" && (
-          <div className="grid-dots absolute inset-0 [mask-image:linear-gradient(to_bottom,#000,transparent_70%)]" />
-        )}
-      </motion.div>
+      />
       <div className="relative">{children}</div>
     </div>
   );

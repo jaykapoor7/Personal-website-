@@ -16,8 +16,12 @@ export function Intro({ aside }: { aside?: React.ReactNode }) {
         paras={[
           {
             parts: [
-              "I study economics and statistics in the Dietrich School of Arts and Sciences at the University of Pittsburgh. I grew up in Bangalore and started my first company, ",
+              "I study economics and statistics in the Dietrich School of Arts and Sciences at the University of Pittsburgh. I grew up in Bangalore ",
+              { pic: "/photos/02_childhood_running-640.webp" },
+              " and started my first company, ",
               { text: "Juno-AI", href: "/work/juno-ai/" },
+              " ",
+              { pic: "/thumbs/juno-light-d.webp", big: "/previews/juno-light-d.webp" },
               ", at 14, to get health information to families in rural India.",
             ],
           },
@@ -30,6 +34,8 @@ export function Intro({ aside }: { aside?: React.ReactNode }) {
             parts: [
               "Right now I'm building ",
               { text: "StrayPaw", href: "/work/straypaw/" },
+              " ",
+              { pic: "/straypaw/street-dog.webp" },
               ", a shared record of India's street animals. It holds 30,288 records across 28 cities, kept with 19 NGO partners.",
             ],
           },

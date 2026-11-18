@@ -17,6 +17,7 @@ const config: Config = {
         card: token("card"),
         accent: token("accent"),
         paper: token("paper"),
+        hero: token("hero"),
         accent2: token("accent-2"),
       },
       fontFamily: {

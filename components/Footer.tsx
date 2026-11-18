@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import { person } from "@/content/site";
 import { Arrow } from "./Arrow";
-import { SystemsField } from "./home/SystemsField";
 import { Magnetic } from "./motion";
 
 /** The time in Pittsburgh, so you know whether to expect a quick reply. */
@@ -31,9 +30,6 @@ export function Footer() {
       aria-labelledby="contact-h"
       className="reveal-footer relative overflow-hidden bg-accent text-white"
     >
-      {/* The same network as the hero, in white, mending itself. */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(900px_600px_at_85%_10%,rgba(120,160,255,0.35),transparent_70%),radial-gradient(800px_500px_at_0%_100%,rgba(15,35,110,0.45),transparent_70%)]" />
-      <SystemsField tone="dark" fade="top" className="opacity-80" />
       <div className="shell relative flex min-h-[inherit] flex-col justify-between gap-12 pb-8 pt-24 md:pt-28">
         <div>
           <h2 id="contact-h" className="text-[17px] font-medium text-white/85">
