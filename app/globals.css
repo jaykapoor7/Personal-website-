@@ -11,7 +11,7 @@
   --line: 204 212 234;
   --card: 232 236 246;
   --paper: 244 246 251;
-  /* The hero's paper; scripts/make-hero.mjs bakes it into the photo. */
+  /* The hero's paper; the photo's edges fade into it. */
   --hero: 243 246 253;
   --accent: 35 70 168;
   --accent-2: 222 228 243;

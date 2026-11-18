@@ -98,10 +98,9 @@ function Broken({ delay }: { delay: number }) {
 const PHOTO = "lg:left-[4.8cqw] lg:w-[60cqw]";
 
 /**
- * Who I am, as a poster. My photo is printed as a cyanotype whose sky is the
- * page itself, so it has no frame: it is the background. Its lower half fades
- * to paper, and a cut-out of me stays at full tone over it, so I step out of
- * the print. On a laptop I stand between "Jay" and "Kapoor": on load the two
+ * Who I am, as a poster. My photo, in its own colours, is the background: no
+ * frame, its edges melt into the page. Its lower half fades to paper, and a
+ * cut-out of me stays at full strength over it, so I step out of the photo. On a laptop I stand between "Jay" and "Kapoor": on load the two
  * words slide in from either side and tuck in behind me. As you scroll the
  * photo closes in on me while the rest of the page slides up over it.
  */
@@ -149,7 +148,7 @@ export function Hero() {
       <div
         className="relative mx-auto min-h-[100svh] max-w-[1680px] [container-type:inline-size]"
       >
-        {/* The print. Gradients in the page colour melt its edges and fade
+        {/* The photo. Gradients in the page colour melt its edges and fade
             its lower half to paper (cheaper than a mask). */}
         <motion.div
           className={`${group} overflow-hidden`}
@@ -158,8 +157,8 @@ export function Hero() {
           <motion.div className="absolute inset-0" {...enter}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/photos/jay-cyan.webp"
-              srcSet="/photos/jay-cyan-640.webp 640w, /photos/jay-cyan.webp 960w"
+              src="/photos/jay-photo.webp"
+              srcSet="/photos/jay-photo-640.webp 640w, /photos/jay-photo.webp 960w"
               sizes="(min-width: 1024px) 60vw, 100vw"
               alt={portrait.alt}
               fetchPriority="high"
@@ -263,7 +262,7 @@ export function Hero() {
         </motion.div>
 
         {/* Me again, cut out, over the name: so the name passes behind me.
-            I come in first; the print develops around me. */}
+            I come in first; the photo fades in around me. */}
         <motion.div
           aria-hidden="true"
           className={`${group} pointer-events-none z-20 hidden lg:block`}
@@ -276,7 +275,7 @@ export function Hero() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/photos/jay-cut.webp"
+              src="/photos/jay-photo-cut.webp"
               alt=""
               decoding="async"
               className="h-full w-full object-cover object-[50%_100%]"
