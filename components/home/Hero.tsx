@@ -92,11 +92,18 @@ function Broken({ delay }: { delay: number }) {
   );
 }
 
+/** Where I stand in the photo box (fractions of it), and the box itself, in
+ * container widths on laptops. The name is laid out around these numbers so
+ * its two words tuck just behind my arms. */
+const PHOTO = "lg:left-[4.8cqw] lg:w-[60cqw]";
+
 /**
- * Who I am, over the photo it belongs to. The photo is printed as a cyanotype:
- * the sky is the page itself, so the picture has no frame, it is the
- * background. On load the print develops from the top down; as you scroll it
- * slowly closes in on me while the rest of the page slides up over it.
+ * Who I am, as a poster. My photo is printed as a cyanotype whose sky is the
+ * page itself, so it has no frame: it is the background. Its lower half fades
+ * to paper, and a cut-out of me stays at full tone over it, so I step out of
+ * the print. On a laptop I stand between "Jay" and "Kapoor": on load the two
+ * words slide in from either side and tuck in behind me. As you scroll the
+ * photo closes in on me while the rest of the page slides up over it.
  */
 export function Hero() {
   const reduce = useReducedMotion();
@@ -109,8 +116,8 @@ export function Hero() {
   }, []);
   const { scrollY } = useScroll();
   const opacity = useTransform(scrollY, [0, h * 0.7], [1, 0]);
-  const y = useTransform(scrollY, [0, h], [0, -h * 0.12]);
-  const zoom = useTransform(scrollY, [0, h], [1, 1.12]);
+  const y = useTransform(scrollY, [0, h], [0, -h * 0.1]);
+  const zoom = useTransform(scrollY, [0, h], [1, 1.14]);
 
   // Once the page has slid over the hero, hide it so it costs nothing.
   const [covered, setCovered] = useState(false);
@@ -120,126 +127,163 @@ export function Hero() {
   });
 
   const words = ["I find", "BROKEN", "systems", "and", "try", "to", "find"];
-  const at = 0.6;
+  const at = 0.8;
+  // Both photo layers move as one: same entrance, same zoom, same origin.
+  const group = `absolute inset-x-0 top-0 h-[58svh] origin-[50%_55%] will-change-transform md:h-[62svh] lg:inset-x-auto lg:top-auto lg:bottom-0 lg:h-auto lg:aspect-[3/4] lg:origin-[54%_66%] ${PHOTO}`;
+  const enter = {
+    initial: reduce ? false : { opacity: 0, scale: 1.06 },
+    animate: { opacity: 1, scale: 1, transitionEnd: { transform: "none" } },
+    transition: {
+      opacity: { duration: 1.3, ease: "easeOut" },
+      scale: { duration: 2.6, ease },
+    },
+  } as const;
 
   return (
     <section
       id="top"
       data-tone="light"
       aria-label="Introduction"
-      className={`hero-pin relative overflow-hidden bg-hero ${covered ? "invisible" : ""}`}
+      className={`hero-pin relative isolate overflow-hidden bg-hero ${covered ? "invisible" : ""}`}
     >
-      {/* The photo: full height on the right on wide screens, the top of the
-          screen on phones. Its sky is the page colour, so only the trees, the
-          tower and I show; gradients in the page colour melt the other edges. */}
-      <motion.div
-        className="absolute inset-x-0 top-0 h-[58svh] origin-[50%_55%] overflow-hidden will-change-transform md:h-[62svh] lg:inset-y-0 lg:left-auto lg:h-auto lg:w-[60%] lg:origin-[55%_62%]"
-        style={reduce ? undefined : { scale: zoom }}
+      <div
+        className="relative mx-auto min-h-[100svh] max-w-[1680px] [container-type:inline-size]"
       >
+        {/* The print. Gradients in the page colour melt its edges and fade
+            its lower half to paper (cheaper than a mask). */}
         <motion.div
-          className="absolute inset-0"
-          initial={reduce ? false : { scale: 1.07 }}
-          animate={{ scale: 1, transitionEnd: { transform: "none" } }}
-          transition={{ duration: 2.6, ease }}
+          className={`${group} overflow-hidden`}
+          style={reduce ? undefined : { scale: zoom }}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/photos/jay-cyan.webp"
-            srcSet="/photos/jay-cyan-640.webp 640w, /photos/jay-cyan.webp 960w"
-            sizes="(min-width: 1024px) 60vw, 100vw"
-            alt={portrait.alt}
-            fetchPriority="high"
-            decoding="async"
-            className="h-full w-full object-cover object-[50%_100%] lg:object-[50%_35%]"
-          />
+          <motion.div className="absolute inset-0" {...enter}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/photos/jay-cyan.webp"
+              srcSet="/photos/jay-cyan-640.webp 640w, /photos/jay-cyan.webp 960w"
+              sizes="(min-width: 1024px) 60vw, 100vw"
+              alt={portrait.alt}
+              fetchPriority="high"
+              decoding="async"
+              className="h-full w-full object-cover object-[50%_100%]"
+            />
+          </motion.div>
+          <div className="absolute inset-x-0 bottom-0 h-[42%] bg-gradient-to-t from-hero via-hero/75 to-transparent lg:h-[58%] lg:from-hero lg:via-hero/90" />
+          <div className="absolute inset-y-0 left-0 hidden w-[24%] bg-gradient-to-r from-hero to-transparent lg:block" />
+          <div className="absolute inset-y-0 right-0 hidden w-[26%] bg-gradient-to-l from-hero to-transparent lg:block" />
         </motion.div>
-        {/* Melting edges, painted in the page colour (cheaper than a mask). */}
-        <div className="absolute inset-x-0 bottom-0 h-[42%] bg-gradient-to-t from-hero via-hero/75 to-transparent lg:hidden" />
-        <div className="absolute inset-y-0 left-0 hidden w-[46%] bg-gradient-to-r from-hero via-hero/70 to-transparent lg:block" />
-        <div className="absolute inset-x-0 bottom-0 hidden h-[18%] bg-gradient-to-t from-hero/60 to-transparent lg:block" />
-        {/* The print develops: a sheet of paper slides off it, top first.
-            Always rendered (so server and client agree); hidden by CSS for
-            reduced motion. */}
-        <motion.div
-          className="absolute inset-x-0 top-0 h-[170%] bg-[linear-gradient(to_bottom,transparent_0%,rgb(var(--hero))_24%,rgb(var(--hero))_100%)] motion-reduce:hidden"
-          initial={{ y: "-24%" }}
-          animate={{ y: "62%", transitionEnd: { display: "none" } }}
-          transition={{ duration: 1.9, ease: [0.65, 0, 0.35, 1], delay: 0.1 }}
-        />
-      </motion.div>
 
-      <motion.div
-        className="shell relative grid min-h-[100svh] items-end pb-20 pt-[50svh] will-change-transform md:pb-28 md:pt-[56svh] lg:items-center lg:pb-24 lg:pt-24"
-        style={reduce ? undefined : { opacity, y }}
-      >
-        <div className="max-w-[640px]">
-          <h1
-            aria-label="Hi, I'm Jay Kapoor. I find broken systems and try to find solutions."
-            className="hero-title"
-          >
-            <span className="block text-[clamp(24px,2.6vw,40px)] font-medium tracking-[-0.03em] text-accent">
+        <motion.div
+          className="shell relative grid min-h-[100svh] items-end pb-20 pt-[50svh] will-change-transform md:pb-28 md:pt-[56svh] lg:absolute lg:inset-0 lg:z-10 lg:block lg:min-h-0 lg:max-w-none lg:p-0"
+          style={reduce ? undefined : { opacity, y }}
+        >
+          <h1 aria-label="Hi, I'm Jay Kapoor" className="hero-title">
+            <span className="block text-[clamp(24px,2.6vw,40px)] font-medium tracking-[-0.03em] text-accent lg:absolute lg:bottom-[24.5cqw] lg:left-[7cqw] lg:text-[2.6cqw]">
               <Letters text="Hi, I'm" delay={0.35} />
             </span>
-            <span className="mt-1 block text-[clamp(58px,8.6vw,140px)] leading-[0.95] tracking-[-0.055em] text-fg">
-              <Letters text="Jay Kapoor" delay={0.5} />
-            </span>
-            <span
-              aria-hidden="true"
-              className="mt-5 block max-w-[17ch] text-[clamp(24px,2.8vw,42px)] font-medium leading-[1.14] tracking-[-0.025em] text-accent md:mt-7"
-            >
-              {words.map((wd, i) => (
-                <Fragment key={i}>
-                  <Word i={i} delay={at}>
-                    {wd === "BROKEN" ? <Broken delay={at + 1.1} /> : wd}
-                  </Word>{" "}
-                </Fragment>
-              ))}
-              <Word i={words.length} delay={at}>
-                <span className="relative inline-block">
-                  solutions.
-                  <motion.span
-                    className="absolute -bottom-[0.02em] left-0 h-[0.07em] w-[calc(100%-0.25em)] origin-left rounded-full bg-accent"
-                    initial={reduce ? false : { scaleX: 0 }}
-                    animate={{ scaleX: 1 }}
-                    transition={{ duration: 0.9, ease, delay: at + 1.35 }}
-                  />
-                </span>
-              </Word>
+            <span className="mt-1 block text-[clamp(58px,15vw,140px)] leading-[0.95] tracking-[-0.055em] text-fg lg:contents lg:text-[14.6cqw]">
+              <motion.span
+                className="inline-block lg:absolute lg:bottom-[8.5cqw] lg:left-[7cqw] lg:leading-[0.92]"
+                initial={reduce ? false : { x: "-0.4em" }}
+                animate={{ x: "0em" }}
+                transition={{ duration: 1.5, ease, delay: 0.45 }}
+              >
+                <Letters text="Jay" delay={0.5} />
+              </motion.span>{" "}
+              <motion.span
+                className="inline-block lg:absolute lg:bottom-[8.5cqw] lg:left-[48cqw] lg:leading-[0.92]"
+                initial={reduce ? false : { x: "0.4em" }}
+                animate={{ x: "0em" }}
+                transition={{ duration: 1.5, ease, delay: 0.45 }}
+              >
+                <Letters text="Kapoor" delay={0.62} />
+              </motion.span>
             </span>
           </h1>
 
-          <motion.p
-            className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3 text-[16px] font-semibold md:mt-11"
-            initial={reduce ? false : { opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease, delay: 1.3 }}
-          >
-            <a
-              href={person.resume}
-              target="_blank"
-              rel="noreferrer"
-              className="btn-primary"
+          <div className="lg:absolute lg:bottom-[29cqw] lg:left-[58cqw] lg:right-[7cqw]">
+            <p
+              className="mt-5 block max-w-[17ch] text-[clamp(24px,2.8vw,42px)] font-medium leading-[1.14] tracking-[-0.025em] text-accent md:mt-7 lg:mt-0 lg:text-[2.5cqw]"
             >
-              Resume <Arrow />
-            </a>
-            {[
-              { label: person.email, href: `mailto:${person.email}` },
-              ...person.links.slice(0, 2),
-            ].map((l) => (
+              <span className="sr-only">
+                I find broken systems and try to find solutions.
+              </span>
+              <span aria-hidden="true">
+                {words.map((wd, i) => (
+                  <Fragment key={i}>
+                    <Word i={i} delay={at}>
+                      {wd === "BROKEN" ? <Broken delay={at + 1.1} /> : wd}
+                    </Word>{" "}
+                  </Fragment>
+                ))}
+                <Word i={words.length} delay={at}>
+                  <span className="relative inline-block">
+                    solutions.
+                    <motion.span
+                      className="absolute -bottom-[0.02em] left-0 h-[0.07em] w-[calc(100%-0.25em)] origin-left rounded-full bg-accent"
+                      initial={reduce ? false : { scaleX: 0 }}
+                      animate={{ scaleX: 1 }}
+                      transition={{ duration: 0.9, ease, delay: at + 1.35 }}
+                    />
+                  </span>
+                </Word>
+              </span>
+            </p>
+
+            <motion.p
+              className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3 text-[16px] font-semibold md:mt-11 lg:mt-8 lg:gap-x-6"
+              initial={reduce ? false : { opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease, delay: 1.5 }}
+            >
               <a
-                key={l.href}
-                href={l.href}
-                target={l.href.startsWith("http") ? "_blank" : undefined}
+                href={person.resume}
+                target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1.5 text-fg underline decoration-fg/25 decoration-2 underline-offset-[6px] transition-colors hover:decoration-fg"
+                className="btn-primary"
               >
-                {l.label}
-                {l.href.startsWith("http") && <Arrow />}
+                Resume <Arrow />
               </a>
-            ))}
-          </motion.p>
-        </div>
-      </motion.div>
+              {[
+                { label: person.email, href: `mailto:${person.email}` },
+                ...person.links.slice(0, 2),
+              ].map((l) => (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  target={l.href.startsWith("http") ? "_blank" : undefined}
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 text-fg underline decoration-fg/25 decoration-2 underline-offset-[6px] transition-colors hover:decoration-fg"
+                >
+                  {l.label}
+                  {l.href.startsWith("http") && <Arrow />}
+                </a>
+              ))}
+            </motion.p>
+          </div>
+        </motion.div>
+
+        {/* Me again, cut out, over the name: so the name passes behind me.
+            I come in first; the print develops around me. */}
+        <motion.div
+          aria-hidden="true"
+          className={`${group} pointer-events-none z-20 hidden lg:block`}
+          style={reduce ? undefined : { scale: zoom }}
+        >
+          <motion.div
+            className="absolute inset-0"
+            {...enter}
+            transition={{ ...enter.transition, opacity: { duration: 0.6, ease: "easeOut" } }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/photos/jay-cut.webp"
+              alt=""
+              decoding="async"
+              className="h-full w-full object-cover object-[50%_100%]"
+            />
+          </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 }
