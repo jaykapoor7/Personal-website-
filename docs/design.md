@@ -4,7 +4,7 @@ The site should read like a well-set CV that opens into a portfolio. A recruiter
 
 ## Hierarchy
 
-1. The hero: "Jay Kapoor [face]. I find broken systems and try to find solutions.", then Resume and links.
+1. The hero: "Hi, I'm Jay Kapoor. I find broken systems and try to find solutions.", the photo, then Resume and links.
 2. Four short paragraphs beside four tiles: Work, Writing, Photos, Play.
 3. Numbered sections: Selected work, Experience, Research, Writing, Photos, Play.
 4. The blue contact panel.
@@ -15,9 +15,10 @@ Every entry on the site is in the index at `/work/`. The home page chooses; the 
 
 Blue and white, as the site has always been: tokens in `app/globals.css`. Inter for reading, Inter Tight for headings, and JetBrains Mono, small and uppercase, only for section numbers, dates and labels.
 
-Backgrounds are never flat:
-- The hero has soft blue washes that drift slowly over a fine grid. They are drawn small and scaled up, and the hero hides once the page covers it, so scrolling stays smooth.
+Backgrounds are never flat, and the colour moves in bands down the page:
+- The hero is cobalt: a blueprint grid, two soft washes drawn small and scaled up, a light that follows the mouse, and the white network mending itself. It pauses while you scroll and hides once the page covers it, so scrolling stays smooth.
 - The white sheet has a dot grid and soft washes painted once.
+- Then cobalt (Research, Writing), white (Photos), pale blue (Play), and the cobalt contact panel. Each band is a rounded card that widens to full bleed as it scrolls in. Only its background scales; text never does.
 - Inner pages get a wash and a grid at the top only.
 
 ## Writing

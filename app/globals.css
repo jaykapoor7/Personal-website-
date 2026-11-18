@@ -457,3 +457,47 @@
 .bg-page:has(#top) {
   background-image: none;
 }
+
+/*
+ * Tones for the bands of the landing page. Inside a band the colour tokens are
+ * redefined, so every text, line and card colour follows without extra classes.
+ * The band paints its own background (a layer that widens as it scrolls in).
+ */
+.tone-blue {
+  --bg: 35 70 168;
+  --fg: 255 255 255;
+  --muted: 210 221 249;
+  --faint: 196 210 247;
+  --line: 96 128 210;
+  --card: 52 90 192;
+  --paper: 44 80 182;
+  --accent: 255 255 255;
+  --accent-2: 70 105 200;
+  color: rgb(var(--fg));
+}
+.tone-blue .btn-primary {
+  color: rgb(35 70 168);
+}
+.tone-blue ::selection {
+  background: #fff;
+  color: rgb(35 70 168);
+}
+.tone-pale {
+  --bg: 237 242 253;
+  --card: 222 231 250;
+  --paper: 230 237 252;
+  --line: 196 208 238;
+}
+
+/* Blueprint: a fine white grid, major lines every fourth. */
+.blueprint {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgb(255 255 255 / 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.09) 1px, transparent 1px),
+    linear-gradient(rgb(255 255 255 / 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.04) 1px, transparent 1px);
+  background-size: 96px 96px, 96px 96px, 24px 24px, 24px 24px;
+}

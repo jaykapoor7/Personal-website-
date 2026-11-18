@@ -94,6 +94,31 @@ function Broken({ delay }: { delay: number }) {
   );
 }
 
+/** Corner marks around the photo, as on a drawing; they snap in to frame it. */
+function Marks() {
+  const reduce = useReducedMotion();
+  const corners = [
+    { c: "-left-3.5 -top-3.5 border-l border-t", x: -10, y: -10 },
+    { c: "-right-3.5 -top-3.5 border-r border-t", x: 10, y: -10 },
+    { c: "-bottom-3.5 -left-3.5 border-b border-l", x: -10, y: 10 },
+    { c: "-bottom-3.5 -right-3.5 border-b border-r", x: 10, y: 10 },
+  ];
+  return (
+    <>
+      {corners.map((k, i) => (
+        <motion.span
+          key={i}
+          aria-hidden="true"
+          className={`pointer-events-none absolute h-5 w-5 border-white/60 md:h-6 md:w-6 ${k.c}`}
+          initial={reduce ? false : { opacity: 0, x: k.x, y: k.y }}
+          animate={{ opacity: 1, x: 0, y: 0 }}
+          transition={{ duration: 0.8, ease, delay: 1.25 + i * 0.05 }}
+        />
+      ))}
+    </>
+  );
+}
+
 /**
  * Who I am: my name, the one sentence, and a photo. Behind them, a network
  * whose broken links keep getting mended. On a tall enough screen the hero
@@ -143,9 +168,9 @@ export function Hero() {
     <section
       ref={ref}
       id="top"
-      data-tone="light"
+      data-tone="accent"
       aria-label="Introduction"
-      className={`hero-pin relative overflow-hidden ${covered ? "invisible" : ""}`}
+      className={`hero-pin tone-blue relative overflow-hidden ${covered ? "invisible" : ""}`}
     >
       <HeroBackdrop active={!covered} />
       <motion.div
@@ -154,15 +179,18 @@ export function Hero() {
       >
         <div className="order-2 lg:order-1">
           <h1
-            aria-label="Jay Kapoor. I find broken systems and try to find solutions."
+            aria-label="Hi, I'm Jay Kapoor. I find broken systems and try to find solutions."
             className="hero-title"
           >
-            <span className="block text-[clamp(52px,8vw,128px)] leading-[0.95] tracking-[-0.05em]">
-              <Letters text="Jay Kapoor" delay={0.1} />
+            <span className="block text-[clamp(26px,3vw,44px)] font-medium tracking-[-0.03em] text-[#c8d6ff]">
+              <Letters text="Hi, I'm" delay={0.05} />
+            </span>
+            <span className="mt-1 block text-[clamp(52px,8.4vw,136px)] leading-[0.95] tracking-[-0.05em] text-white">
+              <Letters text="Jay Kapoor" delay={0.25} />
             </span>
             <span
               aria-hidden="true"
-              className="mt-4 block max-w-[17ch] text-[clamp(26px,3.3vw,50px)] font-medium leading-[1.14] tracking-[-0.025em] text-accent md:mt-6"
+              className="mt-5 block max-w-[18ch] text-[clamp(24px,3vw,46px)] font-medium leading-[1.14] tracking-[-0.025em] text-[#c8d6ff] md:mt-7"
             >
               {words.map((wd, i) => (
                 <Fragment key={i}>
@@ -175,7 +203,7 @@ export function Hero() {
                 <span className="relative inline-block">
                   solutions.
                   <motion.span
-                    className="absolute -bottom-[0.02em] left-0 h-[0.07em] w-[calc(100%-0.25em)] origin-left rounded-full bg-accent"
+                    className="absolute -bottom-[0.02em] left-0 h-[0.07em] w-[calc(100%-0.25em)] origin-left rounded-full bg-white"
                     initial={reduce ? false : { scaleX: 0 }}
                     animate={{ scaleX: 1 }}
                     transition={{ duration: 0.9, ease, delay: at + 1.35 }}
@@ -195,7 +223,7 @@ export function Hero() {
               href={person.resume}
               target="_blank"
               rel="noreferrer"
-              className="btn-primary shadow-[0_10px_24px_-12px_rgb(var(--accent)/0.8)]"
+              className="btn bg-white text-[#2346a8] shadow-[0_14px_30px_-14px_rgba(5,15,60,0.8)] hover:bg-[#e3ebff]"
             >
               Resume <Arrow />
             </a>
@@ -208,7 +236,7 @@ export function Hero() {
                 href={l.href}
                 target={l.href.startsWith("http") ? "_blank" : undefined}
                 rel="noreferrer"
-                className="inline-flex items-center gap-1.5 underline decoration-fg/25 decoration-2 underline-offset-[6px] transition-colors hover:decoration-accent"
+                className="inline-flex items-center gap-1.5 text-white underline decoration-white/35 decoration-2 underline-offset-[6px] transition-colors hover:decoration-white"
               >
                 {l.label}
                 {l.href.startsWith("http") && <Arrow />}
@@ -219,11 +247,12 @@ export function Hero() {
 
         {/* The photo, straight, in a white border; it wipes up into view. */}
         <motion.div
-          className="order-1 w-[min(46vw,200px)] sm:w-[min(50vw,260px)] lg:order-2 lg:w-full lg:max-w-[440px] lg:justify-self-end"
+          className="relative order-1 w-[min(46vw,200px)] sm:w-[min(50vw,260px)] lg:order-2 lg:w-full lg:max-w-[440px] lg:justify-self-end"
           style={reduce ? undefined : { y: photoY }}
         >
+          <Marks />
           <motion.div
-            className="rounded-[30px] bg-white p-[6px] shadow-[0_30px_60px_-28px_rgb(var(--fg)/0.55)] md:rounded-[38px] md:p-2 md:shadow-[0_44px_80px_-34px_rgb(var(--fg)/0.6)]"
+            className="rounded-[30px] bg-white p-[6px] shadow-[0_30px_60px_-24px_rgba(5,15,60,0.75)] md:rounded-[38px] md:p-2 md:shadow-[0_50px_90px_-30px_rgba(5,15,60,0.8)]"
             initial={reduce ? false : { opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease, delay: 0.15 }}
