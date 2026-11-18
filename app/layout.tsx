@@ -69,7 +69,7 @@ export default function RootLayout({
           </noscript>
           <main
             id="main"
-            className="relative z-10 overflow-clip rounded-b-[28px] bg-bg bg-page pb-24 md:rounded-b-[44px] md:pb-32"
+            className="relative z-10 overflow-clip rounded-b-[28px] bg-bg pb-24 md:rounded-b-[44px] md:pb-32"
           >
             {children}
           </main>

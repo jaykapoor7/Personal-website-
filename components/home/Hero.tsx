@@ -6,11 +6,9 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import Image from "next/image";
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { person, portrait } from "@/content/site";
 import { Arrow } from "../Arrow";
-import { HeroBackdrop } from "../Backdrop";
 import { ease } from "../motion";
 
 /** Each letter rises out of a mask, one after another. */
@@ -94,35 +92,11 @@ function Broken({ delay }: { delay: number }) {
   );
 }
 
-/** Corner marks around the photo, as on a drawing; they snap in to frame it. */
-function Marks() {
-  const reduce = useReducedMotion();
-  const corners = [
-    { c: "-left-3.5 -top-3.5 border-l border-t", x: -10, y: -10 },
-    { c: "-right-3.5 -top-3.5 border-r border-t", x: 10, y: -10 },
-    { c: "-bottom-3.5 -left-3.5 border-b border-l", x: -10, y: 10 },
-    { c: "-bottom-3.5 -right-3.5 border-b border-r", x: 10, y: 10 },
-  ];
-  return (
-    <>
-      {corners.map((k, i) => (
-        <motion.span
-          key={i}
-          aria-hidden="true"
-          className={`pointer-events-none absolute h-5 w-5 border-white/60 md:h-6 md:w-6 ${k.c}`}
-          initial={reduce ? false : { opacity: 0, x: k.x, y: k.y }}
-          animate={{ opacity: 1, x: 0, y: 0 }}
-          transition={{ duration: 0.8, ease, delay: 1.25 + i * 0.05 }}
-        />
-      ))}
-    </>
-  );
-}
-
 /**
- * Who I am: my name, the one sentence, and a photo. Behind them, a network
- * whose broken links keep getting mended. On a tall enough screen the hero
- * stays put while the rest of the page slides up over it.
+ * Who I am, over the photo it belongs to. The photo is printed as a cyanotype:
+ * the sky is the page itself, so the picture has no frame, it is the
+ * background. On load the print develops from the top down; as you scroll it
+ * slowly closes in on me while the rest of the page slides up over it.
  */
 export function Hero() {
   const reduce = useReducedMotion();
@@ -134,25 +108,9 @@ export function Hero() {
     return () => window.removeEventListener("resize", on);
   }, []);
   const { scrollY } = useScroll();
-  const opacity = useTransform(scrollY, [0, h * 0.8], [1, 0]);
-  const y = useTransform(scrollY, [0, h], [0, -h * 0.1]);
-  const photoY = useTransform(scrollY, [0, h], [0, -h * 0.16]);
-
-  // While the page scrolls, the washes hold still (a class, no re-render).
-  const ref = useRef<HTMLElement>(null);
-  useEffect(() => {
-    let t: ReturnType<typeof setTimeout> | undefined;
-    const on = () => {
-      ref.current?.classList.add("is-scrolling");
-      clearTimeout(t);
-      t = setTimeout(() => ref.current?.classList.remove("is-scrolling"), 160);
-    };
-    window.addEventListener("scroll", on, { passive: true });
-    return () => {
-      clearTimeout(t);
-      window.removeEventListener("scroll", on);
-    };
-  }, []);
+  const opacity = useTransform(scrollY, [0, h * 0.7], [1, 0]);
+  const y = useTransform(scrollY, [0, h], [0, -h * 0.12]);
+  const zoom = useTransform(scrollY, [0, h], [1, 1.12]);
 
   // Once the page has slid over the hero, hide it so it costs nothing.
   const [covered, setCovered] = useState(false);
@@ -161,36 +119,73 @@ export function Hero() {
     if (now !== covered) setCovered(now);
   });
 
-  const words = ["I find", "BROKEN", "systems", "and", "try", "to", "find"];
-  const at = 0.45;
+  const words = ["I find", "BROKEN", "systems", "and", "try", "to", "find"];
+  const at = 0.6;
 
   return (
     <section
-      ref={ref}
       id="top"
-      data-tone="accent"
+      data-tone="light"
       aria-label="Introduction"
-      className={`hero-pin tone-blue relative overflow-hidden ${covered ? "invisible" : ""}`}
+      className={`hero-pin relative overflow-hidden bg-hero ${covered ? "invisible" : ""}`}
     >
-      <HeroBackdrop active={!covered} />
+      {/* The photo: full height on the right on wide screens, the top of the
+          screen on phones. Its sky is the page colour, so only the trees, the
+          tower and I show; gradients in the page colour melt the other edges. */}
       <motion.div
-        className="shell relative grid min-h-[100svh] items-center gap-x-16 gap-y-8 pb-24 pt-20 will-change-transform md:pb-28 md:pt-24 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)]"
+        className="absolute inset-x-0 top-0 h-[58svh] origin-[50%_55%] overflow-hidden will-change-transform md:h-[62svh] lg:inset-y-0 lg:left-auto lg:h-auto lg:w-[60%] lg:origin-[55%_62%]"
+        style={reduce ? undefined : { scale: zoom }}
+      >
+        <motion.div
+          className="absolute inset-0"
+          initial={reduce ? false : { scale: 1.07 }}
+          animate={{ scale: 1, transitionEnd: { transform: "none" } }}
+          transition={{ duration: 2.6, ease }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/photos/jay-cyan.webp"
+            srcSet="/photos/jay-cyan-640.webp 640w, /photos/jay-cyan.webp 960w"
+            sizes="(min-width: 1024px) 60vw, 100vw"
+            alt={portrait.alt}
+            fetchPriority="high"
+            decoding="async"
+            className="h-full w-full object-cover object-[50%_100%] lg:object-[50%_35%]"
+          />
+        </motion.div>
+        {/* Melting edges, painted in the page colour (cheaper than a mask). */}
+        <div className="absolute inset-x-0 bottom-0 h-[42%] bg-gradient-to-t from-hero via-hero/75 to-transparent lg:hidden" />
+        <div className="absolute inset-y-0 left-0 hidden w-[46%] bg-gradient-to-r from-hero via-hero/70 to-transparent lg:block" />
+        <div className="absolute inset-x-0 bottom-0 hidden h-[18%] bg-gradient-to-t from-hero/60 to-transparent lg:block" />
+        {/* The print develops: a sheet of paper slides off it, top first.
+            Always rendered (so server and client agree); hidden by CSS for
+            reduced motion. */}
+        <motion.div
+          className="absolute inset-x-0 top-0 h-[170%] bg-[linear-gradient(to_bottom,transparent_0%,rgb(var(--hero))_24%,rgb(var(--hero))_100%)] motion-reduce:hidden"
+          initial={{ y: "-24%" }}
+          animate={{ y: "62%", transitionEnd: { display: "none" } }}
+          transition={{ duration: 1.9, ease: [0.65, 0, 0.35, 1], delay: 0.1 }}
+        />
+      </motion.div>
+
+      <motion.div
+        className="shell relative grid min-h-[100svh] items-end pb-20 pt-[50svh] will-change-transform md:pb-28 md:pt-[56svh] lg:items-center lg:pb-24 lg:pt-24"
         style={reduce ? undefined : { opacity, y }}
       >
-        <div className="order-2 lg:order-1">
+        <div className="max-w-[640px]">
           <h1
             aria-label="Hi, I'm Jay Kapoor. I find broken systems and try to find solutions."
             className="hero-title"
           >
-            <span className="block text-[clamp(26px,3vw,44px)] font-medium tracking-[-0.03em] text-[#c8d6ff]">
-              <Letters text="Hi, I'm" delay={0.05} />
+            <span className="block text-[clamp(24px,2.6vw,40px)] font-medium tracking-[-0.03em] text-accent">
+              <Letters text="Hi, I'm" delay={0.35} />
             </span>
-            <span className="mt-1 block text-[clamp(52px,8.4vw,136px)] leading-[0.95] tracking-[-0.05em] text-white">
-              <Letters text="Jay Kapoor" delay={0.25} />
+            <span className="mt-1 block text-[clamp(58px,8.6vw,140px)] leading-[0.95] tracking-[-0.055em] text-fg">
+              <Letters text="Jay Kapoor" delay={0.5} />
             </span>
             <span
               aria-hidden="true"
-              className="mt-5 block max-w-[18ch] text-[clamp(24px,3vw,46px)] font-medium leading-[1.14] tracking-[-0.025em] text-[#c8d6ff] md:mt-7"
+              className="mt-5 block max-w-[17ch] text-[clamp(24px,2.8vw,42px)] font-medium leading-[1.14] tracking-[-0.025em] text-accent md:mt-7"
             >
               {words.map((wd, i) => (
                 <Fragment key={i}>
@@ -203,7 +198,7 @@ export function Hero() {
                 <span className="relative inline-block">
                   solutions.
                   <motion.span
-                    className="absolute -bottom-[0.02em] left-0 h-[0.07em] w-[calc(100%-0.25em)] origin-left rounded-full bg-white"
+                    className="absolute -bottom-[0.02em] left-0 h-[0.07em] w-[calc(100%-0.25em)] origin-left rounded-full bg-accent"
                     initial={reduce ? false : { scaleX: 0 }}
                     animate={{ scaleX: 1 }}
                     transition={{ duration: 0.9, ease, delay: at + 1.35 }}
@@ -214,16 +209,16 @@ export function Hero() {
           </h1>
 
           <motion.p
-            className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-3 text-[16px] font-semibold md:mt-12"
+            className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3 text-[16px] font-semibold md:mt-11"
             initial={reduce ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease, delay: 1.2 }}
+            transition={{ duration: 0.8, ease, delay: 1.3 }}
           >
             <a
               href={person.resume}
               target="_blank"
               rel="noreferrer"
-              className="btn bg-white text-[#2346a8] shadow-[0_14px_30px_-14px_rgba(5,15,60,0.8)] hover:bg-[#e3ebff]"
+              className="btn-primary"
             >
               Resume <Arrow />
             </a>
@@ -236,7 +231,7 @@ export function Hero() {
                 href={l.href}
                 target={l.href.startsWith("http") ? "_blank" : undefined}
                 rel="noreferrer"
-                className="inline-flex items-center gap-1.5 text-white underline decoration-white/35 decoration-2 underline-offset-[6px] transition-colors hover:decoration-white"
+                className="inline-flex items-center gap-1.5 text-fg underline decoration-fg/25 decoration-2 underline-offset-[6px] transition-colors hover:decoration-fg"
               >
                 {l.label}
                 {l.href.startsWith("http") && <Arrow />}
@@ -244,46 +239,6 @@ export function Hero() {
             ))}
           </motion.p>
         </div>
-
-        {/* The photo, straight, in a white border; it wipes up into view. */}
-        <motion.div
-          className="relative order-1 w-[min(46vw,200px)] sm:w-[min(50vw,260px)] lg:order-2 lg:w-full lg:max-w-[440px] lg:justify-self-end"
-          style={reduce ? undefined : { y: photoY }}
-        >
-          <Marks />
-          <motion.div
-            className="rounded-[30px] bg-white p-[6px] shadow-[0_30px_60px_-24px_rgba(5,15,60,0.75)] md:rounded-[38px] md:p-2 md:shadow-[0_50px_90px_-30px_rgba(5,15,60,0.8)]"
-            initial={reduce ? false : { opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease, delay: 0.15 }}
-          >
-            <motion.div
-              className="relative aspect-[820/1008] overflow-hidden rounded-[24px] bg-card md:rounded-[30px]"
-              initial={reduce ? false : { clipPath: "inset(100% 0 0 0)" }}
-              animate={{
-                clipPath: "inset(0% 0 0 0)",
-                transitionEnd: { clipPath: "none" },
-              }}
-              transition={{ duration: 1.2, ease, delay: 0.35 }}
-            >
-              <motion.div
-                className="absolute inset-0"
-                initial={reduce ? false : { scale: 1.18 }}
-                animate={{ scale: 1, transitionEnd: { transform: "none" } }}
-                transition={{ duration: 1.8, ease, delay: 0.35 }}
-              >
-                <Image
-                  src="/photos/jay-hero.webp"
-                  alt={portrait.alt}
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 50vw, 440px"
-                  className="object-cover"
-                />
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        </motion.div>
       </motion.div>
     </section>
   );

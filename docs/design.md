@@ -15,11 +15,12 @@ Every entry on the site is in the index at `/work/`. The home page chooses; the 
 
 Blue and white, as the site has always been: tokens in `app/globals.css`. Inter for reading, Inter Tight for headings, and JetBrains Mono, small and uppercase, only for section numbers, dates and labels.
 
-Backgrounds are never flat, and the colour moves in bands down the page:
-- The hero is cobalt: a blueprint grid, two soft washes drawn small and scaled up, a light that follows the mouse, and the white network mending itself. It pauses while you scroll and hides once the page covers it, so scrolling stays smooth.
-- The white sheet has a dot grid and soft washes painted once.
-- Then cobalt (Research, Writing), white (Photos), pale blue (Play), and the cobalt contact panel. Each band is a rounded card that widens to full bleed as it scrolls in. Only its background scales; text never does.
-- Inner pages get a wash and a grid at the top only.
+Backgrounds are real things or plain colour, never decoration: no generated grids, glows, particles or networks.
+- The hero is my photo, printed as a blue cyanotype on pale paper. The photo is the background; the text sits on its open side.
+- The white sheet is plain white, so the writing reads cleanly.
+- Then colour blocks: cobalt (Research, Writing), white (Photos), pale blue (Play), and the cobalt contact panel. Each band is a rounded card that widens to full bleed as it scrolls in. Only its background scales; text never does.
+- Pictures everywhere are the real thing: project screenshots, document pages, my photos.
+- Inner pages are plain white.
 
 ## Writing
 
