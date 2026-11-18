@@ -3,6 +3,7 @@ import { selected } from "@/content/cases";
 import { education, leadership } from "@/content/site";
 import { experience, items } from "@/content/work";
 import { SheetBackdrop } from "../Backdrop";
+import { Band } from "./Band";
 import { Hero } from "./Hero";
 import { Intro } from "./Intro";
 import { List, type Entry } from "./List";
@@ -182,7 +183,7 @@ export function Home() {
           </Section>
 
           <Section id="experience" n="02" title="Experience">
-            <div className="grid gap-x-16 gap-y-8 lg:grid-cols-2">
+            <div className="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-2">
               <div>
                 <h3 className="label mb-1">Work</h3>
                 <List
@@ -202,42 +203,50 @@ export function Home() {
             </div>
           </Section>
 
-          <Section id="research" n="03" title="Research">
-            <div className="grid gap-x-16 lg:grid-cols-2">
-              <List entries={labsA} />
-              <List entries={labsB} />
-            </div>
-          </Section>
+          <div aria-hidden="true" className="h-28 md:h-40" />
+          <Band tone="blue">
+            <Section id="research" n="03" title="Research">
+              <div className="grid grid-cols-1 gap-x-16 lg:grid-cols-2">
+                <List entries={labsA} />
+                <List entries={labsB} />
+              </div>
+            </Section>
 
-          <Section id="writing" n="04" title="Writing">
-            <div className="grid gap-x-16 lg:grid-cols-2">
-              <List entries={writeA} />
-              <List entries={writeB} />
-            </div>
-          </Section>
+            <Section id="writing" n="04" title="Writing">
+              <div className="grid grid-cols-1 gap-x-16 lg:grid-cols-2">
+                <List entries={writeA} />
+                <List entries={writeB} />
+              </div>
+            </Section>
+          </Band>
 
-          <Section id="photos" n="05" title="Photos">
-            <p className="mb-6 max-w-[640px] text-[16px] leading-relaxed text-muted">
-              Sports days and football in Bangalore, school, summers working in
-              Delhi, and now Pittsburgh. Also the dog that started StrayPaw.
-            </p>
-            <Photos />
-          </Section>
+          <Band tone="white">
+            <Section id="photos" n="05" title="Photos">
+              <p className="mb-6 max-w-[640px] text-[16px] leading-relaxed text-muted">
+                Sports days and football in Bangalore, school, summers working
+                in Delhi, and now Pittsburgh. Also the dog that started
+                StrayPaw.
+              </p>
+              <Photos />
+            </Section>
+          </Band>
 
-          <Section id="play" n="06" title="Play">
-            <p className="mb-6 max-w-[640px] text-[16px] leading-relaxed text-muted">
-              Small browser games I make for fun. All of them run here.
-            </p>
-            <Play
-              games={games.map((g) => ({
-                id: g.id,
-                name: g.name,
-                line: g.line,
-                href: g.href,
-                image: g.image,
-              }))}
-            />
-          </Section>
+          <Band tone="pale">
+            <Section id="play" n="06" title="Play">
+              <p className="mb-6 max-w-[640px] text-[16px] leading-relaxed text-muted">
+                Small browser games I make for fun. All of them run here.
+              </p>
+              <Play
+                games={games.map((g) => ({
+                  id: g.id,
+                  name: g.name,
+                  line: g.line,
+                  href: g.href,
+                  image: g.image,
+                }))}
+              />
+            </Section>
+          </Band>
         </div>
       </div>
     </div>
