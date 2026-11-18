@@ -96,7 +96,7 @@ export function Home() {
   return (
     <div className="relative">
       <Hero />
-      <div className="landing-sheet relative z-10 bg-bg">
+      <div className="relative z-10 -mt-14 rounded-t-[28px] bg-bg shadow-[0_-24px_60px_-30px_rgb(var(--fg)/0.35)] md:rounded-t-[44px]">
         <SheetBackdrop />
         <div className="relative">
           <Intro

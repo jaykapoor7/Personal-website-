@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { person } from "@/content/site";
 import { Arrow } from "./Arrow";
+import { SystemsField } from "./home/SystemsField";
 import { Magnetic } from "./motion";
 
 /** The time in Pittsburgh, so you know whether to expect a quick reply. */
@@ -28,9 +29,11 @@ export function Footer() {
     <footer
       data-tone="accent"
       aria-labelledby="contact-h"
-      className="reveal-footer contact-panel bg-accent text-white"
+      className="reveal-footer relative overflow-hidden bg-accent text-white"
     >
-      <svg aria-hidden="true" className="contact-postmark" viewBox="0 0 300 300" fill="none" stroke="currentColor" strokeWidth="5"><path d="M20 280L280 20M70 20H280V230" /></svg>
+      {/* The same network as the hero, in white, mending itself. */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(900px_600px_at_85%_10%,rgba(120,160,255,0.35),transparent_70%),radial-gradient(800px_500px_at_0%_100%,rgba(15,35,110,0.45),transparent_70%)]" />
+      <SystemsField tone="dark" fade="top" className="opacity-80" />
       <div className="shell relative flex min-h-[inherit] flex-col justify-between gap-12 pb-8 pt-24 md:pt-28">
         <div>
           <h2 id="contact-h" className="text-[17px] font-medium text-white/85">
@@ -38,7 +41,7 @@ export function Footer() {
           </h2>
           <a
             href={`mailto:${person.email}`}
-            className="contact-email group mt-3 block"
+            className="display group mt-3 block w-fit max-w-full text-[clamp(34px,9.2vw,148px)] [overflow-wrap:anywhere]"
           >
             <span className="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_0.06em] bg-[position:0_96%] bg-no-repeat transition-[background-size] duration-700 ease-out group-hover:bg-[length:100%_0.06em]">
               {person.email}

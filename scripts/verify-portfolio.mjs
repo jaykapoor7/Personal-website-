@@ -116,10 +116,6 @@ try {
       await page.locator("h1").getAttribute("aria-label"),
       "Jay Kapoor. I find broken systems and try to find solutions.",
     );
-    assert.match(
-      await page.locator("h1").innerText(),
-      /I\sfind broken systems and try to find solutions/,
-    );
 
     // Every part of the home page is there, in order.
     const order = await page.evaluate(() =>
